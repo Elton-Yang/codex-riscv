@@ -37,7 +37,7 @@ OpenAI Codex CLI 的 **非官方 RISC-V Linux 实验构建与适配**。本项�
 
 ## 在 Debian 13 RISC-V 板子上试运行
 
-从 [首个预发布版本页面](https://github.com/Elton-Yang/codex-riscv/releases/tag/v0.1.0-experimental.1) 下载。若返回 404，请先检查 Release 页面，不要改用来源不明的二进制。
+推荐使用下面的用户级安装器；也可从 [首个预发布版本页面](https://github.com/Elton-Yang/codex-riscv/releases/tag/v0.1.0-experimental.1) 手动下载。安装器只安装这个已发布的实验二进制，不重新构建，也不改变它的版本。
 
 ### 1. 确认系统和依赖
 
@@ -47,7 +47,7 @@ dpkg --print-architecture      # 应为 riscv64
 getconf GNU_LIBC_VERSION       # 本二进制需要 glibc >= 2.39
 
 sudo apt update
-sudo apt install ca-certificates curl gzip libc6 libgcc-s1 libssl3t64 bubblewrap
+sudo apt install ca-certificates curl python3 gzip libc6 libgcc-s1 libssl3t64 bubblewrap
 ```
 
 `libssl3t64` 提供 OpenSSL 3 动态库，并由 apt 安装所需的 zlib、zstd 等依赖。`git`、`ripgrep` 是常用开发工具，可按需要安装：
@@ -58,7 +58,37 @@ sudo apt install git ripgrep
 
 运行发布二进制不需要安装 Rust、Node.js 或交叉编译器。下载和解压需要预留空间：本次二进制本身为 `314651976` 字节，发布包还包含许可证与说明。
 
-### 2. 下载、校验，再解压
+### 2. 安装为用户级全局命令（推荐）
+
+下载并检查脚本后，以普通用户执行，**不要使用 `sudo`**：
+
+```bash
+curl --fail --location --proto '=https' --proto-redir '=https' --tlsv1.2 \
+  https://raw.githubusercontent.com/Elton-Yang/codex-riscv/main/install.sh \
+  -o install-codex-riscv.sh
+less install-codex-riscv.sh
+sh install-codex-riscv.sh
+export PATH="$HOME/.local/bin:$PATH"
+codex-riscv --version
+```
+
+默认将完整发布包安装到 `~/.local/share/codex-riscv/versions/v0.1.0-experimental.1`，并创建 `~/.local/bin/codex-riscv`。安装器会核对固定 SHA-256、检查平台与动态库、试运行 `--version`，再切换当前版本；保留所有许可证，不修改 shell 配置。
+
+以下管理命令按需选择，不必依次执行：
+
+```bash
+sh install-codex-riscv.sh status
+sh install-codex-riscv.sh install --version v0.1.0-experimental.1
+sh install-codex-riscv.sh upgrade --channel experimental
+sh install-codex-riscv.sh rollback
+sh install-codex-riscv.sh uninstall
+```
+
+`upgrade` 使用这份安装器中列出的实验版，不查询 GitHub 的 `latest`。目前仅支持一个版本，重复安装不会制造可回滚的新版本；有过成功的不同版本切换后才能 `rollback`。以后升级前先下载并检查新版安装器。卸载只处理安装器托管且未被修改的文件，不删除 `~/.codex`、登录信息或项目文件。
+
+如确实需要命令名 `codex`，首次安装时显式使用 `--command codex`；目标位置或 `PATH` 中已有其他同名命令时会拒绝安装。旧文档手工复制的 `codex-riscv` 也不会被自动覆盖，请先确认来源，再自行改名或移走。完整选项、目录布局与故障处理见 [安装器说明](docs/installer.md)。
+
+### 3. 手动下载、校验和试运行（不使用安装器）
 
 ```bash
 TAG=v0.1.0-experimental.1
@@ -67,9 +97,11 @@ BASE="https://github.com/Elton-Yang/codex-riscv/releases/download/${TAG}"
 DOWNLOAD_DIR=$(mktemp -d "${TMPDIR:-/tmp}/codex-riscv.XXXXXX")
 cd "$DOWNLOAD_DIR"
 
-curl --fail --location --proto '=https' --tlsv1.2 -O "$BASE/$NAME.tar.gz"
-curl --fail --location --proto '=https' --tlsv1.2 -O "$BASE/SHA256SUMS"
-sha256sum --check --ignore-missing SHA256SUMS
+curl --fail --location --proto '=https' --proto-redir '=https' --tlsv1.2 \
+  -O "$BASE/$NAME.tar.gz"
+printf '%s  %s\n' \
+  2b70f049652793a2dd6c8035122ce2a6920de680153be1c6f8e2a172dde70120 \
+  "$NAME.tar.gz" | sha256sum --check --strict
 ```
 
 **只在校验成功后继续：**
@@ -80,25 +112,7 @@ tar -xzf "$NAME.tar.gz"
 "./$NAME/bin/codex" --help
 ```
 
-`SHA256SUMS` 用于核验附件完整性，不是独立的发布者签名。应从本项目的 HTTPS Release 页面获取文件和校验和。
-
-### 3. 可选：安装为单独的命令
-
-先完成上面的启动检查，再执行。使用 `codex-riscv` 名称，避免覆盖已有 npm 安装的 `codex`：
-
-```bash
-DEST="$HOME/.local/bin/codex-riscv"
-mkdir -p "$HOME/.local/bin"
-if [ -e "$DEST" ] || [ -L "$DEST" ]; then
-  printf '已有文件，未覆盖：%s\n' "$DEST"
-else
-  install -m 0755 "./$NAME/bin/codex" "$DEST"
-  "$DEST" --version
-fi
-export PATH="$HOME/.local/bin:$PATH"
-```
-
-保留解压包中的 `LICENSE`、`NOTICE` 和 `licenses/` 目录；再次分发时一并提供。上述命令不会改写 shell 配置文件。
+这个固定校验值仅适用于上述版本，核验完整性但不是独立的发布者签名。若下载返回 404，请检查本项目的 Release 页面，不要改用来源不明的二进制。保留完整解压目录中的 `LICENSE`、`NOTICE` 和 `licenses/`；再次分发时一并提供。
 
 ### 4. 先验证沙箱，再用于实际工作
 
@@ -127,7 +141,7 @@ export PATH="$HOME/.local/bin:$PATH"
 
 ## 已知边界
 
-- npm 启动器、自动更新和 packaged daemon 安装路径没有完成 RISC-V 适配；本项目采用直接二进制、手动安装方式。
+- npm 启动器、上游自动更新和 packaged daemon 安装路径没有完成 RISC-V 适配；本项目采用直接二进制，由本仓库安装器管理升级。安装器不提供 root / 系统级安装。
 - 可选 code-mode / V8 和实时功能的外部运行时未构建、未打包、未验证。
 - 实机验证仅覆盖上述单台设备上的检查和用户报告的基本对话；工具调用、模型修改文件、`workspace-write`、完整 TUI 交互、其他内核和长期稳定性仍未验证。
 - 文件写入与 IPv4 socket 创建被拒绝不等于完整沙箱安全审计；未单独验证 legacy Landlock 后端或全部过滤规则。

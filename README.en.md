@@ -35,7 +35,7 @@ The pinned upstream development commit declares package version `0.0.0`, so `--v
 
 ## Try it on Debian 13 riscv64
 
-Download from the [release page](https://github.com/Elton-Yang/codex-riscv/releases/tag/v0.1.0-experimental.1). If a download returns 404, check the release page rather than substituting an unknown binary source.
+Use the per-user installer below, or download manually from the [release page](https://github.com/Elton-Yang/codex-riscv/releases/tag/v0.1.0-experimental.1). The installer uses the existing experimental binary without rebuilding or changing its version.
 
 ### 1. Check the system and install runtime dependencies
 
@@ -45,7 +45,7 @@ dpkg --print-architecture      # expected: riscv64
 getconf GNU_LIBC_VERSION       # this binary requires glibc >= 2.39
 
 sudo apt update
-sudo apt install ca-certificates curl gzip libc6 libgcc-s1 libssl3t64 bubblewrap
+sudo apt install ca-certificates curl python3 gzip libc6 libgcc-s1 libssl3t64 bubblewrap
 ```
 
 `libssl3t64` supplies OpenSSL 3 libraries; apt also installs its zlib/zstd dependencies. `git` and `ripgrep` are useful optional development tools:
@@ -56,7 +56,37 @@ sudo apt install git ripgrep
 
 You do not need Rust, Node.js or a cross compiler to run the binary. Allow space for the archive and extraction: the executable alone is `314651976` bytes, excluding accompanying notices and documentation.
 
-### 2. Download, verify, then extract
+### 2. Install a user-global command (recommended)
+
+Download and review the script, then run it as your ordinary user, **without `sudo`**:
+
+```bash
+curl --fail --location --proto '=https' --proto-redir '=https' --tlsv1.2 \
+  https://raw.githubusercontent.com/Elton-Yang/codex-riscv/main/install.sh \
+  -o install-codex-riscv.sh
+less install-codex-riscv.sh
+sh install-codex-riscv.sh
+export PATH="$HOME/.local/bin:$PATH"
+codex-riscv --version
+```
+
+The default installation retains the full release under `~/.local/share/codex-riscv/versions/v0.1.0-experimental.1` and creates `~/.local/bin/codex-riscv`. The installer checks a pinned SHA-256, platform and dynamic libraries, then runs `--version` before switching the active version. It preserves license materials and does not edit shell startup files.
+
+Choose the management action you need; do not run all of these in sequence:
+
+```bash
+sh install-codex-riscv.sh status
+sh install-codex-riscv.sh install --version v0.1.0-experimental.1
+sh install-codex-riscv.sh upgrade --channel experimental
+sh install-codex-riscv.sh rollback
+sh install-codex-riscv.sh uninstall
+```
+
+`upgrade` selects the experimental release listed in this installer, not GitHub's `latest`. Only one release is currently supported; reinstalling it does not create a rollback version. Rollback requires an earlier successful switch between different installed versions. Download and review an updated installer before upgrading to future releases. Uninstall removes only managed, unmodified installation files, never `~/.codex`, credentials or project files.
+
+To use the name `codex`, explicitly pass `--command codex` on the first installation. An unrelated command at the destination or on `PATH` blocks installation. A `codex-riscv` binary copied using the old instructions is not overwritten either: inspect it before manually moving or renaming it. See the [installer guide](docs/installer.en.md) for options, layout and troubleshooting.
+
+### 3. Manual download and startup check (without the installer)
 
 ```bash
 TAG=v0.1.0-experimental.1
@@ -65,9 +95,11 @@ BASE="https://github.com/Elton-Yang/codex-riscv/releases/download/${TAG}"
 DOWNLOAD_DIR=$(mktemp -d "${TMPDIR:-/tmp}/codex-riscv.XXXXXX")
 cd "$DOWNLOAD_DIR"
 
-curl --fail --location --proto '=https' --tlsv1.2 -O "$BASE/$NAME.tar.gz"
-curl --fail --location --proto '=https' --tlsv1.2 -O "$BASE/SHA256SUMS"
-sha256sum --check --ignore-missing SHA256SUMS
+curl --fail --location --proto '=https' --proto-redir '=https' --tlsv1.2 \
+  -O "$BASE/$NAME.tar.gz"
+printf '%s  %s\n' \
+  2b70f049652793a2dd6c8035122ce2a6920de680153be1c6f8e2a172dde70120 \
+  "$NAME.tar.gz" | sha256sum --check --strict
 ```
 
 **Continue only after checksum verification succeeds:**
@@ -78,25 +110,7 @@ tar -xzf "$NAME.tar.gz"
 "./$NAME/bin/codex" --help
 ```
 
-`SHA256SUMS` verifies asset integrity; it is not an independent publisher signature. Obtain both files from this project's HTTPS release page.
-
-### 3. Optional per-user installation
-
-After the startup checks, install under a separate name so an existing npm `codex` is not replaced:
-
-```bash
-DEST="$HOME/.local/bin/codex-riscv"
-mkdir -p "$HOME/.local/bin"
-if [ -e "$DEST" ] || [ -L "$DEST" ]; then
-  printf 'Existing file was not overwritten: %s\n' "$DEST"
-else
-  install -m 0755 "./$NAME/bin/codex" "$DEST"
-  "$DEST" --version
-fi
-export PATH="$HOME/.local/bin:$PATH"
-```
-
-Keep the extracted `LICENSE`, `NOTICE` and `licenses/` materials, and include them when redistributing. These commands do not edit shell startup files.
+This fixed checksum applies only to the named release. It verifies integrity, not an independent publisher signature. If a download returns 404, check this project's release page rather than substituting an unknown binary source. Keep the full extracted `LICENSE`, `NOTICE` and `licenses/` materials, including when redistributing.
 
 ### 4. Validate the native sandbox before real work
 
@@ -125,7 +139,7 @@ To regenerate license notices:
 
 ## Limitations
 
-- npm launcher, automatic updates and packaged-daemon installation paths are not adapted for RISC-V. Use the direct binary and manual installation.
+- npm launcher, upstream automatic updates and packaged-daemon installation paths are not adapted for RISC-V. This repository’s installer manages direct-binary upgrades. Root / system-wide installation is not supported.
 - Optional external code-mode / V8 and realtime runtimes were not built, included or tested.
 - Native validation covers only the listed checks on one board and user-reported basic conversation. Tool calls, model-driven file edits, `workspace-write`, exhaustive TUI behavior, other kernels and long-term stability remain untested.
 - The file-write and IPv4-socket denials are not a comprehensive sandbox security audit. The legacy Landlock backend and the full set of filter rules were not separately validated.
