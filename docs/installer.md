@@ -7,7 +7,7 @@
 ## 依赖与信任范围
 
 - Linux `riscv64`，glibc **2.39 或更新**；目标起点为 Debian 13 riscv64。
-- 安装器需要 Python 3、`curl`、HTTPS CA 证书、`uname`、`getconf`、`ldd` 和系统 `bwrap`。
+- 安装器及安装后的启动器都需要 Python 3（安装后请保留）；下载和平台检查还需要 `curl`、HTTPS CA 证书、`uname`、`getconf`、`ldd` 和系统 `bwrap`。
 - 运行库包括 `libgcc-s1`、OpenSSL 3（Debian 13 的 `libssl3t64`）。激活版本前会检查暂存二进制的动态库，并在临时 `HOME` / `CODEX_HOME` 中执行 `--version`。
 - 预留压缩包、完整解压目录和保留旧版本的空间。当前可执行文件本身约 315 MB。
 
@@ -61,6 +61,32 @@ sh install.sh uninstall
 
 目前只发布了一个二进制版本，重复安装或升级到同一版本不会制造“上一版本”。未来版本需要更新安装器中的目录，因此升级前先下载并检查新版安装器。回滚切换到此前激活过的托管版本，不会下载任意上游版本。使用自定义目录时，后续管理操作也要传入相同的 `--prefix`。
 
+## 从首版安装器升级
+
+首版安装器在用户的 RISC-V 实机上完成了安装，但其直连二进制的命令在不带参数时进入 packaged daemon 路径并启动失败。此前成功的 TUI 对话使用了 `--no-daemon`。
+
+按照 README **重新下载并检查新版 `install.sh`**，不要继续使用缓存的 v1 脚本，然后运行：
+
+```bash
+sh install-codex-riscv.sh upgrade
+```
+
+已有用户也可选择下面的一行升级命令。它会**直接执行下载的代码**；上面先下载、检查再执行的方式更稳妥。
+
+```bash
+curl --fail --location --proto '=https' --proto-redir '=https' --tlsv1.2 https://raw.githubusercontent.com/Elton-Yang/codex-riscv/main/install.sh | sh -s -- upgrade
+```
+
+这会将旧的托管命令链接原位迁移到 standalone 启动器，仍使用同一个二进制发布版本，不需要先卸载。已有 `--command` 和 `--bin-dir` 会从托管记录读取；自定义安装目录仍须传入原来的 `--prefix`。新建命令仍执行冲突保护。
+
+更新前的临时用法：
+
+```bash
+codex-riscv --no-daemon
+codex-riscv --no-daemon resume
+codex-riscv --no-daemon fork
+```
+
 ## 路径与命令名
 
 默认布局：
@@ -74,10 +100,11 @@ sh install.sh uninstall
 │       ├── NOTICE
 │       ├── licenses/
 │       └── ...发布包文档与安装器元数据
+├── launcher                            # 托管的 Python 3 启动器
 ├── current -> versions/v0.1.0-experimental.1
 └── previous -> versions/<previous-tag>  # 切换不同版本后才存在
 
-~/.local/bin/codex-riscv -> ~/.local/share/codex-riscv/current/bin/codex
+~/.local/bin/codex-riscv -> ~/.local/share/codex-riscv/launcher
 ```
 
 `--prefix` 指定托管安装目录，`--bin-dir` 指定命令目录，均须使用绝对路径。请选择专用的空目录，不要使用项目目录或整个 home 目录。当前明确不支持 root / 系统级安装。
@@ -105,6 +132,6 @@ export PATH="$HOME/.local/bin:$PATH"
 
 ## 升级与验证边界
 
-当前二进制来自包版本为 `0.0.0` 的开发提交，上游更新检查对这个开发版本关闭。安装器不引入包装器、不修改源码或二进制。请通过本安装器升级，不要用上游/npm 更新路径替换 RISC-V 二进制。
+当前二进制来自包版本为 `0.0.0` 的开发提交，上游更新检查对这个开发版本关闭。托管启动器通过 `exec` 调用未修改的 `current/bin/codex`，为普通 CLI 调用自动补充 `--no-daemon`，已有该选项时不重复添加；保留用户参数、进程退出状态和信号行为。内部 helper 入口保留原有分派，不强加 TUI 参数。默认直接启动、`resume` 和 `fork` 不依赖共享后台 daemon；此选项不关闭沙箱，也不让显式 daemon、agents 或 remote server 功能自动可用。请通过本安装器升级，不要用上游/npm 更新路径替换 RISC-V 二进制。
 
-安装器的夹具测试使用独立临时目录和模拟的平台、下载命令，不是实机测试。即使发布二进制在 QEMU 下启动成功，也不能证明本安装器或沙箱在开发板上通过。仓库此前由用户反馈的 VisionFive 2 检查适用于二进制，不自动覆盖这次新增安装器。实际记录范围见 [验证记录](validation.md) 和 [安装器发布说明](release-notes-installer-v1.md)。
+安装器的夹具测试使用独立临时目录和模拟的平台、下载命令，不是实机测试。即使发布二进制在 QEMU 下启动成功，也不能证明本安装器或沙箱在开发板上通过。用户已在实机完成首版安装，但随后裸命令启动失败；standalone 修复尚未获得实机启动确认。之前的 VisionFive 2 二进制检查不能代替这次修复的验证。实际记录范围见 [验证记录](validation.md)、[v1 历史说明](release-notes-installer-v1.md) 和 [v1.1 修复说明](release-notes-installer-v1.1.md)。

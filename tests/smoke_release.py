@@ -6,17 +6,26 @@ Usage (Debian cross-toolchain layout produced by this repository):
 
 Requires the sysroot's usr/bin/qemu-riscv64, target loader/libraries, and curl.
 Downloads the unchanged public asset using the real installer download path.
-Only a temporary installer copy's native binary invocation is routed via QEMU;
+A temporary installer copy's native startup invocation is routed via QEMU;
+the unchanged installed launcher's execv transport is also redirected to QEMU.
 uname/getconf/bwrap are mocked. ldd uses the real target loader under QEMU.
 No credentials, model calls, package installs, root, or user configuration.
 """
 import argparse
 import hashlib
+import fcntl
 import os
+import pty
+import re
+import select
+import signal
+import struct
 from pathlib import Path
 import shlex
 import subprocess
 import tempfile
+import termios
+import time
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -26,6 +35,55 @@ TAG = "v0.1.0-experimental.1"
 def run(args, env):
     print("+ " + " ".join(map(str, args)), flush=True)
     subprocess.run(list(map(str, args)), env=env, check=True)
+
+
+def pty_until(args, env, expected, label):
+    """Exercise a real controlling terminal; stop before selecting any login."""
+    pid, fd = pty.fork()
+    if pid == 0:
+        os.chdir(env["HOME"])
+        os.execvpe(str(args[0]), list(map(str, args)), env)
+    fcntl.ioctl(fd, termios.TIOCSWINSZ, struct.pack("HHHH", 35, 100, 0, 0))
+    captured = bytearray()
+    status = None
+    try:
+        deadline = time.monotonic() + 45
+        while time.monotonic() < deadline:
+            if select.select([fd], [], [], 0.2)[0]:
+                try:
+                    block = os.read(fd, 65536)
+                except OSError:
+                    break
+                if not block:
+                    break
+                captured.extend(block)
+                # Answer only terminal capability queries, never login/UI choices.
+                if b"\x1b[6n" in block:
+                    os.write(fd, b"\x1b[1;1R")
+                if b"\x1b]11;?" in block:
+                    os.write(fd, b"\x1b]11;rgb:0000/0000/0000\x1b\\")
+                if b"\x1b[c" in block:
+                    os.write(fd, b"\x1b[?1;2c")
+                if expected.lower() in bytes(captured).lower():
+                    break
+            done, result = os.waitpid(pid, os.WNOHANG)
+            if done:
+                status = result
+                break
+        text = captured.decode("utf-8", errors="replace")
+        plain = re.sub(r"\x1b\[[0-?]*[ -/]*[@-~]", "", text)
+        plain = re.sub(r"\x1b\][^\x1b]*(?:\x1b\\|\x07)", "", plain)
+        print(label + " PTY output (tail, terminal controls removed): " + repr(plain[-2200:]), flush=True)
+        assert expected.lower() in captured.lower(), label + " did not reach expected screen"
+        return text
+    finally:
+        if status is None:
+            try:
+                os.kill(pid, signal.SIGTERM)
+            except ProcessLookupError:
+                pass
+            os.waitpid(pid, 0)
+        os.close(fd)
 
 
 def main():
@@ -74,15 +132,63 @@ def main():
         run(["sh", installer], env)
         run(["sh", installer, "status"], env)
         version = prefix / "versions" / TAG
-        assert command.resolve() == version / "bin/codex"
+        assert command.resolve() == prefix / "launcher"
         for relative in ("LICENSE", "NOTICE", "licenses/THIRD-PARTY-NOTICES.html"):
             assert (version / relative).is_file(), relative
         with (version / "bin/codex").open("rb") as source:
             checksum = hashlib.file_digest(source, "sha256").hexdigest()
         print("Installed binary SHA-256: " + checksum, flush=True)
-        run([runner, command, "--version"], env)
-        run([runner, command, "--help"], env)
+        # Run the exact installed launcher unchanged. Its execv transport alone
+        # is redirected to QEMU, preserving argv0 with QEMU's -0 option.
+        launcher_runner = mocks / "emulate-launcher"
+        launcher_runner.write_text("#!/usr/bin/env python3\n" +
+            "import os, runpy, sys\n" +
+            "invocation = " + repr(invocation) + "\n" +
+            "native_execv = os.execv\n" +
+            "def target_execv(binary, argv):\n" +
+            "    native_execv(invocation[0], [*invocation, '-0', argv[0], binary, *argv[1:]])\n" +
+            "os.execv = target_execv\n" +
+            "sys.argv = sys.argv[1:]\n" +
+            "runpy.run_path(sys.argv[0], run_name='__main__')\n")
+        launcher_runner.chmod(0o755)
+        run([launcher_runner, command, "--version"], env)
+        run([launcher_runner, command, "--help"], env)
+        run([launcher_runner, command, "resume", "--help"], env)
+        run([launcher_runner, command, "fork", "--help"], env)
+        run([launcher_runner, command, "exec", "--help"], env)
+        # Exercise actual hidden-argument and argv0 dispatch without a model,
+        # credentials or sandbox execution, inside this disposable directory.
+        for index, alias in enumerate((None, "apply_patch")):
+            entry = command
+            if alias:
+                entry = work / alias
+                entry.symlink_to(prefix / "launcher")
+            patch = "*** Begin Patch\n*** Add File: helper-smoke-" + str(index) + ".txt\n+ok\n*** End Patch"
+            call = [str(launcher_runner), str(entry)]
+            if not alias:
+                call.append("--codex-run-as-apply-patch")
+            subprocess.run([*call, patch], env=env, cwd=work, check=True)
+            assert (work / ("helper-smoke-" + str(index) + ".txt")).read_text() == "ok\n"
+        sandbox_alias = work / "codex-linux-sandbox"
+        sandbox_alias.symlink_to(prefix / "launcher")
+        run([launcher_runner, sandbox_alias, "--help"], env)
+        print("PASS: actual apply-patch argv1/argv0 dispatch and sandbox-helper help.", flush=True)
+        (home / ".codex").mkdir(exist_ok=True)
+        # Do not inherit API keys, login/config paths or proxies for startup.
+        tui_env = {key: env[key] for key in ("HOME", "CODEX_HOME", "PATH", "LD_LIBRARY_PATH")}
+        tui_env.update(TERM="xterm-256color", LANG="C.UTF-8", HTTP_PROXY="http://127.0.0.1:9",
+                       HTTPS_PROXY="http://127.0.0.1:9", ALL_PROXY="http://127.0.0.1:9", NO_PROXY="")
+        screen = pty_until([launcher_runner, command], tui_env,
+                           b"Sign in with ChatGPT", "Managed bare standalone launcher")
+        assert "no complete local package" not in screen
+        print("PASS: bare managed launcher reaches offline sign-in onboarding, no login selected.", flush=True)
+        print("LIMIT: unauthenticated onboarding precedes the daemon decision; this does not reproduce the user's authenticated native startup.", flush=True)
+        # Exercise same-release migration from the original installed direct link.
+        command.unlink()
+        command.symlink_to(str(prefix / "current/bin/codex"))
+        (prefix / "launcher").unlink()
         run(["sh", installer, "upgrade"], env)
+        assert command.resolve() == prefix / "launcher"
         (home / ".codex").mkdir(exist_ok=True)
         sentinel = home / ".codex" / "DO-NOT-REMOVE.txt"
         sentinel.write_text("isolated smoke fixture, not credentials\n")
@@ -90,7 +196,7 @@ def main():
         assert sentinel.is_file()
         assert not prefix.exists()
         assert not command.is_symlink()
-        print("PASS: real-asset install/status/reinstall/QEMU startup/uninstall; preserved isolated .codex sentinel.")
+        print("PASS: real-asset install/status/legacy migration/QEMU bare onboarding/uninstall; preserved isolated .codex sentinel.")
         print("NOT TESTED: native installer/platform detection, native kernel sandbox, authentication, model or tool calls.")
 
 

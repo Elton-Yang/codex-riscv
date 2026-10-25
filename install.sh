@@ -30,6 +30,7 @@ REPOSITORY = "https://github.com/Elton-Yang/codex-riscv"
 ROOT_MARKER = ".codex-riscv-install"
 VERSION_MARKER = ".codex-riscv-version"
 SCHEMA = 1
+LAUNCHER = "launcher"
 
 
 def fail(message):
@@ -171,8 +172,78 @@ def activate(prefix, current, previous):
         raise
 
 
+def launcher_bytes(prefix):
+    # Keep argv0 for the upstream multicall aliases. Internal helpers inspect
+    # argv1 before clap, so never put a user-facing flag ahead of their sentinel.
+    # os.execv replaces the launcher: arguments, exit status and process signals
+    # belong to the binary, with no waiting wrapper process.
+    program = """#!/usr/bin/env python3
+# Managed by codex-riscv install.sh. Reinstall rather than editing this file.
+import os
+import sys
+
+binary = {binary!r}
+args = sys.argv[1:]
+internal = (os.path.basename(sys.argv[0]) in
+            ("codex-linux-sandbox", "apply_patch", "applypatch") or
+            (args and args[0].startswith("--codex-run-as-")))
+options = args[:args.index("--")] if "--" in args else args
+if not internal and "--no-daemon" not in options:
+    args = ["--no-daemon", *args]
+os.execv(binary, [sys.argv[0], *args])
+"""
+    return program.format(binary=str(prefix / "current/bin/codex")).encode("utf-8")
+
+
+def launcher_owned(prefix):
+    path = prefix / LAUNCHER
+    return (not path.is_symlink() and path.is_file()
+            and stat.S_IMODE(path.stat().st_mode) == 0o755
+            and path.read_bytes() == launcher_bytes(prefix))
+
+
+def check_launcher(prefix):
+    if exists(prefix / LAUNCHER) and not launcher_owned(prefix):
+        fail("Unmanaged or modified launcher; preserved: " + str(prefix / LAUNCHER))
+
+
+def ensure_launcher(prefix):
+    check_launcher(prefix)
+    if launcher_owned(prefix):
+        return
+    temporary = prefix / (".launcher." + uuid.uuid4().hex)
+    try:
+        with temporary.open("xb") as dest:
+            dest.write(launcher_bytes(prefix))
+        temporary.chmod(0o755)
+        os.replace(temporary, prefix / LAUNCHER)
+    finally:
+        if exists(temporary):
+            temporary.unlink()
+
+
 def command_owned(command_path, prefix):
-    return command_path.is_symlink() and os.readlink(command_path) == str(prefix / "current/bin/codex")
+    if not command_path.is_symlink() or not exists(prefix / ROOT_MARKER):
+        return False
+    state = managed_state(prefix)
+    if str(command_path) != str(Path(state["bin_dir"]) / state["command"]):
+        return False
+    target = os.readlink(command_path)
+    # The original installer installed this exact direct link. Only adopt it
+    # when its saved installation identity matches, never a merely similar link.
+    if target == str(prefix / "current/bin/codex"):
+        return True
+    return target == str(prefix / LAUNCHER) and launcher_owned(prefix)
+
+
+def replace_command_link(command_path, target):
+    temporary = command_path.parent / ("." + command_path.name + "." + uuid.uuid4().hex)
+    try:
+        temporary.symlink_to(target)
+        os.replace(temporary, command_path)
+    finally:
+        if exists(temporary):
+            temporary.unlink()
 
 
 def check_command(command_path, prefix):
@@ -257,6 +328,7 @@ def extract_archive(archive, destination, tag):
 
 
 def install(prefix, command_path, tag):
+    check_launcher(prefix)
     check_command(command_path, prefix)
     previous_current = pointer(prefix, "current")
     pointer(prefix, "previous")
@@ -284,17 +356,28 @@ def install(prefix, command_path, tag):
             staged.rename(directory)
     check_command(command_path, prefix)
     command_path.parent.mkdir(parents=True, exist_ok=True)
-    new_command = not exists(command_path)
-    if new_command:
-        command_path.symlink_to(str(prefix / "current/bin/codex"))
+    old_command_target = os.readlink(command_path) if exists(command_path) else None
+    ensure_launcher(prefix)
+    desired_target = str(prefix / LAUNCHER)
+    command_changed = old_command_target != desired_target
+    if command_changed:
+        if old_command_target is None:
+            # Different prefixes have different locks: never replace a command
+            # another installation created after our last collision check.
+            command_path.symlink_to(desired_target)
+        else:
+            replace_command_link(command_path, desired_target)
     try:
         if previous_current != tag:
             activate(prefix, tag, previous_current)
     except BaseException:
-        if new_command and command_owned(command_path, prefix):
-            command_path.unlink()
+        if command_changed and command_owned(command_path, prefix):
+            if old_command_target is None:
+                command_path.unlink()
+            else:
+                replace_command_link(command_path, old_command_target)
         raise
-    print("Installed " + tag + " -> " + str(command_path))
+    print("Installed " + tag + " -> " + str(command_path) + " (standalone --no-daemon launcher)")
     if str(command_path.parent) not in os.environ.get("PATH", "").split(os.pathsep):
         import shlex
         print("Add this directory to PATH yourself (no shell files were changed):\n  export PATH=" + shlex.quote(str(command_path.parent)) + ':"$PATH"')
@@ -303,7 +386,8 @@ def install(prefix, command_path, tag):
 
 def uninstall(prefix, command_path):
     # Preflight everything before deletion; never recursively delete the prefix.
-    allowed = {ROOT_MARKER, ".lock", "versions", "current", "previous"}
+    allowed = {ROOT_MARKER, ".lock", "versions", "current", "previous", LAUNCHER}
+    check_launcher(prefix)
     extras = {p.name for p in prefix.iterdir()} - allowed
     if extras:
         fail("Untracked files in installation prefix; preserved: " + ", ".join(sorted(extras)))
@@ -324,6 +408,8 @@ def uninstall(prefix, command_path):
         # A validated tree contains only manifest-listed regular files/directories.
         shutil.rmtree(version)
     (prefix / "versions").rmdir()
+    if exists(prefix / LAUNCHER):
+        (prefix / LAUNCHER).unlink()
     (prefix / ROOT_MARKER).unlink()
     print("Uninstalled managed versions. ~/.codex, credentials and shell profiles were not touched.")
 

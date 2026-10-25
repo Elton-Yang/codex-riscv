@@ -21,6 +21,8 @@ The first adaptation release is `v0.1.0-experimental.1`, targeting Debian 13 / r
 
 The user ran the native checks on 2026-10-25 on VisionFive 2 / Debian 13 with kernel `6.12.113+deb13-riscv64` and bubblewrap `0.12.0`. These results are separate from the build host's QEMU checks. They cover the listed startup and denial behavior and basic conversation, not a comprehensive sandbox security audit or long-term stability. Do not run Codex as root or disable its sandbox to work around failures. See the [validation record](docs/validation.md).
 
+The earlier successful interactive conversation used `--no-daemon`. The user subsequently completed installation with the first installer, but bare `codex-riscv` failed on the incomplete packaged-daemon path. The updated installer supplies a default standalone launcher; native startup of this fix has not yet been confirmed. See the [installer v1.1 notes](docs/release-notes-installer-v1.1.md).
+
 ## Pinned upstream and patch
 
 - Upstream: [openai/codex](https://github.com/openai/codex)
@@ -70,7 +72,7 @@ export PATH="$HOME/.local/bin:$PATH"
 codex-riscv --version
 ```
 
-The default installation retains the full release under `~/.local/share/codex-riscv/versions/v0.1.0-experimental.1` and creates `~/.local/bin/codex-riscv`. The installer checks a pinned SHA-256, platform and dynamic libraries, then runs `--version` before switching the active version. It preserves license materials and does not edit shell startup files.
+The default installation retains the full release under `~/.local/share/codex-riscv/versions/v0.1.0-experimental.1` and creates `~/.local/bin/codex-riscv`. That command uses a managed Python 3 launcher to run the unchanged binary with `--no-daemon`: bare startup, `resume` and `fork` default to standalone mode without a shared background daemon. This does not disable sandboxing. The installer checks the pinned archive, platform and dynamic libraries before activation, preserves license materials and does not edit shell startup files.
 
 Choose the management action you need; do not run all of these in sequence:
 
@@ -83,6 +85,8 @@ sh install-codex-riscv.sh uninstall
 ```
 
 `upgrade` selects the experimental release listed in this installer, not GitHub's `latest`. Only one release is currently supported; reinstalling it does not create a rollback version. Rollback requires an earlier successful switch between different installed versions. Download and review an updated installer before upgrading to future releases. Uninstall removes only managed, unmodified installation files, never `~/.codex`, credentials or project files.
+
+Already installed with v1? **Download and review the script above again**, then run `sh install-codex-riscv.sh upgrade`. This updates the managed launcher in place without changing the binary version or requiring uninstall; the saved command name and bin directory are retained. Before updating, use `codex-riscv --no-daemon`, or `codex-riscv --no-daemon resume` / `codex-riscv --no-daemon fork` as a workaround.
 
 To use the name `codex`, explicitly pass `--command codex` on the first installation. An unrelated command at the destination or on `PATH` blocks installation. A `codex-riscv` binary copied using the old instructions is not overwritten either: inspect it before manually moving or renaming it. See the [installer guide](docs/installer.en.md) for options, layout and troubleshooting.
 
@@ -139,7 +143,7 @@ To regenerate license notices:
 
 ## Limitations
 
-- npm launcher, upstream automatic updates and packaged-daemon installation paths are not adapted for RISC-V. This repository’s installer manages direct-binary upgrades. Root / system-wide installation is not supported.
+- npm launcher, upstream automatic updates and packaged-daemon installation paths are not adapted for RISC-V. The managed launcher defaults to standalone mode, with upgrades managed by this repository’s installer. It does not add support for explicit daemon, agents or remote-server features. Root / system-wide installation is not supported.
 - Optional external code-mode / V8 and realtime runtimes were not built, included or tested.
 - Native validation covers only the listed checks on one board and user-reported basic conversation. Tool calls, model-driven file edits, `workspace-write`, exhaustive TUI behavior, other kernels and long-term stability remain untested.
 - The file-write and IPv4-socket denials are not a comprehensive sandbox security audit. The legacy Landlock backend and the full set of filter rules were not separately validated.

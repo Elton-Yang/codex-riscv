@@ -7,7 +7,7 @@
 ## Requirements and trust
 
 - Linux `riscv64`, glibc **2.39 or newer**; Debian 13 riscv64 is the intended starting point.
-- Python 3 for the installer, `curl` and CA certificates for HTTPS downloads, `uname`, `getconf`, `ldd`, and system `bwrap`.
+- Python 3 for both the installer and installed launcher (keep it installed), `curl` and CA certificates for HTTPS downloads, `uname`, `getconf`, `ldd`, and system `bwrap`.
 - Runtime libraries including `libgcc-s1` and OpenSSL 3 (`libssl3t64` on Debian 13). The installer checks the staged binary's dynamic dependencies and runs `--version` with a disposable `HOME` / `CODEX_HOME` before activation.
 - Enough free disk space for the compressed archive, the full extracted release and retained previous versions. The current executable alone is about 315 MB.
 
@@ -61,6 +61,32 @@ sh install.sh uninstall
 
 There is currently only one published binary release. Installing or upgrading to it again does not manufacture a previous version. Future upgrade support requires an updated installer catalog; download and review that installer first. Rollback switches to the previously active managed version, not an arbitrary upstream release. Keep the same custom `--prefix` when managing a non-default installation.
 
+## Upgrade an existing v1 installation
+
+The first installer completed installation on the user's RISC-V board, but its direct-binary command failed on bare startup by entering the packaged-daemon path. The earlier successful TUI conversation used `--no-daemon`.
+
+**Download and review the updated `install.sh` again** as shown in the README; do not reuse a cached v1 script. Then run:
+
+```bash
+sh install-codex-riscv.sh upgrade
+```
+
+Existing users can optionally upgrade in one line below. This **executes downloaded code directly**; downloading and reviewing it first, as above, is safer.
+
+```bash
+curl --fail --location --proto '=https' --proto-redir '=https' --tlsv1.2 https://raw.githubusercontent.com/Elton-Yang/codex-riscv/main/install.sh | sh -s -- upgrade
+```
+
+This migrates the old managed command link to the standalone launcher in place, using the same binary release. No uninstall is needed. The saved `--command` and `--bin-dir` are read from installation metadata; pass the original `--prefix` for a custom installation. New command creation still checks for collisions.
+
+Until you update, use:
+
+```bash
+codex-riscv --no-daemon
+codex-riscv --no-daemon resume
+codex-riscv --no-daemon fork
+```
+
 ## Paths and command names
 
 Defaults:
@@ -74,10 +100,11 @@ Defaults:
 │       ├── NOTICE
 │       ├── licenses/
 │       └── ...release documentation and installer metadata
+├── launcher                            # managed Python 3 launcher
 ├── current -> versions/v0.1.0-experimental.1
 └── previous -> versions/<previous-tag>  # only after a version switch
 
-~/.local/bin/codex-riscv -> ~/.local/share/codex-riscv/current/bin/codex
+~/.local/bin/codex-riscv -> ~/.local/share/codex-riscv/launcher
 ```
 
 Use `--prefix` for the managed installation directory and `--bin-dir` for its command directory, both absolute paths. Choose a dedicated, empty prefix, not a project directory or your home directory. Root / system-wide installation is deliberately not implemented.
@@ -105,6 +132,6 @@ If uninstall reports altered or untracked files, inspect and back them up or mov
 
 ## Updates and validation limits
 
-The existing binary was built from a development commit whose package version is `0.0.0`, and upstream update checks are disabled for that development version. The installer introduces no wrapper and makes no source or binary change. Use this installer for upgrades; do not use an upstream/npm update path to replace the RISC-V binary.
+The existing binary was built from a development commit whose package version is `0.0.0`, and upstream update checks are disabled for that development version. The managed launcher uses `exec` to run the unchanged `current/bin/codex`, adding `--no-daemon` to ordinary CLI calls unless already supplied, while preserving user arguments, exit status and signal behavior. Internal helper calls retain their special dispatch without added TUI options. Bare startup, `resume` and `fork` default to standalone mode without a shared background daemon. This does not disable sandboxing or add support for explicit daemon, agents or remote-server features. Use this installer for upgrades; do not use an upstream/npm update path to replace the RISC-V binary.
 
-Installer fixture tests use isolated directories and mocked platform/download commands; they are not native board tests. Likewise, QEMU startup of the published binary does not prove that the installer or sandbox works on a physical board. The repository's earlier user-reported VisionFive 2 tests apply to the binary, not automatically to this new installer. See [validation records](validation.md) and the [installer release notes](release-notes-installer-v1.md) for the recorded scope.
+Installer fixture tests use isolated directories and mocked platform/download commands; they are not native board tests. Likewise, QEMU startup of the published binary does not prove that the installer or sandbox works on a physical board. The user completed native v1 installation but then encountered the bare-startup failure; native startup of the standalone fix has not yet been confirmed. Earlier VisionFive 2 binary checks cannot substitute for testing this repair. See [validation records](validation.md), the [historical v1 notes](release-notes-installer-v1.md) and the [v1.1 repair notes](release-notes-installer-v1.1.md) for the recorded scope.

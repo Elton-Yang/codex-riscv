@@ -21,6 +21,8 @@ OpenAI Codex CLI 的 **非官方 RISC-V Linux 实验构建与适配**。本项�
 
 实机结果由用户于 2026-10-25 在 VisionFive 2 / Debian 13 上自行运行并反馈：内核 `6.12.113+deb13-riscv64`，bubblewrap `0.12.0`。这与构建主机上的 QEMU 检查是两组不同的验证；实机检查覆盖上述启动、拒绝行为和基本对话，不是完整沙箱安全审计或长期稳定性验证。不要用关闭沙箱来绕过错误，也不要以 root 运行 Codex。
 
+此前成功的基本交互对话使用了 `--no-daemon`。随后用户在实机完成首版安装器安装，但直接运行 `codex-riscv` 进入了未完成适配的 packaged daemon 路径而失败；新版安装器改用默认 standalone 启动器。此修复尚未获实机启动确认，见 [安装器 v1.1 说明](docs/release-notes-installer-v1.1.md)。
+
 完整检查范围见 [验证记录](docs/validation.md)。
 
 ## 固定的上游版本与修改
@@ -72,7 +74,7 @@ export PATH="$HOME/.local/bin:$PATH"
 codex-riscv --version
 ```
 
-默认将完整发布包安装到 `~/.local/share/codex-riscv/versions/v0.1.0-experimental.1`，并创建 `~/.local/bin/codex-riscv`。安装器会核对固定 SHA-256、检查平台与动态库、试运行 `--version`，再切换当前版本；保留所有许可证，不修改 shell 配置。
+默认将完整发布包安装到 `~/.local/share/codex-riscv/versions/v0.1.0-experimental.1`，并创建 `~/.local/bin/codex-riscv`。该命令经托管的 Python 3 启动器运行原二进制，自动加上 `--no-daemon`；直接启动、`resume` 和 `fork` 默认使用 standalone 模式，不依赖共享后台 daemon。这不会关闭沙箱。安装器核对固定 SHA-256、检查平台与动态库后切换版本，保留许可证，不修改 shell 配置。
 
 以下管理命令按需选择，不必依次执行：
 
@@ -85,6 +87,8 @@ sh install-codex-riscv.sh uninstall
 ```
 
 `upgrade` 使用这份安装器中列出的实验版，不查询 GitHub 的 `latest`。目前仅支持一个版本，重复安装不会制造可回滚的新版本；有过成功的不同版本切换后才能 `rollback`。以后升级前先下载并检查新版安装器。卸载只处理安装器托管且未被修改的文件，不删除 `~/.codex`、登录信息或项目文件。
+
+若已经用首版安装器安装，请**重新下载并检查上面的脚本**，然后执行 `sh install-codex-riscv.sh upgrade`，即可原位更新托管启动器，二进制版本不变，无需先卸载。原有命令名与命令目录会沿用。更新前的临时办法是 `codex-riscv --no-daemon`；恢复或分叉会话可用 `codex-riscv --no-daemon resume` / `codex-riscv --no-daemon fork`。
 
 如确实需要命令名 `codex`，首次安装时显式使用 `--command codex`；目标位置或 `PATH` 中已有其他同名命令时会拒绝安装。旧文档手工复制的 `codex-riscv` 也不会被自动覆盖，请先确认来源，再自行改名或移走。完整选项、目录布局与故障处理见 [安装器说明](docs/installer.md)。
 
@@ -141,7 +145,7 @@ tar -xzf "$NAME.tar.gz"
 
 ## 已知边界
 
-- npm 启动器、上游自动更新和 packaged daemon 安装路径没有完成 RISC-V 适配；本项目采用直接二进制，由本仓库安装器管理升级。安装器不提供 root / 系统级安装。
+- npm 启动器、上游自动更新和 packaged daemon 安装路径没有完成 RISC-V 适配；托管启动器默认使用 standalone 模式，由本仓库安装器管理升级。显式 daemon、agents 和 remote server 功能不会因此获得支持。安装器不提供 root / 系统级安装。
 - 可选 code-mode / V8 和实时功能的外部运行时未构建、未打包、未验证。
 - 实机验证仅覆盖上述单台设备上的检查和用户报告的基本对话；工具调用、模型修改文件、`workspace-write`、完整 TUI 交互、其他内核和长期稳定性仍未验证。
 - 文件写入与 IPv4 socket 创建被拒绝不等于完整沙箱安全审计；未单独验证 legacy Landlock 后端或全部过滤规则。

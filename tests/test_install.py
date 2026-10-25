@@ -13,8 +13,11 @@ models, package installation or root access are used by this suite.
 import fcntl
 import hashlib
 import io
+import json
 import os
 from pathlib import Path
+import select
+import signal
 import subprocess
 import tarfile
 import tempfile
@@ -146,7 +149,229 @@ class InstallerTests(unittest.TestCase):
         self.assertTrue((self.prefix / "current").is_symlink())
         self.assertEqual((self.prefix / "current").resolve(), self.prefix / "versions" / tag)
         self.assertTrue(self.command.is_symlink())
-        self.assertEqual(self.command.resolve(), self.prefix / "versions" / tag / "bin/codex")
+        self.assertEqual(self.command.resolve(), self.prefix / "launcher")
+
+    def install_recording_binary(self):
+        program = b"""#!/usr/bin/env python3
+import json
+import os
+import signal
+import sys
+if "--version" in sys.argv[1:]:
+    print("codex-cli recording-fixture")
+    raise SystemExit(0)
+mode = os.environ.get("TEST_RECORD_MODE", "args")
+if mode == "signal":
+    print(os.getpid(), flush=True)
+    signal.pause()
+    raise SystemExit(99)
+if mode == "exit":
+    raise SystemExit(37)
+print(json.dumps(sys.argv[1:]))
+"""
+        archive = self.make_archive(TAG, binary_script=program)
+        self.installer = self.make_installer(TAG, archive=archive)
+        self.run_installer()
+
+    def run_command(self, *args, command=None, **environment):
+        return subprocess.run([str(command or self.command), *args],
+                              env=dict(self.env, **environment), cwd=self.work,
+                              text=True, stdout=subprocess.PIPE,
+                              stderr=subprocess.PIPE, timeout=10)
+
+    def test_launcher_defaults_bare_resume_and_fork_to_standalone(self):
+        self.install_recording_binary()
+        for arguments in ([], ["resume", "--last"], ["fork", "session id"],
+                          ["-C", "directory with spaces", "prompt with 'quotes'"],
+                          ["exec", "hello"]):
+            with self.subTest(arguments=arguments):
+                result = self.run_command(*arguments)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertEqual(json.loads(result.stdout), ["--no-daemon", *arguments])
+
+    def test_launcher_preserves_arguments_and_explicit_standalone(self):
+        self.install_recording_binary()
+        cases = [
+            (["--no-daemon", "resume", "--last"], ["--no-daemon", "resume", "--last"]),
+            (["fork", "--last", "--no-daemon"], ["fork", "--last", "--no-daemon"]),
+            (["--", "--no-daemon"], ["--no-daemon", "--", "--no-daemon"]),
+            (["", "with spaces", "'quoted'", '"double"', "*", "$HOME", "line\nbreak", "中文"],
+             ["--no-daemon", "", "with spaces", "'quoted'", '"double"', "*", "$HOME", "line\nbreak", "中文"]),
+        ]
+        for arguments, expected in cases:
+            with self.subTest(arguments=arguments):
+                result = self.run_command(*arguments)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertEqual(json.loads(result.stdout), expected)
+
+    def test_launcher_does_not_inject_flag_into_internal_dispatch(self):
+        self.install_recording_binary()
+        for flag in ("--codex-run-as-apply-patch", "--codex-run-as-fs-helper",
+                     "--codex-run-as-arg0-exec-helper", "--codex-run-as-process-setup"):
+            with self.subTest(flag=flag):
+                arguments = [flag, "opaque argument", "--", "other"]
+                result = self.run_command(*arguments)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertEqual(json.loads(result.stdout), arguments)
+        for name in ("apply_patch", "applypatch", "codex-linux-sandbox"):
+            with self.subTest(alias=name):
+                alias = self.work / name
+                alias.symlink_to(self.command)
+                arguments = ["opaque helper argument", "--", "payload"]
+                result = self.run_command(*arguments, command=alias)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertEqual(json.loads(result.stdout), arguments)
+
+    def test_launcher_preserves_exit_status(self):
+        self.install_recording_binary()
+        result = self.run_command(TEST_RECORD_MODE="exit")
+        self.assertEqual(result.returncode, 37, result.stderr)
+
+    def test_launcher_exec_preserves_pid_and_termination_signal(self):
+        self.install_recording_binary()
+        process = subprocess.Popen([str(self.command)], cwd=self.work,
+                                   env=dict(self.env, TEST_RECORD_MODE="signal"),
+                                   text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        try:
+            self.assertTrue(select.select([process.stdout], [], [], 10)[0], "fixture did not start")
+            self.assertEqual(int(process.stdout.readline().strip()), process.pid)
+            process.terminate()
+            stdout, stderr = process.communicate(timeout=10)
+            self.assertEqual(process.returncode, -signal.SIGTERM, stderr)
+        finally:
+            if process.poll() is None:
+                process.kill()
+                process.communicate()
+
+    def make_legacy_install(self):
+        self.run_installer()
+        self.command.unlink()
+        self.command.symlink_to(self.prefix / "current/bin/codex")
+        (self.prefix / "launcher").unlink()
+
+    def test_legacy_symlink_migrates_on_same_version_upgrade(self):
+        self.make_legacy_install()
+        original_binary = (self.prefix / "versions" / TAG / "bin/codex").read_bytes()
+        self.run_installer("upgrade")
+        self.assert_current(TAG)
+        self.assertEqual((self.prefix / "versions" / TAG / "bin/codex").read_bytes(), original_binary)
+        self.assertFalse((self.prefix / "previous").is_symlink())
+        self.run_installer()
+        self.assert_current(TAG)
+        self.run_installer("uninstall")
+        self.assertFalse(self.prefix.exists())
+        self.assertFalse(self.command.is_symlink())
+
+    def test_legacy_symlink_upgrade_and_rollback_preserve_launcher(self):
+        self.make_legacy_install()
+        newer = self.make_installer(NEXT_TAG)
+        self.run_installer("upgrade", installer=newer)
+        self.assert_current(NEXT_TAG)
+        self.run_installer("rollback", installer=newer)
+        self.assert_current(TAG)
+        self.run_installer("uninstall", installer=newer)
+        self.assertFalse(self.prefix.exists())
+
+    def test_legacy_symlink_uninstall_is_still_supported(self):
+        self.make_legacy_install()
+        self.run_installer("uninstall")
+        self.assertFalse(self.prefix.exists())
+        self.assertFalse(self.command.is_symlink())
+
+    def test_legacy_migration_does_not_replace_foreign_launcher(self):
+        self.make_legacy_install()
+        launcher = self.prefix / "launcher"
+        launcher.write_text("unrelated user file\n")
+        for action in ("install", "upgrade", "uninstall"):
+            with self.subTest(action=action):
+                self.run_installer(action, success=False)
+                self.assertEqual(launcher.read_text(), "unrelated user file\n")
+                self.assertEqual(os.readlink(self.command), str(self.prefix / "current/bin/codex"))
+
+    def test_modified_launcher_is_not_overwritten_or_deleted(self):
+        self.run_installer()
+        launcher = self.prefix / "launcher"
+        launcher.write_text(launcher.read_text() + "\n# user modification\n")
+        original = launcher.read_bytes()
+        for action in ("install", "upgrade", "uninstall"):
+            with self.subTest(action=action):
+                self.run_installer(action, success=False)
+                self.assertEqual(launcher.read_bytes(), original)
+                self.assertTrue(self.command.is_symlink())
+
+    def test_legacy_migration_link_failure_preserves_old_command(self):
+        self.make_legacy_install()
+        source = self.installer.read_text()
+        replacement = "        os.replace(temporary, command_path)"
+        self.assertIn(replacement, source)
+        source = source.replace(replacement,
+                                '        raise OSError("simulated command-link failure")\n' + replacement)
+        faulty = self.work / "command-link-failure.sh"
+        faulty.write_text(source)
+        self.run_installer("upgrade", installer=faulty, success=False)
+        self.assertEqual(os.readlink(self.command), str(self.prefix / "current/bin/codex"))
+        self.assertEqual((self.prefix / "current").resolve(), self.prefix / "versions" / TAG)
+        self.assertFalse(any(self.bin.glob(".codex-riscv.*")))
+        self.run_installer("upgrade")
+        self.assert_current(TAG)
+
+    def test_legacy_migration_activation_failure_restores_old_command(self):
+        self.make_legacy_install()
+        newer = self.make_installer(NEXT_TAG)
+        source = newer.read_text()
+        replacement = "        os.replace(temporary, prefix / name)"
+        self.assertIn(replacement, source)
+        source = source.replace(replacement,
+            '        if name == "current":\n'
+            '            raise OSError("simulated activation failure")\n' + replacement)
+        faulty = self.work / "legacy-activation-failure.sh"
+        faulty.write_text(source)
+        self.run_installer("upgrade", installer=faulty, success=False)
+        self.assertEqual(os.readlink(self.command), str(self.prefix / "current/bin/codex"))
+        self.assertEqual((self.prefix / "current").resolve(), self.prefix / "versions" / TAG)
+        self.assertFalse((self.prefix / "previous").is_symlink())
+        self.run_installer("upgrade", installer=newer)
+        self.assert_current(NEXT_TAG)
+
+    def test_unowned_legacy_looking_symlink_is_not_adopted(self):
+        self.bin.mkdir(parents=True)
+        self.command.symlink_to(self.prefix / "current/bin/codex")
+        self.run_installer(success=False)
+        self.assertEqual(os.readlink(self.command), str(self.prefix / "current/bin/codex"))
+        self.assertFalse((self.prefix / ".codex-riscv-install").exists())
+
+    def test_first_install_does_not_overwrite_command_created_concurrently(self):
+        source = self.installer.read_text()
+        needle = "    ensure_launcher(prefix)"
+        self.assertIn(needle, source)
+        source = source.replace(needle,
+            '    if old_command_target is None:\n'
+            '        command_path.write_text("concurrent unrelated command\\n")\n' + needle)
+        faulty = self.work / "concurrent-command.sh"
+        faulty.write_text(source)
+        self.run_installer(installer=faulty, success=False)
+        self.assertFalse(self.command.is_symlink())
+        self.assertEqual(self.command.read_text(), "concurrent unrelated command\n")
+        self.assertFalse((self.prefix / "current").is_symlink())
+
+    def test_launcher_mode_change_is_not_overwritten_or_deleted(self):
+        self.run_installer()
+        launcher = self.prefix / "launcher"
+        launcher.chmod(0o644)
+        for action in ("install", "upgrade", "uninstall"):
+            with self.subTest(action=action):
+                self.run_installer(action, success=False)
+                self.assertEqual(launcher.stat().st_mode & 0o777, 0o644)
+                self.assertTrue(self.command.is_symlink())
+
+    def test_launcher_symlink_collision_is_not_followed(self):
+        self.make_legacy_install()
+        foreign = self.work / "foreign-launcher"
+        foreign.write_text("preserve me\n")
+        (self.prefix / "launcher").symlink_to(foreign)
+        self.run_installer("upgrade", success=False)
+        self.run_installer("uninstall", success=False)
+        self.assertEqual(foreign.read_text(), "preserve me\n")
 
     def test_help_without_platform_check_or_mutation(self):
         output = self.run_installer("--help", TEST_MACHINE="x86_64").stdout
@@ -229,7 +454,7 @@ class InstallerTests(unittest.TestCase):
         prefix = self.work / "custom location" / "codex-riscv"
         bin_dir = self.work / "custom commands"
         self.run_installer("--prefix", str(prefix), "--bin-dir", str(bin_dir))
-        self.assertEqual((bin_dir / "codex-riscv").resolve(), prefix / "versions" / TAG / "bin/codex")
+        self.assertEqual((bin_dir / "codex-riscv").resolve(), prefix / "launcher")
         self.run_installer("uninstall", "--prefix", str(prefix))
         self.assertFalse((bin_dir / "codex-riscv").is_symlink())
 
