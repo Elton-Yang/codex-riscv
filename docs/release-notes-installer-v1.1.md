@@ -19,9 +19,9 @@ The `v0.1.0-experimental.1` binary, binary tag, release assets and licenses are 
 
 ## Update / 更新
 
-Download and review the current installer again using the [README instructions](../README.en.md); a previously downloaded v1 script will not contain this fix. Then run as your ordinary user, without `sudo`:
+Download and review the current installer again using the [README instructions](../README.md); a previously downloaded v1 script will not contain this fix. Then run as your ordinary user, without `sudo`:
 
-请按 [README](../README.md) 重新下载并检查新版安装器；缓存的 v1 脚本不包含此修复。随后以普通用户执行，不要用 `sudo`：
+请按 [README](../README.zh-CN.md) 重新下载并检查新版安装器；缓存的 v1 脚本不包含此修复。随后以普通用户执行，不要用 `sudo`：
 
 ```bash
 sh install-codex-riscv.sh upgrade

@@ -1,6 +1,6 @@
 # Per-user installer
 
-[简体中文](installer.md) · [README](../README.en.md)
+[简体中文](installer.md) · [README](../README.md)
 
 `install.sh` manages the existing unofficial RISC-V Linux release. It does not build Codex, install an npm package or change upstream source. Run it with `sh` as an ordinary user on Linux riscv64. “User-global” means the command can be used from any directory after its bin directory is on your `PATH`; it does not install for every account.
 
@@ -18,7 +18,7 @@ sudo apt update
 sudo apt install ca-certificates curl python3 libc6 libgcc-s1 libssl3t64 bubblewrap
 ```
 
-The package installation uses `sudo`; the Codex installer and Codex itself must not. Presence of `bwrap` is not proof that the board's kernel and policy support its sandbox. Follow the separate [native sandbox validation guidance](../README.en.md#4-validate-the-native-sandbox-before-real-work).
+The package installation uses `sudo`; the Codex installer and Codex itself must not. Presence of `bwrap` is not proof that the board's kernel and policy support its sandbox. Follow the separate [native sandbox validation guidance](../README.md#4-validate-the-native-sandbox-before-real-work).
 
 Download the script from this repository and review it before running. The `main` URL in the README can change. For repeatable installation, use an inspected repository commit in place of `main` and retain that script. The embedded archive SHA-256 pins the expected release bytes, but is not a publisher signature or an independent way to authenticate the installer itself.
 

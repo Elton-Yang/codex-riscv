@@ -17,7 +17,7 @@ This is an installer-only update for the unofficial `codex-riscv` project. It in
 
 ## Use / 使用
 
-See the [Chinese README](../README.md) / [English README](../README.en.md) for the download-and-review instructions, and the [Chinese installer guide](installer.md) / [English installer guide](installer.en.md) for all options.
+See the [Chinese README](../README.zh-CN.md) / [English README](../README.md) for the download-and-review instructions, and the [Chinese installer guide](installer.md) / [English installer guide](installer.en.md) for all options.
 
 Only `v0.1.0-experimental.1` is currently supported. `upgrade` uses the catalog in the downloaded installer, never GitHub's generic `latest` endpoint; future binary releases require an updated installer. Rollback requires an actual earlier managed version and is not available after a first or same-version installation. Root / system-wide installation is not included.
 

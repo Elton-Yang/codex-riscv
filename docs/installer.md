@@ -1,6 +1,6 @@
 # 用户级安装器
 
-[English](installer.en.md) · [README](../README.md)
+[English](installer.en.md) · [README](../README.zh-CN.md)
 
 `install.sh` 管理已发布的非官方 RISC-V Linux 二进制，不编译 Codex、不安装 npm 包，也不修改上游源码。在 Linux riscv64 上使用普通用户运行 `sh install.sh`。“用户级全局”指把命令目录加入 `PATH` 后，可以从任意目录使用；不是为所有账户安装。
 
@@ -18,7 +18,7 @@ sudo apt update
 sudo apt install ca-certificates curl python3 libc6 libgcc-s1 libssl3t64 bubblewrap
 ```
 
-只有安装系统软件包这一步使用 `sudo`，不要用它运行 Codex 安装器或 Codex。检测到 `bwrap` 不代表开发板内核和策略已经支持沙箱；仍须按照 [实机沙箱验证说明](../README.md#4-先验证沙箱再用于实际工作) 单独检查。
+只有安装系统软件包这一步使用 `sudo`，不要用它运行 Codex 安装器或 Codex。检测到 `bwrap` 不代表开发板内核和策略已经支持沙箱；仍须按照 [实机沙箱验证说明](../README.zh-CN.md#4-先验证沙箱再用于实际工作) 单独检查。
 
 从本仓库下载脚本，阅读后再执行。README 中的 `main` 地址会随仓库更新；若需要可重复安装，可以将 URL 中的 `main` 换成已检查的仓库提交，并保留那份脚本。内置 SHA-256 固定发布包字节，但不是发布者签名，也不能独立证明安装器本身可信。
 

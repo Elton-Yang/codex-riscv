@@ -1,68 +1,66 @@
 # codex-riscv
 
-[English](README.en.md)
+[简体中文](README.zh-CN.md)
 
-OpenAI Codex CLI 的 **非官方 RISC-V Linux 实验构建与适配**。本项目独立于 OpenAI，未获 OpenAI 背书，也不代表上游已经正式支持 RISC-V。
+An **unofficial experimental RISC-V Linux build and adaptation of OpenAI Codex CLI**. This project is independent of OpenAI and is not endorsed by OpenAI. It does not indicate official upstream RISC-V support.
 
-首个适配版本：`v0.1.0-experimental.1`。目标是让 Debian 13 / riscv64 用户能够检查、复现和继续验证一次小范围移植，而不是宣称完整功能已经可用。
+The first adaptation release is `v0.1.0-experimental.1`, targeting Debian 13 / riscv64.
 
-## 当前结果
+## Status
 
-| 项目 | 结果 |
+| Check | Result |
 | --- | --- |
-| `riscv64gc-unknown-linux-gnu` 交叉编译 | 通过 |
-| QEMU 下 `codex --version` / `--help` | 均退出 0 |
-| QEMU 下 seccomp 策略选择单元测试 | 6 通过，0 失败 |
-| VisionFive 2 / JH7110 实机启动 | 用户实测 `--version` / `--help` 正常 |
-| 实机只读沙箱执行 `/bin/true` | 退出 0 |
-| 实机只读沙箱拒绝文件写入 / IPv4 socket 创建 | 分别报只读文件系统（退出 2）/ `EPERM`（退出 1）；沙箱外对照成功 |
-| 认证、模型选择、基本交互对话 | 用户报告成功 |
-| 工具调用、模型修改文件、`workspace-write`、完整测试套件 | **尚未测试** |
+| Cross-build for `riscv64gc-unknown-linux-gnu` | Passed |
+| `codex --version` and `--help` under QEMU | Both exited 0 |
+| seccomp policy-selection unit tests under QEMU | 6 passed, 0 failed |
+| Native startup on VisionFive 2 / JH7110 | User-operated `--version` / `--help` produced normal output |
+| Native read-only sandbox running `/bin/true` | Exit 0 |
+| Native read-only sandbox denying file writes / IPv4 socket creation | Read-only filesystem, exit 2 / `EPERM`, exit 1; both outside-sandbox controls succeeded |
+| Authentication, model selection and basic interactive conversation | User reported success |
+| Tool calls, model-driven file edits, `workspace-write`, full test suite | **Not tested** |
 
-实机结果由用户于 2026-10-25 在 VisionFive 2 / Debian 13 上自行运行并反馈：内核 `6.12.113+deb13-riscv64`，bubblewrap `0.12.0`。这与构建主机上的 QEMU 检查是两组不同的验证；实机检查覆盖上述启动、拒绝行为和基本对话，不是完整沙箱安全审计或长期稳定性验证。不要用关闭沙箱来绕过错误，也不要以 root 运行 Codex。
+The user ran the native checks on 2026-10-25 on VisionFive 2 / Debian 13 with kernel `6.12.113+deb13-riscv64` and bubblewrap `0.12.0`. These results are separate from the build host's QEMU checks. They cover the listed startup and denial behavior and basic conversation, not a comprehensive sandbox security audit or long-term stability. Do not run Codex as root or disable its sandbox to work around failures. See the [validation record](docs/validation.md).
 
-此前成功的基本交互对话使用了 `--no-daemon`。随后用户在实机完成首版安装器安装，但直接运行 `codex-riscv` 进入了未完成适配的 packaged daemon 路径而失败；新版安装器改用默认 standalone 启动器。此修复尚未获实机启动确认，见 [安装器 v1.1 说明](docs/release-notes-installer-v1.1.md)。
+The earlier successful interactive conversation used `--no-daemon`. The user subsequently completed installation with the first installer, but bare `codex-riscv` failed on the incomplete packaged-daemon path. The updated installer supplies a default standalone launcher; native startup of this fix has not yet been confirmed. See the [installer v1.1 notes](docs/release-notes-installer-v1.1.md).
 
-完整检查范围见 [验证记录](docs/validation.md)。
+## Pinned upstream and patch
 
-## 固定的上游版本与修改
+- Upstream: [openai/codex](https://github.com/openai/codex)
+- Commit: [`970111f6cb62cc02fe36a82ea7d71b37a2889c97`](https://github.com/openai/codex/commit/970111f6cb62cc02fe36a82ea7d71b37a2889c97)
+- Target: `riscv64gc-unknown-linux-gnu`, LP64D ABI
+- Rust `1.99.1`, cross GCC `14.2`, target glibc `2.41`
+- Profile: unoptimized `dev-small`, stripped, for experiments
 
-- 上游：[openai/codex](https://github.com/openai/codex)
-- 提交：[`970111f6cb62cc02fe36a82ea7d71b37a2889c97`](https://github.com/openai/codex/commit/970111f6cb62cc02fe36a82ea7d71b37a2889c97)
-- 目标：`riscv64gc-unknown-linux-gnu`，LP64D ABI
-- Rust：`1.99.1`；交叉 GCC：`14.2`；目标 glibc：`2.41`
-- 构建配置：`dev-small`，未优化、已去除符号，仅供实验
+The functional source patch adds two lines selecting `TargetArch::riscv64` in the Linux seccomp architecture dispatch. `seccompiler 0.5.0` already provides this architecture. No filter rules or security checks were removed.
 
-功能性源码补丁只有两行：在 Linux seccomp 的架构分派中增加 `TargetArch::riscv64`。所用 `seccompiler 0.5.0` 已提供该架构；没有删除过滤规则或禁用安全检查。补丁和修改说明随本仓库提供。
+The pinned upstream development commit declares package version `0.0.0`, so `--version` reports `codex-cli 0.0.0`. This repository's release tag identifies the adaptation, not an upstream Codex release.
 
-上游该提交的包版本是 `0.0.0`，所以 `--version` 输出 `codex-cli 0.0.0`。本仓库的 `v0.1.0-experimental.1` 是**适配发布版本**，不是 OpenAI Codex 的上游版本。
+## Try it on Debian 13 riscv64
 
-## 在 Debian 13 RISC-V 板子上试运行
+Use the per-user installer below, or download manually from the [release page](https://github.com/Elton-Yang/codex-riscv/releases/tag/v0.1.0-experimental.1). The installer uses the existing experimental binary without rebuilding or changing its version.
 
-推荐使用下面的用户级安装器；也可从 [首个预发布版本页面](https://github.com/Elton-Yang/codex-riscv/releases/tag/v0.1.0-experimental.1) 手动下载。安装器只安装这个已发布的实验二进制，不重新构建，也不改变它的版本。
-
-### 1. 确认系统和依赖
+### 1. Check the system and install runtime dependencies
 
 ```bash
-uname -m                       # 应为 riscv64
-dpkg --print-architecture      # 应为 riscv64
-getconf GNU_LIBC_VERSION       # 本二进制需要 glibc >= 2.39
+uname -m                       # expected: riscv64
+dpkg --print-architecture      # expected: riscv64
+getconf GNU_LIBC_VERSION       # this binary requires glibc >= 2.39
 
 sudo apt update
 sudo apt install ca-certificates curl python3 gzip libc6 libgcc-s1 libssl3t64 bubblewrap
 ```
 
-`libssl3t64` 提供 OpenSSL 3 动态库，并由 apt 安装所需的 zlib、zstd 等依赖。`git`、`ripgrep` 是常用开发工具，可按需要安装：
+`libssl3t64` supplies OpenSSL 3 libraries; apt also installs its zlib/zstd dependencies. `git` and `ripgrep` are useful optional development tools:
 
 ```bash
 sudo apt install git ripgrep
 ```
 
-运行发布二进制不需要安装 Rust、Node.js 或交叉编译器。下载和解压需要预留空间：本次二进制本身为 `314651976` 字节，发布包还包含许可证与说明。
+You do not need Rust, Node.js or a cross compiler to run the binary. Allow space for the archive and extraction: the executable alone is `314651976` bytes, excluding accompanying notices and documentation.
 
-### 2. 安装为用户级全局命令（推荐）
+### 2. Install a user-global command (recommended)
 
-下载并检查脚本后，以普通用户执行，**不要使用 `sudo`**：
+Download and review the script, then run it as your ordinary user, **without `sudo`**:
 
 ```bash
 curl --fail --location --proto '=https' --proto-redir '=https' --tlsv1.2 \
@@ -74,9 +72,9 @@ export PATH="$HOME/.local/bin:$PATH"
 codex-riscv --version
 ```
 
-默认将完整发布包安装到 `~/.local/share/codex-riscv/versions/v0.1.0-experimental.1`，并创建 `~/.local/bin/codex-riscv`。该命令经托管的 Python 3 启动器运行原二进制，自动加上 `--no-daemon`；直接启动、`resume` 和 `fork` 默认使用 standalone 模式，不依赖共享后台 daemon。这不会关闭沙箱。安装器核对固定 SHA-256、检查平台与动态库后切换版本，保留许可证，不修改 shell 配置。
+The default installation retains the full release under `~/.local/share/codex-riscv/versions/v0.1.0-experimental.1` and creates `~/.local/bin/codex-riscv`. That command uses a managed Python 3 launcher to run the unchanged binary with `--no-daemon`: bare startup, `resume` and `fork` default to standalone mode without a shared background daemon. This does not disable sandboxing. The installer checks the pinned archive, platform and dynamic libraries before activation, preserves license materials and does not edit shell startup files.
 
-以下管理命令按需选择，不必依次执行：
+Choose the management action you need; do not run all of these in sequence:
 
 ```bash
 sh install-codex-riscv.sh status
@@ -86,13 +84,13 @@ sh install-codex-riscv.sh rollback
 sh install-codex-riscv.sh uninstall
 ```
 
-`upgrade` 使用这份安装器中列出的实验版，不查询 GitHub 的 `latest`。目前仅支持一个版本，重复安装不会制造可回滚的新版本；有过成功的不同版本切换后才能 `rollback`。以后升级前先下载并检查新版安装器。卸载只处理安装器托管且未被修改的文件，不删除 `~/.codex`、登录信息或项目文件。
+`upgrade` selects the experimental release listed in this installer, not GitHub's `latest`. Only one release is currently supported; reinstalling it does not create a rollback version. Rollback requires an earlier successful switch between different installed versions. Download and review an updated installer before upgrading to future releases. Uninstall removes only managed, unmodified installation files, never `~/.codex`, credentials or project files.
 
-若已经用首版安装器安装，请**重新下载并检查上面的脚本**，然后执行 `sh install-codex-riscv.sh upgrade`，即可原位更新托管启动器，二进制版本不变，无需先卸载。原有命令名与命令目录会沿用。更新前的临时办法是 `codex-riscv --no-daemon`；恢复或分叉会话可用 `codex-riscv --no-daemon resume` / `codex-riscv --no-daemon fork`。
+Already installed with v1? **Download and review the script above again**, then run `sh install-codex-riscv.sh upgrade`. This updates the managed launcher in place without changing the binary version or requiring uninstall; the saved command name and bin directory are retained. Before updating, use `codex-riscv --no-daemon`, or `codex-riscv --no-daemon resume` / `codex-riscv --no-daemon fork` as a workaround.
 
-如确实需要命令名 `codex`，首次安装时显式使用 `--command codex`；目标位置或 `PATH` 中已有其他同名命令时会拒绝安装。旧文档手工复制的 `codex-riscv` 也不会被自动覆盖，请先确认来源，再自行改名或移走。完整选项、目录布局与故障处理见 [安装器说明](docs/installer.md)。
+To use the name `codex`, explicitly pass `--command codex` on the first installation. An unrelated command at the destination or on `PATH` blocks installation. A `codex-riscv` binary copied using the old instructions is not overwritten either: inspect it before manually moving or renaming it. See the [installer guide](docs/installer.en.md) for options, layout and troubleshooting.
 
-### 3. 手动下载、校验和试运行（不使用安装器）
+### 3. Manual download and startup check (without the installer)
 
 ```bash
 TAG=v0.1.0-experimental.1
@@ -108,7 +106,7 @@ printf '%s  %s\n' \
   "$NAME.tar.gz" | sha256sum --check --strict
 ```
 
-**只在校验成功后继续：**
+**Continue only after checksum verification succeeds:**
 
 ```bash
 tar -xzf "$NAME.tar.gz"
@@ -116,44 +114,44 @@ tar -xzf "$NAME.tar.gz"
 "./$NAME/bin/codex" --help
 ```
 
-这个固定校验值仅适用于上述版本，核验完整性但不是独立的发布者签名。若下载返回 404，请检查本项目的 Release 页面，不要改用来源不明的二进制。保留完整解压目录中的 `LICENSE`、`NOTICE` 和 `licenses/`；再次分发时一并提供。
+This fixed checksum applies only to the named release. It verifies integrity, not an independent publisher signature. If a download returns 404, check this project's release page rather than substituting an unknown binary source. Keep the full extracted `LICENSE`, `NOTICE` and `licenses/` materials, including when redistributing.
 
-### 4. 先验证沙箱，再用于实际工作
+### 4. Validate the native sandbox before real work
 
-本构建不附带 `bubblewrap`，使用系统的 `bwrap`。除了 apt 软件包，开发板内核和系统策略还需允许相应的用户命名空间与沙箱机制。Debian 用户空间版本并不能证明厂商内核配置满足要求。
+This build does not bundle bubblewrap. It uses the system `bwrap`, and the board's kernel and system policy must permit the relevant user namespaces and sandbox mechanisms. A Debian userland version alone does not establish that a vendor kernel is suitable.
 
-建议先在没有敏感文件的独立测试目录检查只读、文件写入和网络拒绝行为。遇到 `bwrap`、命名空间、seccomp 或 Landlock 错误，应记录内核版本与完整错误，再排查支持情况。**不要加关闭沙箱的选项来把失败变成“通过”。**
+Start in an isolated test directory without sensitive files. Validate read-only, write-restriction and network-denial behavior. Record the kernel version and full errors if bubblewrap, namespace, seccomp or Landlock operations fail. Do not turn off sandboxing to claim compatibility.
 
-## 从源码复现
+## Reproduce the cross-build
 
-构建脚本面向 **Debian 13 x86_64 构建主机**，不是直接在 RISC-V 板子上运行的安装脚本。先阅读脚本顶部的主机依赖和配置，再运行：
+The build scripts target a **Debian 13 x86_64 build host**, not native installation on the board. Read the host prerequisites in the scripts first:
 
 ```bash
 ./scripts/build.sh
 ./scripts/check.sh
 ```
 
-脚本固定上游提交、Rust 版本、Debian 包清单，并使用 Cargo `--locked`。构建所用的 Debian 包通过签名与哈希链校验后解包到本地目录。主机依赖仍需预先满足。
+The upstream commit, Rust version and Debian package manifests are pinned; Cargo uses `--locked`. Debian packages are checked against a signature/hash chain and extracted locally. Host prerequisites must already be present.
 
-本次实际构建和测试命令已经执行；整理后的公共脚本尚未在全新环境完整重跑，也不承诺不同路径、日期或主机上的位级一致性。镜像中的固定版本或索引若不可用，验证应报错，不应静默升级依赖。详见 [验证记录](docs/validation.md)。
+The underlying build and test commands were executed successfully. The reorganized public scripts have not been run end-to-end in a fresh environment. Bit-for-bit reproducibility across paths, dates and hosts is not claimed. Missing or changed pinned mirror content must fail verification rather than silently upgrade dependencies. See [validation details](docs/validation.md).
 
-许可证清单与文本生成入口：
+To regenerate license notices:
 
 ```bash
 ./scripts/generate-notices.py
 ```
 
-## 已知边界
+## Limitations
 
-- npm 启动器、上游自动更新和 packaged daemon 安装路径没有完成 RISC-V 适配；托管启动器默认使用 standalone 模式，由本仓库安装器管理升级。显式 daemon、agents 和 remote server 功能不会因此获得支持。安装器不提供 root / 系统级安装。
-- 可选 code-mode / V8 和实时功能的外部运行时未构建、未打包、未验证。
-- 实机验证仅覆盖上述单台设备上的检查和用户报告的基本对话；工具调用、模型修改文件、`workspace-write`、完整 TUI 交互、其他内核和长期稳定性仍未验证。
-- 文件写入与 IPv4 socket 创建被拒绝不等于完整沙箱安全审计；未单独验证 legacy Landlock 后端或全部过滤规则。
-- `dev-small` 产物体积较大，性能不代表优化后的 release 构建。
-- 这不是通用静态二进制；它依赖 Debian 13 级别的 GNU/Linux 运行库。
+- npm launcher, upstream automatic updates and packaged-daemon installation paths are not adapted for RISC-V. The managed launcher defaults to standalone mode, with upgrades managed by this repository’s installer. It does not add support for explicit daemon, agents or remote-server features. Root / system-wide installation is not supported.
+- Optional external code-mode / V8 and realtime runtimes were not built, included or tested.
+- Native validation covers only the listed checks on one board and user-reported basic conversation. Tool calls, model-driven file edits, `workspace-write`, exhaustive TUI behavior, other kernels and long-term stability remain untested.
+- The file-write and IPv4-socket denials are not a comprehensive sandbox security audit. The legacy Landlock backend and the full set of filter rules were not separately validated.
+- This large `dev-small` executable does not represent optimized release performance.
+- This is a dynamically linked GNU/Linux binary, not a generic static executable.
 
-## 许可证与来源
+## Licensing and provenance
 
-上游 Codex 采用 Apache-2.0；本仓库保留 [LICENSE](LICENSE)、[NOTICE](NOTICE) 和修改记录。第三方组件可能使用其他许可证，见 `licenses/THIRD-PARTY-NOTICES.html` 及 `licenses/` 中的原始文本与补充说明。
+Upstream Codex is Apache-2.0. This repository retains [LICENSE](LICENSE), [NOTICE](NOTICE) and modification records. Third-party components may use other licenses; see `licenses/THIRD-PARTY-NOTICES.html` and the original texts and supplemental notices under `licenses/`.
 
-发布时应保留这些材料。许可证生成工具辅助整理依赖信息，不等同于对所有使用情形的法律保证。
+Retain those materials when redistributing. Automated notice generation assists with dependency information; it is not a legal guarantee for every use case.

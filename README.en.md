@@ -1,6 +1,6 @@
 # codex-riscv
 
-[简体中文](README.md)
+[English (default)](README.md) · [简体中文](README.zh-CN.md)
 
 An **unofficial experimental RISC-V Linux build and adaptation of OpenAI Codex CLI**. This project is independent of OpenAI and is not endorsed by OpenAI. It does not indicate official upstream RISC-V support.
 

@@ -51,6 +51,6 @@ codex-riscv64-linux-gnu-v0.1.0-experimental.1.tar.gz
     └── documentation
 ```
 
-Use the repository [README](../README.md) / [English README](../README.en.md) for checksum verification, dependencies and non-destructive per-user installation as `codex-riscv`.
+Use the repository [English README](../README.md) / [Chinese README](../README.zh-CN.md) for checksum verification, dependencies and non-destructive per-user installation as `codex-riscv`.
 
 完整验证边界见 [validation.md](validation.md)。初始交叉编译和 QEMU 检查之后，已补充上述用户实机结果；仍不代表开发板已获得完整、安全的生产支持。
