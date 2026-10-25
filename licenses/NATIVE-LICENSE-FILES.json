@@ -1,0 +1,169 @@
+[
+  {
+    "origin": "crates.io:aws-lc-sys-0.45.0/LICENSE",
+    "file": "native/aws-lc-sys-0.45.0/LICENSE",
+    "sha256": "728536b4160e051f86d7c9c388f704866b3d512cd7df97ac3516c65279523c4e"
+  },
+  {
+    "origin": "crates.io:aws-lc-sys-0.45.0/aws-lc/LICENSE",
+    "file": "native/aws-lc-sys-0.45.0/aws-lc/LICENSE",
+    "sha256": "977c541bd25ffe36975dde25c028c0cd15ddf3d08243983b58e8a6a3d9447523"
+  },
+  {
+    "origin": "crates.io:aws-lc-sys-0.45.0/aws-lc/third_party/fiat/LICENSE",
+    "file": "native/aws-lc-sys-0.45.0/aws-lc/third_party/fiat/LICENSE",
+    "sha256": "43e358d7b6eb109d0f51f7b3a090fd82607965767c25fadee39e922475de2061"
+  },
+  {
+    "origin": "crates.io:ring-0.17.14/LICENSE",
+    "file": "native/ring-0.17.14/LICENSE",
+    "sha256": "b3d734001a94efff3579978d953391aa7115f877657d25eb54037a43875d078a"
+  },
+  {
+    "origin": "crates.io:ring-0.17.14/LICENSE-other-bits",
+    "file": "native/ring-0.17.14/LICENSE-other-bits",
+    "sha256": "f025ccfb7dfb6bdfedc75ca0f67acc69e6fb4998143d834f7c2f38a29989680f"
+  },
+  {
+    "origin": "crates.io:ring-0.17.14/LICENSE-BoringSSL",
+    "file": "native/ring-0.17.14/LICENSE-BoringSSL",
+    "sha256": "005fc765ddc5115da796cca915baa9557abae13ff35e0a47c47affc56f6c414d"
+  },
+  {
+    "origin": "crates.io:ring-0.17.14/src/polyfill/once_cell/LICENSE-APACHE",
+    "file": "native/ring-0.17.14/src/polyfill/once_cell/LICENSE-APACHE",
+    "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2"
+  },
+  {
+    "origin": "crates.io:ring-0.17.14/src/polyfill/once_cell/LICENSE-MIT",
+    "file": "native/ring-0.17.14/src/polyfill/once_cell/LICENSE-MIT",
+    "sha256": "6ee2ed6c77710de911761acd5fc1ad1da00f476beb1a7ef27e78c2d1858deafc"
+  },
+  {
+    "origin": "crates.io:ring-0.17.14/third_party/fiat/LICENSE",
+    "file": "native/ring-0.17.14/third_party/fiat/LICENSE",
+    "sha256": "9eacbcb81be660840c714a560a9d65ba07913db98dd4baf969f78dd499fdd60f"
+  },
+  {
+    "origin": "crates.io:libsqlite3-sys-0.37.0/LICENSE",
+    "file": "native/libsqlite3-sys-0.37.0/LICENSE",
+    "sha256": "c10c1f27337546471e5f7e4e97fdd398b35b9d4e126115dcd22de8d8e65abf6f"
+  },
+  {
+    "origin": "crates.io:zstd-sys-2.0.16+zstd.1.5.7/LICENSE",
+    "file": "native/zstd-sys-2.0.16+zstd.1.5.7/LICENSE",
+    "sha256": "a77b7cfeaf911ed410ffbe76f0cb2b24ad8a4d94e7ead5727e914425c416cc63"
+  },
+  {
+    "origin": "crates.io:zstd-sys-2.0.16+zstd.1.5.7/LICENSE.Apache-2.0",
+    "file": "native/zstd-sys-2.0.16+zstd.1.5.7/LICENSE.Apache-2.0",
+    "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
+  },
+  {
+    "origin": "crates.io:zstd-sys-2.0.16+zstd.1.5.7/LICENSE.BSD-3-Clause",
+    "file": "native/zstd-sys-2.0.16+zstd.1.5.7/LICENSE.BSD-3-Clause",
+    "sha256": "48341f685c87304089aa099b23c386f8bacc519ef555aa7a13e239908907b3fd"
+  },
+  {
+    "origin": "crates.io:zstd-sys-2.0.16+zstd.1.5.7/LICENSE.Mit",
+    "file": "native/zstd-sys-2.0.16+zstd.1.5.7/LICENSE.Mit",
+    "sha256": "129e8edef29e9abcd2ebabe252f4ef1b1289cdca356bf0040284a2fbccfb96c8"
+  },
+  {
+    "origin": "crates.io:zstd-sys-2.0.16+zstd.1.5.7/zstd/LICENSE",
+    "file": "native/zstd-sys-2.0.16+zstd.1.5.7/zstd/LICENSE",
+    "sha256": "7055266497633c9025b777c78eb7235af13922117480ed5c674677adc381c9d8"
+  },
+  {
+    "origin": "crates.io:onig_sys-69.9.1/LICENSE.md",
+    "file": "native/onig_sys-69.9.1/LICENSE.md",
+    "sha256": "71f321038b088358004bee991635ac09e4c703bec467d3c30c06992c0595f189"
+  },
+  {
+    "origin": "crates.io:onig_sys-69.9.1/oniguruma/COPYING",
+    "file": "native/onig_sys-69.9.1/oniguruma/COPYING",
+    "sha256": "70ba5469ea0bab6e18a32d7009068f996503168d27be57747e08da34337ff26f"
+  },
+  {
+    "origin": "crates.io:bzip2-sys-0.1.13+1.0.8/LICENSE-APACHE",
+    "file": "native/bzip2-sys-0.1.13+1.0.8/LICENSE-APACHE",
+    "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2"
+  },
+  {
+    "origin": "crates.io:bzip2-sys-0.1.13+1.0.8/LICENSE-MIT",
+    "file": "native/bzip2-sys-0.1.13+1.0.8/LICENSE-MIT",
+    "sha256": "c8c6324cf2f0f076e3ed5dea4a21f00bd4dd6fce44f72b110bc52e7fe06f6e1e"
+  },
+  {
+    "origin": "crates.io:bzip2-sys-0.1.13+1.0.8/bzip2-1.0.8/LICENSE",
+    "file": "native/bzip2-sys-0.1.13+1.0.8/bzip2-1.0.8/LICENSE",
+    "sha256": "c6dbbf828498be844a89eaa3b84adbab3199e342eb5cb2ed2f0d4ba7ec0f38a3"
+  },
+  {
+    "origin": "crates.io:libbz2-rs-sys-0.2.5/LICENSE",
+    "file": "native/libbz2-rs-sys-0.2.5/LICENSE",
+    "sha256": "54e1fd7bd53273e601c9599eb162a004dacddee031ae297ee7109a7beb93b1c2"
+  },
+  {
+    "origin": "crates.io:zlib-rs-0.5.5/LICENSE",
+    "file": "native/zlib-rs-0.5.5/LICENSE",
+    "sha256": "e72111c52b7d96ebe25348dee19f0744f444d3c95ae6b1ecb6ccaecc5bce05ba"
+  },
+  {
+    "origin": "crates.io:zlib-rs-0.6.3/LICENSE",
+    "file": "native/zlib-rs-0.6.3/LICENSE",
+    "sha256": "e72111c52b7d96ebe25348dee19f0744f444d3c95ae6b1ecb6ccaecc5bce05ba"
+  },
+  {
+    "origin": "crates.io:tree-sitter-0.25.10/src/unicode/LICENSE",
+    "file": "native/tree-sitter-0.25.10/src/unicode/LICENSE",
+    "sha256": "6a18c5fac70d7860b57f5b72b4e2c9a1ba6b3d2741eef7ff9767c5379364f10d"
+  },
+  {
+    "origin": "crates.io:tree-sitter-bash-0.25.1/LICENSE",
+    "file": "native/tree-sitter-bash-0.25.1/LICENSE",
+    "sha256": "49bf33cf78ef5897e4e161ce1517df7de1ae5042a65b6bcfd44401e0fc606559"
+  },
+  {
+    "origin": "crates.io:tree-sitter-powershell-0.26.4/LICENSE",
+    "file": "native/tree-sitter-powershell-0.26.4/LICENSE",
+    "sha256": "1fca8454c0d77a73f9922a52d39e1f7c339f5da5d03f2766eff66b859fa19477"
+  },
+  {
+    "origin": "crates.io:syntect-5.3.0/LICENSE.txt",
+    "file": "native/syntect-5.3.0/LICENSE.txt",
+    "sha256": "c695a20d7feb2463ecc9f0a966c88ed1581e364e1e22796e0ded020b571fa43b"
+  },
+  {
+    "origin": "crates.io:two-face-0.5.1/LICENSE-APACHE",
+    "file": "native/two-face-0.5.1/LICENSE-APACHE",
+    "sha256": "6da61c67477940fc0bfc3a5f65ae1813b1c54c4e3b2572de26f802f097d8b03c"
+  },
+  {
+    "origin": "crates.io:two-face-0.5.1/LICENSE-MIT",
+    "file": "native/two-face-0.5.1/LICENSE-MIT",
+    "sha256": "cabb6a447d268894d6dc664a55848e8fba6d093e19666e8fd1e0d5ee3b7d2fa9"
+  },
+  {
+    "origin": "crates.io:libsqlite3-sys-0.37.0/sqlite3/sqlite3.c (opening license notice only)",
+    "file": "native/libsqlite3-sys-0.37.0/SQLITE-NATIVE-NOTICE.txt",
+    "sha256": "87bbc587cbf0b0344522929e79139eabd167f89a5eb202b37cb0b8f09c7bb1fb"
+  },
+  {
+    "origin": "https://github.com/helix-editor/nucleo/blob/4253de9faabb4e5c6d81d946a5e35a90f87347ee/LICENSE",
+    "file": "native/nucleo/LICENSE",
+    "sha256": "1f256ecad192880510e84ad60474eab7589218784b9a50bc7ceee34c2b91f1d5"
+  },
+  {
+    "origin": "https://raw.githubusercontent.com/CosmicHorrorDev/two-face/61d1e8d42cfe3c80e5f3d1bc9a71a4a59ee9ebee/generated/acknowledgements_full.md",
+    "file": "native/two-face-0.5.1/EMBEDDED-ASSET-ACKNOWLEDGEMENTS.md",
+    "sha256": "66512fea2f515b498c2972b2cdf361b1405735ec934a85e48fbe39d917074a7f",
+    "verification": "upstream git revision taken from distributed crate .cargo_vcs_info.json"
+  },
+  {
+    "origin": "https://raw.githubusercontent.com/tree-sitter/tree-sitter/da6fe9beb4f7f67beb75914ca8e0d48ae48d6406/LICENSE",
+    "file": "native/tree-sitter-0.25.10/LICENSE",
+    "sha256": "5f9cf9fb6acb1972b35ae29119ce563bb60ec097656bc4b69b9bac2d04c7a147",
+    "verification": "upstream git revision taken from distributed crate .cargo_vcs_info.json"
+  }
+]

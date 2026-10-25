@@ -1,0 +1,560 @@
+[
+  {
+    "packages": [
+      "Inflector 0.11.4"
+    ],
+    "repository": "https://github.com/whatisinternet/inflector",
+    "commit": "a4a95eac75043f4bffb127c7c8ec886b5b106053",
+    "upstream_path": "LICENSE.md",
+    "source_url": "https://raw.githubusercontent.com/whatisinternet/inflector/a4a95eac75043f4bffb127c7c8ec886b5b106053/LICENSE.md",
+    "file": "files/whatisinternet__inflector__a4a95eac7504__LICENSE.md",
+    "sha256": "03d1bd5bfbee8d44651e7f57faf9e5b4eda4233f0d4eda36a716f2f0533d230b",
+    "provenance": "exact .cargo_vcs_info.json commit from published crate"
+  },
+  {
+    "packages": [
+      "age 0.12.1"
+    ],
+    "repository": "https://github.com/str4d/rage",
+    "commit": "7a854c9c8c02dab2ebea19e02e6693a5730a8b2a",
+    "upstream_path": "LICENSE-APACHE",
+    "source_url": "https://raw.githubusercontent.com/str4d/rage/7a854c9c8c02dab2ebea19e02e6693a5730a8b2a/LICENSE-APACHE",
+    "file": "files/str4d__rage__7a854c9c8c02__LICENSE-APACHE",
+    "sha256": "3708458dee7f359ac6c9c5558023ed481be87e5372c43ebd7f2ca7ad23c12026",
+    "provenance": "exact .cargo_vcs_info.json commit from published crate"
+  },
+  {
+    "packages": [
+      "age 0.12.1"
+    ],
+    "repository": "https://github.com/str4d/rage",
+    "commit": "7a854c9c8c02dab2ebea19e02e6693a5730a8b2a",
+    "upstream_path": "LICENSE-MIT",
+    "source_url": "https://raw.githubusercontent.com/str4d/rage/7a854c9c8c02dab2ebea19e02e6693a5730a8b2a/LICENSE-MIT",
+    "file": "files/str4d__rage__7a854c9c8c02__LICENSE-MIT",
+    "sha256": "fe56c030c2d8c3404a37fe711cebb27ebea13d0aacf7e3524db4198335ad8cd1",
+    "provenance": "exact .cargo_vcs_info.json commit from published crate"
+  },
+  {
+    "packages": [
+      "age-core 0.12.0"
+    ],
+    "repository": "https://github.com/str4d/rage",
+    "commit": "f6383f367e9aa514a3b5fbce7feede08a425d647",
+    "upstream_path": "LICENSE-APACHE",
+    "source_url": "https://raw.githubusercontent.com/str4d/rage/f6383f367e9aa514a3b5fbce7feede08a425d647/LICENSE-APACHE",
+    "file": "files/str4d__rage__f6383f367e9a__LICENSE-APACHE",
+    "sha256": "3708458dee7f359ac6c9c5558023ed481be87e5372c43ebd7f2ca7ad23c12026",
+    "provenance": "exact .cargo_vcs_info.json commit from published crate"
+  },
+  {
+    "packages": [
+      "age-core 0.12.0"
+    ],
+    "repository": "https://github.com/str4d/rage",
+    "commit": "f6383f367e9aa514a3b5fbce7feede08a425d647",
+    "upstream_path": "LICENSE-MIT",
+    "source_url": "https://raw.githubusercontent.com/str4d/rage/f6383f367e9aa514a3b5fbce7feede08a425d647/LICENSE-MIT",
+    "file": "files/str4d__rage__f6383f367e9a__LICENSE-MIT",
+    "sha256": "fe56c030c2d8c3404a37fe711cebb27ebea13d0aacf7e3524db4198335ad8cd1",
+    "provenance": "exact .cargo_vcs_info.json commit from published crate"
+  },
+  {
+    "packages": [
+      "asn1-rs-impl 0.2.0"
+    ],
+    "repository": "https://github.com/rusticata/asn1-rs",
+    "commit": "a20e5f7319c896737ad0f2557037817b91ad854f",
+    "upstream_path": "LICENSE-APACHE",
+    "source_url": "https://raw.githubusercontent.com/rusticata/asn1-rs/a20e5f7319c896737ad0f2557037817b91ad854f/LICENSE-APACHE",
+    "file": "files/rusticata__asn1-rs__a20e5f7319c8__LICENSE-APACHE",
+    "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+    "provenance": "exact .cargo_vcs_info.json commit from published crate"
+  },
+  {
+    "packages": [
+      "asn1-rs-impl 0.2.0"
+    ],
+    "repository": "https://github.com/rusticata/asn1-rs",
+    "commit": "a20e5f7319c896737ad0f2557037817b91ad854f",
+    "upstream_path": "LICENSE-MIT",
+    "source_url": "https://raw.githubusercontent.com/rusticata/asn1-rs/a20e5f7319c896737ad0f2557037817b91ad854f/LICENSE-MIT",
+    "file": "files/rusticata__asn1-rs__a20e5f7319c8__LICENSE-MIT",
+    "sha256": "a5c61b93b6ee1d104af9920cf020ff3c7efe818e31fe562c72261847a728f513",
+    "provenance": "exact .cargo_vcs_info.json commit from published crate"
+  },
+  {
+    "packages": [
+      "base64-simd 0.8.0",
+      "vsimd 0.8.0"
+    ],
+    "repository": "https://github.com/Nugine/simd",
+    "commit": "d74c030d9dc4f3cae02146d1f497ff62726ef09a",
+    "upstream_path": "LICENSE",
+    "source_url": "https://raw.githubusercontent.com/Nugine/simd/d74c030d9dc4f3cae02146d1f497ff62726ef09a/LICENSE",
+    "file": "files/Nugine__simd__d74c030d9dc4__LICENSE",
+    "sha256": "71674605ec4c087fe9eb534e3e4f9e26eb2e4aabcd76a29fd156c6a844d44b3d",
+    "provenance": "exact .cargo_vcs_info.json commit from published crate"
+  },
+  {
+    "packages": [
+      "flatbuffers 25.12.19"
+    ],
+    "repository": "https://github.com/google/flatbuffers",
+    "commit": "7e163021e59cca4f8e1e35a7c828b5c6b7915953",
+    "upstream_path": "LICENSE",
+    "source_url": "https://raw.githubusercontent.com/google/flatbuffers/7e163021e59cca4f8e1e35a7c828b5c6b7915953/LICENSE",
+    "file": "files/google__flatbuffers__7e163021e59c__LICENSE",
+    "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "provenance": "exact .cargo_vcs_info.json commit from published crate"
+  },
+  {
+    "packages": [
+      "fluent-langneg 0.13.1"
+    ],
+    "repository": "https://github.com/projectfluent/fluent-langneg-rs",
+    "commit": "7fdc590466ea63ca2367ac10fb1b881fe561f1a8",
+    "upstream_path": "LICENSE-APACHE",
+    "source_url": "https://raw.githubusercontent.com/projectfluent/fluent-langneg-rs/7fdc590466ea63ca2367ac10fb1b881fe561f1a8/LICENSE-APACHE",
+    "file": "files/projectfluent__fluent-langneg-rs__7fdc590466ea__LICENSE-APACHE",
+    "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+    "provenance": "exact .cargo_vcs_info.json commit from published crate"
+  },
+  {
+    "packages": [
+      "fluent-langneg 0.13.1"
+    ],
+    "repository": "https://github.com/projectfluent/fluent-langneg-rs",
+    "commit": "7fdc590466ea63ca2367ac10fb1b881fe561f1a8",
+    "upstream_path": "LICENSE-MIT",
+    "source_url": "https://raw.githubusercontent.com/projectfluent/fluent-langneg-rs/7fdc590466ea63ca2367ac10fb1b881fe561f1a8/LICENSE-MIT",
+    "file": "files/projectfluent__fluent-langneg-rs__7fdc590466ea__LICENSE-MIT",
+    "sha256": "016fcc02048817d628b04b140c54db290fd9d29a5e8a55b77871194e810716ac",
+    "provenance": "exact .cargo_vcs_info.json commit from published crate"
+  },
+  {
+    "packages": [
+      "include_dir 0.7.4",
+      "include_dir_macros 0.7.4"
+    ],
+    "repository": "https://github.com/Michael-F-Bryan/include_dir",
+    "commit": "d742c6fffce99ee89da91b934e7ce6fb2a82680c",
+    "upstream_path": "LICENSE",
+    "source_url": "https://raw.githubusercontent.com/Michael-F-Bryan/include_dir/d742c6fffce99ee89da91b934e7ce6fb2a82680c/LICENSE",
+    "file": "files/Michael-F-Bryan__include_dir__d742c6fffce9__LICENSE",
+    "sha256": "9369f62987b3a116111f2edfdc4cc72633e44ddc94d5d0c68659cf537b76a31f",
+    "provenance": "exact .cargo_vcs_info.json commit from published crate"
+  },
+  {
+    "packages": [
+      "opentelemetry 0.31.0",
+      "opentelemetry-http 0.31.0",
+      "opentelemetry-otlp 0.31.0",
+      "opentelemetry-proto 0.31.0",
+      "opentelemetry-semantic-conventions 0.31.0",
+      "opentelemetry_sdk 0.31.0"
+    ],
+    "repository": "https://github.com/open-telemetry/opentelemetry-rust",
+    "commit": "285dc925f98403ff426acc70968f104dc820d4f2",
+    "upstream_path": "LICENSE",
+    "source_url": "https://raw.githubusercontent.com/open-telemetry/opentelemetry-rust/285dc925f98403ff426acc70968f104dc820d4f2/LICENSE",
+    "file": "files/open-telemetry__opentelemetry-rust__285dc925f984__LICENSE",
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "provenance": "exact .cargo_vcs_info.json commit from published crate"
+  },
+  {
+    "packages": [
+      "opentelemetry-appender-tracing 0.31.1"
+    ],
+    "repository": "https://github.com/open-telemetry/opentelemetry-rust",
+    "commit": "00f97c948e95beb7b2c966fcdb5f946c2a89baeb",
+    "upstream_path": "LICENSE",
+    "source_url": "https://raw.githubusercontent.com/open-telemetry/opentelemetry-rust/00f97c948e95beb7b2c966fcdb5f946c2a89baeb/LICENSE",
+    "file": "files/open-telemetry__opentelemetry-rust__00f97c948e95__LICENSE",
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "provenance": "exact .cargo_vcs_info.json commit from published crate"
+  },
+  {
+    "packages": [
+      "pagable 0.4.1",
+      "pagable_derive 0.4.1"
+    ],
+    "repository": "https://github.com/facebook/starlark-rust",
+    "commit": "8978f3cd91b2908e1e61f6b58f84293097abf8f1",
+    "upstream_path": "LICENSE",
+    "source_url": "https://raw.githubusercontent.com/facebook/starlark-rust/8978f3cd91b2908e1e61f6b58f84293097abf8f1/LICENSE",
+    "file": "files/facebook__starlark-rust__8978f3cd91b2__LICENSE",
+    "sha256": "50e6751797c50dedd75ef1b8a0d9e42f5f8472e9fbce91f34718e9f97b0c780a",
+    "provenance": "exact .cargo_vcs_info.json commit from published crate"
+  },
+  {
+    "packages": [
+      "protoc-bin-vendored 3.2.0",
+      "protoc-bin-vendored-linux-aarch_64 3.2.0",
+      "protoc-bin-vendored-linux-ppcle_64 3.2.0",
+      "protoc-bin-vendored-linux-s390_64 3.2.0",
+      "protoc-bin-vendored-linux-x86_32 3.2.0",
+      "protoc-bin-vendored-linux-x86_64 3.2.0",
+      "protoc-bin-vendored-macos-aarch_64 3.2.0",
+      "protoc-bin-vendored-macos-x86_64 3.2.0",
+      "protoc-bin-vendored-win32 3.2.0"
+    ],
+    "repository": "https://github.com/stepancheg/rust-protoc-bin-vendored",
+    "commit": "895c0433c3727a552970ce961e398e20e52d6353",
+    "upstream_path": "LICENSE.txt",
+    "source_url": "https://raw.githubusercontent.com/stepancheg/rust-protoc-bin-vendored/895c0433c3727a552970ce961e398e20e52d6353/LICENSE.txt",
+    "file": "files/stepancheg__rust-protoc-bin-vendored__895c0433c372__LICENSE.txt",
+    "sha256": "97647e63047ef75a82ee2928b335df94f45c87e08777dc033393c73294f3a57a",
+    "provenance": "exact .cargo_vcs_info.json commit from published crate"
+  },
+  {
+    "packages": [
+      "rama-core 0.3.0-alpha.4",
+      "rama-dns 0.3.0-alpha.4",
+      "rama-error 0.3.0-alpha.4",
+      "rama-http 0.3.0-alpha.4",
+      "rama-http-backend 0.3.0-alpha.4",
+      "rama-http-core 0.3.0-alpha.4",
+      "rama-http-headers 0.3.0-alpha.4",
+      "rama-http-types 0.3.0-alpha.4",
+      "rama-macros 0.3.0-alpha.4",
+      "rama-net 0.3.0-alpha.4",
+      "rama-socks5 0.3.0-alpha.4",
+      "rama-tcp 0.3.0-alpha.4",
+      "rama-tls-rustls 0.3.0-alpha.4",
+      "rama-udp 0.3.0-alpha.4",
+      "rama-unix 0.3.0-alpha.4",
+      "rama-utils 0.3.0-alpha.4"
+    ],
+    "repository": "https://github.com/plabayo/rama",
+    "commit": "4733273a10a791762e2b7727850032b0c9b8536d",
+    "upstream_path": "LICENSE-APACHE",
+    "source_url": "https://raw.githubusercontent.com/plabayo/rama/4733273a10a791762e2b7727850032b0c9b8536d/LICENSE-APACHE",
+    "file": "files/plabayo__rama__4733273a10a7__LICENSE-APACHE",
+    "sha256": "95bd3988beee069fa2848f648dab43cc6e0b2add2ad6bcb17360caf749802bcc",
+    "provenance": "exact .cargo_vcs_info.json commit from published crate"
+  },
+  {
+    "packages": [
+      "rama-core 0.3.0-alpha.4",
+      "rama-dns 0.3.0-alpha.4",
+      "rama-error 0.3.0-alpha.4",
+      "rama-http 0.3.0-alpha.4",
+      "rama-http-backend 0.3.0-alpha.4",
+      "rama-http-core 0.3.0-alpha.4",
+      "rama-http-headers 0.3.0-alpha.4",
+      "rama-http-types 0.3.0-alpha.4",
+      "rama-macros 0.3.0-alpha.4",
+      "rama-net 0.3.0-alpha.4",
+      "rama-socks5 0.3.0-alpha.4",
+      "rama-tcp 0.3.0-alpha.4",
+      "rama-tls-rustls 0.3.0-alpha.4",
+      "rama-udp 0.3.0-alpha.4",
+      "rama-unix 0.3.0-alpha.4",
+      "rama-utils 0.3.0-alpha.4"
+    ],
+    "repository": "https://github.com/plabayo/rama",
+    "commit": "4733273a10a791762e2b7727850032b0c9b8536d",
+    "upstream_path": "LICENSE-MIT",
+    "source_url": "https://raw.githubusercontent.com/plabayo/rama/4733273a10a791762e2b7727850032b0c9b8536d/LICENSE-MIT",
+    "file": "files/plabayo__rama__4733273a10a7__LICENSE-MIT",
+    "sha256": "1fa7e078de3f9165a1c6742359307711e91652f035dc37a32376ca0023483e63",
+    "provenance": "exact .cargo_vcs_info.json commit from published crate"
+  },
+  {
+    "packages": [
+      "schemafy_core 0.5.2",
+      "schemafy_lib 0.5.2"
+    ],
+    "repository": "https://github.com/Marwes/schemafy",
+    "commit": "5f835025d16d691f168315dda93efc52ae1e4e5e",
+    "upstream_path": "LICENSE",
+    "source_url": "https://raw.githubusercontent.com/Marwes/schemafy/5f835025d16d691f168315dda93efc52ae1e4e5e/LICENSE",
+    "file": "files/Marwes__schemafy__5f835025d16d__LICENSE",
+    "sha256": "a11232911aa0d746688b560af367728021184084eeb6328a1922d60925c5eda0",
+    "provenance": "exact .cargo_vcs_info.json commit from published crate"
+  },
+  {
+    "packages": [
+      "sorted_vector_map 0.2.1"
+    ],
+    "repository": "https://github.com/facebookexperimental/rust-shed",
+    "commit": "756ae7daba100d194aa0260131937b7d96672549",
+    "upstream_path": "LICENSE-APACHE",
+    "source_url": "https://raw.githubusercontent.com/facebookexperimental/rust-shed/756ae7daba100d194aa0260131937b7d96672549/LICENSE-APACHE",
+    "file": "files/facebookexperimental__rust-shed__756ae7daba10__LICENSE-APACHE",
+    "sha256": "bb28c48e3e078166e91cfc2b6db7ffebb8a0973b9e23b3df060561292d8d69ec",
+    "provenance": "exact .cargo_vcs_info.json commit from published crate"
+  },
+  {
+    "packages": [
+      "sorted_vector_map 0.2.1"
+    ],
+    "repository": "https://github.com/facebookexperimental/rust-shed",
+    "commit": "756ae7daba100d194aa0260131937b7d96672549",
+    "upstream_path": "LICENSE-MIT",
+    "source_url": "https://raw.githubusercontent.com/facebookexperimental/rust-shed/756ae7daba100d194aa0260131937b7d96672549/LICENSE-MIT",
+    "file": "files/facebookexperimental__rust-shed__756ae7daba10__LICENSE-MIT",
+    "sha256": "52412d7bc7ce4157ea628bbaacb8829e0a9cb3c58f57f99176126bc8cf2bfc85",
+    "provenance": "exact .cargo_vcs_info.json commit from published crate"
+  },
+  {
+    "packages": [
+      "starlark 0.14.2",
+      "starlark_derive 0.14.2",
+      "starlark_map 0.14.2"
+    ],
+    "repository": "https://github.com/facebook/starlark-rust",
+    "commit": "0c8d107ab963362ba47ee3ab9e0173bc39bd101d",
+    "upstream_path": "LICENSE",
+    "source_url": "https://raw.githubusercontent.com/facebook/starlark-rust/0c8d107ab963362ba47ee3ab9e0173bc39bd101d/LICENSE",
+    "file": "files/facebook__starlark-rust__0c8d107ab963__LICENSE",
+    "sha256": "50e6751797c50dedd75ef1b8a0d9e42f5f8472e9fbce91f34718e9f97b0c780a",
+    "provenance": "exact .cargo_vcs_info.json commit from published crate"
+  },
+  {
+    "packages": [
+      "tonic-prost 0.14.3",
+      "tonic-prost-build 0.14.3"
+    ],
+    "repository": "https://github.com/hyperium/tonic",
+    "commit": "ed4bafc35af7a284357cf4e77e26b9c3eb0266ca",
+    "upstream_path": "LICENSE",
+    "source_url": "https://raw.githubusercontent.com/hyperium/tonic/ed4bafc35af7a284357cf4e77e26b9c3eb0266ca/LICENSE",
+    "file": "files/hyperium__tonic__ed4bafc35af7__LICENSE",
+    "sha256": "e24a56698aa6feaf3a02272b3624f9dc255d982970c5ed97ac4525a95056a5b3",
+    "provenance": "exact .cargo_vcs_info.json commit from published crate"
+  },
+  {
+    "packages": [
+      "ts-rs 11.1.0",
+      "ts-rs-macros 11.1.0"
+    ],
+    "repository": "https://github.com/Aleph-Alpha/ts-rs",
+    "commit": "1dce5297090804082e9639d2b7d851ba815aa359",
+    "upstream_path": "LICENSE",
+    "source_url": "https://raw.githubusercontent.com/Aleph-Alpha/ts-rs/1dce5297090804082e9639d2b7d851ba815aa359/LICENSE",
+    "file": "files/Aleph-Alpha__ts-rs__1dce52970908__LICENSE",
+    "sha256": "db7f7f8e7236a2d0b41b855b2501b7b913caebbcda6ce498637a304ad1706ce1",
+    "provenance": "exact .cargo_vcs_info.json commit from published crate"
+  },
+  {
+    "packages": [
+      "cookie-factory 0.3.3"
+    ],
+    "repository": "https://github.com/rust-bakery/cookie-factory",
+    "commit": "d36b805dbd7dd65f2df947235c5bcc573afe2c76",
+    "upstream_path": "LICENSES/MIT.txt",
+    "source_url": "https://raw.githubusercontent.com/rust-bakery/cookie-factory/d36b805dbd7dd65f2df947235c5bcc573afe2c76/LICENSES/MIT.txt",
+    "file": "files/rust-bakery__cookie-factory__d36b805dbd7d__LICENSES__MIT.txt",
+    "sha256": "d09216dc1ea5f273997667935a8d6514d80f00b89fb6954ecc3a43e0a6e360de",
+    "provenance": "exact .cargo_vcs_info.json commit from published crate; nested license directory"
+  },
+  {
+    "packages": [
+      "crc-catalog 2.4.0"
+    ],
+    "repository": "https://github.com/akhilles/crc-catalog",
+    "commit": "b500ea693c552f8d946e290722a7b3ee8b9a7ee2",
+    "upstream_path": "LICENSES/Apache-2.0.txt",
+    "source_url": "https://raw.githubusercontent.com/akhilles/crc-catalog/b500ea693c552f8d946e290722a7b3ee8b9a7ee2/LICENSES/Apache-2.0.txt",
+    "file": "files/akhilles__crc-catalog__b500ea693c55__LICENSES__Apache-2.0.txt",
+    "sha256": "d3cdb764b98283ee7c3a3cea8d374e2a2957322374378d1f3263f4d512741fc3",
+    "provenance": "exact .cargo_vcs_info.json commit from published crate; nested license directory"
+  },
+  {
+    "packages": [
+      "crc-catalog 2.4.0"
+    ],
+    "repository": "https://github.com/akhilles/crc-catalog",
+    "commit": "b500ea693c552f8d946e290722a7b3ee8b9a7ee2",
+    "upstream_path": "LICENSES/MIT.txt",
+    "source_url": "https://raw.githubusercontent.com/akhilles/crc-catalog/b500ea693c552f8d946e290722a7b3ee8b9a7ee2/LICENSES/MIT.txt",
+    "file": "files/akhilles__crc-catalog__b500ea693c55__LICENSES__MIT.txt",
+    "sha256": "5ef8fcfb6cccec8fcae043c834099a60c8b7406408db576e026d2b7e67dc5cf5",
+    "provenance": "exact .cargo_vcs_info.json commit from published crate; nested license directory"
+  },
+  {
+    "packages": [
+      "allocative 0.3.6"
+    ],
+    "repository": "https://github.com/facebookexperimental/allocative",
+    "upstream_path": "src/lib.rs",
+    "source_url": "https://static.crates.io/crates/allocative/allocative-0.3.6.crate",
+    "file": "files/allocative-0.3.6-published-copyright.txt",
+    "sha256": "c2cca00394232ec39b96ea9797596b6e0ba11dd8f478e0e8abb15b72763c83d9",
+    "provenance": "verbatim copyright/license header from exact published crate source; no VCS commit supplied"
+  },
+  {
+    "packages": [
+      "allocative_derive 0.3.6"
+    ],
+    "repository": "https://github.com/facebookexperimental/allocative",
+    "upstream_path": "src/lib.rs",
+    "source_url": "https://static.crates.io/crates/allocative_derive/allocative_derive-0.3.6.crate",
+    "file": "files/allocative_derive-0.3.6-published-copyright.txt",
+    "sha256": "4156e65e28f16f1336b2cb6290259ffc6d1e05430a72cb3b3ddc4e2b87936888",
+    "provenance": "verbatim copyright/license header from exact published crate source; no VCS commit supplied"
+  },
+  {
+    "packages": [
+      "display_container 0.9.0"
+    ],
+    "repository": "https://github.com/facebookincubator/gazebo",
+    "upstream_path": "src/lib.rs",
+    "source_url": "https://static.crates.io/crates/display_container/display_container-0.9.0.crate",
+    "file": "files/display_container-0.9.0-published-copyright.txt",
+    "sha256": "bc41c366c60ea53c13c84fd198d1fcee2f1f88a29140a9f1668f6b4578aa4bff",
+    "provenance": "verbatim copyright/license header from exact published crate source; no VCS commit supplied"
+  },
+  {
+    "packages": [
+      "fxhash 0.2.1"
+    ],
+    "repository": "https://github.com/cbreeden/fxhash",
+    "upstream_path": "lib.rs",
+    "source_url": "https://static.crates.io/crates/fxhash/fxhash-0.2.1.crate",
+    "file": "files/fxhash-0.2.1-published-copyright.txt",
+    "sha256": "4dda906fa767ca999338392419d71f29762cca814724d4150ffbd9ae305f2472",
+    "provenance": "verbatim copyright/license header from exact published crate source; no VCS commit supplied"
+  },
+  {
+    "packages": [
+      "lock_free_hashtable 0.1.4"
+    ],
+    "repository": "https://github.com/facebook/buck2",
+    "upstream_path": "src/lib.rs",
+    "source_url": "https://static.crates.io/crates/lock_free_hashtable/lock_free_hashtable-0.1.4.crate",
+    "file": "files/lock_free_hashtable-0.1.4-published-copyright.txt",
+    "sha256": "38575e5911fde5e4566c7a8e1d62f1ced27eb43092a99da4882423cef559d047",
+    "provenance": "verbatim copyright/license header from exact published crate source; no VCS commit supplied"
+  },
+  {
+    "packages": [
+      "static_interner 0.1.2"
+    ],
+    "repository": "https://github.com/facebook/buck2",
+    "upstream_path": "src/lib.rs",
+    "source_url": "https://static.crates.io/crates/static_interner/static_interner-0.1.2.crate",
+    "file": "files/static_interner-0.1.2-published-copyright.txt",
+    "sha256": "433f5eaba9a84b1f9e7745ca1ab10bbe42b6dd1735317f1c198775f6ec3f1cc1",
+    "provenance": "verbatim copyright/license header from exact published crate source; no VCS commit supplied"
+  },
+  {
+    "packages": [
+      "strong_hash 0.1.0"
+    ],
+    "repository": "https://github.com/facebook/buck2",
+    "upstream_path": "src/lib.rs",
+    "source_url": "https://static.crates.io/crates/strong_hash/strong_hash-0.1.0.crate",
+    "file": "files/strong_hash-0.1.0-published-copyright.txt",
+    "sha256": "2c8e48dafae5d83fcfe563baed60ad94670cee05f7c4c01ebd3e48f0cbe78483",
+    "provenance": "verbatim copyright/license header from exact published crate source; no VCS commit supplied"
+  },
+  {
+    "packages": [
+      "strong_hash_derive 0.1.0"
+    ],
+    "repository": "https://github.com/facebook/buck2",
+    "upstream_path": "src/lib.rs",
+    "source_url": "https://static.crates.io/crates/strong_hash_derive/strong_hash_derive-0.1.0.crate",
+    "file": "files/strong_hash_derive-0.1.0-published-copyright.txt",
+    "sha256": "13c3837138dc7a30e9f84b63ade0a64719d6af9321a3d65615989b19663bb58e",
+    "provenance": "verbatim copyright/license header from exact published crate source; no VCS commit supplied"
+  },
+  {
+    "packages": [
+      "allocative 0.3.6",
+      "allocative_derive 0.3.6"
+    ],
+    "repository": "https://github.com/facebookexperimental/allocative",
+    "commit": "c256f0bb074252ded51614aaa73a9a41cb38a2a4",
+    "upstream_path": "LICENSE-APACHE",
+    "source_url": "https://raw.githubusercontent.com/facebookexperimental/allocative/c256f0bb074252ded51614aaa73a9a41cb38a2a4/LICENSE-APACHE",
+    "file": "files/facebookexperimental__allocative__c256f0bb0742__LICENSE-APACHE",
+    "sha256": "50e6751797c50dedd75ef1b8a0d9e42f5f8472e9fbce91f34718e9f97b0c780a",
+    "provenance": "official upstream HEAD observed 2026-10-25; NOT proven to be the exact published crate revision; supplemental only"
+  },
+  {
+    "packages": [
+      "allocative 0.3.6",
+      "allocative_derive 0.3.6"
+    ],
+    "repository": "https://github.com/facebookexperimental/allocative",
+    "commit": "c256f0bb074252ded51614aaa73a9a41cb38a2a4",
+    "upstream_path": "LICENSE-MIT",
+    "source_url": "https://raw.githubusercontent.com/facebookexperimental/allocative/c256f0bb074252ded51614aaa73a9a41cb38a2a4/LICENSE-MIT",
+    "file": "files/facebookexperimental__allocative__c256f0bb0742__LICENSE-MIT",
+    "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93",
+    "provenance": "official upstream HEAD observed 2026-10-25; NOT proven to be the exact published crate revision; supplemental only"
+  },
+  {
+    "packages": [
+      "display_container 0.9.0"
+    ],
+    "repository": "https://github.com/facebookincubator/gazebo",
+    "commit": "7c9c7304a1dbd451e9e448749228e88de1c193ce",
+    "upstream_path": "LICENSE-APACHE",
+    "source_url": "https://raw.githubusercontent.com/facebookincubator/gazebo/7c9c7304a1dbd451e9e448749228e88de1c193ce/LICENSE-APACHE",
+    "file": "files/facebookincubator__gazebo__7c9c7304a1db__LICENSE-APACHE",
+    "sha256": "50e6751797c50dedd75ef1b8a0d9e42f5f8472e9fbce91f34718e9f97b0c780a",
+    "provenance": "official upstream HEAD observed 2026-10-25; NOT proven to be the exact published crate revision; supplemental only"
+  },
+  {
+    "packages": [
+      "display_container 0.9.0"
+    ],
+    "repository": "https://github.com/facebookincubator/gazebo",
+    "commit": "7c9c7304a1dbd451e9e448749228e88de1c193ce",
+    "upstream_path": "LICENSE-MIT",
+    "source_url": "https://raw.githubusercontent.com/facebookincubator/gazebo/7c9c7304a1dbd451e9e448749228e88de1c193ce/LICENSE-MIT",
+    "file": "files/facebookincubator__gazebo__7c9c7304a1db__LICENSE-MIT",
+    "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93",
+    "provenance": "official upstream HEAD observed 2026-10-25; NOT proven to be the exact published crate revision; supplemental only"
+  },
+  {
+    "packages": [
+      "lock_free_hashtable 0.1.4",
+      "static_interner 0.1.2",
+      "strong_hash 0.1.0",
+      "strong_hash_derive 0.1.0"
+    ],
+    "repository": "https://github.com/facebook/buck2",
+    "commit": "c157439fc457e7b796c4c62b7b38ab4780f9f951",
+    "upstream_path": "LICENSE-APACHE",
+    "source_url": "https://raw.githubusercontent.com/facebook/buck2/c157439fc457e7b796c4c62b7b38ab4780f9f951/LICENSE-APACHE",
+    "file": "files/facebook__buck2__c157439fc457__LICENSE-APACHE",
+    "sha256": "50e6751797c50dedd75ef1b8a0d9e42f5f8472e9fbce91f34718e9f97b0c780a",
+    "provenance": "official upstream HEAD observed 2026-10-25; NOT proven to be the exact published crate revision; supplemental only"
+  },
+  {
+    "packages": [
+      "lock_free_hashtable 0.1.4",
+      "static_interner 0.1.2",
+      "strong_hash 0.1.0",
+      "strong_hash_derive 0.1.0"
+    ],
+    "repository": "https://github.com/facebook/buck2",
+    "commit": "c157439fc457e7b796c4c62b7b38ab4780f9f951",
+    "upstream_path": "LICENSE-MIT",
+    "source_url": "https://raw.githubusercontent.com/facebook/buck2/c157439fc457e7b796c4c62b7b38ab4780f9f951/LICENSE-MIT",
+    "file": "files/facebook__buck2__c157439fc457__LICENSE-MIT",
+    "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93",
+    "provenance": "official upstream HEAD observed 2026-10-25; NOT proven to be the exact published crate revision; supplemental only"
+  },
+  {
+    "packages": [
+      "lock_free_hashtable 0.1.4",
+      "static_interner 0.1.2",
+      "strong_hash 0.1.0",
+      "strong_hash_derive 0.1.0"
+    ],
+    "repository": "https://github.com/facebook/buck2",
+    "commit": "c157439fc457e7b796c4c62b7b38ab4780f9f951",
+    "upstream_path": "NOTICE",
+    "source_url": "https://raw.githubusercontent.com/facebook/buck2/c157439fc457e7b796c4c62b7b38ab4780f9f951/NOTICE",
+    "file": "files/facebook__buck2__c157439fc457__NOTICE",
+    "sha256": "b3355ad324483539ba40a8ad85bcaa5c03c19b6b54831e3f7f3b67f56ac4982e",
+    "provenance": "official upstream HEAD observed 2026-10-25; NOT proven to be the exact published crate revision; supplemental only"
+  }
+]

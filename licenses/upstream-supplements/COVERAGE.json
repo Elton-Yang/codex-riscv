@@ -1,0 +1,13 @@
+{
+  "original_missing_file_inventory_count": 69,
+  "packages_with_preserved_exact_commit_files_or_exact_published_headers": 64,
+  "packages_with_any_preserved_file": 64,
+  "packages_without_a_separate_license_file_found": [
+    "debugserver-types 0.5.0",
+    "eventsource-stream 0.2.3",
+    "intl_pluralrules 7.0.2",
+    "io_tee 0.1.1",
+    "linux-keyutils 0.2.4"
+  ],
+  "note": "For remaining packages, preserve declared SPDX license metadata and generated standard license terms. Exact published source archives contain no copyright notice found by case-insensitive scan; repository roots at recorded VCS revisions had no standalone license/notice files. This is a scope-limited evidence collection, not legal clearance."
+}

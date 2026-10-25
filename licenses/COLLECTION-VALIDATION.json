@@ -1,0 +1,11 @@
+{
+  "cargo_about_version": "0.9.2",
+  "cargo_about_result": "passed with --locked --fail",
+  "cargo_inventory_packages": 1055,
+  "distinct_preserved_original_license_files": 537,
+  "native_notice_files": 33,
+  "upstream_supplement_files": 42,
+  "dependency_source_archives": 16,
+  "copied_notice_sha256_validation": "passed",
+  "scope": "Selected CLI normal/build graph plus reviewed native and standard-library supplements, not optional unbuilt runtimes."
+}

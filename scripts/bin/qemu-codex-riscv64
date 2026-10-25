@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -eu
+root="$(cd -- "$(dirname -- "$0")/../.." && pwd)"
+cross="$root/toolchains/debian/root"
+mkdir -p "$root/smoke-home" "$root/smoke-home/.codex"
+exec env -i PATH=/usr/bin:/bin HOME="$root/smoke-home" CODEX_HOME="$root/smoke-home/.codex" TERM=dumb \
+  "$cross/usr/bin/qemu-riscv64" -L "$cross/usr/riscv64-linux-gnu" \
+  -E "LD_LIBRARY_PATH=$cross/usr/lib/riscv64-linux-gnu:$cross/usr/riscv64-linux-gnu/lib" "$@"

@@ -1,0 +1,155 @@
+[
+  {
+    "name": "option-ext",
+    "version": "0.2.0",
+    "license": "MPL-2.0",
+    "source_url": "https://static.crates.io/crates/option-ext/option-ext-0.2.0.crate",
+    "file": "sources/option-ext-0.2.0.crate",
+    "sha256": "04744f49eae99ab78e0d5c0b603ab218f515ea8cfe5a456d7629ad883a3b6e7d",
+    "verification": "matches pinned upstream Cargo.lock checksum"
+  },
+  {
+    "name": "symphonia",
+    "version": "0.6.0",
+    "license": "MPL-2.0",
+    "source_url": "https://static.crates.io/crates/symphonia/symphonia-0.6.0.crate",
+    "file": "sources/symphonia-0.6.0.crate",
+    "sha256": "1758d6c853020a7244de03cc3e0185eaea3f58715122422dd3cc7452e6d4c16a",
+    "verification": "matches pinned upstream Cargo.lock checksum"
+  },
+  {
+    "name": "symphonia-bundle-mp3",
+    "version": "0.6.0",
+    "license": "MPL-2.0",
+    "source_url": "https://static.crates.io/crates/symphonia-bundle-mp3/symphonia-bundle-mp3-0.6.0.crate",
+    "file": "sources/symphonia-bundle-mp3-0.6.0.crate",
+    "sha256": "350f1f2f2e19ad4dd315db94304d1eb361b29af070681f94e51b8fdaad769546",
+    "verification": "matches pinned upstream Cargo.lock checksum"
+  },
+  {
+    "name": "symphonia-common",
+    "version": "0.6.0",
+    "license": "MPL-2.0",
+    "source_url": "https://static.crates.io/crates/symphonia-common/symphonia-common-0.6.0.crate",
+    "file": "sources/symphonia-common-0.6.0.crate",
+    "sha256": "8257891ffa7f05e02b58f4761e2abf7e5278c8744fd59e981559e050f86eef55",
+    "verification": "matches pinned upstream Cargo.lock checksum"
+  },
+  {
+    "name": "symphonia-core",
+    "version": "0.6.0",
+    "license": "MPL-2.0",
+    "source_url": "https://static.crates.io/crates/symphonia-core/symphonia-core-0.6.0.crate",
+    "file": "sources/symphonia-core-0.6.0.crate",
+    "sha256": "95ec293b5f288383b72a7bffcade6b2860b642cf66f28b3bd5967349a49938b1",
+    "verification": "matches pinned upstream Cargo.lock checksum"
+  },
+  {
+    "name": "symphonia-format-isomp4",
+    "version": "0.6.0",
+    "license": "MPL-2.0",
+    "source_url": "https://static.crates.io/crates/symphonia-format-isomp4/symphonia-format-isomp4-0.6.0.crate",
+    "file": "sources/symphonia-format-isomp4-0.6.0.crate",
+    "sha256": "2d179a01305b3505940135a9f0180d6ef4b487912748fe97554756f120fbd05e",
+    "verification": "matches pinned upstream Cargo.lock checksum"
+  },
+  {
+    "name": "symphonia-format-mkv",
+    "version": "0.6.0",
+    "license": "MPL-2.0",
+    "source_url": "https://static.crates.io/crates/symphonia-format-mkv/symphonia-format-mkv-0.6.0.crate",
+    "file": "sources/symphonia-format-mkv-0.6.0.crate",
+    "sha256": "fb17713e134f5ad316c2690fa3104590ccc85842cdbcf82c3cd1a845cb08aa74",
+    "verification": "matches pinned upstream Cargo.lock checksum"
+  },
+  {
+    "name": "symphonia-format-ogg",
+    "version": "0.6.0",
+    "license": "MPL-2.0",
+    "source_url": "https://static.crates.io/crates/symphonia-format-ogg/symphonia-format-ogg-0.6.0.crate",
+    "file": "sources/symphonia-format-ogg-0.6.0.crate",
+    "sha256": "b05a67e02b1e4fca1a261ba4fe06910a9357489ad8c36aafdd2960e9c6559433",
+    "verification": "matches pinned upstream Cargo.lock checksum"
+  },
+  {
+    "name": "symphonia-format-riff",
+    "version": "0.6.0",
+    "license": "MPL-2.0",
+    "source_url": "https://static.crates.io/crates/symphonia-format-riff/symphonia-format-riff-0.6.0.crate",
+    "file": "sources/symphonia-format-riff-0.6.0.crate",
+    "sha256": "17424452a777666d3eaf09a5c651029b15b6a333812fcc5b5474f2a3f0cff3f0",
+    "verification": "matches pinned upstream Cargo.lock checksum"
+  },
+  {
+    "name": "symphonia-metadata",
+    "version": "0.6.0",
+    "license": "MPL-2.0",
+    "source_url": "https://static.crates.io/crates/symphonia-metadata/symphonia-metadata-0.6.0.crate",
+    "file": "sources/symphonia-metadata-0.6.0.crate",
+    "sha256": "a31acf5cd623398a6208e2225d18f4b20f761c55098a796a5247ad516a4a8681",
+    "verification": "matches pinned upstream Cargo.lock checksum"
+  },
+  {
+    "name": "nucleo + nucleo-matcher",
+    "versions": [
+      "0.5.0",
+      "0.3.1"
+    ],
+    "license": "MPL-2.0",
+    "repository": "https://github.com/helix-editor/nucleo",
+    "revision": "4253de9faabb4e5c6d81d946a5e35a90f87347ee",
+    "file": "sources/nucleo-4253de9faabb4e5c6d81d946a5e35a90f87347ee.tar.gz",
+    "sha256": "31bff172fd47e4e488bb75c6cb93c7d0c8d5484e929083b938e399ecc22ee2f4",
+    "verification": "git archive from exact cached git commit; no untracked files or git metadata included"
+  },
+  {
+    "name": "debugserver-types",
+    "version": "0.5.0",
+    "license": "MIT",
+    "source_url": "https://static.crates.io/crates/debugserver-types/debugserver-types-0.5.0.crate",
+    "file": "sources/debugserver-types-0.5.0.crate",
+    "sha256": "2bf6834a70ed14e8e4e41882df27190bea150f1f6ecf461f1033f8739cd8af4a",
+    "verification": "matches pinned upstream Cargo.lock checksum",
+    "purpose": "Preserves exact published source/license metadata for a producer that omitted a standalone license file; not an assertion of MPL applicability."
+  },
+  {
+    "name": "eventsource-stream",
+    "version": "0.2.3",
+    "license": "MIT OR Apache-2.0",
+    "source_url": "https://static.crates.io/crates/eventsource-stream/eventsource-stream-0.2.3.crate",
+    "file": "sources/eventsource-stream-0.2.3.crate",
+    "sha256": "74fef4569247a5f429d9156b9d0a2599914385dd189c539334c625d8099d90ab",
+    "verification": "matches pinned upstream Cargo.lock checksum",
+    "purpose": "Preserves exact published source/license metadata for a producer that omitted a standalone license file; not an assertion of MPL applicability."
+  },
+  {
+    "name": "intl_pluralrules",
+    "version": "7.0.2",
+    "license": "Apache-2.0/MIT",
+    "source_url": "https://static.crates.io/crates/intl_pluralrules/intl_pluralrules-7.0.2.crate",
+    "file": "sources/intl_pluralrules-7.0.2.crate",
+    "sha256": "078ea7b7c29a2b4df841a7f6ac8775ff6074020c6776d48491ce2268e068f972",
+    "verification": "matches pinned upstream Cargo.lock checksum",
+    "purpose": "Preserves exact published source/license metadata for a producer that omitted a standalone license file; not an assertion of MPL applicability."
+  },
+  {
+    "name": "io_tee",
+    "version": "0.1.1",
+    "license": "MIT OR Apache-2.0",
+    "source_url": "https://static.crates.io/crates/io_tee/io_tee-0.1.1.crate",
+    "file": "sources/io_tee-0.1.1.crate",
+    "sha256": "4b3f7cef34251886990511df1c61443aa928499d598a9473929ab5a90a527304",
+    "verification": "matches pinned upstream Cargo.lock checksum",
+    "purpose": "Preserves exact published source/license metadata for a producer that omitted a standalone license file; not an assertion of MPL applicability."
+  },
+  {
+    "name": "linux-keyutils",
+    "version": "0.2.4",
+    "license": "Apache-2.0 OR MIT",
+    "source_url": "https://static.crates.io/crates/linux-keyutils/linux-keyutils-0.2.4.crate",
+    "file": "sources/linux-keyutils-0.2.4.crate",
+    "sha256": "761e49ec5fd8a5a463f9b84e877c373d888935b71c6be78f3767fe2ae6bed18e",
+    "verification": "matches pinned upstream Cargo.lock checksum",
+    "purpose": "Preserves exact published source/license metadata for a producer that omitted a standalone license file; not an assertion of MPL applicability."
+  }
+]

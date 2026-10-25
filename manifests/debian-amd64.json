@@ -1,0 +1,250 @@
+[
+  {
+    "Package": "binutils-riscv64-linux-gnu",
+    "Version": "2.44-3",
+    "Filename": "pool/main/b/binutils/binutils-riscv64-linux-gnu_2.44-3_amd64.deb",
+    "Size": "1428404",
+    "SHA256": "a7e5304f538357983164454ae2ccc7b9bfb8023f54ec6be4e682c6d8067f76ab",
+    "Depends": "binutils-common (= 2.44-3), libc6 (>= 2.38), libjansson4 (>= 2.14), libsframe1 (>= 2.41), libzstd1 (>= 1.5.5), zlib1g (>= 1:1.1.4)"
+  },
+  {
+    "Package": "cmake",
+    "Version": "3.31.6-2",
+    "Filename": "pool/main/c/cmake/cmake_3.31.6-2_amd64.deb",
+    "Size": "11969144",
+    "SHA256": "dee2fc94973325240604ffbca677a3f16b462fb6520946bd81be1ecbac770a02",
+    "Depends": "cmake-data (= 3.31.6-2), procps, libarchive13t64 (>= 3.3.3), libc6 (>= 2.38), libcurl4t64 (>= 7.16.2), libexpat1 (>= 2.0.1), libgcc-s1 (>= 3.0), libjsoncpp26 (>= 1.9.6), librhash1 (>= 1.2.6), libstdc++6 (>= 14), libuv1t64 (>= 1.38.0), zlib1g (>= 1:1.1.4)"
+  },
+  {
+    "Package": "cmake-data",
+    "Version": "3.31.6-2",
+    "Filename": "pool/main/c/cmake/cmake-data_3.31.6-2_all.deb",
+    "Size": "2268208",
+    "SHA256": "d9060145be892f43cd1888024114ceab019c81479d4b0a3383fe14cebe2295cb",
+    "Depends": null
+  },
+  {
+    "Package": "cpp-14-riscv64-linux-gnu",
+    "Version": "14.2.0-19cross1",
+    "Filename": "pool/main/g/gcc-14-cross/cpp-14-riscv64-linux-gnu_14.2.0-19cross1_amd64.deb",
+    "Size": "13271660",
+    "SHA256": "7b188d1754125dbb1553c50a7419bbb88da689a26858f517ba38c3cfbef7e9cb",
+    "Depends": "gcc-14-riscv64-linux-gnu-base (= 14.2.0-19cross1), libc6 (>= 2.38), libgmp10 (>= 2:6.3.0+dfsg), libisl23 (>= 0.15), libmpc3 (>= 1.1.0), libmpfr6 (>= 3.1.3), libzstd1 (>= 1.5.5), zlib1g (>= 1:1.1.4)"
+  },
+  {
+    "Package": "g++-14-riscv64-linux-gnu",
+    "Version": "14.2.0-19cross1",
+    "Filename": "pool/main/g/gcc-14-cross/g++-14-riscv64-linux-gnu_14.2.0-19cross1_amd64.deb",
+    "Size": "14270600",
+    "SHA256": "4c0794938f1e137a40df762c6ee8332f15e641150cef43c4882ee215ca5468aa",
+    "Depends": "gcc-14-riscv64-linux-gnu-base (= 14.2.0-19cross1), gcc-14-riscv64-linux-gnu (= 14.2.0-19cross1), libstdc++-14-dev-riscv64-cross (>= 14), libc6 (>= 2.38), libgmp10 (>= 2:6.3.0+dfsg), libisl23 (>= 0.15), libmpc3 (>= 1.1.0), libmpfr6 (>= 3.1.3), libzstd1 (>= 1.5.5), zlib1g (>= 1:1.2.2)"
+  },
+  {
+    "Package": "gcc-14-cross-base",
+    "Version": "14.2.0-19cross1",
+    "Filename": "pool/main/g/gcc-14-cross/gcc-14-cross-base_14.2.0-19cross1_all.deb",
+    "Size": "44884",
+    "SHA256": "a6c277ad0961c1e69bebd2509151733961ea49bb53ff64aa1dac72b5929babf0",
+    "Depends": null
+  },
+  {
+    "Package": "gcc-14-riscv64-linux-gnu",
+    "Version": "14.2.0-19cross1",
+    "Filename": "pool/main/g/gcc-14-cross/gcc-14-riscv64-linux-gnu_14.2.0-19cross1_amd64.deb",
+    "Size": "25741616",
+    "SHA256": "fca814820c63cd7cc7ffe6a4c63e0b4dd677028a23e1584e1eecc2e08dbfa394",
+    "Depends": "cpp-14-riscv64-linux-gnu (= 14.2.0-19cross1), gcc-14-riscv64-linux-gnu-base (= 14.2.0-19cross1), libcc1-0 (>= 14), binutils-riscv64-linux-gnu (>= 2.39), libgcc-14-dev-riscv64-cross (>= 14.2.0-19cross1), libc6 (>= 2.38), libgcc-s1 (>= 3.0), libgmp10 (>= 2:6.3.0+dfsg), libisl23 (>= 0.15), libmpc3 (>= 1.1.0), libmpfr6 (>= 3.1.3), libstdc++6 (>= 5), libzstd1 (>= 1.5.5), zlib1g (>= 1:1.1.4)"
+  },
+  {
+    "Package": "gcc-14-riscv64-linux-gnu-base",
+    "Version": "14.2.0-19cross1",
+    "Filename": "pool/main/g/gcc-14-cross/gcc-14-riscv64-linux-gnu-base_14.2.0-19cross1_amd64.deb",
+    "Size": "49648",
+    "SHA256": "392321d96d4fefca7a0461541ec197a8880e12590d387739878c17aee831f5d7",
+    "Depends": null
+  },
+  {
+    "Package": "gpgv",
+    "Version": "2.4.7-21+deb13u1+b5",
+    "Filename": "pool/main/g/gnupg2/gpgv_2.4.7-21+deb13u1+b5_amd64.deb",
+    "Size": "241100",
+    "SHA256": "104e4c57b98f0b883aa94c68fbe7ec7b48bcdec7c0f9dedf2a51a5054aaeb5ae",
+    "Depends": "libbz2-1.0, libc6 (>= 2.38), libgcrypt20 (>= 1.11.0), libgpg-error0 (>= 1.49), zlib1g (>= 1:1.1.4)"
+  },
+  {
+    "Package": "libasan8-riscv64-cross",
+    "Version": "14.2.0-19cross1",
+    "Filename": "pool/main/g/gcc-14-cross/libasan8-riscv64-cross_14.2.0-19cross1_all.deb",
+    "Size": "2353864",
+    "SHA256": "a3b94b5633851d7366db16f576c6ef9d501946695ec0292fb2857678b4a0c873",
+    "Depends": "gcc-14-cross-base (>= 14.2.0-19), libc6-riscv64-cross (>= 2.41), libgcc-s1-riscv64-cross (>= 3.4)"
+  },
+  {
+    "Package": "libatomic1-riscv64-cross",
+    "Version": "14.2.0-19cross1",
+    "Filename": "pool/main/g/gcc-14-cross/libatomic1-riscv64-cross_14.2.0-19cross1_all.deb",
+    "Size": "8316",
+    "SHA256": "1ee832ad1b3583cc5fadf0ac9430d87d90911ed8a138a15a27dd523927d43f9e",
+    "Depends": "gcc-14-cross-base (>= 14.2.0-19), libc6-riscv64-cross (>= 2.41)"
+  },
+  {
+    "Package": "libc6-dev-riscv64-cross",
+    "Version": "2.41-11cross1",
+    "Filename": "pool/main/c/cross-toolchain-base/libc6-dev-riscv64-cross_2.41-11cross1_all.deb",
+    "Size": "3121272",
+    "SHA256": "b76e06ca31dba05b94f0b648c4896c0e74bf6c50dc35a2fe4328fd7971dc802f",
+    "Depends": "libc6-riscv64-cross (= 2.41-11cross1), linux-libc-dev-riscv64-cross"
+  },
+  {
+    "Package": "libc6-riscv64-cross",
+    "Version": "2.41-11cross1",
+    "Filename": "pool/main/c/cross-toolchain-base/libc6-riscv64-cross_2.41-11cross1_all.deb",
+    "Size": "1170268",
+    "SHA256": "d91109b719920cb503ec5146abd2cc4ba838da5bac4c8c84f698b86b779613eb",
+    "Depends": null
+  },
+  {
+    "Package": "libgcc-14-dev-riscv64-cross",
+    "Version": "14.2.0-19cross1",
+    "Filename": "pool/main/g/gcc-14-cross/libgcc-14-dev-riscv64-cross_14.2.0-19cross1_all.deb",
+    "Size": "5177540",
+    "SHA256": "f7e759ee96231bc83e98c0f5a7a70460cabf08399a1eac23ab17f08288ff4b17",
+    "Depends": "gcc-14-cross-base (>= 14.2.0-19), libgcc-s1-riscv64-cross (>= 14.2.0-19cross1), libgomp1-riscv64-cross (>= 14.2.0-19cross1), libitm1-riscv64-cross (>= 14.2.0-19cross1), libatomic1-riscv64-cross (>= 14.2.0-19cross1), libasan8-riscv64-cross (>= 14.2.0-19cross1), liblsan0-riscv64-cross (>= 14.2.0-19cross1), libtsan2-riscv64-cross (>= 14.2.0-19cross1), libubsan1-riscv64-cross (>= 14.2.0-19cross1)"
+  },
+  {
+    "Package": "libgcc-s1-riscv64-cross",
+    "Version": "14.2.0-19cross1",
+    "Filename": "pool/main/g/gcc-14-cross/libgcc-s1-riscv64-cross_14.2.0-19cross1_all.deb",
+    "Size": "56764",
+    "SHA256": "873ce7e703da35fff92aefc4b27661909529200000c2f3ee892f1aa06e072e3a",
+    "Depends": "gcc-14-cross-base (>= 14.2.0-19), libc6-riscv64-cross (>= 2.41)"
+  },
+  {
+    "Package": "libgcrypt20",
+    "Version": "1.11.0-7+deb13u1",
+    "Filename": "pool/main/libg/libgcrypt20/libgcrypt20_1.11.0-7+deb13u1_amd64.deb",
+    "Size": "843104",
+    "SHA256": "f0eb41f8cb40896e0822e9ab65611e8383c12b721c76c54764f744abb4a8c247",
+    "Depends": "libc6 (>= 2.38), libgpg-error0 (>= 1.50)"
+  },
+  {
+    "Package": "libgomp1-riscv64-cross",
+    "Version": "14.2.0-19cross1",
+    "Filename": "pool/main/g/gcc-14-cross/libgomp1-riscv64-cross_14.2.0-19cross1_all.deb",
+    "Size": "127948",
+    "SHA256": "5966e60a1f1c3e02b3cf5c2e419f08138f38c928e5647210a0d937606d5024a3",
+    "Depends": "gcc-14-cross-base (>= 14.2.0-19), libc6-riscv64-cross (>= 2.41)"
+  },
+  {
+    "Package": "libgpg-error0",
+    "Version": "1.51-4",
+    "Filename": "pool/main/libg/libgpg-error/libgpg-error0_1.51-4_amd64.deb",
+    "Size": "82108",
+    "SHA256": "22b95570fd41c113ef6f5651563b4d748292844baab1278a46eb940c1dec2322",
+    "Depends": "libc6 (>= 2.38)"
+  },
+  {
+    "Package": "libisl23",
+    "Version": "0.27-1",
+    "Filename": "pool/main/i/isl/libisl23_0.27-1_amd64.deb",
+    "Size": "659152",
+    "SHA256": "ac8518042e81c00de1effb72bba7e88ac4ecd488f7ea8b9e3ebc63159cb53b35",
+    "Depends": "libc6 (>= 2.14), libgmp10 (>= 2:6.3.0+dfsg)"
+  },
+  {
+    "Package": "libitm1-riscv64-cross",
+    "Version": "14.2.0-19cross1",
+    "Filename": "pool/main/g/gcc-14-cross/libitm1-riscv64-cross_14.2.0-19cross1_all.deb",
+    "Size": "25240",
+    "SHA256": "cf05996a46f5187adf3a8ffea90add45657247d8624859c56dbe2956f7b243b7",
+    "Depends": "gcc-14-cross-base (>= 14.2.0-19), libc6-riscv64-cross (>= 2.41)"
+  },
+  {
+    "Package": "libjansson4",
+    "Version": "2.14-2+b3",
+    "Filename": "pool/main/j/jansson/libjansson4_2.14-2+b3_amd64.deb",
+    "Size": "39792",
+    "SHA256": "60707a62fe6c1228c3389b12a13ca4efd76defc5532473e547a29e99cf7d2a6e",
+    "Depends": "libc6 (>= 2.38)"
+  },
+  {
+    "Package": "liblsan0-riscv64-cross",
+    "Version": "14.2.0-19cross1",
+    "Filename": "pool/main/g/gcc-14-cross/liblsan0-riscv64-cross_14.2.0-19cross1_all.deb",
+    "Size": "1075984",
+    "SHA256": "6e08f624200ade65a8dab7e4cf1efbef6a28c5231c6e5518618738d2ff109fb6",
+    "Depends": "gcc-14-cross-base (>= 14.2.0-19), libc6-riscv64-cross (>= 2.41), libgcc-s1-riscv64-cross (>= 3.4)"
+  },
+  {
+    "Package": "librhash1",
+    "Version": "1.4.5-1",
+    "Filename": "pool/main/r/rhash/librhash1_1.4.5-1_amd64.deb",
+    "Size": "132184",
+    "SHA256": "9bf56d7d8ce3e7680a0dd8e3cfe8acdf50e0aa3b98b0a907cf744a4d1711af72",
+    "Depends": "libc6 (>= 2.34)"
+  },
+  {
+    "Package": "libsframe1",
+    "Version": "2.44-3",
+    "Filename": "pool/main/b/binutils/libsframe1_2.44-3_amd64.deb",
+    "Size": "78360",
+    "SHA256": "38f625dfdc582717029ac3a3e97c51d994ec2e7a0e9b230c6b44e40d1276311f",
+    "Depends": "libc6 (>= 2.14)"
+  },
+  {
+    "Package": "libstdc++-14-dev-riscv64-cross",
+    "Version": "14.2.0-19cross1",
+    "Filename": "pool/main/g/gcc-14-cross/libstdc++-14-dev-riscv64-cross_14.2.0-19cross1_all.deb",
+    "Size": "4939728",
+    "SHA256": "20f2ef235ba797f0b8cb26efb4cd68ca542f07d99e48aa4c83728122e750a92e",
+    "Depends": "gcc-14-cross-base (>= 14.2.0-19), libgcc-14-dev-riscv64-cross (= 14.2.0-19cross1), libstdc++6-riscv64-cross (>= 14.2.0-19cross1), libc6-dev-riscv64-cross (>= 2.23-1~)"
+  },
+  {
+    "Package": "libstdc++6-riscv64-cross",
+    "Version": "14.2.0-19cross1",
+    "Filename": "pool/main/g/gcc-14-cross/libstdc++6-riscv64-cross_14.2.0-19cross1_all.deb",
+    "Size": "660052",
+    "SHA256": "adbe5405e1e99baa964b3d0a4f8cc1d091f484e4089243e1b9dd00d0c03aa31a",
+    "Depends": "gcc-14-cross-base (>= 14.2.0-19), libc6-riscv64-cross (>= 2.41), libgcc-s1-riscv64-cross (>= 4.5)"
+  },
+  {
+    "Package": "libtsan2-riscv64-cross",
+    "Version": "14.2.0-19cross1",
+    "Filename": "pool/main/g/gcc-14-cross/libtsan2-riscv64-cross_14.2.0-19cross1_all.deb",
+    "Size": "2230044",
+    "SHA256": "aa2b93b80abe7129c3b7f3c9c42a55e693dd8398d5a7adaa6278be08406f709c",
+    "Depends": "gcc-14-cross-base (>= 14.2.0-19), libc6-riscv64-cross (>= 2.41), libgcc-s1-riscv64-cross (>= 3.4)"
+  },
+  {
+    "Package": "libubsan1-riscv64-cross",
+    "Version": "14.2.0-19cross1",
+    "Filename": "pool/main/g/gcc-14-cross/libubsan1-riscv64-cross_14.2.0-19cross1_all.deb",
+    "Size": "978472",
+    "SHA256": "4330f9dd0a753a5374202e4c0d508cb8f3bb5f33b48f88ca2b61cea4bccb696a",
+    "Depends": "gcc-14-cross-base (>= 14.2.0-19), libc6-riscv64-cross (>= 2.41), libgcc-s1-riscv64-cross (>= 3.4), libstdc++6-riscv64-cross"
+  },
+  {
+    "Package": "libuv1t64",
+    "Version": "1.50.0-2",
+    "Filename": "pool/main/libu/libuv1/libuv1t64_1.50.0-2_amd64.deb",
+    "Size": "153752",
+    "SHA256": "5fec8035002e0c745b64d1c5b3e1dc42790d1a77574315b976cf3e4aab9ddc0a",
+    "Depends": "libc6 (>= 2.38)"
+  },
+  {
+    "Package": "linux-libc-dev-riscv64-cross",
+    "Version": "6.12.38-1cross1",
+    "Filename": "pool/main/c/cross-toolchain-base/linux-libc-dev-riscv64-cross_6.12.38-1cross1_all.deb",
+    "Size": "2440048",
+    "SHA256": "e8683a94aad15e044efdd862e6da7e417e80747a6636bd8d19011dc220b9e825",
+    "Depends": null
+  },
+  {
+    "Package": "qemu-user",
+    "Version": "1:10.0.13+ds-0+deb13u1",
+    "Filename": "pool/main/q/qemu/qemu-user_10.0.13+ds-0+deb13u1_amd64.deb",
+    "Size": "71089852",
+    "SHA256": "ca6ede739327a20ae5a3498230c8a3a9a072c586e131bc6bcc1201eb1725e336",
+    "Depends": null
+  }
+]

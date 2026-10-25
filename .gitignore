@@ -1,0 +1,11 @@
+/src/
+/target/
+/target-audit/
+/toolchains
+/logs/
+/smoke-home/
+/dist/
+/work/
+__pycache__/
+*.pyc
+/manifests/Packages-*.xz

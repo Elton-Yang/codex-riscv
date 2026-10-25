@@ -1,0 +1,668 @@
+[
+  {
+    "package": "Inflector 0.11.4",
+    "license": "BSD-2-Clause",
+    "authors": [
+      "Josh Teeter<joshteeter@gmail.com>"
+    ],
+    "repository": "https://github.com/whatisinternet/inflector",
+    "source_url": "https://static.crates.io/crates/Inflector/Inflector-0.11.4.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "age 0.12.1",
+    "license": "MIT OR Apache-2.0",
+    "authors": [
+      "Jack Grigg <thestr4d@gmail.com>"
+    ],
+    "repository": "https://github.com/str4d/rage",
+    "source_url": "https://static.crates.io/crates/age/age-0.12.1.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "age-core 0.12.0",
+    "license": "MIT OR Apache-2.0",
+    "authors": [
+      "Jack Grigg <thestr4d@gmail.com>"
+    ],
+    "repository": "https://github.com/str4d/rage",
+    "source_url": "https://static.crates.io/crates/age-core/age-core-0.12.0.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "allocative 0.3.6",
+    "license": "Apache-2.0",
+    "authors": [
+      "Meta"
+    ],
+    "repository": "https://github.com/facebookexperimental/allocative",
+    "source_url": "https://static.crates.io/crates/allocative/allocative-0.3.6.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "allocative_derive 0.3.6",
+    "license": "Apache-2.0",
+    "authors": [
+      "Meta"
+    ],
+    "repository": "https://github.com/facebookexperimental/allocative",
+    "source_url": "https://static.crates.io/crates/allocative_derive/allocative_derive-0.3.6.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "asn1-rs-impl 0.2.0",
+    "license": "MIT/Apache-2.0",
+    "authors": [
+      "Pierre Chifflier <chifflier@wzdftpd.net>"
+    ],
+    "repository": "https://github.com/rusticata/asn1-rs.git",
+    "source_url": "https://static.crates.io/crates/asn1-rs-impl/asn1-rs-impl-0.2.0.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "base64-simd 0.8.0",
+    "license": "MIT",
+    "authors": [],
+    "repository": "https://github.com/Nugine/simd",
+    "source_url": "https://static.crates.io/crates/base64-simd/base64-simd-0.8.0.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "cookie-factory 0.3.3",
+    "license": "MIT",
+    "authors": [
+      "Geoffroy Couprie <geo.couprie@gmail.com>",
+      "Pierre Chifflier <chifflier@wzdftpd.net>"
+    ],
+    "repository": "https://github.com/rust-bakery/cookie-factory",
+    "source_url": "https://static.crates.io/crates/cookie-factory/cookie-factory-0.3.3.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "crc-catalog 2.4.0",
+    "license": "MIT OR Apache-2.0",
+    "authors": [
+      "Akhil Velagapudi <akhilvelagapudi@gmail.com>"
+    ],
+    "repository": "https://github.com/akhilles/crc-catalog.git",
+    "source_url": "https://static.crates.io/crates/crc-catalog/crc-catalog-2.4.0.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "debugserver-types 0.5.0",
+    "license": "MIT",
+    "authors": [
+      "Markus Westerlind <marwes91@gmail.com>"
+    ],
+    "repository": "https://github.com/Marwes/debugserver-types",
+    "source_url": "https://static.crates.io/crates/debugserver-types/debugserver-types-0.5.0.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "display_container 0.9.0",
+    "license": "MIT OR Apache-2.0",
+    "authors": [
+      "Facebook"
+    ],
+    "repository": "https://github.com/facebookincubator/gazebo",
+    "source_url": "https://static.crates.io/crates/display_container/display_container-0.9.0.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "eventsource-stream 0.2.3",
+    "license": "MIT OR Apache-2.0",
+    "authors": [
+      "Julian Popescu <jpopesculian@gmail.com>"
+    ],
+    "repository": "https://github.com/jpopesculian/eventsource-stream",
+    "source_url": "https://static.crates.io/crates/eventsource-stream/eventsource-stream-0.2.3.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "flatbuffers 25.12.19",
+    "license": "Apache-2.0",
+    "authors": [
+      "Robert Winslow <hello@rwinslow.com>",
+      "FlatBuffers Maintainers"
+    ],
+    "repository": "https://github.com/google/flatbuffers",
+    "source_url": "https://static.crates.io/crates/flatbuffers/flatbuffers-25.12.19.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "fluent-langneg 0.13.1",
+    "license": "Apache-2.0 OR MIT",
+    "authors": [
+      "Zibi Braniecki <gandalf@mozilla.com>"
+    ],
+    "repository": "https://github.com/projectfluent/fluent-langneg-rs",
+    "source_url": "https://static.crates.io/crates/fluent-langneg/fluent-langneg-0.13.1.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "fxhash 0.2.1",
+    "license": "Apache-2.0/MIT",
+    "authors": [
+      "cbreeden <github@u.breeden.cc>"
+    ],
+    "repository": "https://github.com/cbreeden/fxhash",
+    "source_url": "https://static.crates.io/crates/fxhash/fxhash-0.2.1.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "include_dir 0.7.4",
+    "license": "MIT",
+    "authors": [
+      "Michael Bryan <michaelfbryan@gmail.com>"
+    ],
+    "repository": "https://github.com/Michael-F-Bryan/include_dir",
+    "source_url": "https://static.crates.io/crates/include_dir/include_dir-0.7.4.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "include_dir_macros 0.7.4",
+    "license": "MIT",
+    "authors": [
+      "Michael Bryan <michaelfbryan@gmail.com>"
+    ],
+    "repository": "https://github.com/Michael-F-Bryan/include_dir",
+    "source_url": "https://static.crates.io/crates/include_dir_macros/include_dir_macros-0.7.4.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "intl_pluralrules 7.0.2",
+    "license": "Apache-2.0/MIT",
+    "authors": [
+      "Kekoa Riggin <kekoariggin@gmail.com>",
+      "Zibi Braniecki <zbraniecki@mozilla.com>"
+    ],
+    "repository": "https://github.com/zbraniecki/pluralrules",
+    "source_url": "https://static.crates.io/crates/intl_pluralrules/intl_pluralrules-7.0.2.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "io_tee 0.1.1",
+    "license": "MIT OR Apache-2.0",
+    "authors": [],
+    "repository": "https://github.com/TheOnlyMrCat/io_tee",
+    "source_url": "https://static.crates.io/crates/io_tee/io_tee-0.1.1.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "linux-keyutils 0.2.4",
+    "license": "Apache-2.0 OR MIT",
+    "authors": [
+      "landhb <landhb@users.noreply.github.com>"
+    ],
+    "repository": "https://github.com/landhb/linux-keyutils",
+    "source_url": "https://static.crates.io/crates/linux-keyutils/linux-keyutils-0.2.4.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "lock_free_hashtable 0.1.4",
+    "license": "MIT OR Apache-2.0",
+    "authors": [],
+    "repository": "https://github.com/facebook/buck2",
+    "source_url": "https://static.crates.io/crates/lock_free_hashtable/lock_free_hashtable-0.1.4.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "opentelemetry 0.31.0",
+    "license": "Apache-2.0",
+    "authors": [],
+    "repository": "https://github.com/open-telemetry/opentelemetry-rust/tree/main/opentelemetry",
+    "source_url": "https://static.crates.io/crates/opentelemetry/opentelemetry-0.31.0.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "opentelemetry-appender-tracing 0.31.1",
+    "license": "Apache-2.0",
+    "authors": [],
+    "repository": "https://github.com/open-telemetry/opentelemetry-rust/tree/main/opentelemetry-appender-tracing",
+    "source_url": "https://static.crates.io/crates/opentelemetry-appender-tracing/opentelemetry-appender-tracing-0.31.1.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "opentelemetry-http 0.31.0",
+    "license": "Apache-2.0",
+    "authors": [],
+    "repository": "https://github.com/open-telemetry/opentelemetry-rust/tree/main/opentelemetry-http",
+    "source_url": "https://static.crates.io/crates/opentelemetry-http/opentelemetry-http-0.31.0.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "opentelemetry-otlp 0.31.0",
+    "license": "Apache-2.0",
+    "authors": [],
+    "repository": "https://github.com/open-telemetry/opentelemetry-rust/tree/main/opentelemetry-otlp",
+    "source_url": "https://static.crates.io/crates/opentelemetry-otlp/opentelemetry-otlp-0.31.0.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "opentelemetry-proto 0.31.0",
+    "license": "Apache-2.0",
+    "authors": [],
+    "repository": "https://github.com/open-telemetry/opentelemetry-rust/tree/main/opentelemetry-proto",
+    "source_url": "https://static.crates.io/crates/opentelemetry-proto/opentelemetry-proto-0.31.0.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "opentelemetry-semantic-conventions 0.31.0",
+    "license": "Apache-2.0",
+    "authors": [],
+    "repository": "https://github.com/open-telemetry/opentelemetry-rust/tree/main/opentelemetry-semantic-conventions",
+    "source_url": "https://static.crates.io/crates/opentelemetry-semantic-conventions/opentelemetry-semantic-conventions-0.31.0.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "opentelemetry_sdk 0.31.0",
+    "license": "Apache-2.0",
+    "authors": [],
+    "repository": "https://github.com/open-telemetry/opentelemetry-rust/tree/main/opentelemetry-sdk",
+    "source_url": "https://static.crates.io/crates/opentelemetry_sdk/opentelemetry_sdk-0.31.0.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "pagable 0.4.1",
+    "license": "Apache-2.0",
+    "authors": [],
+    "repository": "https://github.com/facebook/starlark-rust",
+    "source_url": "https://static.crates.io/crates/pagable/pagable-0.4.1.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "pagable_derive 0.4.1",
+    "license": "Apache-2.0",
+    "authors": [
+      "Meta"
+    ],
+    "repository": null,
+    "source_url": "https://static.crates.io/crates/pagable_derive/pagable_derive-0.4.1.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "protoc-bin-vendored 3.2.0",
+    "license": "MIT",
+    "authors": [
+      "Stepan Koltsov <stepan.koltsov@gmail.com>"
+    ],
+    "repository": "https://github.com/stepancheg/rust-protoc-bin-vendored/",
+    "source_url": "https://static.crates.io/crates/protoc-bin-vendored/protoc-bin-vendored-3.2.0.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "protoc-bin-vendored-linux-aarch_64 3.2.0",
+    "license": "MIT",
+    "authors": [
+      "Stepan Koltsov <stepan.koltsov@gmail.com>"
+    ],
+    "repository": "https://github.com/stepancheg/rust-protoc-bin-vendored/",
+    "source_url": "https://static.crates.io/crates/protoc-bin-vendored-linux-aarch_64/protoc-bin-vendored-linux-aarch_64-3.2.0.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "protoc-bin-vendored-linux-ppcle_64 3.2.0",
+    "license": "MIT",
+    "authors": [
+      "Stepan Koltsov <stepan.koltsov@gmail.com>"
+    ],
+    "repository": "https://github.com/stepancheg/rust-protoc-bin-vendored/",
+    "source_url": "https://static.crates.io/crates/protoc-bin-vendored-linux-ppcle_64/protoc-bin-vendored-linux-ppcle_64-3.2.0.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "protoc-bin-vendored-linux-s390_64 3.2.0",
+    "license": "MIT",
+    "authors": [
+      "Stepan Koltsov <stepan.koltsov@gmail.com>"
+    ],
+    "repository": "https://github.com/stepancheg/rust-protoc-bin-vendored/",
+    "source_url": "https://static.crates.io/crates/protoc-bin-vendored-linux-s390_64/protoc-bin-vendored-linux-s390_64-3.2.0.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "protoc-bin-vendored-linux-x86_32 3.2.0",
+    "license": "MIT",
+    "authors": [
+      "Stepan Koltsov <stepan.koltsov@gmail.com>"
+    ],
+    "repository": "https://github.com/stepancheg/rust-protoc-bin-vendored/",
+    "source_url": "https://static.crates.io/crates/protoc-bin-vendored-linux-x86_32/protoc-bin-vendored-linux-x86_32-3.2.0.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "protoc-bin-vendored-linux-x86_64 3.2.0",
+    "license": "MIT",
+    "authors": [
+      "Stepan Koltsov <stepan.koltsov@gmail.com>"
+    ],
+    "repository": "https://github.com/stepancheg/rust-protoc-bin-vendored/",
+    "source_url": "https://static.crates.io/crates/protoc-bin-vendored-linux-x86_64/protoc-bin-vendored-linux-x86_64-3.2.0.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "protoc-bin-vendored-macos-aarch_64 3.2.0",
+    "license": "MIT",
+    "authors": [
+      "Stepan Koltsov <stepan.koltsov@gmail.com>"
+    ],
+    "repository": "https://github.com/stepancheg/rust-protoc-bin-vendored/",
+    "source_url": "https://static.crates.io/crates/protoc-bin-vendored-macos-aarch_64/protoc-bin-vendored-macos-aarch_64-3.2.0.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "protoc-bin-vendored-macos-x86_64 3.2.0",
+    "license": "MIT",
+    "authors": [
+      "Stepan Koltsov <stepan.koltsov@gmail.com>"
+    ],
+    "repository": "https://github.com/stepancheg/rust-protoc-bin-vendored/",
+    "source_url": "https://static.crates.io/crates/protoc-bin-vendored-macos-x86_64/protoc-bin-vendored-macos-x86_64-3.2.0.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "protoc-bin-vendored-win32 3.2.0",
+    "license": "MIT",
+    "authors": [
+      "Stepan Koltsov <stepan.koltsov@gmail.com>"
+    ],
+    "repository": "https://github.com/stepancheg/rust-protoc-bin-vendored/",
+    "source_url": "https://static.crates.io/crates/protoc-bin-vendored-win32/protoc-bin-vendored-win32-3.2.0.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "rama-core 0.3.0-alpha.4",
+    "license": "MIT OR Apache-2.0",
+    "authors": [
+      "Glen De Cauwsemaecker <glen@plabayo.tech>"
+    ],
+    "repository": "https://github.com/plabayo/rama",
+    "source_url": "https://static.crates.io/crates/rama-core/rama-core-0.3.0-alpha.4.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "rama-dns 0.3.0-alpha.4",
+    "license": "MIT OR Apache-2.0",
+    "authors": [
+      "Glen De Cauwsemaecker <glen@plabayo.tech>"
+    ],
+    "repository": "https://github.com/plabayo/rama",
+    "source_url": "https://static.crates.io/crates/rama-dns/rama-dns-0.3.0-alpha.4.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "rama-error 0.3.0-alpha.4",
+    "license": "MIT OR Apache-2.0",
+    "authors": [
+      "Glen De Cauwsemaecker <glen@plabayo.tech>"
+    ],
+    "repository": "https://github.com/plabayo/rama",
+    "source_url": "https://static.crates.io/crates/rama-error/rama-error-0.3.0-alpha.4.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "rama-http 0.3.0-alpha.4",
+    "license": "MIT OR Apache-2.0",
+    "authors": [
+      "Glen De Cauwsemaecker <glen@plabayo.tech>"
+    ],
+    "repository": "https://github.com/plabayo/rama",
+    "source_url": "https://static.crates.io/crates/rama-http/rama-http-0.3.0-alpha.4.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "rama-http-backend 0.3.0-alpha.4",
+    "license": "MIT OR Apache-2.0",
+    "authors": [
+      "Glen De Cauwsemaecker <glen@plabayo.tech>"
+    ],
+    "repository": "https://github.com/plabayo/rama",
+    "source_url": "https://static.crates.io/crates/rama-http-backend/rama-http-backend-0.3.0-alpha.4.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "rama-http-core 0.3.0-alpha.4",
+    "license": "MIT OR Apache-2.0",
+    "authors": [
+      "Glen De Cauwsemaecker <glen@plabayo.tech>"
+    ],
+    "repository": "https://github.com/plabayo/rama",
+    "source_url": "https://static.crates.io/crates/rama-http-core/rama-http-core-0.3.0-alpha.4.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "rama-http-headers 0.3.0-alpha.4",
+    "license": "MIT OR Apache-2.0",
+    "authors": [
+      "Glen De Cauwsemaecker <glen@plabayo.tech>"
+    ],
+    "repository": "https://github.com/plabayo/rama",
+    "source_url": "https://static.crates.io/crates/rama-http-headers/rama-http-headers-0.3.0-alpha.4.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "rama-http-types 0.3.0-alpha.4",
+    "license": "MIT OR Apache-2.0",
+    "authors": [
+      "Glen De Cauwsemaecker <glen@plabayo.tech>"
+    ],
+    "repository": "https://github.com/plabayo/rama",
+    "source_url": "https://static.crates.io/crates/rama-http-types/rama-http-types-0.3.0-alpha.4.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "rama-macros 0.3.0-alpha.4",
+    "license": "MIT OR Apache-2.0",
+    "authors": [
+      "Glen De Cauwsemaecker <glen@plabayo.tech>"
+    ],
+    "repository": "https://github.com/plabayo/rama",
+    "source_url": "https://static.crates.io/crates/rama-macros/rama-macros-0.3.0-alpha.4.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "rama-net 0.3.0-alpha.4",
+    "license": "MIT OR Apache-2.0",
+    "authors": [
+      "Glen De Cauwsemaecker <glen@plabayo.tech>"
+    ],
+    "repository": "https://github.com/plabayo/rama",
+    "source_url": "https://static.crates.io/crates/rama-net/rama-net-0.3.0-alpha.4.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "rama-socks5 0.3.0-alpha.4",
+    "license": "MIT OR Apache-2.0",
+    "authors": [
+      "Glen De Cauwsemaecker <glen@plabayo.tech>"
+    ],
+    "repository": "https://github.com/plabayo/rama",
+    "source_url": "https://static.crates.io/crates/rama-socks5/rama-socks5-0.3.0-alpha.4.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "rama-tcp 0.3.0-alpha.4",
+    "license": "MIT OR Apache-2.0",
+    "authors": [
+      "Glen De Cauwsemaecker <glen@plabayo.tech>"
+    ],
+    "repository": "https://github.com/plabayo/rama",
+    "source_url": "https://static.crates.io/crates/rama-tcp/rama-tcp-0.3.0-alpha.4.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "rama-tls-rustls 0.3.0-alpha.4",
+    "license": "MIT OR Apache-2.0",
+    "authors": [
+      "Glen De Cauwsemaecker <glen@plabayo.tech>"
+    ],
+    "repository": "https://github.com/plabayo/rama",
+    "source_url": "https://static.crates.io/crates/rama-tls-rustls/rama-tls-rustls-0.3.0-alpha.4.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "rama-udp 0.3.0-alpha.4",
+    "license": "MIT OR Apache-2.0",
+    "authors": [
+      "Glen De Cauwsemaecker <glen@plabayo.tech>"
+    ],
+    "repository": "https://github.com/plabayo/rama",
+    "source_url": "https://static.crates.io/crates/rama-udp/rama-udp-0.3.0-alpha.4.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "rama-unix 0.3.0-alpha.4",
+    "license": "MIT OR Apache-2.0",
+    "authors": [
+      "Glen De Cauwsemaecker <glen@plabayo.tech>"
+    ],
+    "repository": "https://github.com/plabayo/rama",
+    "source_url": "https://static.crates.io/crates/rama-unix/rama-unix-0.3.0-alpha.4.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "rama-utils 0.3.0-alpha.4",
+    "license": "MIT OR Apache-2.0",
+    "authors": [
+      "Glen De Cauwsemaecker <glen@plabayo.tech>"
+    ],
+    "repository": "https://github.com/plabayo/rama",
+    "source_url": "https://static.crates.io/crates/rama-utils/rama-utils-0.3.0-alpha.4.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "schemafy_core 0.5.2",
+    "license": "MIT",
+    "authors": [
+      "Markus Westerlind <marwes91@gmail.com>"
+    ],
+    "repository": "https://github.com/Marwes/schemafy",
+    "source_url": "https://static.crates.io/crates/schemafy_core/schemafy_core-0.5.2.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "schemafy_lib 0.5.2",
+    "license": "MIT",
+    "authors": [
+      "Markus Westerlind <marwes91@gmail.com>",
+      "MATILLAT Quentin <qmatillat@gmail.com>"
+    ],
+    "repository": "https://github.com/Marwes/schemafy",
+    "source_url": "https://static.crates.io/crates/schemafy_lib/schemafy_lib-0.5.2.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "sorted_vector_map 0.2.1",
+    "license": "MIT OR Apache-2.0",
+    "authors": [
+      "Facebook <opensource+crates-sorted-vector-map@fb.com>"
+    ],
+    "repository": "https://github.com/facebookexperimental/rust-shed",
+    "source_url": "https://static.crates.io/crates/sorted_vector_map/sorted_vector_map-0.2.1.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "starlark 0.14.2",
+    "license": "Apache-2.0",
+    "authors": [
+      "Damien Martin-Guillerez <dmarting@google.com>",
+      "Stepan Koltsov <stepan.koltsov@gmail.com>",
+      "Facebook"
+    ],
+    "repository": "https://github.com/facebook/starlark-rust",
+    "source_url": "https://static.crates.io/crates/starlark/starlark-0.14.2.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "starlark_derive 0.14.2",
+    "license": "Apache-2.0",
+    "authors": [
+      "Facebook"
+    ],
+    "repository": "https://github.com/facebook/starlark-rust",
+    "source_url": "https://static.crates.io/crates/starlark_derive/starlark_derive-0.14.2.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "starlark_map 0.14.2",
+    "license": "Apache-2.0",
+    "authors": [
+      "Facebook"
+    ],
+    "repository": "https://github.com/facebook/starlark-rust",
+    "source_url": "https://static.crates.io/crates/starlark_map/starlark_map-0.14.2.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "static_interner 0.1.2",
+    "license": "MIT OR Apache-2.0",
+    "authors": [],
+    "repository": "https://github.com/facebook/buck2",
+    "source_url": "https://static.crates.io/crates/static_interner/static_interner-0.1.2.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "strong_hash 0.1.0",
+    "license": "MIT OR Apache-2.0",
+    "authors": [],
+    "repository": "https://github.com/facebook/buck2",
+    "source_url": "https://static.crates.io/crates/strong_hash/strong_hash-0.1.0.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "strong_hash_derive 0.1.0",
+    "license": "MIT OR Apache-2.0",
+    "authors": [],
+    "repository": "https://github.com/facebook/buck2",
+    "source_url": "https://static.crates.io/crates/strong_hash_derive/strong_hash_derive-0.1.0.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "tonic-prost 0.14.3",
+    "license": "MIT",
+    "authors": [
+      "Lucio Franco <luciofranco14@gmail.com>"
+    ],
+    "repository": "https://github.com/hyperium/tonic",
+    "source_url": "https://static.crates.io/crates/tonic-prost/tonic-prost-0.14.3.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "tonic-prost-build 0.14.3",
+    "license": "MIT",
+    "authors": [
+      "Lucio Franco <luciofranco14@gmail.com>"
+    ],
+    "repository": "https://github.com/hyperium/tonic",
+    "source_url": "https://static.crates.io/crates/tonic-prost-build/tonic-prost-build-0.14.3.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "ts-rs 11.1.0",
+    "license": "MIT",
+    "authors": [
+      "Moritz Bischof <moritz.bischof1@gmail.com>"
+    ],
+    "repository": "https://github.com/Aleph-Alpha/ts-rs",
+    "source_url": "https://static.crates.io/crates/ts-rs/ts-rs-11.1.0.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "ts-rs-macros 11.1.0",
+    "license": "MIT",
+    "authors": [
+      "Moritz Bischof <moritz.bischof1@gmail.com>"
+    ],
+    "repository": "https://github.com/Aleph-Alpha/ts-rs",
+    "source_url": "https://static.crates.io/crates/ts-rs-macros/ts-rs-macros-11.1.0.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  },
+  {
+    "package": "vsimd 0.8.0",
+    "license": "MIT",
+    "authors": [],
+    "repository": "https://github.com/Nugine/simd",
+    "source_url": "https://static.crates.io/crates/vsimd/vsimd-0.8.0.crate",
+    "provenance": "License and author metadata from exact downloaded crate Cargo.toml; identifiers are not additional invented copyright statements"
+  }
+]

@@ -1,0 +1,8 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Codex RISC-V — dependency license notices</title>
+<style>body{max-width:76rem;margin:2rem auto;padding:0 1rem;font:16px/1.5 sans-serif}pre{white-space:pre-wrap}section{border-top:1px solid #888;padding-top:1rem}</style></head><body>
+<h1>Dependency license notices</h1>
+<p>Generated with cargo-about 0.9.2 for the pinned Codex CLI RISC-V dependency graph. See the adjacent original license-text collection, native/embedded notices, Rust standard-library notices, and corresponding MPL source archives for supplementary material.</p>
+{{#each licenses}}<section><h2>{{name}}</h2><ul>
+{{#each used_by}}<li>{{crate.name}} {{crate.version}}{{#if crate.repository}} — <a href="{{crate.repository}}">source repository</a>{{/if}}</li>{{/each}}
+</ul><pre>{{text}}</pre></section>{{/each}}
+</body></html>

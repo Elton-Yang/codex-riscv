@@ -1,0 +1,12 @@
+Target: riscv64gc-unknown-linux-gnu; runner: QEMU user-mode
+Policy-selection logic only, not native kernel enforcement.
+
+running 6 tests
+test seccomp::tests::full_network_policy_without_managed_network_skips_seccomp ... ok
+test seccomp::tests::full_network_without_managed_proxy_skips_network_seccomp_mode ... ok
+test seccomp::tests::managed_network_enforces_seccomp_even_for_full_network_policy ... ok
+test seccomp::tests::managed_proxy_routes_use_proxy_routed_seccomp_mode ... ok
+test seccomp::tests::restricted_network_policy_always_installs_seccomp ... ok
+test seccomp::tests::restricted_network_without_proxy_routing_uses_restricted_mode ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 153 filtered out; finished in 0.02s
