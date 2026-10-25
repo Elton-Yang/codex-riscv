@@ -1,6 +1,6 @@
 # Validation record / 验证记录
 
-Date: 2026-10-25 UTC. Scope: a preliminary cross-build and emulated startup of the CLI, not a complete platform port.
+Date: 2026-10-25 UTC. Scope: a preliminary cross-build, emulated checks, and subsequent user-operated native checks on one VisionFive 2 board. This remains an experimental adaptation, not a complete platform port.
 
 ## Inputs
 
@@ -28,7 +28,7 @@ The initial unmodified build stopped because the cross-compilation environment l
 
 Building only `codex-cli` / `codex` avoids the optional V8 runtime package. This does not validate external runtime features.
 
-## Commands exercised
+## Cross-build and QEMU commands exercised
 
 From the pinned upstream `codex-rs` workspace, with the recorded cross toolchain and target-specific environment:
 
@@ -43,7 +43,7 @@ cargo test --locked -p codex-linux-sandbox --lib \
 
 The test runner used QEMU with a matching local target sysroot. CLI smoke tests used an empty isolated home/config directory and did not make model API requests.
 
-## Observed results
+## Cross-build and QEMU results
 
 | Check | Observed result |
 | --- | --- |
@@ -69,7 +69,35 @@ The six policy-selection tests cover:
 - restricted networking always requires seccomp;
 - restricted networking without proxy routing selects restricted mode.
 
-**None of these tests establishes that native RISC-V kernel filtering is enforced.** They test policy-selection logic and do not apply the complete sandbox to real work.
+**The QEMU policy-selection tests alone do not establish native RISC-V kernel filtering.** They test policy-selection logic and do not apply the complete sandbox to real work. Separate native checks are recorded below.
+
+## User-operated native validation / 用户实机验证
+
+On 2026-10-25, the user ran the released executable on their board and supplied terminal results. They separately reported successful authentication, model selection and live conversation. These are user-operated native results, not tests performed through remote access by the build environment. No account details, model name, conversation content or private paths are recorded here.
+
+| Environment | Reported value |
+| --- | --- |
+| Board | VisionFive 2 / JH7110 |
+| Operating system / architecture | Debian 13 / riscv64 |
+| Kernel | `6.12.113+deb13-riscv64` |
+| bubblewrap | `0.12.0` |
+| Executable version | `codex-cli 0.0.0` (unchanged release binary) |
+
+The sandbox checks used isolated temporary working and home/config directories with `env -i`, without authentication or model requests. The policy was explicitly selected with `sandbox -c 'sandbox_mode="read-only"'`. The socket probe created an `AF_INET` / `SOCK_STREAM` socket only: it did not perform DNS resolution or connect to any address.
+
+| Native check | Observed or reported result |
+| --- | --- |
+| `--version` / `--help` | Normal version/help output; separate exit codes were not supplied |
+| Read-only sandbox running `/bin/true` | Exit 0 |
+| File-write control outside the sandbox | Succeeded in the temporary test directory |
+| File-write attempt inside the read-only sandbox | `Read-only file system`, exit 2 |
+| IPv4 TCP socket-creation control outside the sandbox | Succeeded |
+| IPv4 TCP socket creation inside the read-only sandbox | `PermissionError: [Errno 1] Operation not permitted` (`EPERM`), exit 1 |
+| Authentication, model selection and live conversation | User reported success; this supports basic TUI/conversation usability, not exhaustive UI or authentication-flow coverage |
+
+The successful controls help distinguish the two sandbox denials from ordinary host filesystem permissions or lack of host socket support. These observations establish the tested native denial behaviors on this configuration. They do not audit every sandbox rule, establish a separate legacy Landlock result, or validate other boards/kernels. The authentication method was not established and no particular login route is claimed.
+
+用户实机检查确认了启动、只读沙箱执行、文件写入拒绝和 IPv4 socket 创建拒绝；用户另行报告认证、模型选择与真实对话成功。这些结果独立于 QEMU 检查，不代表工具调用、模型修改文件、`workspace-write`、全部 TUI 操作或长期稳定性已经验证。
 
 ## Binary identity and dynamic dependencies
 
@@ -83,9 +111,9 @@ The release archive additionally contains notices and documentation, so its chec
 
 ## Not established
 
-- Native VisionFive 2 / JH7110 execution or performance.
-- Interactive TUI behavior, login or real model API access.
-- Actual seccomp, Landlock, bubblewrap filesystem/network enforcement on a RISC-V kernel.
+- Tool calls, model-driven file edits, or `workspace-write` behavior.
+- Exhaustive TUI and authentication-flow coverage, native performance or long-term stability.
+- Comprehensive sandbox/security validation beyond the two native denial probes, including the legacy Landlock backend, other filter rules, and other boards/kernels.
 - Full test-suite success or optimized release-build behavior.
 - RISC-V npm launcher, automatic updater or packaged-daemon installation support.
 - Optional external code-mode / V8 and realtime runtimes.
@@ -96,6 +124,6 @@ The release archive additionally contains notices and documentation, so its chec
 
 The scripts pin source and dependency inputs and reject checksum/signature mismatches. Debian mirrors can remove old package versions or change distribution indexes. A later reproduction may need matching historical inputs; it must not silently accept different ones. Any extra historical archive route should be verified before being described as supported.
 
-The first native follow-up should use an isolated directory without sensitive files, check `--version` / `--help`, and then verify sandbox restrictions. Installation of bubblewrap does not by itself demonstrate that a board's vendor kernel allows the required namespaces or implements all relevant security mechanisms.
+For another board or kernel, repeat startup and sandbox checks in an isolated directory without sensitive files. The recorded success on this board is not a substitute for those checks. Installation of bubblewrap alone does not demonstrate that a different kernel allows the required namespaces or implements all relevant security mechanisms.
 
 The public Debian-fetch helper was also exercised in verification-only mode: the signed indexes and all 36 package hashes passed. It did not extract packages or rebuild Codex.

@@ -13,11 +13,13 @@ OpenAI Codex CLI 的 **非官方 RISC-V Linux 实验构建与适配**。本项�
 | `riscv64gc-unknown-linux-gnu` 交叉编译 | 通过 |
 | QEMU 下 `codex --version` / `--help` | 均退出 0 |
 | QEMU 下 seccomp 策略选择单元测试 | 6 通过，0 失败 |
-| VisionFive 2 / JH7110 实机 | **尚未测试** |
-| 实际 seccomp / Landlock / bubblewrap 沙箱执行 | **尚未测试** |
-| 交互 TUI、登录、真实模型请求、完整测试套件 | **尚未测试** |
+| VisionFive 2 / JH7110 实机启动 | 用户实测 `--version` / `--help` 正常 |
+| 实机只读沙箱执行 `/bin/true` | 退出 0 |
+| 实机只读沙箱拒绝文件写入 / IPv4 socket 创建 | 分别报只读文件系统（退出 2）/ `EPERM`（退出 1）；沙箱外对照成功 |
+| 认证、模型选择、基本交互对话 | 用户报告成功 |
+| 工具调用、模型修改文件、`workspace-write`、完整测试套件 | **尚未测试** |
 
-QEMU 启动和策略选择测试不能证明开发板上的内核沙箱有效。不要用关闭沙箱来绕过错误，也不要以 root 运行 Codex。
+实机结果由用户于 2026-10-25 在 VisionFive 2 / Debian 13 上自行运行并反馈：内核 `6.12.113+deb13-riscv64`，bubblewrap `0.12.0`。这与构建主机上的 QEMU 检查是两组不同的验证；实机检查覆盖上述启动、拒绝行为和基本对话，不是完整沙箱安全审计或长期稳定性验证。不要用关闭沙箱来绕过错误，也不要以 root 运行 Codex。
 
 完整检查范围见 [验证记录](docs/validation.md)。
 
@@ -35,7 +37,7 @@ QEMU 启动和策略选择测试不能证明开发板上的内核沙箱有效。
 
 ## 在 Debian 13 RISC-V 板子上试运行
 
-发布文件上传完成后，可从 [首个预发布版本页面](https://github.com/Elton-Yang/codex-riscv/releases/tag/v0.1.0-experimental.1) 下载。以下命令以该 Release 及其附件可用为前提；若返回 404，请先检查 Release 页面，不要改用来源不明的二进制。
+从 [首个预发布版本页面](https://github.com/Elton-Yang/codex-riscv/releases/tag/v0.1.0-experimental.1) 下载。若返回 404，请先检查 Release 页面，不要改用来源不明的二进制。
 
 ### 1. 确认系统和依赖
 
@@ -127,7 +129,8 @@ export PATH="$HOME/.local/bin:$PATH"
 
 - npm 启动器、自动更新和 packaged daemon 安装路径没有完成 RISC-V 适配；本项目采用直接二进制、手动安装方式。
 - 可选 code-mode / V8 和实时功能的外部运行时未构建、未打包、未验证。
-- 本次没有进行 VisionFive 2 实机验证、交互体验验证、登录或真实 API 请求。
+- 实机验证仅覆盖上述单台设备上的检查和用户报告的基本对话；工具调用、模型修改文件、`workspace-write`、完整 TUI 交互、其他内核和长期稳定性仍未验证。
+- 文件写入与 IPv4 socket 创建被拒绝不等于完整沙箱安全审计；未单独验证 legacy Landlock 后端或全部过滤规则。
 - `dev-small` 产物体积较大，性能不代表优化后的 release 构建。
 - 这不是通用静态二进制；它依赖 Debian 13 级别的 GNU/Linux 运行库。
 

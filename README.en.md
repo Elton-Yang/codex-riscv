@@ -13,11 +13,13 @@ The first adaptation release is `v0.1.0-experimental.1`, targeting Debian 13 / r
 | Cross-build for `riscv64gc-unknown-linux-gnu` | Passed |
 | `codex --version` and `--help` under QEMU | Both exited 0 |
 | seccomp policy-selection unit tests under QEMU | 6 passed, 0 failed |
-| VisionFive 2 / JH7110 hardware | **Not tested** |
-| Actual kernel seccomp / Landlock / bubblewrap enforcement | **Not tested** |
-| Interactive TUI, login, model API calls, full test suite | **Not tested** |
+| Native startup on VisionFive 2 / JH7110 | User-operated `--version` / `--help` produced normal output |
+| Native read-only sandbox running `/bin/true` | Exit 0 |
+| Native read-only sandbox denying file writes / IPv4 socket creation | Read-only filesystem, exit 2 / `EPERM`, exit 1; both outside-sandbox controls succeeded |
+| Authentication, model selection and basic interactive conversation | User reported success |
+| Tool calls, model-driven file edits, `workspace-write`, full test suite | **Not tested** |
 
-QEMU startup and policy-selection tests do not establish native sandbox enforcement. Do not run Codex as root or disable its sandbox to work around failures. See the [validation record](docs/validation.md).
+The user ran the native checks on 2026-10-25 on VisionFive 2 / Debian 13 with kernel `6.12.113+deb13-riscv64` and bubblewrap `0.12.0`. These results are separate from the build host's QEMU checks. They cover the listed startup and denial behavior and basic conversation, not a comprehensive sandbox security audit or long-term stability. Do not run Codex as root or disable its sandbox to work around failures. See the [validation record](docs/validation.md).
 
 ## Pinned upstream and patch
 
@@ -33,7 +35,7 @@ The pinned upstream development commit declares package version `0.0.0`, so `--v
 
 ## Try it on Debian 13 riscv64
 
-Once the prerelease and its assets have been uploaded, use the [release page](https://github.com/Elton-Yang/codex-riscv/releases/tag/v0.1.0-experimental.1). The commands below require those assets to be available. If a download returns 404, check the release page rather than substituting an unknown binary source.
+Download from the [release page](https://github.com/Elton-Yang/codex-riscv/releases/tag/v0.1.0-experimental.1). If a download returns 404, check the release page rather than substituting an unknown binary source.
 
 ### 1. Check the system and install runtime dependencies
 
@@ -125,7 +127,8 @@ To regenerate license notices:
 
 - npm launcher, automatic updates and packaged-daemon installation paths are not adapted for RISC-V. Use the direct binary and manual installation.
 - Optional external code-mode / V8 and realtime runtimes were not built, included or tested.
-- No native VisionFive 2 test, interactive validation, login or model API call was performed.
+- Native validation covers only the listed checks on one board and user-reported basic conversation. Tool calls, model-driven file edits, `workspace-write`, exhaustive TUI behavior, other kernels and long-term stability remain untested.
+- The file-write and IPv4-socket denials are not a comprehensive sandbox security audit. The legacy Landlock backend and the full set of filter rules were not separately validated.
 - This large `dev-small` executable does not represent optimized release performance.
 - This is a dynamically linked GNU/Linux binary, not a generic static executable.
 
