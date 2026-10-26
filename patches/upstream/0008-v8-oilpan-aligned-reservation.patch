@@ -1,0 +1,39 @@
+--- a/v8/src/heap/cppgc-internal/caged-heap.cc
++++ b/v8/src/heap/cppgc-internal/caged-heap.cc
+@@ -113,6 +113,36 @@
+             .offset_into_cage_start = kUsefulReservationSize};
+   }
+ 
++#if defined(V8_TARGET_ARCH_RISCV64) && defined(V8_OS_LINUX)
++  // Sv39 may have space for the complete aligned cage but not the extra
++  // alignment slack requested by OS::Allocate. Try non-fixed, exact-size
++  // mappings at every compression-compatible slot in the Sv39 user range.
++  // Randomize the starting slot; never replace an existing mapping. Accept
++  // only an actually aligned mapping with the required compression bit.
++  static constexpr uintptr_t kSv39UserLimit = uintptr_t{1} << 38;
++  static constexpr size_t kSlotCount =
++      kSv39UserLimit / (2 * kUsefulReservationSize);
++  const size_t first_slot =
++      reinterpret_cast<uintptr_t>(platform_allocator.GetRandomMmapAddr()) /
++      kUsefulReservationSize % kSlotCount;
++  for (size_t i = 0; i < kSlotCount; ++i) {
++    const uintptr_t candidate =
++        (2 * ((first_slot + i) % kSlotCount) + 1) * kUsefulReservationSize;
++    void* exact = platform_allocator.AllocatePages(
++        reinterpret_cast<void*>(candidate), kUsefulReservationSize,
++        platform_allocator.AllocatePageSize(), PageAllocator::kNoAccess);
++    if (!exact) continue;
++    const uintptr_t address = reinterpret_cast<uintptr_t>(exact);
++    if (address % kReservationAlignment == 0 && (address & kMaskedOutLSB)) {
++      return {.memory = VirtualMemory(&platform_allocator, exact,
++                                      kUsefulReservationSize),
++              .offset_into_cage_start = 0};
++    }
++    // This mapping belongs to this attempt; no existing reservation is freed.
++    platform_allocator.FreePages(exact, kUsefulReservationSize);
++  }
++#endif  // V8_TARGET_ARCH_RISCV64 && V8_OS_LINUX
++
+   // Otherwise, try to reserve kUsefulReservationSize and hope the LSB of the
+   // masked out part is 1.
+   for (size_t i = 0; i < kAllocationTries; ++i) {

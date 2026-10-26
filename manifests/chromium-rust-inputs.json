@@ -1,0 +1,410 @@
+[
+  {
+    "file": "calendrical_calculations-v0_2.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/calendrical_calculations-v0_2",
+    "sha256": "2e3e957c1968d6ed62e02aa21e2f54ad1078caa44c93224346748bf41f21e8b4",
+    "bytes": 70287,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/calendrical_calculations-v0_2.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "core_maths-v0_1.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/core_maths-v0_1",
+    "sha256": "f2131f6d2ef0a7e648791a89cd530b4228bf62bb78579eecf4ef4e5a3110e9c5",
+    "bytes": 6886,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/core_maths-v0_1.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "cxx-v1.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/cxx-v1",
+    "sha256": "cda92f0dae5639b6691c6fc59ba691cf72564dd6a842fd79573c5fc28f0b86ee",
+    "bytes": 254481,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/cxx-v1.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "cxxbridge-macro-v1.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/cxxbridge-macro-v1",
+    "sha256": "7d32e48ecd876910c9bb2a92ec17893149be2cbfcddaa2c16166500f2e1a08dc",
+    "bytes": 75135,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/cxxbridge-macro-v1.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "diplomat-runtime-v0_15.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/diplomat-runtime-v0_15",
+    "sha256": "98ed1c868965ccb676fb7611be216bac190bcafe082eea024ecb2e76768b6962",
+    "bytes": 19047,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/diplomat-runtime-v0_15.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "diplomat-v0_15.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/diplomat-v0_15",
+    "sha256": "73a189543bfba2638e0baf71f3aada63d17402ef15bad5259be304736c6e8adf",
+    "bytes": 24257,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/diplomat-v0_15.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "diplomat_core-v0_15.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/diplomat_core-v0_15",
+    "sha256": "9a86d9650380e19083770d14dcf09bb211e9463219a473d0ef4504c9f2f077f4",
+    "bytes": 135580,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/diplomat_core-v0_15.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "displaydoc-v0_2.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/displaydoc-v0_2",
+    "sha256": "6277fa9a9de030f794a36f2b6f4fb76a61025d9abfe1bef67c81a3186d990bd3",
+    "bytes": 23459,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/displaydoc-v0_2.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "either-v1.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/either-v1",
+    "sha256": "a08cd4c73664d1915600e8d29cc318f84e9155804499ebdb2e21b3cf5ab24ce2",
+    "bytes": 21967,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/either-v1.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "equivalent-v1.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/equivalent-v1",
+    "sha256": "2bd497d93645a35925885570901457e8526264f7d900b6839812316b9e49e975",
+    "bytes": 7917,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/equivalent-v1.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "foldhash-v0_2.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/foldhash-v0_2",
+    "sha256": "21d339b82f0a07978a842407755e606f351d7801da1d6d24efcbb02cf9554368",
+    "bytes": 24168,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/foldhash-v0_2.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "hashbrown-v0_17.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/hashbrown-v0_17",
+    "sha256": "8481fcfbe2e4f398947494d6044c784b1965a8bd8f9fcfe9f0037dc159629827",
+    "bytes": 159523,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/hashbrown-v0_17.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "icu_calendar-v2.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/icu_calendar-v2",
+    "sha256": "3fa2bc85cb35a2cee388df2356b683af383e5502d86648854b4c064cad51fe8f",
+    "bytes": 864777,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/icu_calendar-v2.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "icu_calendar_data-v2.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/icu_calendar_data-v2",
+    "sha256": "3cb26705188be53ace66cfa80de7a3a42016098bf329713d2d5947051e82f95f",
+    "bytes": 5952,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/icu_calendar_data-v2.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "icu_collections-v2.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/icu_collections-v2",
+    "sha256": "80bcc504fbf22966453cc685d102a08553386b02fb845864a9a7a088d615995e",
+    "bytes": 94778,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/icu_collections-v2.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "icu_locale-v2.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/icu_locale-v2",
+    "sha256": "5797101f50b8b2077a14ca10d04e50205dfe9531eab0d87459bceaf85a437544",
+    "bytes": 35867,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/icu_locale-v2.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "icu_locale_core-v2.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/icu_locale_core-v2",
+    "sha256": "9ea6d6154fc713d7794e56f3d15c6f707aa95d100da1158a3e5b42e948603c70",
+    "bytes": 84662,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/icu_locale_core-v2.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "icu_locale_data-v2.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/icu_locale_data-v2",
+    "sha256": "f27493286d187708ea76c00a17e5d491d19c29fe4a9477c5f3066bd560f6018f",
+    "bytes": 118628,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/icu_locale_data-v2.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "icu_provider-v2.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/icu_provider-v2",
+    "sha256": "7c98cd75bd49a49eea83cc24471b75669fed71f23bef730b018d6be576bde631",
+    "bytes": 53531,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/icu_provider-v2.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "indexmap-v2.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/indexmap-v2",
+    "sha256": "7368f87c7705e492c7c15cf198433b94a778126a3dd521ddb56466a8c15c1997",
+    "bytes": 106686,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/indexmap-v2.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "ixdtf-v0_6.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/ixdtf-v0_6",
+    "sha256": "66b61d6aaebff1554c49252fac5a0f3d07a06187eac930c9c1ca38b8e75b77fb",
+    "bytes": 37602,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/ixdtf-v0_6.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "libm-v0_2.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/libm-v0_2",
+    "sha256": "ce03819fc4aa92aa537fa0b8bf7adef46cf13684d7b55892002d6b3ccf278f5c",
+    "bytes": 171808,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/libm-v0_2.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "litemap-v0_8.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/litemap-v0_8",
+    "sha256": "a92b9ec843f9cc6e801f2ec3b1a777a9f6314bb9fa1ba34b284769f8f635fdeb",
+    "bytes": 36864,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/litemap-v0_8.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "num-traits-v0_2.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/num-traits-v0_2",
+    "sha256": "3ec294751a8af3da67c788954806154dcdb41a180f036b028746477f731cf4a6",
+    "bytes": 53592,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/num-traits-v0_2.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "potential_utf-v0_1.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/potential_utf-v0_1",
+    "sha256": "33d25b9cf211d86ba7878cdce3356de6c7b179ab0995b77609ce7592d92f7224",
+    "bytes": 10643,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/potential_utf-v0_1.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "proc-macro2-v1.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/proc-macro2-v1",
+    "sha256": "7748f90a60aaa5e81ebac66f071bc1e35e5feb48c7b571e018bcab1330375877",
+    "bytes": 61801,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/proc-macro2-v1.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "quote-v1.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/quote-v1",
+    "sha256": "d839526a6accff728102e6da3fdd1e280f70c5dc43e8789df00cce6176ba6d6c",
+    "bytes": 34295,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/quote-v1.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "resb-v0_1.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/resb-v0_1",
+    "sha256": "135d7239e8ebe21f95a56af3b18f1439bb3b0b2fb39f245daae010246a15efae",
+    "bytes": 167545,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/resb-v0_1.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "serde-v1.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/serde-v1",
+    "sha256": "8165a014680e9a0a9ad1867332ac3222eb9e977cf321ab7c6e6d11830f636293",
+    "bytes": 86460,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/serde-v1.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "serde_core-v1.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/serde_core-v1",
+    "sha256": "3ce40401ef835586b96a51ccb3ef59fa5ecf7d154e4436939ebea488dba780ec",
+    "bytes": 65123,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/serde_core-v1.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "serde_derive-v1.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/serde_derive-v1",
+    "sha256": "fe41b39762ebcbf637ad9b720ff4bc362846391a2d7a1704ce7c82f85e418068",
+    "bytes": 62257,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/serde_derive-v1.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "smallvec-v1.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/smallvec-v1",
+    "sha256": "37400b3b8ceda44fe350b521123b56bcd95d0587b9e6042f3777679838afa33a",
+    "bytes": 35838,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/smallvec-v1.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "stable_deref_trait-v1.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/stable_deref_trait-v1",
+    "sha256": "be0664ae48d7ab0d71234506df6b060bbbebe8990860c6aa728125679775f003",
+    "bytes": 8605,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/stable_deref_trait-v1.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "strck-v1.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/strck-v1",
+    "sha256": "4cbfb96e46800969dd874a1407baa1a91003ab613a103e91ea99bc2ed77b2809",
+    "bytes": 10797,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/strck-v1.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "syn-v2.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/syn-v2",
+    "sha256": "b17fe5dc825ae091c762065a6c2360aced912ef489306807439d4c6162c523ca",
+    "bytes": 315376,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/syn-v2.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "synstructure-v0_13.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/synstructure-v0_13",
+    "sha256": "da2d3f168ea4e3b298e5f0fc14dd78506dfce165047ed71a37d8784f466b50c5",
+    "bytes": 19619,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/synstructure-v0_13.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "temporal_capi-v0_2.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/temporal_capi-v0_2",
+    "sha256": "5904e0c24df04eec6df6628dde14564bfb640ce3f0e0401c12843cf9b6a76196",
+    "bytes": 83858,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/temporal_capi-v0_2.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "temporal_rs-v0_2.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/temporal_rs-v0_2",
+    "sha256": "8afc7b8bc5a2f7a05547b79be180480dbd4241e9e8e9e61825ff1ee45570b0bc",
+    "bytes": 193003,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/temporal_rs-v0_2.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "timezone_provider-v0_2.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/timezone_provider-v0_2",
+    "sha256": "a349d7143c2e8c7b97df835996acf3e9d4368ba49b5dd180659bf1d3cac37984",
+    "bytes": 151241,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/timezone_provider-v0_2.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "tinystr-v0_8.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/tinystr-v0_8",
+    "sha256": "e275eb56f9204a069c96eddfa9827cfb65a38a375ce5932906a5f19a132b5c83",
+    "bytes": 25868,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/tinystr-v0_8.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "unicode-ident-v1.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/unicode-ident-v1",
+    "sha256": "d19377d2131436011e4efa35b4ac34301a67280e2cd67305ed56984387f46b51",
+    "bytes": 51854,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/unicode-ident-v1.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "utf8_iter-v1.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/utf8_iter-v1",
+    "sha256": "ab9895f8f65f6243af6effca14ed52c7d633cd0dc491af2e2d113f14abbd3295",
+    "bytes": 11003,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/utf8_iter-v1.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "writeable-v0_6.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/writeable-v0_6",
+    "sha256": "5266be7118d899ebacd7ddc43300ef75698d9706151e5781e5671dfc22fa6642",
+    "bytes": 28053,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/writeable-v0_6.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "yoke-derive-v0_8.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/yoke-derive-v0_8",
+    "sha256": "1fea140b2ddb1e9be0815efb3f71585cc7e21bdbe61ddb579d8bbcc28eae42d5",
+    "bytes": 15730,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/yoke-derive-v0_8.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "yoke-v0_8.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/yoke-v0_8",
+    "sha256": "c505cdbd9947cc9863add14ceabe7f9af5e6f73ef4db37c82ce62adf43ee28cf",
+    "bytes": 34977,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/yoke-v0_8.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "zerofrom-derive-v0_1.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/zerofrom-derive-v0_1",
+    "sha256": "b4213bb5623d52a12b531796a65918eb62cf90af89fbb0f243512849a7ff56c5",
+    "bytes": 9304,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/zerofrom-derive-v0_1.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "zerofrom-v0_1.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/zerofrom-v0_1",
+    "sha256": "755d61facbcad43f80e0cd5f42c4bb3efbaf5946954bb713198adfde345ea702",
+    "bytes": 6552,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/zerofrom-v0_1.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "zerotrie-v0_2.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/zerotrie-v0_2",
+    "sha256": "419b49e040550da8007253cebb5486fc3d54c6e7a90a27b2e3adcbbd246a4fb9",
+    "bytes": 86429,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/zerotrie-v0_2.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "zerovec-derive-v0_11.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/zerovec-derive-v0_11",
+    "sha256": "642059eca26b38cce3f2acd40966e95826768225f6674853e7c314fc5894a664",
+    "bytes": 23064,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/zerovec-derive-v0_11.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "zerovec-v0_11.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/zerovec-v0_11",
+    "sha256": "3c0554095cb48570f10ae06124126ff99c59a89ba5d2e053dcc67b087137a29c",
+    "bytes": 133939,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/zerovec-v0_11.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  },
+  {
+    "file": "zoneinfo64-v0_3.tar.gz",
+    "destination": "third_party/rust/chromium_crates_io/vendor/zoneinfo64-v0_3",
+    "sha256": "e7ad32b4d1b549b49203e2f4dac5faaff6b3c0f856f8f8098e87a75189a29bc2",
+    "bytes": 83095,
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/rust/+archive/afbc96607d0e659715d803cc099607dd1737fc41/chromium_crates_io/vendor/zoneinfo64-v0_3.tar.gz",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41"
+  }
+]

@@ -1,0 +1,35 @@
+--- a/v8/include/v8-internal.h
++++ b/v8/include/v8-internal.h
+@@ -229,12 +229,15 @@
+ // 16 GB so that the base address + size for the emulated virtual address space
+ // lies within the 64 GB total virtual address space.
+ constexpr size_t kSandboxSizeLog2 = 34;  // 16 GB
+-#elif defined(V8_HOST_ARCH_RISCV64)
++#elif defined(V8_TARGET_ARCH_RISCV64)
+ // Most RISC-V hardware currently uses Sv39 (39-bit VA, 256GB userspace).
+-// Limit the sandbox to 128GB (a quarter of Sv39 userspace) to avoid exceeding
+-// the available virtual address space. Uses V8_HOST_ARCH so that simulator
+-// builds on x64 are not unnecessarily constrained.
+-constexpr size_t kSandboxSizeLog2 = 37;  // 128 GB
++// Leave room for both 64GB guards and alignment below ordinary Sv39 PIE
++// mappings. This is below the reservation ceiling in Sandbox::Initialize;
++// the embedder must still reject partial reservations on fragmented layouts.
++// The target, not the build host, determines sandboxed-pointer encoding:
++// cross-generated RISC-V builtins and native RISC-V code must use the same
++// kSandboxedPointerShift. RISC-V simulators therefore use this size as well.
++constexpr size_t kSandboxSizeLog2 = 35;  // 32 GB
+ #elif defined(V8_TARGET_ARCH_LOONG64)
+ // Some hardwares like 2k3000 only have 40-bit virtual address space, 39 bits
+ // userspace and kernel each.
+@@ -310,6 +313,11 @@
+ // Some hardwares like 2K3000 does not have sufficient virtual address space
+ // available.
+ constexpr size_t kAdditionalTrailingGuardRegionSize = 0;
++#elif defined(V8_TARGET_ARCH_RISCV64)
++// Sv39 cannot accommodate the additional trailing reservation. Use the
++// existing typed-array access masks below, retaining both 64GB guard regions
++// and the unchanged bounded-size encoding and maximum safe buffer size.
++constexpr size_t kAdditionalTrailingGuardRegionSize = 0;
+ #else
+ // Worst-case, we need 8 (max element size) * 32GB (max ArrayBuffer size) +
+ // 32GB (additional bounded size offset for TypedArray access).

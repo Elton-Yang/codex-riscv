@@ -1,0 +1,31 @@
+name: Source maintenance
+on:
+  push:
+    paths:
+      - 'scripts/**'
+      - 'patches/upstream/**'
+      - 'manifests/upstream-lock.json'
+      - 'manifests/chromium-rust-inputs.json'
+      - 'tests/test_upstream.py'
+      - '.github/workflows/source-maintenance.yml'
+  pull_request:
+    paths:
+      - 'scripts/**'
+      - 'patches/upstream/**'
+      - 'manifests/upstream-lock.json'
+      - 'manifests/chromium-rust-inputs.json'
+      - 'tests/test_upstream.py'
+      - '.github/workflows/source-maintenance.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  tooling:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify manifest and tooling failure handling
+        run: |
+          python3 scripts/upstream.py check-lock
+          python3 -m unittest discover -s tests -p test_upstream.py -v
+          bash -n scripts/build.sh scripts/check.sh scripts/build-cli-performance.sh scripts/build-code-mode.sh

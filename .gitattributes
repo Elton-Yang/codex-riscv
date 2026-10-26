@@ -9,3 +9,6 @@ tests/code-mode/**/*.log -text -whitespace
 
 # Preserve performance validation console bytes.
 docs/performance-evidence/** -text -whitespace
+
+# Canonical patch bytes include unified-diff context whitespace.
+patches/upstream/*.patch -text -whitespace

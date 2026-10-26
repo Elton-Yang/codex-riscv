@@ -85,3 +85,7 @@ Download binary and dependency-source archives plus `SHA256SUMS` from the [`.3` 
 The [Code Mode build notes](docs/code-mode.md) describe the prepared source/toolchain layout and replay patches. `scripts/build.sh` reproduces the CLI-only build on a compatible Debian 13 x86_64 build host. No clean-room Code Mode setup or bit-identical rebuild is claimed.
 
 Keep `LICENSE`, `NOTICE`, `licenses/`, modification records and the relevant dependency-source materials when redistributing. The Code Mode notice supplement supplements the baseline; known upstream attribution gaps and absent final linker map are explicitly disclosed. Inventory coverage is not legal clearance.
+
+## Upstream alignment / 上游对齐
+
+Current source, toolchain, profiles and patch identities are pinned in [upstream-lock.json](manifests/upstream-lock.json). See [source preparation and upgrade policy](docs/upstream-maintenance.md) for clean patch commits, repeatable replay, release discovery, state-compatibility tests and the first formal-release rehearsal. The validated `.3` baseline remains unchanged.

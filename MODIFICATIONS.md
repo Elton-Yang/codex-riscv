@@ -1,5 +1,10 @@
 # Changes from upstream
 
+Current development pins and the canonical split patch series are recorded in
+`manifests/upstream-lock.json` and `patches/upstream/`. The sections below describe
+published historical artifacts; source-preparation tools do not modify them.
+See `docs/upstream-maintenance.md` for upgrade and state-compatibility policy.
+
 This is an unofficial adaptation/build project, not an OpenAI release.
 
 - Upstream: https://github.com/openai/codex

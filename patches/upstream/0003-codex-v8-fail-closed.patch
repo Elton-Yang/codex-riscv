@@ -1,0 +1,13 @@
+--- a/codex-rs/code-mode-runtime/src/v8_init.rs
++++ b/codex-rs/code-mode-runtime/src/v8_init.rs
+@@ -47,6 +47,10 @@
+     // our V8 artifacts include the upstream fix for mixed-element sorting:
+     // https://github.com/v8/v8/commit/e0562d87ad9c17042b581582c99237d798572e67
+     v8::V8::set_flags_from_string("--no-maglev --no-turbolev --no-turbo-inline-array-builtins");
++    // Small RISC-V address spaces must fail closed rather than silently use
++    // V8's explicitly insecure partial-reservation or accessible-Smi fallback.
++    #[cfg(target_arch = "riscv64")]
++    v8::V8::set_flags_from_string("--sandbox-prohibit-insecure-mode");
+     match jit_mode {
+         V8JitMode::Enabled => {}
+         V8JitMode::Disabled => v8::V8::set_flags_from_string("--jitless"),

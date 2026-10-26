@@ -9,10 +9,11 @@ from collections import defaultdict
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent.parent
 parser=argparse.ArgumentParser();parser.add_argument('--source',type=Path,default=ROOT/'src/codex-rs');parser.add_argument('--cargo-home',type=Path,default=Path(os.environ.get('CARGO_HOME',str(Path.home()/'.cargo'))));parser.add_argument('--harvest-only',action='store_true');args=parser.parse_args()
-src=args.source.resolve(); out=ROOT/'licenses';out.mkdir(exist_ok=True)
+upstream_lock=json.loads((ROOT/'manifests/upstream-lock.json').read_text());upstream_commit=upstream_lock['codex']['commit'];target_triple=upstream_lock['toolchain']['target']
+src=args.source.resolve(); subprocess.run(['python3',str(ROOT/'scripts/upstream.py'),'verify-source','--source',str(src.parent),'--component','cli'],check=True); out=ROOT/'licenses';out.mkdir(exist_ok=True)
 def cargo(*args):return subprocess.check_output(['cargo',*args],cwd=src,text=True)
-meta=json.loads(cargo('metadata','--locked','--format-version','1','--filter-platform','riscv64gc-unknown-linux-gnu'))
-tree=cargo('tree','--locked','-p','codex-cli','--target','riscv64gc-unknown-linux-gnu','-e','normal,build','--prefix','none','--format','{p}')
+meta=json.loads(cargo('metadata','--locked','--format-version','1','--filter-platform',target_triple))
+tree=cargo('tree','--locked','-p','codex-cli','--target',target_triple,'-e','normal,build','--prefix','none','--format','{p}')
 selected=set()
 for line in tree.splitlines():
  match=re.match(r'([^ ]+) v([^ ]+)',line)
@@ -29,7 +30,7 @@ notices={};inventory=[];no_files=[]
 for p in sorted(pkgs,key=lambda x:(x['name'],x['version'])):
  base=Path(p['manifest_path']).parent
  if p.get('source') is None:
-  inventory.append(dict(name=p['name'],version=p['version'],license=p.get('license'),source='https://github.com/openai/codex/tree/970111f6cb62cc02fe36a82ea7d71b37a2889c97',notice='See repository LICENSE and NOTICE.'));continue
+  inventory.append(dict(name=p['name'],version=p['version'],license=p.get('license'),source='https://github.com/openai/codex/tree/'+upstream_commit,notice='See repository LICENSE and NOTICE.'));continue
  candidates=[]
  for directory,dirs,files in os.walk(base):
   dirs[:]=[d for d in dirs if d not in {'.git','target','node_modules'}]
@@ -57,7 +58,7 @@ for p in sorted(pkgs,key=lambda x:(x['name'],x['version'])):
  record=dict(name=p['name'],version=p['version'],license=p.get('license'),repository=p.get('repository'),source=p.get('source'),files=files)
  if not files:no_files.append(f"{p['name']} {p['version']}")
  inventory.append(record)
-(out/'cargo-license-inventory.json').write_text(json.dumps({'upstream_commit':'970111f6cb62cc02fe36a82ea7d71b37a2889c97','target':'riscv64gc-unknown-linux-gnu','scope':'CLI normal and build dependencies, conservatively includes build-time code; excludes dev-only dependencies','packages':inventory,'packages_without_packaged_license_files':no_files},indent=2)+'\n')
+(out/'cargo-license-inventory.json').write_text(json.dumps({'upstream_commit':upstream_commit,'target':target_triple,'scope':'CLI normal and build dependencies, conservatively includes build-time code; excludes dev-only dependencies','packages':inventory,'packages_without_packaged_license_files':no_files},indent=2)+'\n')
 with (out/'ORIGINAL-LICENSE-TEXTS.txt').open('w') as f:
  f.write('Original license/notice files from pinned Cargo sources. Identical files are deduplicated by SHA256.\nSee THIRD-PARTY-NOTICES.html and reviewed supplements for crates whose archives omit license files.\n\n')
  for digest,item in sorted(notices.items()):

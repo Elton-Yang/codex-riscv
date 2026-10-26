@@ -1,0 +1,118 @@
+{
+  "date": "2026-10-26",
+  "lock_sha256": "0a2bede1a18fa29c620cd3e385c5602821f24bfed4117d9cb50c6308477565b3",
+  "sources": {
+    "cli": {
+      "base_commit": "970111f6cb62cc02fe36a82ea7d71b37a2889c97",
+      "status": "PINNED_SOURCE_REPLAY_PASS",
+      "repositories": {
+        "codex": {
+          "path": "src",
+          "head": "7e3d2730e9b733d4ebd656973aeba95327ee7c8f",
+          "tree": "44153fb2d807b6e4d4c18ef31d1e89ad6e4fba54",
+          "patches": [
+            {
+              "id": "0001-codex-seccomp-riscv64",
+              "commit": "7e3d2730e9b733d4ebd656973aeba95327ee7c8f",
+              "patch_sha256": "152e06f73eb2554264e8037395f11ba088355b00d29a732f96dd885c7b12747b"
+            }
+          ]
+        }
+      }
+    },
+    "code-mode": {
+      "base_commit": "970111f6cb62cc02fe36a82ea7d71b37a2889c97",
+      "status": "PINNED_SOURCE_REPLAY_PASS",
+      "repositories": {
+        "codex": {
+          "path": "src",
+          "head": "5638173b3113be7bafe9d02cc59292d683b5250c",
+          "tree": "681dc15e7fdb7fbdce4e6cbd1007a2d30f7a6b9b",
+          "patches": [
+            {
+              "id": "0001-codex-seccomp-riscv64",
+              "commit": "70006b572d32a85a69cfd84048c7901ae97de3b1",
+              "patch_sha256": "152e06f73eb2554264e8037395f11ba088355b00d29a732f96dd885c7b12747b"
+            },
+            {
+              "id": "0002-codex-local-v8-source",
+              "commit": "65284b2d4c3aa21bbb4809722cda125c0a01d8db",
+              "patch_sha256": "1ae70f949acae54a74d8824e999814131cab5a3d76af650f4587d7a7087b97ba"
+            },
+            {
+              "id": "0003-codex-v8-fail-closed",
+              "commit": "07388822bce7323d1a1a0cbb8f75b7cf626edd29",
+              "patch_sha256": "17ae0c2e701a189e444638a1bc4db238b2a5086bc5043e715d145ba60e164fd9"
+            },
+            {
+              "id": "0004-codex-riscv-sandbox-tests",
+              "commit": "5638173b3113be7bafe9d02cc59292d683b5250c",
+              "patch_sha256": "faedcb5ac2161a1ce80ed431f2efe67efc1ab5e586c43850b1130594d3f90b8c"
+            }
+          ]
+        },
+        "v8": {
+          "path": "vendor/v8",
+          "base": "2c83aa608c87aeb123b6d73742e4bfaaf7dc9fb3",
+          "source_input_commit": "bba34b38069231a741f87864a6e821f6824b14cb",
+          "head": "851dfbc1b8e464fe63ea03112b9f71265b0b4d8c",
+          "tree": "03a034d45f311af50b389c93f20ea20d24603206",
+          "patches": [
+            {
+              "id": "0005-v8-proxy-download",
+              "commit": "19f97e9c206b84aedef8a599f3fca12f86586062",
+              "patch_sha256": "5004e92ff6ab1581f0701ed0fa277ac5601c7b8851afddac5e2634e618c3f37c"
+            },
+            {
+              "id": "0006-v8-target-sandbox-layout",
+              "commit": "f05ad5e637787a67d9c7668f07f32da44da1a104",
+              "patch_sha256": "d002dfd8e565d67fb0d2e598351619dd75ba08db04533786d481b48aa5fab471"
+            },
+            {
+              "id": "0007-v8-partitionalloc-sv39-hints",
+              "commit": "5bdc1adc1b7ba44432fb8ed195f55728dac21954",
+              "patch_sha256": "dd6e43dcb8f36ff5dc402de5452ba10373192cbe6acbbaaa8f989db620dbad95"
+            },
+            {
+              "id": "0008-v8-oilpan-aligned-reservation",
+              "commit": "851dfbc1b8e464fe63ea03112b9f71265b0b4d8c",
+              "patch_sha256": "9f690c16fbfd13861573f6494c8ff25060761a65bd0d0561ff971bc85ee526db"
+            }
+          ],
+          "base_kind": "published-crate import, not upstream V8 Git commit"
+        }
+      }
+    }
+  },
+  "repeated_preparation_identical_trees": true,
+  "source_files_match_published_working_inputs": true,
+  "v8_crate_changed_files": [
+    "third_party/partition_alloc/src/partition_alloc/address_space_randomization.h",
+    "tools/ninja_gn_binaries.py",
+    "v8/include/v8-internal.h",
+    "v8/src/heap/cppgc-internal/caged-heap.cc"
+  ],
+  "checks": {
+    "lock_and_patch_hashes": "PASS",
+    "dedicated_clean_cli_and_host_source_verification": "PASS",
+    "second_independent_cli_and_host_preparation": "PASS",
+    "unexpected_committed_or_dirty_tree_refused": "PASS",
+    "archive_traversal_and_links_refused": "PASS",
+    "existing_destination_refused": "PASS",
+    "failed_preparation_record": "PASS",
+    "candidate_source_not_admitted_by_current_lock": "PASS",
+    "unit_tests": 8,
+    "cli_and_host_build_wrapper_transport": "PASS with mocked Cargo; no compilation",
+    "locked_offline_cargo_metadata_cli_and_code_mode": "PASS",
+    "final_tooling_source_preparation": "PASS with reviewed full-tree checks"
+  },
+  "candidate": {
+    "tag": "rust-v0.164.0",
+    "status": "SOURCE_PATCH_REPLAY_ONLY",
+    "promoted": false,
+    "built": false,
+    "runtime_tested": false
+  },
+  "new_full_build": "NOT_RUN: source/build-orchestration refactor only",
+  "release_artifacts": "UNCHANGED"
+}

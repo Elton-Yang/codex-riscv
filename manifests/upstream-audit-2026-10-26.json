@@ -1,0 +1,42 @@
+{
+  "checked_date": "2026-10-26",
+  "repository": "openai/codex",
+  "current_pin": "970111f6cb62cc02fe36a82ea7d71b37a2889c97",
+  "current_main_at_check": "970111f6cb62cc02fe36a82ea7d71b37a2889c97",
+  "latest_stable": {
+    "tag": "rust-v0.164.0",
+    "commit": "6aaac694803004a63c6f393d153c96d22521a6b9",
+    "published_at": "2026-10-23T04:48:10Z",
+    "release_url": "https://github.com/openai/codex/releases/tag/rust-v0.164.0"
+  },
+  "compare_stable_to_current": {
+    "status": "diverged",
+    "current_only_commits": 91,
+    "stable_only_commits": 1,
+    "merge_base": "342ed69a174c206c1de52a59491b131e0753cfa5"
+  },
+  "decision": "KEEP_CURRENT_PIN",
+  "reason": "Latest formal release and current pinned main are diverged; 0.164.0 is not a forward update. Rehearse source replay only, never replace published .3 based on tag recency.",
+  "candidate_build_validated": false,
+  "candidate_runtime_validated": false,
+  "source_rehearsal": {
+    "status": "CANDIDATE_PATCH_REPLAY_ONLY",
+    "base_commit": "6aaac694803004a63c6f393d153c96d22521a6b9",
+    "observed_versions": {
+      "package_version": "0.164.0",
+      "rust": "1.99.1",
+      "v8": [
+        {
+          "name": "v8",
+          "version": "152.2.0",
+          "checksum": "a10fe1a92da5c32c7c7f838ce36c0ccfcfd5edf0865b58bdde820aa64cea9888"
+        }
+      ]
+    },
+    "codex_tree": "f82e76125b903b42087dff1cbdfcc095f284ad47",
+    "cli_patch_applied": true,
+    "build_validated": false,
+    "runtime_validated": false,
+    "reason_not_promoted": "Formal release branch diverged from current main pin; replay alone does not prove compatibility"
+  }
+}

@@ -1,0 +1,324 @@
+--- /dev/null
++++ b/codex-rs/code-mode-runtime/tests/riscv_sandbox.rs
+@@ -0,0 +1,199 @@
++//! Packaging regression probes, not an exploit-resistance certification.
++#![cfg(all(target_arch = "riscv64", target_os = "linux", target_env = "gnu"))]
++
++use codex_code_mode_runtime::V8JitMode;
++use codex_code_mode_runtime::initialize_v8;
++use std::ffi::c_char;
++use std::ffi::c_int;
++use std::io::Write;
++use std::sync::atomic::AtomicUsize;
++use std::sync::atomic::Ordering;
++
++static PREINIT_LOW_SMI_MAPPING: AtomicUsize = AtomicUsize::new(0);
++
++// Test-only GNU ELF preinitialization. PartitionAlloc reserves its zero segment
++// before Rust main, so a later collision attempt would only test setup EEXIST.
++// GNU ld.so passes argc/argv/envp to .preinit_array before normal initializers.
++// This callback uses no allocator, TLS, Rust I/O, libc call, or mutable guard.
++#[used]
++#[unsafe(link_section = ".preinit_array")]
++static LOW_SMI_PREINIT: unsafe extern "C" fn(c_int, *const *const c_char, *const *const c_char) =
++    reserve_low_smi_before_allocators;
++
++unsafe fn raw_syscall(number: usize, arguments: [usize; 6]) -> usize {
++    let mut result = arguments[0];
++    // SAFETY: Linux RV64 syscall ABI. No stack access in the assembly; memory
++    // effects are intentionally not marked nomem, and no library is called.
++    unsafe {
++        std::arch::asm!(
++            "ecall",
++            in("a7") number,
++            inlateout("a0") result,
++            in("a1") arguments[1],
++            in("a2") arguments[2],
++            in("a3") arguments[3],
++            in("a4") arguments[4],
++            in("a5") arguments[5],
++            options(nostack),
++        );
++    }
++    result
++}
++
++unsafe extern "C" fn reserve_low_smi_before_allocators(
++    _argc: c_int,
++    _argv: *const *const c_char,
++    environment: *const *const c_char,
++) {
++    let flag = b"CODEX_TEST_RESERVE_LOW_SMI=1\0";
++    let mut cursor = environment;
++    // SAFETY: GNU loader supplies a valid null-terminated environment vector.
++    // Every string comparison stops at the first differing byte, including a
++    // premature NUL. The exact test flag is the only activating condition.
++    unsafe {
++        while !cursor.is_null() && !(*cursor).is_null() {
++            let value = *cursor as *const u8;
++            let mut index = 0;
++            while index < flag.len() && *value.add(index) == *flag.as_ptr().add(index) {
++                index += 1;
++            }
++            if index == flag.len() {
++                // RV64 __NR_mmap=222; READ|WRITE; PRIVATE|ANONYMOUS|
++                // FIXED_NOREPLACE. Never overwrite/unmap an existing guard.
++                let mapped = raw_syscall(222, [1 << 30, 4096, 3, 2 | 32 | 0x100000, usize::MAX, 0]);
++                PREINIT_LOW_SMI_MAPPING.store(mapped, Ordering::Relaxed);
++                let message: &[u8] = if mapped == 1 << 30 {
++                    b"TEST_PREINIT_LOW_SMI_MAPPED=0x40000000\n"
++                } else {
++                    b"TEST_PREINIT_LOW_SMI_RESERVATION_FAILED\n"
++                };
++                // RV64 __NR_write=64; diagnostic stderr only, no formatting.
++                let _ = raw_syscall(64, [2, message.as_ptr() as usize, message.len(), 0, 0, 0]);
++                return;
++            }
++            cursor = cursor.add(1);
++        }
++    }
++}
++
++unsafe extern "C" {
++    // Pinned rusty_v8's own native sandbox-enabled test binding.
++    fn v8__V8__IsSandboxEnabled() -> bool;
++    // Test-only access to public static V8 APIs using their Linux Itanium ABI.
++    // Verify these exact symbols against the pinned archive before running.
++    #[link_name = "_ZN2v82V814GetSandboxModeEv"]
++    fn sandbox_mode() -> u8;
++    #[link_name = "_ZN2v82V821GetSandboxSizeInBytesEv"]
++    fn sandbox_size() -> usize;
++    #[link_name = "_ZN2v82V832GetSandboxReservationSizeInBytesEv"]
++    fn sandbox_reservation_size() -> usize;
++}
++
++#[test]
++fn secure_sandbox_native_backing_store_and_optimized_arrays() {
++    // SAFETY: the pinned binding takes no pointers and returns compile-time
++    // configuration. Upstream uses this same query in test_sandbox_on.
++    assert!(unsafe { v8__V8__IsSandboxEnabled() });
++    if std::env::var_os("CODEX_TEST_RESERVE_LOW_SMI").is_some() {
++        let mapped = PREINIT_LOW_SMI_MAPPING.load(Ordering::Relaxed);
++        assert_eq!(
++            mapped,
++            1 << 30,
++            "reserve negative-test page before allocators"
++        );
++        println!("TEST_FORCED_LOW_SMI_MAPPING={mapped:#x}; initialization must fail closed");
++        std::io::stdout()
++            .flush()
++            .expect("flush negative-test marker");
++    }
++    // Only this separate test process exposes V8 testing intrinsics. The host
++    // itself never enables them; they make optimized-path coverage explicit.
++    v8::V8::set_flags_from_string("--allow-natives-syntax");
++    initialize_v8(V8JitMode::Enabled).expect("initialize sandbox-enabled V8");
++    // SAFETY: V8 has initialized; these pinned public static APIs take no
++    // pointers and return an enum with uint8_t representation / size_t values.
++    let (mode, size, reservation) =
++        unsafe { (sandbox_mode(), sandbox_size(), sandbox_reservation_size()) };
++    assert_eq!(
++        mode, 0,
++        "require full reservation AND inaccessible Smi range"
++    );
++    assert_eq!(size, 32usize << 30);
++    assert_eq!(reservation, 160usize << 30);
++    println!("sandbox_mode={mode}, sandbox_bytes={size}, reservation_bytes={reservation}");
++    println!(
++        "V8_MAPS_BEGIN\n{}V8_MAPS_END",
++        std::fs::read_to_string("/proc/self/maps").expect("read test-process maps")
++    );
++
++    let isolate = &mut v8::Isolate::new(Default::default());
++    let backing = v8::ArrayBuffer::new_backing_store(isolate, 256).make_shared();
++    for (index, cell) in backing.iter().enumerate() {
++        cell.set((index as u8) ^ 0x5a);
++    }
++    let typed_backing = v8::ArrayBuffer::new_backing_store(isolate, 64).make_shared();
++    let mut typed_expected = std::array::from_fn::<_, 64, _>(|index| (index * 5 + 7) as u8);
++    typed_expected[24..32].copy_from_slice(&(-123.5f64).to_le_bytes());
++    typed_expected[40..48].copy_from_slice(&(-123_456_789_012_345i64).to_le_bytes());
++    for (cell, expected) in typed_backing.iter().zip(typed_expected) {
++        cell.set(expected);
++    }
++    {
++        v8::scope!(let scope, isolate);
++        let context = v8::Context::new(scope, Default::default());
++        let scope = &mut v8::ContextScope::new(scope, context);
++        let buffer = v8::ArrayBuffer::with_backing_store(scope, &backing);
++        let key = v8::String::new(scope, "nativeBuffer").expect("buffer key");
++        context
++            .global(scope)
++            .set(scope, key.into(), buffer.into())
++            .expect("expose test buffer");
++        let buffer = v8::ArrayBuffer::with_backing_store(scope, &typed_backing);
++        let key = v8::String::new(scope, "nativeTypedBuffer").expect("typed buffer key");
++        context
++            .global(scope)
++            .set(scope, key.into(), buffer.into())
++            .expect("expose typed test buffer");
++        let source = v8::String::new(scope, include_str!("fixtures/riscv_sandbox_roundtrip.js"))
++            .expect("test source");
++        v8::tc_scope!(let scope, scope);
++        let script = v8::Script::compile(scope, source, None).unwrap_or_else(|| {
++            let exception = scope
++                .exception()
++                .map(|value| value.to_rust_string_lossy(scope))
++                .unwrap_or_else(|| "no JavaScript exception".to_owned());
++            panic!("compile regression suite: {exception}");
++        });
++        let result = script.run(scope).unwrap_or_else(|| {
++            let exception = scope
++                .exception()
++                .map(|value| value.to_rust_string_lossy(scope))
++                .unwrap_or_else(|| "no JavaScript exception".to_owned());
++            panic!("run regression suite: {exception}");
++        });
++        assert_eq!(
++            result
++                .to_string(scope)
++                .expect("test result")
++                .to_rust_string_lossy(scope),
++            "sandbox-array-roundtrip-ok"
++        );
++    }
++    for (index, cell) in backing.iter().enumerate() {
++        assert_eq!(
++            cell.get(),
++            ((index * 17 + 3) & 255) as u8,
++            "JS to native byte {index}"
++        );
++    }
++    typed_expected[8..12].copy_from_slice(&0x89abcdefu32.to_le_bytes());
++    typed_expected[24..32].copy_from_slice(&1.25f64.to_le_bytes());
++    typed_expected[40..48].copy_from_slice(&(-0x1234567890abcdi64).to_le_bytes());
++    for (index, (cell, expected)) in typed_backing.iter().zip(typed_expected).enumerate() {
++        assert_eq!(
++            cell.get(),
++            expected,
++            "nonzero-offset typed JS to native byte {index}"
++        );
++    }
++}
+--- /dev/null
++++ b/codex-rs/code-mode-runtime/tests/fixtures/riscv_sandbox_roundtrip.js
+@@ -0,0 +1,119 @@
++// Test-only V8 intrinsics are enabled ONLY in the separate Rust test process.
++// They are never enabled by the shipping Code Mode host.
++(() => {
++  const check = (condition, label) => { if (!condition) throw new Error(label); };
++  const bytes = new Uint8Array(nativeBuffer);
++  const view = new DataView(nativeBuffer);
++  for (let i = 0; i < bytes.length; i++) {
++    check(view.getUint8(i) === (i ^ 0x5a), `native to JS ${i}`);
++    view.setUint8(i, (i * 17 + 3) & 255);
++  }
++  const copied = new Uint8Array(nativeBuffer.slice(8, 40));
++  check(copied.every((v, i) => v === (((i + 8) * 17 + 3) & 255)), 'ArrayBuffer.slice');
++  const sliced = bytes.slice(16, 48);
++  check(sliced.every((v, i) => v === (((i + 16) * 17 + 3) & 255)), 'Uint8Array.slice');
++
++  // Native-provided bytes and native verification of writes prevent paired
++  // incorrect read/write address calculations from cancelling each other.
++  const nativeUint32 = new Uint32Array(nativeTypedBuffer, 8, 2);
++  const nativeFloat64 = new Float64Array(nativeTypedBuffer, 24, 1);
++  const nativeBigInt64 = new BigInt64Array(nativeTypedBuffer, 40, 1);
++  check(nativeUint32[0] === 0x3e39342f, 'native Uint32 nonzero byteOffset');
++  check(nativeFloat64[0] === -123.5, 'native Float64 nonzero byteOffset');
++  check(nativeBigInt64[0] === -123456789012345n, 'native BigInt64 nonzero byteOffset');
++  nativeUint32[0] = 0x89abcdef;
++  nativeFloat64[0] = 1.25;
++  nativeBigInt64[0] = -0x1234567890abcdn;
++
++  const cases = [
++    ['Int8', -91], ['Uint8', 213], ['Int16', -12345], ['Uint16', 54321],
++    ['Int32', -123456789], ['Uint32', 3456789012], ['Float16', 1.25], ['Float32', 1.25],
++    ['Float64', -123.125], ['BigInt64', -123456789012345n],
++    ['BigUint64', 12345678901234567890n],
++  ];
++  for (const [kind, value] of cases) {
++    const dv = new DataView(new ArrayBuffer(64));
++    for (const littleEndian of [false, true]) {
++      dv[`set${kind}`](3, value, littleEndian);
++      check(dv[`get${kind}`](3, littleEndian) === value, `DataView ${kind}`);
++    }
++    let rejected = false;
++    try { dv[`get${kind}`](64); } catch (error) { rejected = error instanceof RangeError; }
++    check(rejected, `DataView bounds ${kind}`);
++  }
++
++  const constructors = [Int8Array, Uint8Array, Uint8ClampedArray, Int16Array,
++    Uint16Array, Int32Array, Uint32Array, Float16Array, Float32Array, Float64Array,
++    BigInt64Array, BigUint64Array];
++  for (const C of constructors) {
++    const big = C === BigInt64Array || C === BigUint64Array;
++    const value = n => big ? BigInt(n) : n;
++    const a = new C([1, 2, 3, 4].map(value));
++    a.set(a.subarray(0, 3), 1);
++    check([...a].every((v, i) => v === value([1, 1, 2, 3][i])), `overlap set ${C.name}`);
++    const b = a.slice();
++    b.copyWithin(0, 2);
++    check(b[0] === value(2) && b[1] === value(3), `copyWithin ${C.name}`);
++    const roundtrip = (arr, index, v) => { arr[index] = v; return arr[index]; };
++    %PrepareFunctionForOptimization(roundtrip);
++    for (let i = 0; i < 100; i++) check(roundtrip(a, i & 3, value(i & 7)) === value(i & 7), C.name);
++    %OptimizeFunctionOnNextCall(roundtrip);
++    check(roundtrip(a, 1, value(7)) === value(7), `optimized ${C.name}`);
++    // Pinned V8 runtime.h OptimizationStatus: kOptimized=1<<3, kTurboFanned=1<<5.
++    const status = %GetOptimizationStatus(roundtrip);
++    check((status & 8) !== 0 && (status & 32) !== 0, `TurboFan ${C.name}: ${status}`);
++    check(roundtrip(a, a.length, value(4)) === undefined, `typed bounds ${C.name}`);
++  }
++
++  const atomicTypes = [Int8Array, Uint8Array, Int16Array, Uint16Array,
++    Int32Array, Uint32Array, BigInt64Array, BigUint64Array];
++  for (const C of atomicTypes) {
++    const big = C === BigInt64Array || C === BigUint64Array;
++    const n = value => big ? BigInt(value) : value;
++    const a = new C(new SharedArrayBuffer(64));
++    Atomics.store(a, 1, n(12));
++    check(Atomics.add(a, 1, n(3)) === n(12), `Atomics.add ${C.name}`);
++    check(Atomics.compareExchange(a, 1, n(15), n(7)) === n(15), `Atomics.CAS ${C.name}`);
++    check(Atomics.load(a, 1) === n(7), `Atomics.load ${C.name}`);
++    check(Atomics.exchange(a, 1, n(9)) === n(7), `Atomics.exchange ${C.name}`);
++    check(Atomics.and(a, 1, n(3)) === n(9), `Atomics.and ${C.name}`);
++    check(Atomics.or(a, 1, n(4)) === n(1), `Atomics.or ${C.name}`);
++    check(Atomics.xor(a, 1, n(1)) === n(5), `Atomics.xor ${C.name}`);
++  }
++
++  // Pinned default sandbox allocator has an at-most8GiB PROT_NONE pool.
++  // This fixed-length request cannot fit and fails before committing data
++  // pages. Do not add RAB/maxByteLength options: those use another path.
++  let fixedPoolFailure = false;
++  try { new ArrayBuffer((8 * 1024 ** 3) + 1); }
++  catch (error) { fixedPoolFailure = error instanceof RangeError; }
++  check(fixedPoolFailure, 'fixed ArrayBuffer pool failure must be a RangeError');
++
++  const rab = new ArrayBuffer(16, { maxByteLength: 64 });
++  const tracking = new Uint8Array(rab);
++  tracking[0] = 42;
++  rab.resize(32);
++  check(tracking.length === 32 && tracking[0] === 42, 'RAB grow');
++  const fixed = new DataView(rab, 0, 16);
++  rab.resize(8);
++  let rejected = false;
++  try { fixed.getUint8(0); } catch (error) { rejected = error instanceof TypeError; }
++  check(rejected && tracking.length === 8, 'RAB shrink');
++  const gsab = new SharedArrayBuffer(16, { maxByteLength: 64 });
++  const sharedTracking = new Int32Array(gsab);
++  gsab.grow(32);
++  Atomics.store(sharedTracking, 7, 99);
++  check(sharedTracking.length === 8 && Atomics.load(sharedTracking, 7) === 99, 'GSAB grow');
++
++  const nativeRead = index => new DataView(nativeBuffer).getUint8(index);
++  %PrepareFunctionForOptimization(nativeRead);
++  for (let i = 0; i < 100; i++) check(nativeRead(i) === ((i * 17 + 3) & 255), 'native DataView warmup');
++  %OptimizeFunctionOnNextCall(nativeRead);
++  check(nativeRead(201) === ((201 * 17 + 3) & 255), 'native DataView optimized');
++  let nativeStatus = %GetOptimizationStatus(nativeRead);
++  check((nativeStatus & 8) !== 0 && (nativeStatus & 32) !== 0, 'DataView TurboFan');
++  check(nativeRead(203) === ((203 * 17 + 3) & 255), 'native DataView remains optimized');
++  nativeStatus = %GetOptimizationStatus(nativeRead);
++  check((nativeStatus & 8) !== 0 && (nativeStatus & 32) !== 0, 'DataView remains TurboFan');
++  return 'sandbox-array-roundtrip-ok';
++})();

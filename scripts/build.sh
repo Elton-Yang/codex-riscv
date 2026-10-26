@@ -5,36 +5,44 @@
 # libexpat1, libbz2-1.0 and normal GCC runtime libraries. No system writes occur.
 set -euo pipefail
 cd -- "$(dirname -- "$0")/.."
-mkdir -p logs toolchains
+project_root="$PWD"
+rust_version="$(python3 scripts/upstream.py get toolchain.rust)"
+target_triple="$(python3 scripts/upstream.py get toolchain.target)"
+source_commit="$(python3 scripts/upstream.py get codex.commit)"
+source_repository="$(python3 scripts/upstream.py get codex.repository)"
+mkdir -p logs toolchains work
 export RUSTUP_HOME="$PWD/toolchains/rustup" CARGO_HOME="$PWD/toolchains/cargo"
 if [[ ! -x "$CARGO_HOME/bin/rustup" ]]; then
   curl -fLsS https://sh.rustup.rs -o toolchains/rustup-init.sh
-  sh toolchains/rustup-init.sh -y --no-modify-path --profile minimal --default-toolchain 1.99.1
+  sh toolchains/rustup-init.sh -y --no-modify-path --profile minimal --default-toolchain "$rust_version"
 fi
 export PATH="$CARGO_HOME/bin:$PATH"
-rustup toolchain install 1.99.1 --profile minimal --component rustfmt --component clippy --component rust-src
-rustup target add --toolchain 1.99.1 riscv64gc-unknown-linux-gnu
+rustup toolchain install "$rust_version" --profile minimal --component rustfmt --component clippy --component rust-src
+rustup target add --toolchain "$rust_version" "$target_triple"
 command -v gpgv >/dev/null || { echo "Install trusted gpgv and debian-archive-keyring first." >&2; exit 1; }
 python3 scripts/fetch-debian.py
-if [[ ! -e src/.git ]]; then
-  git init src
-  git -C src remote add origin https://github.com/openai/codex.git
-  git -C src fetch --depth 1 origin 970111f6cb62cc02fe36a82ea7d71b37a2889c97
-  git -C src checkout --detach FETCH_HEAD
+if [[ ! -e work/upstream.git ]]; then
+  git init --bare work/upstream.git
+  git -C work/upstream.git remote add origin "$source_repository"
 fi
-[[ "$(git -C src rev-parse HEAD)" == 970111f6cb62cc02fe36a82ea7d71b37a2889c97 ]]
-if git -C src apply --check ../patches/0001-linux-seccomp-riscv64.patch; then
-  git -C src apply ../patches/0001-linux-seccomp-riscv64.patch
-else
-  git -C src apply --reverse --check ../patches/0001-linux-seccomp-riscv64.patch
+if ! git -C work/upstream.git cat-file -e "$source_commit^{commit}" 2>/dev/null; then
+  git -C work/upstream.git fetch --depth 1 origin "$source_commit"
 fi
+git -C work/upstream.git update-ref refs/heads/pinned "$source_commit"
+if [[ ! -e src ]]; then
+  python3 scripts/upstream.py prepare --component cli --codex-repo work/upstream.git --output work/cli
+  ln -s work/cli/src src
+fi
+python3 scripts/upstream.py verify-source --component cli --source "$(cd src && pwd -P)"
 source scripts/env.sh
 if ldd "$CROSS_ROOT/usr/bin/cmake" | grep -q "not found"; then
   ldd "$CROSS_ROOT/usr/bin/cmake" >&2; exit 1
 fi
 gpgv --keyring /usr/share/keyrings/debian-archive-keyring.gpg manifests/debian-trixie-InRelease
 cd src/codex-rs
-cargo build --locked -p codex-cli --bin codex --target riscv64gc-unknown-linux-gnu --profile dev-small 2>&1 | tee ../../logs/reproduce-build.log
-cd ../..
-"$CARGO_TARGET_RISCV64GC_UNKNOWN_LINUX_GNU_RUNNER" target/riscv64gc-unknown-linux-gnu/dev-small/codex --version
-"$CARGO_TARGET_RISCV64GC_UNKNOWN_LINUX_GNU_RUNNER" target/riscv64gc-unknown-linux-gnu/dev-small/codex --help
+profile_output="$(python3 "$project_root/scripts/upstream.py" build-args cli)"
+mapfile -t profile_args <<< "$profile_output"
+cargo build --locked -p codex-cli --bin codex "${profile_args[@]}" 2>&1 | tee "$project_root/logs/reproduce-build.log"
+cli_profile="$(python3 "$project_root/scripts/upstream.py" get profiles.cli.name)"
+"$CARGO_TARGET_RISCV64GC_UNKNOWN_LINUX_GNU_RUNNER" "$CARGO_TARGET_DIR/$target_triple/$cli_profile/codex" --version
+"$CARGO_TARGET_RISCV64GC_UNKNOWN_LINUX_GNU_RUNNER" "$CARGO_TARGET_DIR/$target_triple/$cli_profile/codex" --help

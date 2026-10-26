@@ -85,3 +85,7 @@ sh install-codex-riscv.sh uninstall
 [Code Mode 构建说明](docs/code-mode.md)记录已准备的源码/工具链布局和补丁；`scripts/build.sh` 仍用于兼容 Debian 13 x86_64 构建主机上的 CLI-only 构建。尚未承诺全新环境 Code Mode 自动搭建或位级一致重建。
 
 再次分发时保留 `LICENSE`、`NOTICE`、完整 `licenses/`、修改记录及相关依赖源码。Code Mode 许可证是对原清单的补充；已知上游归属限制及缺少最终链接映射的边界均有披露。
+
+## Upstream alignment / 上游对齐
+
+Current source, toolchain, profiles and patch identities are pinned in [upstream-lock.json](manifests/upstream-lock.json). See [source preparation and upgrade policy](docs/upstream-maintenance.md) for clean patch commits, repeatable replay, release discovery, state-compatibility tests and the first formal-release rehearsal. The validated `.3` baseline remains unchanged.

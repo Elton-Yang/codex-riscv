@@ -1,0 +1,190 @@
+{
+  "schema": 1,
+  "codex": {
+    "repository": "https://github.com/openai/codex.git",
+    "commit": "970111f6cb62cc02fe36a82ea7d71b37a2889c97",
+    "upstream_tag": null,
+    "package_version": "0.0.0",
+    "commit_date": "2026-10-23T18:50:54Z",
+    "note": "Pinned development commit, not a formal upstream release tag"
+  },
+  "toolchain": {
+    "rust": "1.99.1",
+    "target": "riscv64gc-unknown-linux-gnu",
+    "host": "x86_64-unknown-linux-gnu",
+    "cross_gcc": "14.2.0-19cross1",
+    "target_glibc": "2.41-11cross1"
+  },
+  "v8": {
+    "crate_version": "152.2.0",
+    "crate_url": "https://static.crates.io/crates/v8/v8-152.2.0.crate",
+    "crate_sha256": "a10fe1a92da5c32c7c7f838ce36c0ccfcfd5edf0865b58bdde820aa64cea9888",
+    "crate_prefix": "v8-152.2.0",
+    "repository": "https://github.com/denoland/v8",
+    "commit": "c4ca1eccb90c5464d826b7713dc27178a53b0cfe",
+    "version": "15.2.124.1",
+    "snapshot_basis": "Exact published crate bytes; synthetic Git base is not the native V8 repository commit",
+    "native_inputs_manifest": "licenses/code-mode/manifests/native-component-pins.json"
+  },
+  "additional_sources": {
+    "chromium_rust": {
+      "manifest": "manifests/chromium-rust-inputs.json",
+      "sha256": "6b8b039ac19ec2212065fbefff5a6db108f429f126c039853f2bc8b6ad4f4ff4"
+    },
+    "icu_data": {
+      "file": "vendor/v8/third_party/icu/common/icudtl.dat",
+      "destination": "third_party/icu/common/icudtl.dat",
+      "sha256": "9f48c7f9c7c94d516a14870707e910ab94d75ae640ff6842c4af53276cd26ebe",
+      "bytes": 10876560
+    }
+  },
+  "profiles": {
+    "cli": {
+      "name": "perf-cli",
+      "inherits": "dev-small",
+      "opt-level": 3,
+      "codegen-units": 16,
+      "lto": false,
+      "debug-assertions": true,
+      "overflow-checks": true,
+      "incremental": false
+    },
+    "host": {
+      "name": "dev-small"
+    },
+    "sandbox_tests": {
+      "name": "dev-small"
+    }
+  },
+  "patches": [
+    {
+      "id": "0001-codex-seccomp-riscv64",
+      "repository": "codex",
+      "components": [
+        "cli",
+        "code-mode"
+      ],
+      "file": "patches/upstream/0001-codex-seccomp-riscv64.patch",
+      "sha256": "152e06f73eb2554264e8037395f11ba088355b00d29a732f96dd885c7b12747b",
+      "subject": "Select RISC-V seccomp architecture",
+      "purpose": "runtime"
+    },
+    {
+      "id": "0002-codex-local-v8-source",
+      "repository": "codex",
+      "components": [
+        "code-mode"
+      ],
+      "file": "patches/upstream/0002-codex-local-v8-source.patch",
+      "sha256": "1ae70f949acae54a74d8824e999814131cab5a3d76af650f4587d7a7087b97ba",
+      "subject": "Use exact local V8 source without changing other lockfile versions",
+      "purpose": "build"
+    },
+    {
+      "id": "0003-codex-v8-fail-closed",
+      "repository": "codex",
+      "components": [
+        "code-mode"
+      ],
+      "file": "patches/upstream/0003-codex-v8-fail-closed.patch",
+      "sha256": "17ae0c2e701a189e444638a1bc4db238b2a5086bc5043e715d145ba60e164fd9",
+      "subject": "Require secure RISC-V V8 initialization",
+      "purpose": "runtime"
+    },
+    {
+      "id": "0004-codex-riscv-sandbox-tests",
+      "repository": "codex",
+      "components": [
+        "code-mode"
+      ],
+      "file": "patches/upstream/0004-codex-riscv-sandbox-tests.patch",
+      "sha256": "faedcb5ac2161a1ce80ed431f2efe67efc1ab5e586c43850b1130594d3f90b8c",
+      "subject": "Add separate RISC-V sandbox regression probes",
+      "purpose": "test"
+    },
+    {
+      "id": "0005-v8-proxy-download",
+      "repository": "v8",
+      "components": [
+        "code-mode"
+      ],
+      "file": "patches/upstream/0005-v8-proxy-download.patch",
+      "sha256": "5004e92ff6ab1581f0701ed0fa277ac5601c7b8851afddac5e2634e618c3f37c",
+      "subject": "Use standard proxy-aware V8 tool downloads",
+      "purpose": "build"
+    },
+    {
+      "id": "0006-v8-target-sandbox-layout",
+      "repository": "v8",
+      "components": [
+        "code-mode"
+      ],
+      "file": "patches/upstream/0006-v8-target-sandbox-layout.patch",
+      "sha256": "d002dfd8e565d67fb0d2e598351619dd75ba08db04533786d481b48aa5fab471",
+      "subject": "Align snapshot and native RISC-V sandbox layout",
+      "purpose": "runtime"
+    },
+    {
+      "id": "0007-v8-partitionalloc-sv39-hints",
+      "repository": "v8",
+      "components": [
+        "code-mode"
+      ],
+      "file": "patches/upstream/0007-v8-partitionalloc-sv39-hints.patch",
+      "sha256": "dd6e43dcb8f36ff5dc402de5452ba10373192cbe6acbbaaa8f989db620dbad95",
+      "subject": "Adapt PartitionAlloc advisory placement for Sv39",
+      "purpose": "runtime"
+    },
+    {
+      "id": "0008-v8-oilpan-aligned-reservation",
+      "repository": "v8",
+      "components": [
+        "code-mode"
+      ],
+      "file": "patches/upstream/0008-v8-oilpan-aligned-reservation.patch",
+      "sha256": "9f690c16fbfd13861573f6494c8ff25060761a65bd0d0561ff971bc85ee526db",
+      "subject": "Reserve full Oilpan cage without transient alignment slack",
+      "purpose": "runtime"
+    }
+  ],
+  "expected_sources": {
+    "cli": {
+      "codex-rs/Cargo.toml": "833b84d4bea462b2a71101a59f34fdb51175863957e94836edb2ac278e846fb0",
+      "codex-rs/Cargo.lock": "d661437f2dae702b0beb404df06ef60219845c5ce909138427ac4a3947b8cb2c",
+      "codex-rs/rust-toolchain.toml": "913d7e9d7adcd7abfeb0c4554c39a5a57c3cf84a694bc6a6aeae038a1f6ae33b",
+      "codex-rs/linux-sandbox/src/seccomp.rs": "f17cd27a06cb63e64115874188c30ce0000f1f97a683e31a493bd82ea0375f5b"
+    },
+    "code-mode": {
+      "codex-rs/Cargo.toml": "4bd616ca9e12203cace1f62abebfc9b0a4050bc050f726ad1fcf2a7f8deb182a",
+      "codex-rs/Cargo.lock": "d2603497af91c77bc766155e39b6e8fff8af9674cbcea121e293d4997aa62f4c",
+      "codex-rs/rust-toolchain.toml": "913d7e9d7adcd7abfeb0c4554c39a5a57c3cf84a694bc6a6aeae038a1f6ae33b",
+      "codex-rs/linux-sandbox/src/seccomp.rs": "f17cd27a06cb63e64115874188c30ce0000f1f97a683e31a493bd82ea0375f5b",
+      "codex-rs/code-mode-runtime/src/v8_init.rs": "c801953b6781c63590609153f285ae3569935f096209eaca71e92c715064a387",
+      "codex-rs/code-mode-runtime/tests/riscv_sandbox.rs": "b07509fe9b98e5ea86776392a1a85fbe9adf1d49b40d2a61835b9b8376c17a21",
+      "codex-rs/code-mode-runtime/tests/fixtures/riscv_sandbox_roundtrip.js": "fc81a5b76c6c7c4c13eb1c7bc7e66e289a593819f3310b0dbe83527b6043bb65"
+    },
+    "v8": {
+      "Cargo.toml": "3aea3bd11b63d6b7bccd4f728c50e6df277d960692b95d9cf85a3baa7c214493",
+      "build.rs": "47d307ac1df6338dd418d57e286f96b3cf9fcd324579b28d754c56302dab7623",
+      "tools/ninja_gn_binaries.py": "83afde40c4f4755c45bf2040bebd88b989bfa1d4be92e6a1fe6d608a927110e6",
+      "v8/include/v8-internal.h": "bda14afe1cb6f8a768a0ebdac4954ac2500575ac2fa551dfa1fe5c9118448aa4",
+      "third_party/partition_alloc/src/partition_alloc/address_space_randomization.h": "1e2159392b054a23ea1f0bba05ed776d4e5ebc2fb107dcbf4721aae925a925ff",
+      "v8/src/heap/cppgc-internal/caged-heap.cc": "31fa459afccc24d1d6a3dce9aff447be39d7c0ca8ee6cd6279c711ca9019f661"
+    }
+  },
+  "acceptance": [
+    "CLI version/help, TUI input and helper dispatch",
+    "Code Mode protocol and real tools",
+    "Sv39 positive and fail-closed negative sandbox checks when host changes",
+    "Native workspace-write/read-only denial checks",
+    "Persistent and interactive resume across versions",
+    "Upgrade/rollback, configuration and session-store schema compatibility",
+    "Attribution, source/binary identity and recoverable backup",
+    "Native startup and resume responsiveness comparison"
+  ],
+  "expected_git_trees": {
+    "cli": "44153fb2d807b6e4d4c18ef31d1e89ad6e4fba54",
+    "code-mode": "681dc15e7fdb7fbdce4e6cbd1007a2d30f7a6b9b",
+    "v8": "03a034d45f311af50b389c93f20ea20d24603206"
+  }
+}
