@@ -13,7 +13,7 @@ curl --fail --location --proto '=https' --proto-redir '=https' --tlsv1.2 \
   https://raw.githubusercontent.com/Elton-Yang/codex-riscv/main/install.sh \
   -o install-codex-riscv.sh
 less install-codex-riscv.sh
-sh install-codex-riscv.sh upgrade
+sh install-codex-riscv.sh upgrade --command codex
 sh install-codex-riscv.sh status
 ```
 
@@ -30,11 +30,11 @@ sh install-codex-riscv.sh uninstall
 
 ## 布局与配置保护
 
-默认程序位于 `~/.local/share/codex-riscv/versions/<tag>/`；`.2` 内含 `bin/codex`、相邻 `bin/codex-code-mode-host`、许可证、文档及来源材料。`current` 和 `previous` 指向当前及上一成功版本。`~/.local/bin/codex-riscv` 指向托管 Python 启动器。
+默认程序位于 `~/.local/share/codex-riscv/versions/<tag>/`；`.2` 内含 `bin/codex`、相邻 `bin/codex-code-mode-host`、许可证、文档及来源材料。`current` 和 `previous` 指向当前及上一成功版本。`~/.local/bin/codex` 指向托管 Python 启动器。
 
 启动器对普通调用自动加 `--no-daemon`，内部 helper 保留原分派；CLI 自动发现相邻 host。沙箱保持启用。安装过程不登录、不调用模型，不修改 `~/.codex`、登录信息、模型设置、shell 配置或项目。
 
-`--prefix`、`--bin-dir` 必须是分离的绝对专用目录，不能放入 Codex 配置目录。默认命令为 `codex-riscv`；首次安装可选 `--command codex`，但不能覆盖其他命令。旧安装沿用原命令名和命令目录，自定义 prefix 在后续管理时仍需传入。安装器不编辑 PATH，必要时自行加入 `~/.local/bin`。
+`--prefix`、`--bin-dir` 必须是分离的绝对专用目录，不能放入 Codex 配置目录。默认命令为 `codex`。旧安装普通 `upgrade` 沿用原命令名；`upgrade --command codex` 将托管 `codex-riscv` 原位迁移，若目标位置或 PATH 已有其他 `codex` 则拒绝。新入口和元数据就绪后才移除旧托管入口，可恢复的改名失败会恢复旧命令元数据，保留版本历史、启动器和用户配置。仍支持显式 `--command codex-riscv`；命令目录不能原位更改，自定义 prefix 在后续管理时仍需传入。安装器不编辑 PATH，必要时自行加入 `~/.local/bin`。
 
 ## 激活前检查
 

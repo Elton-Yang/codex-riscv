@@ -255,6 +255,45 @@ def check_command(command_path, prefix):
         fail("Command already exists on PATH; not shadowed: " + found)
 
 
+def migrate_command(prefix, old_path, new_path):
+    """Rename only a verified managed entry; preserve the old entry on failure."""
+    check_launcher(prefix)
+    if not command_owned(old_path, prefix):
+        fail("Old command is missing or modified; preserved: " + str(old_path))
+    check_command(new_path, prefix)
+    original = managed_state(prefix)
+    old_identity = old_path.lstat()
+    updated = dict(original, command=new_path.name)
+    temporary = prefix / (".install-state." + uuid.uuid4().hex)
+    created = False
+    state_changed = False
+    try:
+        write_json(temporary, updated)
+        # Exclusive creation prevents overwriting a concurrent foreign command.
+        new_path.symlink_to(str(prefix / LAUNCHER))
+        created = True
+        current_identity = old_path.lstat()
+        if ((current_identity.st_dev, current_identity.st_ino, current_identity.st_mtime_ns,
+             current_identity.st_ctime_ns) !=
+                (old_identity.st_dev, old_identity.st_ino, old_identity.st_mtime_ns,
+                 old_identity.st_ctime_ns) or not command_owned(old_path, prefix)):
+            fail("Old command changed during migration; preserved: " + str(old_path))
+        os.replace(temporary, prefix / ROOT_MARKER)
+        state_changed = True
+        old_path.unlink()
+    except BaseException:
+        if state_changed:
+            write_json(temporary, original)
+            os.replace(temporary, prefix / ROOT_MARKER)
+        if created and new_path.is_symlink() and os.readlink(new_path) == str(prefix / LAUNCHER):
+            new_path.unlink()
+        raise
+    finally:
+        if exists(temporary):
+            temporary.unlink()
+    print("Command migrated: " + str(old_path) + " -> " + str(new_path))
+
+
 def output(argv):
     return subprocess.check_output(argv, text=True, stderr=subprocess.STDOUT).strip()
 
@@ -428,7 +467,7 @@ def main():
     parser.add_argument("--channel", choices=("experimental",), help="curated experimental channel; never GitHub latest")
     parser.add_argument("--prefix", default=str(Path.home() / ".local/share/codex-riscv"), help="absolute managed data directory")
     parser.add_argument("--bin-dir", help="absolute command directory (default: ~/.local/bin)")
-    parser.add_argument("--command", choices=("codex-riscv", "codex"), help="command name; default codex-riscv, never overwrite another install")
+    parser.add_argument("--command", choices=("codex", "codex-riscv"), help="command name; default codex for new installs, existing name retained unless explicitly changed during install/upgrade")
     args = parser.parse_args()
     if args.action not in ("install", "upgrade") and (args.version or args.channel):
         parser.error("--version/--channel apply only to install or upgrade")
@@ -454,12 +493,16 @@ def main():
     if args.action not in ("install", "upgrade") and not state:
         fail("No managed installation at " + str(prefix))
     bin_dir = absolute_path(args.bin_dir or (state["bin_dir"] if state else str(home / ".local/bin")), "--bin-dir")
-    command = args.command or (state["command"] if state else "codex-riscv")
+    command = args.command or (state["command"] if state else "codex")
     if (within(bin_dir, prefix) or within(prefix, bin_dir) or within(bin_dir, default_codex_home) or within(bin_dir, codex_home)):
         fail("Install and command directories must be separate, outside Codex configuration")
-    if state and (state["bin_dir"] != str(bin_dir) or state["command"] != command):
-        fail("This installation has a different command/bin directory. Uninstall it before changing those options.")
+    if state and state["bin_dir"] != str(bin_dir):
+        fail("This installation has a different bin directory. Uninstall it before changing that option.")
+    rename_command = bool(state and state["command"] != command)
+    if rename_command and args.action not in ("install", "upgrade"):
+        fail("Command renaming applies only to install or upgrade")
     command_path = bin_dir / command
+    old_command_path = bin_dir / state["command"] if rename_command else command_path
     if args.action == "status":
         print("Current: " + str(pointer(prefix, "current") or "none"))
         print("Previous: " + str(pointer(prefix, "previous") or "none"))
@@ -470,6 +513,8 @@ def main():
     if args.action in ("install", "upgrade", "rollback"):
         check_platform()
         check_command(command_path, prefix)
+        if rename_command and not command_owned(old_command_path, prefix):
+            fail("Old command is missing or modified; preserved: " + str(old_command_path))
     prefix.mkdir(parents=True, exist_ok=True, mode=0o700)
     lock_path = prefix / ".lock"
     lock_fd = os.open(lock_path, os.O_CREAT | os.O_RDWR | os.O_NOFOLLOW, 0o600)
@@ -481,7 +526,7 @@ def main():
         # Recheck after acquiring the lock, including first-install races.
         if exists(prefix / ROOT_MARKER):
             state = managed_state(prefix)
-            if state["bin_dir"] != str(bin_dir) or state["command"] != command:
+            if state["bin_dir"] != str(bin_dir) or state["command"] != old_command_path.name:
                 fail("Installation configuration changed; retry")
         elif set(p.name for p in prefix.iterdir()) - {".lock"}:
             fail("Refusing unmanaged installation prefix")
@@ -492,7 +537,9 @@ def main():
             fail("Unsafe versions directory")
         versions.mkdir(exist_ok=True)
         if args.action in ("install", "upgrade"):
-            install(prefix, command_path, tag)
+            install(prefix, old_command_path, tag)
+            if rename_command:
+                migrate_command(prefix, old_command_path, command_path)
         elif args.action == "rollback":
             current, previous = pointer(prefix, "current"), pointer(prefix, "previous")
             if not current or not previous or current == previous:

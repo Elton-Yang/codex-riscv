@@ -137,15 +137,20 @@ def main():
         installer.write_text(modified)
         env["SMOKE_TARGET_RUNNER"] = str(runner)
         prefix = home / ".local/share/codex-riscv"
-        command = home / ".local/bin/codex-riscv"
+        command = home / ".local/bin/codex"
         print("EMULATION HARNESS: mocked platform gates; " +
               ("local archive transport" if args.archive else "real HTTPS download") +
               "; real digest, extraction, target libraries and binary.", flush=True)
         if args.previous_archive:
-            run(["sh", installer, "install", "--version", "v0.1.0-experimental.1"], env)
+            run(["sh", installer, "install", "--version", "v0.1.0-experimental.1",
+                 "--command", "codex-riscv"], env)
             (home / ".codex").mkdir(exist_ok=True)
             (home / ".codex/config.toml").write_text('model = "fixture-preserved-model"\n')
-        run(["sh", installer], env)
+        if args.previous_archive:
+            run(["sh", installer, "upgrade", "--command", "codex"], env)
+            assert not (home / ".local/bin/codex-riscv").is_symlink()
+        else:
+            run(["sh", installer], env)
         run(["sh", installer, "status"], env)
         if args.previous_archive:
             run(["sh", installer, "rollback"], env)
@@ -221,7 +226,7 @@ def main():
         assert sentinel.is_file()
         assert not prefix.exists()
         assert not command.is_symlink()
-        print("PASS: real-asset install/status/legacy migration/QEMU bare onboarding/uninstall; preserved isolated .codex sentinel.")
+        print("PASS: real-asset install/status/command-name migration and rollback when requested/legacy migration/QEMU bare onboarding/uninstall; preserved isolated .codex sentinel.")
         print("NOT TESTED: native installer/platform detection, native kernel sandbox, authentication, model or tool calls.")
 
 

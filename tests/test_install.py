@@ -86,7 +86,7 @@ class InstallerTests(unittest.TestCase):
         self.home.mkdir()
         self.prefix = self.home / ".local/share/codex-riscv"
         self.bin = self.home / ".local/bin"
-        self.command = self.bin / "codex-riscv"
+        self.command = self.bin / "codex"
         self.archives = self.work / "archives"
         self.archives.mkdir()
         self.mocks = self.work / "mock-bin"
@@ -316,7 +316,7 @@ print(json.dumps(sys.argv[1:]))
         self.run_installer("upgrade", installer=faulty, success=False)
         self.assertEqual(os.readlink(self.command), str(self.prefix / "current/bin/codex"))
         self.assertEqual((self.prefix / "current").resolve(), self.prefix / "versions" / TAG)
-        self.assertFalse(any(self.bin.glob(".codex-riscv.*")))
+        self.assertFalse(any(self.bin.glob(".codex.*")))
         self.run_installer("upgrade")
         self.assert_current(TAG)
 
@@ -459,9 +459,9 @@ print(json.dumps(sys.argv[1:]))
         prefix = self.work / "custom location" / "codex-riscv"
         bin_dir = self.work / "custom commands"
         self.run_installer("--prefix", str(prefix), "--bin-dir", str(bin_dir))
-        self.assertEqual((bin_dir / "codex-riscv").resolve(), prefix / "launcher")
+        self.assertEqual((bin_dir / "codex").resolve(), prefix / "launcher")
         self.run_installer("uninstall", "--prefix", str(prefix))
-        self.assertFalse((bin_dir / "codex-riscv").is_symlink())
+        self.assertFalse((bin_dir / "codex").is_symlink())
 
     def test_regular_command_collision(self):
         self.bin.mkdir(parents=True)
@@ -475,12 +475,12 @@ print(json.dumps(sys.argv[1:]))
         self.run_installer(success=False)
         self.assertEqual(os.readlink(self.command), str(self.work / "missing"))
 
-    def test_explicit_codex_command(self):
-        self.run_installer("--command", "codex")
-        self.assertTrue((self.bin / "codex").is_symlink())
+    def test_explicit_legacy_command(self):
+        self.run_installer("--command", "codex-riscv")
+        self.assertTrue((self.bin / "codex-riscv").is_symlink())
         self.assertFalse(self.command.exists())
         self.run_installer("uninstall")
-        self.assertFalse((self.bin / "codex").is_symlink())
+        self.assertFalse((self.bin / "codex-riscv").is_symlink())
 
     def test_explicit_codex_collision(self):
         self.bin.mkdir(parents=True)
@@ -496,6 +496,99 @@ print(json.dumps(sys.argv[1:]))
         self.run_installer("--command", "codex", success=False)
         self.assertFalse((self.bin / "codex").exists())
         self.assertTrue(codex.is_file())
+
+    def make_old_command_install(self):
+        self.run_installer("--command", "codex-riscv")
+        return self.bin / "codex-riscv"
+
+    def test_old_command_retained_without_explicit_rename(self):
+        old = self.make_old_command_install()
+        self.run_installer("upgrade")
+        self.assertTrue(old.is_symlink())
+        self.assertFalse(self.command.exists())
+        self.assertIn(str(old), self.run_installer("status").stdout)
+
+    def test_command_rename_preserves_history_configuration_and_launcher(self):
+        old = self.make_old_command_install()
+        newer = self.make_installer(NEXT_TAG)
+        self.run_installer("upgrade", installer=newer)
+        config = self.home / ".codex"
+        config.mkdir()
+        (config / "config.toml").write_text('model = "preserved"\n')
+        project = self.home / "program.py"
+        project.write_text('print(42)\n')
+        launcher = (self.prefix / "launcher").read_bytes()
+        self.run_installer("upgrade", "--command", "codex", installer=newer)
+        self.assert_current(NEXT_TAG)
+        self.assertFalse(old.is_symlink())
+        self.assertEqual((self.prefix / "launcher").read_bytes(), launcher)
+        self.assertEqual((self.prefix / "previous").resolve().name, TAG)
+        self.assertEqual((config / "config.toml").read_text(), 'model = "preserved"\n')
+        self.assertEqual(project.read_text(), 'print(42)\n')
+        self.run_installer("rollback", installer=newer)
+        self.assert_current(TAG)
+        self.run_installer("uninstall", installer=newer)
+        self.assertFalse(self.command.is_symlink())
+        self.assertFalse(old.is_symlink())
+        self.assertTrue(project.exists())
+
+    def test_command_rename_refuses_foreign_target_and_path_collision(self):
+        old = self.make_old_command_install()
+        for target in (self.command, self.mocks / "codex"):
+            with self.subTest(target=target):
+                target.write_text('#!/bin/sh\necho foreign\n')
+                target.chmod(0o755)
+                before = (self.prefix / ".codex-riscv-install").read_bytes()
+                self.run_installer("upgrade", "--command", "codex", success=False)
+                self.assertEqual(target.read_text(), '#!/bin/sh\necho foreign\n')
+                self.assertTrue(old.is_symlink())
+                self.assertEqual((self.prefix / ".codex-riscv-install").read_bytes(), before)
+                target.unlink()
+
+    def test_command_rename_refuses_modified_old_entry(self):
+        old = self.make_old_command_install()
+        old.unlink()
+        old.write_text('foreign old command\n')
+        self.run_installer("upgrade", "--command", "codex", success=False)
+        self.assertEqual(old.read_text(), 'foreign old command\n')
+        self.assertFalse(self.command.exists())
+
+    def test_failed_command_rename_restores_old_entry_and_state(self):
+        old = self.make_old_command_install()
+        before = json.loads((self.prefix / ".codex-riscv-install").read_text())
+        for needle, replacement in (
+            ('        os.replace(temporary, prefix / ROOT_MARKER)\n        state_changed = True',
+             '        raise OSError("simulated metadata failure")\n        state_changed = True'),
+            ('        old_path.unlink()', '        raise OSError("simulated unlink failure")'),
+        ):
+            with self.subTest(failure=needle):
+                source = self.installer.read_text()
+                self.assertIn(needle, source)
+                faulty = self.work / "rename-failure.sh"
+                faulty.write_text(source.replace(needle, replacement))
+                self.run_installer("upgrade", "--command", "codex", installer=faulty, success=False)
+                self.assertTrue(old.is_symlink())
+                self.assertFalse(self.command.is_symlink())
+                self.assertEqual(json.loads((self.prefix / ".codex-riscv-install").read_text()), before)
+                self.assertFalse(list(self.prefix.glob('.install-state.*')))
+
+    def test_command_rename_creation_race_preserves_foreign_entry(self):
+        old = self.make_old_command_install()
+        source = self.installer.read_text()
+        needle = '        new_path.symlink_to(str(prefix / LAUNCHER))'
+        self.assertIn(needle, source)
+        faulty = self.work / "rename-race.sh"
+        faulty.write_text(source.replace(needle, '        new_path.write_text("concurrent command")\n' + needle))
+        self.run_installer("upgrade", "--command", "codex", installer=faulty, success=False)
+        self.assertEqual(self.command.read_text(), "concurrent command")
+        self.assertTrue(old.is_symlink())
+        self.assertIn(str(old), self.run_installer("status").stdout)
+
+    def test_command_rename_only_allowed_on_install_upgrade(self):
+        old = self.make_old_command_install()
+        for action in ('status', 'rollback', 'uninstall'):
+            self.run_installer(action, '--command', 'codex', success=False)
+            self.assertTrue(old.is_symlink())
 
     def test_checksum_failure_has_no_active_install(self):
         wrong = self.make_installer(TAG, checksum="0" * 64)

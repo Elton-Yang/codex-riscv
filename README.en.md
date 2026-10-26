@@ -24,10 +24,10 @@ curl --fail --location --proto '=https' --proto-redir '=https' --tlsv1.2 \
   https://raw.githubusercontent.com/Elton-Yang/codex-riscv/main/install.sh \
   -o install-codex-riscv.sh
 less install-codex-riscv.sh
-sh install-codex-riscv.sh upgrade
+sh install-codex-riscv.sh upgrade --command codex
 export PATH="$HOME/.local/bin:$PATH"
 sh install-codex-riscv.sh status
-codex-riscv --version
+codex --version
 ```
 
 `upgrade` also installs on a fresh system. It checks a pinned archive SHA256, executable permissions and both binaries' dynamic dependencies before switching `current`. The launcher keeps `--no-daemon`; no sandbox is disabled. Existing login information, model settings, `~/.codex`, shell files and projects are preserved. Existing custom prefixes require the original `--prefix` option. Re-download the script for a new release: old scripts do not query GitHub `latest`.
@@ -37,7 +37,7 @@ Start Code Mode in a disposable project:
 ```sh
 mkdir -p "$HOME/codex-riscv-smoke"
 cd "$HOME/codex-riscv-smoke"
-codex-riscv -c features.code_mode_only=true
+codex -c features.code_mode_only=true
 ```
 
 Ask it to create a small Python file and execute it. This enables Code Mode for this invocation only; existing authentication and model selection apply. The CLI finds `bin/codex-code-mode-host` beside its actual executable automatically. The user has reported native program creation and `/resume` followed by editing with `gpt-5.6-luna`; see [native validation](docs/native-validation-v0.1.0-experimental.2.md). Retain errors rather than disable sandboxing.
@@ -50,7 +50,7 @@ sh install-codex-riscv.sh install --version v0.1.0-experimental.1
 sh install-codex-riscv.sh uninstall
 ```
 
-Rollback switches program versions and does not undo edits made by Codex. Uninstall preserves settings and projects. The default command is `codex-riscv`; `--command codex` is available for a new install if it does not collide with another installation. See [installer details](docs/installer.en.md).
+Rollback switches program versions and does not undo edits made by Codex. Uninstall preserves settings and projects. The default command is `codex`. Existing `codex-riscv` installations migrate in place with `upgrade --command codex`; plain `upgrade` retains their saved command. Foreign `codex` commands are never overwritten or shadowed. `--command codex-riscv` remains available explicitly. See [installer details](docs/installer.en.md).
 
 ## Validation
 

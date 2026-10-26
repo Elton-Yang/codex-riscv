@@ -5,7 +5,7 @@ The `.2` package includes `bin/codex` and `bin/codex-code-mode-host`. The CLI re
 Code Mode host support is enabled by default in this pinned CLI, while the Code Mode-only workflow is opt-in:
 
 ```sh
-codex-riscv -c features.code_mode_only=true
+codex -c features.code_mode_only=true
 ```
 
 This invocation does not rewrite existing settings. In a new disposable directory, ask Codex to create a small Python file and execute it. Authentication and model choice remain your existing configuration. Report installation status, kernel/bubblewrap versions and errors if a failure occurs; do not include login files or tokens.

@@ -35,10 +35,10 @@ The user reported successful program creation, exit followed by `/resume`, and s
 Re-download `install.sh` from the existing GitHub main URL, review it, then:
 
 ```sh
-sh install-codex-riscv.sh upgrade
+sh install-codex-riscv.sh upgrade --command codex
 sh install-codex-riscv.sh status
-codex-riscv --version
-codex-riscv -c features.code_mode_only=true
+codex --version
+codex -c features.code_mode_only=true
 ```
 
 The installer preserves `~/.codex`, login information, model settings, shell files and projects. No persistent feature/config changes are made. Use a disposable project for the first Code Mode task. `sh install-codex-riscv.sh rollback` switches back to the previous managed program version; it does not undo changes made by Codex to configuration or project files.
@@ -46,3 +46,7 @@ The installer preserves `~/.codex`, login information, model settings, shell fil
 新版仍由原安装地址升级，无需卸载；默认 standalone 启动。首次验证建议使用空测试项目，通过 `-c features.code_mode_only=true` 临时启用 Code Mode。若异常请保留终端错误，再使用安装器回滚；不要关闭沙箱来绕过失败。
 
 Native sandbox and rollback instructions / 实机沙箱与回滚步骤: [check guide](native-sandbox-check.md).
+
+## Installer command-name update
+
+The current installer defaults to `codex`; existing managed `codex-riscv` installations can migrate with `upgrade --command codex` without uninstalling. Archive bytes and pinned digests remain unchanged. See [command-name migration](command-name-codex.md). The native results above used the historical `codex-riscv` entry; native migration of the new entry is not yet confirmed.

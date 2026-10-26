@@ -2,6 +2,8 @@
 
 先退出所有 Codex 会话。以下使用普通用户，不加 sudo。沙箱脚本使用全新的临时 HOME/CODEX_HOME，不登录、不调用模型；只在当前用户主目录下创建独立测试目录，并保留结果。
 
+当前默认入口为 `codex`；旧安装先按[命令迁移说明](command-name-codex.md)执行 `upgrade --command codex`。若暂时保留旧入口，可用 `python3 native_sandbox.py --codex codex-riscv`。下方用户实测记录产生时使用的是旧入口。
+
 ## 1. 记录环境
 
 ```sh
@@ -42,10 +44,10 @@ sh install-codex-riscv.sh status
 ```sh
 sh install-codex-riscv.sh rollback
 sh install-codex-riscv.sh status
-codex-riscv --version
+codex --version
 sh install-codex-riscv.sh upgrade
 sh install-codex-riscv.sh status
-codex-riscv -c features.code_mode_only=true
+codex -c features.code_mode_only=true
 ```
 
 预期状态依次为 `.2` → `.1` → `.2`。最后在 `.2` 中 `/resume` 恢复此前测试会话，检查所用模型和程序仍在，再执行一次小修改/运行。回滚期间仅检查版本，不需要在 `.1` 中恢复 `.2` 的会话。

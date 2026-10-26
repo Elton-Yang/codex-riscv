@@ -24,10 +24,10 @@ curl --fail --location --proto '=https' --proto-redir '=https' --tlsv1.2 \
   https://raw.githubusercontent.com/Elton-Yang/codex-riscv/main/install.sh \
   -o install-codex-riscv.sh
 less install-codex-riscv.sh
-sh install-codex-riscv.sh upgrade
+sh install-codex-riscv.sh upgrade --command codex
 export PATH="$HOME/.local/bin:$PATH"
 sh install-codex-riscv.sh status
-codex-riscv --version
+codex --version
 ```
 
 `upgrade` 也支持首次安装。安装器核对固定 SHA256、两个程序的执行权限与动态库后再切换版本；启动器仍自动加入 `--no-daemon`，沙箱保持启用。保留登录信息、模型设置、`~/.codex`、shell 配置与项目文件。自定义安装目录需继续传入原 `--prefix`。旧脚本不会自动查询 GitHub `latest`，发布新版后需要重新下载。
@@ -37,7 +37,7 @@ codex-riscv --version
 ```sh
 mkdir -p "$HOME/codex-riscv-smoke"
 cd "$HOME/codex-riscv-smoke"
-codex-riscv -c features.code_mode_only=true
+codex -c features.code_mode_only=true
 ```
 
 让模型创建一个小 Python 文件并执行。该选项只对本次启动启用 Code Mode，不写入配置；沿用现有认证与模型选择。CLI 自动寻找同目录的 host。用户已报告在开发板上使用 `gpt-5.6-luna` 创建程序、退出后 `/resume` 并继续修改程序成功，见[实机验证记录](docs/native-validation-v0.1.0-experimental.2.md)。出现错误时保留日志，不要关闭沙箱来绕过。
@@ -50,7 +50,7 @@ sh install-codex-riscv.sh install --version v0.1.0-experimental.1
 sh install-codex-riscv.sh uninstall
 ```
 
-回滚只切换程序，不撤销 Codex 对文件或配置的修改；卸载保留设置和项目。默认命令为 `codex-riscv`；首次安装可在无冲突时选用 `--command codex`。详见[安装器说明](docs/installer.md)。
+回滚只切换程序，不撤销 Codex 对文件或配置的修改；卸载保留设置和项目。默认命令为 `codex`；已有 `codex-riscv` 安装通过 `upgrade --command codex` 原位迁移，普通 `upgrade` 沿用已保存的命令名。同名外来命令不会被覆盖或遮蔽，仍可显式选择 `--command codex-riscv`。详见[安装器说明](docs/installer.md)。
 
 ## 当前验证
 

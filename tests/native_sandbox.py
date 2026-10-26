@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Account-free native sandbox probes in a fresh directory under the user's HOME.
 
-Usage: python3 tests/native_sandbox.py --codex /absolute/path/to/codex-riscv
+Usage: python3 tests/native_sandbox.py --codex /absolute/path/to/codex
 Keeps the test directory and JSON results for inspection. Never reads credentials.
 """
 import argparse
@@ -49,7 +49,7 @@ raise SystemExit(0 if all(checks.values()) else 1)
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--codex', default='codex-riscv')
+    parser.add_argument('--codex', default='codex')
     args = parser.parse_args()
     if os.geteuid() == 0:
         parser.error('Run as your ordinary user, without sudo')

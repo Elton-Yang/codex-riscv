@@ -13,7 +13,7 @@ curl --fail --location --proto '=https' --proto-redir '=https' --tlsv1.2 \
   https://raw.githubusercontent.com/Elton-Yang/codex-riscv/main/install.sh \
   -o install-codex-riscv.sh
 less install-codex-riscv.sh
-sh install-codex-riscv.sh upgrade
+sh install-codex-riscv.sh upgrade --command codex
 sh install-codex-riscv.sh status
 ```
 
@@ -40,12 +40,12 @@ Rollback toggles the previous successful version; same-version reinstall does no
 ├── launcher
 ├── current -> versions/v0.1.0-experimental.2
 └── previous -> versions/<previous-successful-tag>
-~/.local/bin/codex-riscv -> ~/.local/share/codex-riscv/launcher
+~/.local/bin/codex -> ~/.local/share/codex-riscv/launcher
 ```
 
 The launcher adds `--no-daemon` to ordinary calls and preserves internal helper dispatch. CLI discovers the host adjacent to its actual executable. This does not disable sandboxing. Installation does not log in, call a model, modify `~/.codex`, change model settings, alter shell files or touch projects.
 
-`--prefix` and `--bin-dir` must be separate absolute dedicated paths outside Codex configuration; default command is `codex-riscv`. `--command codex` can be chosen for first installation if it does not collide with another command. Existing installations retain their command/bin directory; custom prefixes must be supplied again for later management. The installer never edits PATH; add `~/.local/bin` yourself if needed.
+`--prefix` and `--bin-dir` must be separate absolute dedicated paths outside Codex configuration; the default command is `codex`. Existing installations retain their saved command on plain `upgrade`; `upgrade --command codex` migrates a managed `codex-riscv` entry in place. A foreign target or another `codex` on PATH prevents migration. The old managed entry is removed only after the new entry and metadata are ready, and recoverable rename failures restore the old command metadata. Existing version history, launcher and user settings are retained. An explicit `--command codex-riscv` is still supported. The bin directory cannot be changed in place; custom prefixes must be supplied again for later management. The installer never edits PATH; add `~/.local/bin` yourself if needed.
 
 ## Activation checks and limits
 
