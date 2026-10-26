@@ -1,6 +1,6 @@
 # Code Mode on RISC-V
 
-The `.2` package includes `bin/codex` and `bin/codex-code-mode-host`. The CLI resolves the host beside its actual executable; no separate host command in PATH or runtime download is needed. The user launcher continues to supply `--no-daemon`.
+The `.2` and `.3` packages include `bin/codex` and `bin/codex-code-mode-host`. The CLI resolves the host beside its actual executable; no separate host command in PATH or runtime download is needed. The user launcher continues to supply `--no-daemon`.
 
 Code Mode host support is enabled by default in this pinned CLI, while the Code Mode-only workflow is opt-in:
 
@@ -23,3 +23,5 @@ No clean-room run of toolchain/source setup or bit-identical rebuild is claimed.
 Full-system Sv39 simulation passed with default ASLR and restricted rv64gc-oriented CPU settings. The user subsequently reported native program creation and exit → `/resume` → editing with `gpt-5.6-luna`; the later terminal transcript confirms native sandbox probes and rollback/re-upgrade with preserved model/program and correct subsequent execution. See [native validation](native-validation-v0.1.0-experimental.2.md) for the measured scope. The first unmodified candidate failed Oilpan reservation and is excluded from the release; the final artifact identity is recorded in `manifests/release-v0.1.0-experimental.2.json`.
 
 V8 cage 32 GiB, full reservation 160 GiB, front/back guards 64 GiB each; low-Smi protection and mandatory refusal remain. Oilpan and PartitionAlloc placement adaptations preserve their sizes and checks, but their entropy and exploit resistance have not been certified. Complete TUI coverage, long-term stability, other boards/kernels, realtime runtime and explicit daemon/agents/remote-server support remain unvalidated.
+
+`.3` changes only the CLI compiler profile; it reuses `.2` host bytes. See [performance candidate](release-notes-v0.1.0-experimental.3.md).

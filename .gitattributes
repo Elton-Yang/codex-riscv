@@ -6,3 +6,6 @@ docs/code-mode-evidence/** -text -whitespace
 patches/code-mode/*.patch -whitespace
 licenses/code-mode/** -text -whitespace
 tests/code-mode/**/*.log -text -whitespace
+
+# Preserve performance validation console bytes.
+docs/performance-evidence/** -text -whitespace

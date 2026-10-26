@@ -4,7 +4,7 @@
 
 Unofficial experimental RISC-V Linux adaptation of OpenAI Codex CLI. Independent of OpenAI; no endorsement or official upstream RISC-V support is implied.
 
-The current experimental release is **`v0.1.0-experimental.2`**, for Debian 13 / riscv64. It adds a sandbox-enabled Code Mode host alongside the unchanged `.1` CLI. The upstream development version still prints `codex-cli 0.0.0`.
+The current experimental release is **`v0.1.0-experimental.3`**, for Debian 13 / riscv64. It enables `opt-level=3` for the CLI and reuses the `.2` Code Mode host. Native startup/resume speedup is unmeasured; faster operation is not guaranteed. The upstream development version still prints `codex-cli 0.0.0`.
 
 ## Install or upgrade
 
@@ -15,7 +15,7 @@ sudo apt update
 sudo apt install ca-certificates curl python3 libc6 libgcc-s1 libssl3t64 bubblewrap
 ```
 
-Requires Linux riscv64 and glibc ≥ 2.39. The two executables together occupy about 478 MB; allow roughly 1.5 GB free for download/staging and keep space for the previous installed version. No Rust, Node.js or compiler is needed to run the package.
+Requires Linux riscv64 and glibc ≥ 2.39. The two executables together occupy about 509 MB; allow roughly 1.5 GB free for download/staging and keep space for the previous installed version. No Rust, Node.js or compiler is needed to run the package.
 
 Download and inspect the existing installer URL, then upgrade in place:
 
@@ -52,7 +52,11 @@ sh install-codex-riscv.sh uninstall
 
 Rollback switches program versions and does not undo edits made by Codex. Uninstall preserves settings and projects. The default command is `codex`. Existing `codex-riscv` installations migrate in place with `upgrade --command codex`; plain `upgrade` retains their saved command. Foreign `codex` commands are never overwritten or shadowed. `--command codex-riscv` remains available explicitly. See [installer details](docs/installer.en.md).
 
-## Validation
+## `.3` optimized candidate
+
+Same CLI source/dependencies, retained debug assertions, overflow checks and security mechanisms. CLI size increases from about 315 MB to 345 MB. Full-system Sv39 tool integration, persistent resume and kernel-policy probes passed; simulation is not native performance evidence. See [`.3` release notes](docs/release-notes-v0.1.0-experimental.3.md) and [comparison steps](docs/performance.md).
+
+## Historical `.2` validation
 
 | Scope | Result |
 | --- | --- |
@@ -74,9 +78,9 @@ These checks are not an exploit-resistance certification, full sandbox audit, lo
 
 ## Sources, changes and licenses
 
-Pinned CLI upstream: [`970111f6cb62cc02fe36a82ea7d71b37a2889c97`](https://github.com/openai/codex/commit/970111f6cb62cc02fe36a82ea7d71b37a2889c97). Rust 1.99.1, cross GCC 14.2, target glibc 2.41; stripped, unoptimized `dev-small`. CLI changes retain the two-line RISC-V seccomp architecture selection. Code Mode uses rusty_v8 152.2.0 / V8 15.2.124.1 with the source adaptations recorded in [MODIFICATIONS.md](MODIFICATIONS.md).
+Pinned CLI upstream: [`970111f6cb62cc02fe36a82ea7d71b37a2889c97`](https://github.com/openai/codex/commit/970111f6cb62cc02fe36a82ea7d71b37a2889c97). Rust 1.99.1, cross GCC 14.2, target glibc 2.41; `.3` CLI uses stripped `perf-cli` (opt-level=3, no LTO, debug assertions and overflow checks retained); host remains the `.2` `dev-small` build. CLI changes retain the two-line RISC-V seccomp architecture selection. Code Mode uses rusty_v8 152.2.0 / V8 15.2.124.1 with the source adaptations recorded in [MODIFICATIONS.md](MODIFICATIONS.md).
 
-Download binary and dependency-source archives plus `SHA256SUMS` from the [`.2` prerelease](https://github.com/Elton-Yang/codex-riscv/releases/tag/v0.1.0-experimental.2). The fixed binary archive digest is also embedded in `install.sh`. The package is dynamically linked, not a universal static Linux executable.
+Download binary and dependency-source archives plus `SHA256SUMS` from the [`.3` prerelease](https://github.com/Elton-Yang/codex-riscv/releases/tag/v0.1.0-experimental.3). The fixed binary archive digest is also embedded in `install.sh`. The package is dynamically linked, not a universal static Linux executable.
 
 The [Code Mode build notes](docs/code-mode.md) describe the prepared source/toolchain layout and replay patches. `scripts/build.sh` reproduces the CLI-only build on a compatible Debian 13 x86_64 build host. No clean-room Code Mode setup or bit-identical rebuild is claimed.
 

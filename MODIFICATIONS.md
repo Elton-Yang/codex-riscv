@@ -35,3 +35,11 @@ intrinsics remain in a separate regression executable, never in the host.
 The installer now checks both binaries before activating `.2`, preserving the
 standalone launcher and existing user configuration. See the `.2` release notes
 for actual emulated tests and pending physical-board confirmation.
+
+## CLI compiler optimization in v0.1.0-experimental.3
+
+No functional CLI source or dependency changes from the original CLI adaptation.
+A new perf-cli profile inherits dev-small, sets opt-level=3, codegen-units=16,
+LTO=false and retains debug-assertions=true, overflow-checks=true. The CLI is
+stripped; the .2 sandbox-enabled Code Mode host is byte-identical. This is an
+experiment for native A/B comparison, not a measured performance claim.

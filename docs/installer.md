@@ -17,10 +17,10 @@ sh install-codex-riscv.sh upgrade --command codex
 sh install-codex-riscv.sh status
 ```
 
-`upgrade` 也支持首次安装。默认版本为 `.2`，保留 `.1` 安装支持。两个版本的精确 SHA256 固定在脚本 `RELEASES` 中，并随 Release 的 `SHA256SUMS` 发布。不接受未知版本、镜像或跳过校验；摘要不等于独立发布者签名。
+`upgrade` 也支持首次安装。默认版本为 `.3`，保留 `.1`、`.2` 安装支持。各版本的精确 SHA256 固定在脚本 `RELEASES` 中，并随 Release 的 `SHA256SUMS` 发布。不接受未知版本、镜像或跳过校验；摘要不等于独立发布者签名。
 
 ```sh
-sh install-codex-riscv.sh install --version v0.1.0-experimental.2
+sh install-codex-riscv.sh install --version v0.1.0-experimental.3
 sh install-codex-riscv.sh install --version v0.1.0-experimental.1
 sh install-codex-riscv.sh rollback
 sh install-codex-riscv.sh uninstall
@@ -30,7 +30,7 @@ sh install-codex-riscv.sh uninstall
 
 ## 布局与配置保护
 
-默认程序位于 `~/.local/share/codex-riscv/versions/<tag>/`；`.2` 内含 `bin/codex`、相邻 `bin/codex-code-mode-host`、许可证、文档及来源材料。`current` 和 `previous` 指向当前及上一成功版本。`~/.local/bin/codex` 指向托管 Python 启动器。
+默认程序位于 `~/.local/share/codex-riscv/versions/<tag>/`；`.2`/`.3` 内含 `bin/codex`、相邻 `bin/codex-code-mode-host`、许可证、文档及来源材料。`current` 和 `previous` 指向当前及上一成功版本。`~/.local/bin/codex` 指向托管 Python 启动器。
 
 启动器对普通调用自动加 `--no-daemon`，内部 helper 保留原分派；CLI 自动发现相邻 host。沙箱保持启用。安装过程不登录、不调用模型，不修改 `~/.codex`、登录信息、模型设置、shell 配置或项目。
 
@@ -38,8 +38,10 @@ sh install-codex-riscv.sh uninstall
 
 ## 激活前检查
 
-固定摘要通过后才解包；拒绝路径穿越、链接、特殊文件、重复条目和超限包。仅将普通文件暂存到新目录。`.2` 的两个程序均须存在、有执行权限且动态库完整；`.1` 只要求主 CLI。CLI `--version` 在临时 HOME/CODEX_HOME 中检查。安装成功不等于 V8 或 Code Mode 运行成功，运行验证需另行完成。
+固定摘要通过后才解包；拒绝路径穿越、链接、特殊文件、重复条目和超限包。仅将普通文件暂存到新目录。`.2`/`.3` 的两个程序均须存在、有执行权限且动态库完整；`.1` 只要求主 CLI。CLI `--version` 在临时 HOME/CODEX_HOME 中检查。安装成功不等于 V8 或 Code Mode 运行成功，运行验证需另行完成。
 
 检查全部通过后才原子替换 `current`，保留旧版本；下载、校验、依赖或启动失败不会切换当前程序。可恢复的激活错误会恢复历史，但两个链接的更新不保证断电事务一致性。强制终止可能留下 `.stage-*`，应检查后再清理。不要将个人文件放入托管版本目录，也不要删除标记来绕过保护。
 
 57 项夹具回归覆盖 host 缺失、依赖缺失、执行权限、`.1` → `.2` 升级回滚和配置/项目保留。实际发布包安装烟测使用 QEMU 和模拟平台门槛；用户随后报告开发板上使用 `gpt-5.6-luna` 创建程序、退出后 `/resume` 并继续修改程序成功；后续终端输出又确认 `.2` → `.1` → `.2` 实机回滚升级、模型/程序保留、修改运行正确及实机沙箱探针通过（内核 `6.12.113+deb13-riscv64`、bubblewrap `0.12.0`），见[实机功能记录](native-validation-v0.1.0-experimental.2.md)。详见[发布说明](release-notes-v0.1.0-experimental.2.md)。
+
+`.3` 只优化主 CLI，host 沿用 `.2`；实机响应和性能尚待对比，见[新版说明](release-notes-v0.1.0-experimental.3.md)。

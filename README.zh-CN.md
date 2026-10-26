@@ -4,7 +4,7 @@
 
 OpenAI Codex CLI 的非官方 RISC-V Linux 实验适配，独立于 OpenAI，未获官方背书。
 
-当前实验版为 **`v0.1.0-experimental.2`**，目标系统为 Debian 13 / riscv64。本版加入启用沙箱的 Code Mode host，主 CLI 保持 `.1` 的原始字节。上游开发版本号仍显示 `codex-cli 0.0.0`。
+当前实验版为 **`v0.1.0-experimental.3`**，目标系统为 Debian 13 / riscv64。本版以 `opt-level=3` 优化主 CLI，沿用 `.2` 的 Code Mode host；实机启动与 `/resume` 加速幅度待对比，不保证更快。上游开发版本号仍显示 `codex-cli 0.0.0`。
 
 ## 安装或原位升级
 
@@ -15,7 +15,7 @@ sudo apt update
 sudo apt install ca-certificates curl python3 libc6 libgcc-s1 libssl3t64 bubblewrap
 ```
 
-要求 Linux riscv64、glibc ≥ 2.39。两个程序合计约 478 MB；下载和暂存建议至少留出约 1.5 GB，另留空间保存旧版本。运行不需要 Rust、Node.js 或编译器。
+要求 Linux riscv64、glibc ≥ 2.39。两个程序合计约 509 MB；下载和暂存建议至少留出约 1.5 GB，另留空间保存旧版本。运行不需要 Rust、Node.js 或编译器。
 
 继续使用原来的 GitHub 安装地址。重新下载并检查脚本后执行：
 
@@ -52,7 +52,11 @@ sh install-codex-riscv.sh uninstall
 
 回滚只切换程序，不撤销 Codex 对文件或配置的修改；卸载保留设置和项目。默认命令为 `codex`；已有 `codex-riscv` 安装通过 `upgrade --command codex` 原位迁移，普通 `upgrade` 沿用已保存的命令名。同名外来命令不会被覆盖或遮蔽，仍可显式选择 `--command codex-riscv`。详见[安装器说明](docs/installer.md)。
 
-## 当前验证
+## `.3` 优化版
+
+固定源码与依赖，保留断言、溢出检查和安全机制，CLI 从 315 MB 增长到约 345 MB。完整 Sv39 工具集成、会话持久化恢复及内核探针通过；模拟测试不代表实机性能。详见[`.3` 发布说明](docs/release-notes-v0.1.0-experimental.3.md)与[性能对比步骤](docs/performance.md)。
+
+## 历史 `.2` 验证
 
 | 检查 | 结果 |
 | --- | --- |
@@ -74,9 +78,9 @@ sh install-codex-riscv.sh uninstall
 
 ## 源码与许可证
 
-固定上游提交为 [`970111f6cb62cc02fe36a82ea7d71b37a2889c97`](https://github.com/openai/codex/commit/970111f6cb62cc02fe36a82ea7d71b37a2889c97)。Rust 1.99.1、交叉 GCC 14.2、目标 glibc 2.41；使用去除符号、未优化的 `dev-small`。CLI 保留两行 seccomp 架构分派适配；Code Mode 使用 rusty_v8 152.2.0 / V8 15.2.124.1，补丁见 [MODIFICATIONS.md](MODIFICATIONS.md)。
+固定上游提交为 [`970111f6cb62cc02fe36a82ea7d71b37a2889c97`](https://github.com/openai/codex/commit/970111f6cb62cc02fe36a82ea7d71b37a2889c97)。Rust 1.99.1、交叉 GCC 14.2、目标 glibc 2.41；`.3` CLI 使用去除符号的 `perf-cli`（opt-level=3、无 LTO、保留 debug assertions 与 overflow checks）；host 沿用 `.2` 的 `dev-small`。CLI 保留两行 seccomp 架构分派适配；Code Mode 使用 rusty_v8 152.2.0 / V8 15.2.124.1，补丁见 [MODIFICATIONS.md](MODIFICATIONS.md)。
 
-[`.2` Release 页面](https://github.com/Elton-Yang/codex-riscv/releases/tag/v0.1.0-experimental.2)提供程序包、依赖源码包和 `SHA256SUMS`；安装器内也固定程序包摘要。程序依赖系统动态库，不是通用静态二进制。
+[`.3` Release 页面](https://github.com/Elton-Yang/codex-riscv/releases/tag/v0.1.0-experimental.3)提供程序包、依赖源码包和 `SHA256SUMS`；安装器内也固定程序包摘要。程序依赖系统动态库，不是通用静态二进制。
 
 [Code Mode 构建说明](docs/code-mode.md)记录已准备的源码/工具链布局和补丁；`scripts/build.sh` 仍用于兼容 Debian 13 x86_64 构建主机上的 CLI-only 构建。尚未承诺全新环境 Code Mode 自动搭建或位级一致重建。
 

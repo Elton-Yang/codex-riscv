@@ -35,8 +35,9 @@ those rights. Permissive alternatives were selected where applicable, e.g.
 Apache-2.0 rather than GPL for self_cell, and BSD for zstd.
 
 System OpenSSL, glibc and other shared libraries are **not bundled**. Debian
-installs those dependencies separately. Optional V8/code-mode, voice runtime,
-and Windows-only components are outside this Linux CLI artifact.
+installs those dependencies separately. This baseline collection covers the CLI; the bundled Code Mode host is covered
+additionally by `code-mode/`. Voice runtime and Windows-only components remain
+outside this Linux package.
 
 This collection documents the selected experimental build. It is not a claim
 that every optional backend or feature in upstream Codex has been audited or

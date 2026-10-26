@@ -29,7 +29,7 @@ import time
 
 
 ROOT = Path(__file__).resolve().parents[1]
-TAG = "v0.1.0-experimental.2"
+TAG = "v0.1.0-experimental.3"
 
 
 def run(args, env):
@@ -91,6 +91,7 @@ def main():
     parser.add_argument("--sysroot", type=Path, required=True)
     parser.add_argument("--archive", type=Path, help="test a local release archive before publication; checksum checks remain enabled")
     parser.add_argument("--previous-archive", type=Path, help="also exercise actual .1 to .2 upgrade and rollback")
+    parser.add_argument("--previous-tag", default="v0.1.0-experimental.2", help="release tag of --previous-archive")
     args = parser.parse_args()
     cross = args.sysroot.resolve()
     qemu = cross / "usr/bin/qemu-riscv64"
@@ -123,7 +124,7 @@ def main():
                                'while [ "$#" -gt 0 ]; do\n'
                                '  case "$1" in\n'
                                '    --output) out=$2; shift;;\n'
-                               '    */codex-riscv64-linux-gnu-v0.1.0-experimental.1.tar.gz) source=' + shlex.quote(str(previous)) + ';;\n'
+                               '    */codex-riscv64-linux-gnu-' + args.previous_tag + '.tar.gz) source=' + shlex.quote(str(previous)) + ';;\n'
                                '  esac\n  shift\ndone\ncp -- "$source" "$out"\n')
         for name, body in scripts.items():
             path = mocks / name
@@ -142,7 +143,7 @@ def main():
               ("local archive transport" if args.archive else "real HTTPS download") +
               "; real digest, extraction, target libraries and binary.", flush=True)
         if args.previous_archive:
-            run(["sh", installer, "install", "--version", "v0.1.0-experimental.1",
+            run(["sh", installer, "install", "--version", args.previous_tag,
                  "--command", "codex-riscv"], env)
             (home / ".codex").mkdir(exist_ok=True)
             (home / ".codex/config.toml").write_text('model = "fixture-preserved-model"\n')
@@ -154,7 +155,7 @@ def main():
         run(["sh", installer, "status"], env)
         if args.previous_archive:
             run(["sh", installer, "rollback"], env)
-            assert (prefix / "current").resolve().name == "v0.1.0-experimental.1"
+            assert (prefix / "current").resolve().name == args.previous_tag
             run(["sh", installer, "upgrade"], env)
             assert (prefix / "current").resolve().name == TAG
             assert (home / ".codex/config.toml").read_text() == 'model = "fixture-preserved-model"\n'

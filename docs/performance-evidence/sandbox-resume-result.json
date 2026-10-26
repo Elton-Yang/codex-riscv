@@ -1,0 +1,39 @@
+{
+  "mode": "cli-integration",
+  "status": "PASS",
+  "checks": {
+    "bridge_exit_zero": true,
+    "qemu_exit_zero": true,
+    "guest_exit_zero": true,
+    "guest_finished": true,
+    "guest_export_zero": true,
+    "archive_digest": true,
+    "archive_length": true,
+    "sv39_both_harts": true,
+    "restricted_isa": true,
+    "default_aslr": true,
+    "ordinary_root": true,
+    "guest_result_pass": true
+  },
+  "guest_result": {
+    "pass": true,
+    "native_sandbox_exit": 0,
+    "resume": {
+      "pass": true,
+      "runs_pass": [
+        true,
+        true
+      ],
+      "model_requests": 2,
+      "errors": [],
+      "scope": "Actual CLI persists and resumes synthetic history; loopback SSE only, no real account/model; not TUI performance measurement"
+    },
+    "scope": "Actual optimized CLI sandbox and synthetic persistent resume; test guest root guard replaced only; no TUI performance claim"
+  },
+  "guest_console": "/home/elton/codex-riscv/build-attempts/release-performance-20261026/qemu-sv39/runs/cli-integration-x9rr3ka1/kernel-console.log",
+  "archive": "/home/elton/codex-riscv/build-attempts/release-performance-20261026/qemu-sv39/runs/artifact-cli-integration-3zoddld8/guest-results.tar.gz",
+  "archive_sha256": "fd6ea589fd36261cfdc5bb72475d5e2596be87914dec77e792e4d27e905287cb",
+  "archive_bytes": 157253,
+  "initramfs_sha256": "c559ca4a34639dcba082e6b5c73cbda213adb7ef0b04c48ff9e0a69022a4f41e",
+  "scope": "ACTUAL_CLI_AND_HOST_WITH_MOCK_MODEL_SSE"
+}

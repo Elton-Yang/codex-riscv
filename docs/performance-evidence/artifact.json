@@ -1,0 +1,16 @@
+{
+  "status": "BUILD_PASS_RUNTIME_UNVALIDATED",
+  "build_exit_code": 0,
+  "started_utc": "2026-10-26T06:32:06Z",
+  "finished_utc": "2026-10-26T06:47:24Z",
+  "duration_cargo": "15m 17s",
+  "artifact": "build-attempts/cli-performance-20261026/target/riscv64gc-unknown-linux-gnu/perf-cli/codex",
+  "bytes": 345346040,
+  "sha256": "c4b148a1584e4afca769a417f68c0993af9371ec5a2e152c600a50071e056de2",
+  "baseline_cli_bytes": 314651976,
+  "size_reduction_percent": -9.8,
+  "elf": "build-attempts/cli-performance-20261026/target/riscv64gc-unknown-linux-gnu/perf-cli/codex: ELF 64-bit LSB pie executable, UCB RISC-V, RVC, double-float ABI, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-riscv64-lp64d.so.1, BuildID[sha1]=6c912fdcfc6afdc173e90a84dcb6413d8ce1b381, for GNU/Linux 4.15.0, stripped",
+  "runtime_validation": "PENDING",
+  "board_performance_comparison": "PENDING",
+  "current_release_replaced": false
+}

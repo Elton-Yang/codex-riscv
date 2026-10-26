@@ -22,8 +22,9 @@ import tarfile
 import tempfile
 import uuid
 
-DEFAULT_VERSION = "v0.1.0-experimental.2"
+DEFAULT_VERSION = "v0.1.0-experimental.3"
 RELEASES = {
+    "v0.1.0-experimental.3": "28c6611e150db751b773c818de1b85a29b044a7c0077cc0abcf95f99655026a4",
     "v0.1.0-experimental.2": "409e051bcb98862d615ad468cd4b134456cbf52b6efa4a3c078ed02c219a233c",
     "v0.1.0-experimental.1": "2b70f049652793a2dd6c8035122ce2a6920de680153be1c6f8e2a172dde70120",
 }

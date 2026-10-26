@@ -1,0 +1,27 @@
+{
+  "recorded_utc": "2026-10-26T06:33:32.335082+00:00",
+  "source_commit": "970111f6cb62cc02fe36a82ea7d71b37a2889c97",
+  "source_worktree_diff": " codex-rs/linux-sandbox/src/seccomp.rs | 2 ++\n 1 file changed, 2 insertions(+)\n",
+  "files": {
+    "codex-rs/Cargo.toml": "833b84d4bea462b2a71101a59f34fdb51175863957e94836edb2ac278e846fb0",
+    "codex-rs/Cargo.lock": "d661437f2dae702b0beb404df06ef60219845c5ce909138427ac4a3947b8cb2c",
+    "codex-rs/linux-sandbox/src/seccomp.rs": "f17cd27a06cb63e64115874188c30ce0000f1f97a683e31a493bd82ea0375f5b",
+    "codex-rs/cli/src/main.rs": "ac51c153916132c0be2c37ea1136562685b832957bc2e43e53d71608d0b28a4a",
+    "codex-rs/tui/src/app/session_lifecycle.rs": "9928262003c7e6b061ed36b2e97165539079429584b99eb75bf50747c26a00a7"
+  },
+  "profile": {
+    "name": "perf-cli",
+    "inherits": "dev-small",
+    "opt_level": 3,
+    "codegen_units": 16,
+    "lto": false,
+    "debug_assertions": true,
+    "overflow_checks": true,
+    "incremental": false
+  },
+  "current_release_replaced": false,
+  "host_changed": false,
+  "target": "riscv64gc-unknown-linux-gnu",
+  "board_evidence": "SD card; SSH normal; resume list fast; delay after selection",
+  "scope": "Build candidate, no performance improvement claim"
+}
