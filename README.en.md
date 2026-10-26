@@ -62,7 +62,8 @@ Rollback switches program versions and does not undo edits made by Codex. Uninst
 | Three fresh secure V8/native-buffer/TurboFan runs | Passed: 32 GiB cage, 160 GiB full reservation |
 | Low-Smi collision and 100 GiB VA limit | Expected fail-closed refusals passed |
 | Actual CLI → host → real patch/Python tools | Passed in full-system simulation; only model responses mocked |
-| Workspace-write kernel checks | Seccomp=2, NoNewPrivs=1, outside-workspace write denied |
+| Native workspace-write / read-only checks | Passed: policy-specific writes, outside-write/socket denials, Seccomp=2, NoNewPrivs=1 |
+| Native `.2` → `.1` → `.2` rollback/upgrade | Passed; model/program retained and subsequent edit/run correct |
 | User-operated native program creation on the development board | Reported success with `gpt-5.6-luna` |
 | Native exit → `/resume` → program editing | User reported success |
 | Native program runs before and after modification | User confirmed both results correct |

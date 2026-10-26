@@ -55,3 +55,5 @@ codex-riscv -c features.code_mode_only=true
 反馈环境四项、沙箱两条 JSON/最终 PASS，以及三次安装状态即可；不要提供认证文件或 token。
 
 脚本的命令与断言已在现有 Sv39 客体中通过检查；客体由 root 启动，测试包装器仅替换了脚本的普通用户门槛，真实 CLI 与内核沙箱未被替换。该准备检查不算开发板测试通过。
+
+2026-10-26 用户已在 VisionFive 2 上完成本指南的实机检查，两组沙箱与 `.2` → `.1` → `.2` 回滚升级均通过，升级后模型/程序保留且修改运行正确。结果见[实机记录](native-validation-v0.1.0-experimental.2.md)。

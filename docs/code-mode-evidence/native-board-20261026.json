@@ -1,0 +1,67 @@
+{
+  "date": "2026-10-26",
+  "release": "v0.1.0-experimental.2",
+  "source": "User-supplied terminal transcript and functional confirmation in project conversation",
+  "environment": {
+    "board": "VisionFive 2 / JH7110 (project context)",
+    "architecture": "riscv64",
+    "kernel": "6.12.113+deb13-riscv64",
+    "bubblewrap": "0.12.0"
+  },
+  "model": "gpt-5.6-luna",
+  "sandbox_probe": "tests/native_sandbox.py",
+  "sandbox_results": [
+    {
+      "checks": {
+        "ipv4_socket_denied": true,
+        "no_new_privs": true,
+        "outside_write_denied": true,
+        "seccomp_filter": true,
+        "workspace_write": true
+      },
+      "mode": "workspace-write",
+      "pass": true
+    },
+    {
+      "checks": {
+        "ipv4_socket_denied": true,
+        "no_new_privs": true,
+        "outside_write_denied": true,
+        "seccomp_filter": true,
+        "workspace_write_denied": true
+      },
+      "mode": "read-only",
+      "pass": true
+    }
+  ],
+  "sandbox_final": "PASS: workspace write, read-only denial, outside denial, socket denial, seccomp and no_new_privs",
+  "installer_states": [
+    {
+      "step": "before rollback",
+      "current": "v0.1.0-experimental.2",
+      "previous": "v0.1.0-experimental.1",
+      "command_managed": true
+    },
+    {
+      "step": "after rollback",
+      "current": "v0.1.0-experimental.1",
+      "previous": "v0.1.0-experimental.2",
+      "cli_version": "codex-cli 0.0.0"
+    },
+    {
+      "step": "after upgrade",
+      "current": "v0.1.0-experimental.2",
+      "previous": "v0.1.0-experimental.1",
+      "launcher": "standalone --no-daemon"
+    }
+  ],
+  "post_upgrade": {
+    "command": "codex-riscv -c features.code_mode_only=true",
+    "program_preserved": true,
+    "model_preserved": true,
+    "modification_correct": true,
+    "execution_correct": true
+  },
+  "privacy": "Personal paths, session identifiers, program/conversation content and token usage omitted",
+  "limits": "Single-board user-operated evidence; no installed binary hash or comprehensive security/stability audit"
+}

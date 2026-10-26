@@ -62,7 +62,8 @@ sh install-codex-riscv.sh uninstall
 | 三次独立 V8 原生内存与 TurboFan 测试 | 通过；32 GiB cage、160 GiB 完整预留 |
 | 低地址冲突、100 GiB 地址空间限制 | 均按预期安全拒绝 |
 | 真实 CLI → host → 创建文件与执行 Python | 完整系统模拟通过；仅模型响应为本地模拟 |
-| workspace-write 内核检查 | Seccomp=2、NoNewPrivs=1、工作区外写入被拒绝 |
+| 实机 workspace-write / read-only 检查 | 通过；写入权限符合策略、工作区外写入及 socket 拒绝、Seccomp=2、NoNewPrivs=1 |
+| 实机 `.2` → `.1` → `.2` 回滚升级 | 通过；模型和程序保留，随后修改运行正确 |
 | 用户开发板创建程序 | 用户报告使用 `gpt-5.6-luna` 成功 |
 | 退出 → `/resume` → 修改程序 | 用户报告成功 |
 | 初次及修改后运行程序 | 用户确认两次结果均正确 |

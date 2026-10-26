@@ -87,21 +87,35 @@
     "sandbox-validation.json": {
       "bytes": 5369,
       "sha256": "672646e6e6517026cd274811ef0fb7fb810d8a5a444f8033dfdfc8a9a3cb0397"
+    },
+    "native-board-20261026.json": {
+      "bytes": 2050,
+      "sha256": "ef4a3d6d422b144de273581e6f78275e16b3fe3dbba3ba4eb54e88ad2d43b2ea"
     }
   },
   "native_validation": {
     "report_date": "2026-10-26",
-    "source": "User report in project conversation; no terminal logs supplied",
+    "source": "User report and supplied terminal transcript in project conversation",
     "model": "gpt-5.6-luna",
     "checks": [
       "program creation",
       "exit then /resume",
       "program modification after resume",
       "initial program execution: correct result",
-      "program execution after modification: correct result"
+      "program execution after modification: correct result",
+      "native workspace-write and read-only sandbox probes: PASS",
+      "native .2 -> .1 -> .2 rollback/upgrade: PASS",
+      "post-upgrade model/program preservation and edit/run: PASS"
     ],
     "record": "docs/native-validation-v0.1.0-experimental.2.md",
-    "limits": "No fresh native kernel-policy result; exit codes, exact flags and installed hashes not supplied"
+    "limits": "Single-board measured behaviors; no installed binary hashes or comprehensive security/stability audit",
+    "environment": {
+      "board": "VisionFive 2 / JH7110 (project context)",
+      "architecture": "riscv64",
+      "kernel": "6.12.113+deb13-riscv64",
+      "bubblewrap": "0.12.0"
+    },
+    "transcript": "docs/code-mode-evidence/native-board-20261026.json"
   },
   "model_api_calls_scope": "Agent-operated emulated acceptance only; the later user-operated native report used the existing model"
 }

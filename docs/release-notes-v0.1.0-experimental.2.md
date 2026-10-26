@@ -28,7 +28,7 @@ See [validation evidence](code-mode-evidence/) and [Code Mode notes](code-mode.m
 
 ## User-operated native result (2026-10-26)
 
-The user reported successful program creation, exit followed by `/resume`, and subsequent program editing with the existing `gpt-5.6-luna` model, and then confirmed correct program output both before and after modification. This is native functional evidence supplied by the user; no new native kernel-policy test is claimed. See the [full record and scope](native-validation-v0.1.0-experimental.2.md). The original release assets, tag and installer digest are unchanged.
+The user reported successful program creation, exit followed by `/resume`, and subsequent program editing with the existing `gpt-5.6-luna` model, and then confirmed correct program output both before and after modification. The user then supplied native sandbox output on kernel `6.12.113+deb13-riscv64` and bubblewrap `0.12.0`: both workspace-write and read-only probes passed, including policy-specific writes, outside-workspace and IPv4 socket denials, `Seccomp=2` and `NoNewPrivs=1`. Native `.2` → `.1` → `.2` rollback/upgrade also passed; the model/program remained available and subsequent editing/execution was correct. See the [full record and scope](native-validation-v0.1.0-experimental.2.md). The original release assets, tag and installer digest are unchanged.
 
 ## Upgrade and test on your board
 
