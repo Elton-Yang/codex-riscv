@@ -56,6 +56,8 @@ Rollback switches program versions and does not undo edits made by Codex. Uninst
 
 Same CLI source/dependencies, retained debug assertions, overflow checks and security mechanisms. CLI size increases from about 315 MB to 345 MB. Full-system Sv39 tool integration, persistent resume and kernel-policy probes passed; simulation is not native performance evidence. Subsequent user feedback confirms qualitatively improved resume responsiveness on VisionFive 2 with SD storage over SSH; no speedup ratio is claimed. See [`.3` release notes](docs/release-notes-v0.1.0-experimental.3.md) and [comparison steps](docs/performance.md).
 
+The user also reports successful Mac Codex App SSH connection to the board, automatic discovery of existing sessions and continuation of a selected session. See [remote validation and scope](docs/remote-mac-validation.md).
+
 ## Historical `.2` validation
 
 | Scope | Result |
@@ -74,7 +76,7 @@ Same CLI source/dependencies, retained debug assertions, overflow checks and sec
 
 The historical `.1` user tests covered VisionFive 2 / JH7110, Debian 13, startup, authentication/model choice/basic conversation and two read-only sandbox denial probes. Native `.2` creation and resumed editing are recorded separately in the [user report](docs/native-validation-v0.1.0-experimental.2.md). See [`.1` validation](docs/validation.md), [`.2` release notes](docs/release-notes-v0.1.0-experimental.2.md) and [new evidence](docs/code-mode-evidence/).
 
-These checks are not an exploit-resistance certification, full sandbox audit, long-term stability result or validation of other boards/kernels. Full TUI coverage, realtime runtime, npm updater and explicit packaged daemon/agents/remote-server workflows remain unvalidated.
+These checks are not an exploit-resistance certification, full sandbox audit, long-term stability result or validation of other boards/kernels. Full TUI coverage, realtime runtime, npm updater and full packaged daemon/agents/remote-server coverage remains unvalidated beyond the reported App/SSH workflow.
 
 ## Sources, changes and licenses
 

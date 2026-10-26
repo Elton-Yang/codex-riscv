@@ -1,0 +1,24 @@
+{
+  "report_date": "2026-10-26",
+  "source": "User report in project conversation",
+  "context_release": "v0.1.0-experimental.3 after update; remote executable not independently identified",
+  "client": "Codex App on local Mac",
+  "transport": "SSH to RISC-V development board",
+  "board_context": "VisionFive 2 / JH7110, Debian 13 from previous project reports",
+  "checks": {
+    "ssh_connection": "USER_REPORTED_PASS",
+    "existing_session_discovery": "USER_REPORTED_ALL_PREVIOUS_SESSIONS_VISIBLE",
+    "select_existing_session": "USER_REPORTED_PASS",
+    "continue_remote_development": "USER_REPORTED_PASS"
+  },
+  "unknown": [
+    "App/macOS versions",
+    "remote executable identity",
+    "backend launch mechanism",
+    "detailed edit/execute transcript",
+    "fresh remote-process kernel-policy probes",
+    "reconnect/reboot/concurrent-writer coverage"
+  ],
+  "privacy": "No keys, credentials, host addresses, personal paths, session IDs or conversation contents collected",
+  "scope": "App SSH session discovery and continuation only; not blanket daemon/agents/remote-server support"
+}

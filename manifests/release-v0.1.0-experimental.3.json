@@ -66,6 +66,10 @@
     "native-resume-feedback-20261026.json": {
       "bytes": 1147,
       "sha256": "4f2f4609ef72e2492031290afc89b994f8c58081ee2658624eb4ea248e996e09"
+    },
+    "native-mac-remote-feedback-20261026.json": {
+      "bytes": 1097,
+      "sha256": "97c394fd87614e7008c4c7f6b96dac98c76e07e9c695874ebe4ae95190d01488"
     }
   },
   "installer_actual_archive_upgrade_rollback": "PASS under QEMU with mocked platform gates",
@@ -90,5 +94,11 @@
     "startup_latency": "UNREPORTED",
     "speedup_ratio": null,
     "fresh_native_kernel_checks": "UNREPORTED"
+  },
+  "native_remote_feedback": {
+    "record": "docs/performance-evidence/native-mac-remote-feedback-20261026.json",
+    "documentation": "docs/remote-mac-validation.md",
+    "result": "USER_REPORTED_APP_SSH_SESSION_DISCOVERY_AND_CONTINUATION_PASS",
+    "limits": "App version, remote binary identity and backend launch mechanism unconfirmed"
   }
 }

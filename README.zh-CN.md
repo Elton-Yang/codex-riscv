@@ -56,6 +56,8 @@ sh install-codex-riscv.sh uninstall
 
 固定源码与依赖，保留断言、溢出检查和安全机制，CLI 从 315 MB 增长到约 345 MB。完整 Sv39 工具集成、会话持久化恢复及内核探针通过；模拟测试不代表实机性能；用户后续在 VisionFive 2 / SD 卡 / SSH 环境中确认了恢复加载的主观改善，未提供计时数据。详见[`.3` 发布说明](docs/release-notes-v0.1.0-experimental.3.md)与[性能对比步骤](docs/performance.md)。
 
+用户另已实测 Mac Codex App 通过 SSH 连接开发板、自动发现已有会话、选中后继续远程开发，见[远程验证范围](docs/remote-mac-validation.md)。
+
 ## 历史 `.2` 验证
 
 | 检查 | 结果 |
@@ -74,7 +76,7 @@ sh install-codex-riscv.sh uninstall
 
 历史 `.1` 在 VisionFive 2 / JH7110、Debian 13 上有启动、认证、模型选择、基础对话和只读沙箱拒绝行为的用户记录，`.2` 的程序创建与恢复编辑结果另见[用户实机记录](docs/native-validation-v0.1.0-experimental.2.md)。参见[历史验证](docs/validation.md)、[新版发布说明](docs/release-notes-v0.1.0-experimental.2.md)与[新验收证据](docs/code-mode-evidence/)。
 
-以上结果不代表完整安全审计、攻击抵抗认证、长期稳定性或其他板卡/内核兼容。完整 TUI、realtime 外部运行时、npm 更新器及显式 daemon、agents、remote server 仍未验证。
+以上结果不代表完整安全审计、攻击抵抗认证、长期稳定性或其他板卡/内核兼容。完整 TUI、realtime 外部运行时、npm 更新器及完整 daemon、agents、remote server 功能仍未获得全面验证；已测 App/SSH 流程见上述记录。
 
 ## 源码与许可证
 

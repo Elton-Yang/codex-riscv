@@ -39,3 +39,7 @@ Pre-publication installer checks: 64 regressions passed; actual `.2`/`.3` archiv
 ## Native resume feedback (2026-10-26)
 
 On the previously reported VisionFive 2 / SD-card / SSH setup, the user confirmed a clear improvement after updating: selecting a `/resume` conversation and pressing Enter loads noticeably faster and essentially eliminates the perceived pause. This is qualitative user evidence, not a timed benchmark, cold-cache result, generalized speedup claim or fresh `.3` kernel-policy audit. See [performance feedback](performance.md#native-feedback-on-2026-10-26).
+
+## Mac Codex App / SSH feedback (2026-10-26)
+
+The user reported successful SSH connection from their Mac Codex App to the RISC-V board, automatic discovery of all previously saved sessions, and continued remote development after selecting one. Exact App version, remote binary identity and backend launch mechanism were not supplied. This validates the reported workflow rather than all daemon/remote-server modes. See [remote validation](remote-mac-validation.md).
