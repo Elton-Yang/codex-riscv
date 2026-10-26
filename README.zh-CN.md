@@ -6,6 +6,12 @@ OpenAI Codex CLI 的非官方 RISC-V Linux 实验适配，独立于 OpenAI，未
 
 当前实验版为 **`v0.1.0-experimental.3`**，目标系统为 Debian 13 / riscv64。本版以 `opt-level=3` 优化主 CLI，沿用 `.2` 的 Code Mode host；用户已反馈实机 `/resume` 选中后的加载明显加快，基本消除停滞感；具体加速倍数和启动速度仍未测量。上游开发版本号仍显示 `codex-cli 0.0.0`。
 
+## 一分钟实机演示
+
+在运行 Debian 13 的 VisionFive 2 / JH7110 开发板上启动 Codex，并编写一个简单的 Python 程序。
+
+https://github.com/user-attachments/assets/df7a67c9-8069-44d7-8a0e-d03e67f8e921
+
 ## 安装或原位升级
 
 在开发板上使用普通用户安装，不要以 root 运行安装器或 Codex。系统依赖：

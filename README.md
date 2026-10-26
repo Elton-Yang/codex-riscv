@@ -6,6 +6,12 @@ Unofficial experimental RISC-V Linux adaptation of OpenAI Codex CLI. Independent
 
 The current experimental release is **`v0.1.0-experimental.3`**, for Debian 13 / riscv64. It enables `opt-level=3` for the CLI and reuses the `.2` Code Mode host. The user reports noticeably faster native `/resume` post-selection loading with perceived pauses essentially eliminated; numerical timings and startup speed remain unmeasured. The upstream development version still prints `codex-cli 0.0.0`.
 
+## One-minute demo
+
+Starting Codex on a VisionFive 2 / JH7110 running Debian 13 and creating a simple Python program.
+
+https://github.com/user-attachments/assets/df7a67c9-8069-44d7-8a0e-d03e67f8e921
+
 ## Install or upgrade
 
 Use an ordinary user, without `sudo`, on the board. Runtime dependencies:
