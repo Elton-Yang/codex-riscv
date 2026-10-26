@@ -63,5 +63,16 @@
     "execution_correct": true
   },
   "privacy": "Personal paths, session identifiers, program/conversation content and token usage omitted",
-  "limits": "Single-board user-operated evidence; no installed binary hash or comprehensive security/stability audit"
+  "limits": "Single-board user-operated evidence; no installed binary hash or comprehensive security/stability audit",
+  "command_name_migration": {
+    "command": "sh install-codex-riscv.sh upgrade --command codex",
+    "result": "Command migrated: codex-riscv -> codex (personal directory omitted)",
+    "current": "v0.1.0-experimental.2",
+    "previous": "v0.1.0-experimental.1",
+    "command_basename": "codex",
+    "managed": true,
+    "cli_version": "codex-cli 0.0.0",
+    "architecture": "riscv64",
+    "scope": "Native command migration and version startup; no new interactive task reported"
+  }
 }

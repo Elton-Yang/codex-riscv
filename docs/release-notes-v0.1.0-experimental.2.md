@@ -49,4 +49,4 @@ Native sandbox and rollback instructions / 实机沙箱与回滚步骤: [check g
 
 ## Installer command-name update
 
-The current installer defaults to `codex`; existing managed `codex-riscv` installations can migrate with `upgrade --command codex` without uninstalling. Archive bytes and pinned digests remain unchanged. See [command-name migration](command-name-codex.md). The native results above used the historical `codex-riscv` entry; native migration of the new entry is not yet confirmed.
+The current installer defaults to `codex`; existing managed `codex-riscv` installations can migrate with `upgrade --command codex` without uninstalling. Archive bytes and pinned digests remain unchanged. See [command-name migration](command-name-codex.md). The earlier functional results used the historical `codex-riscv` entry. The user subsequently confirmed native migration to managed `codex`, unchanged `.2` / `.1` version history and normal `codex --version` output on `riscv64`.

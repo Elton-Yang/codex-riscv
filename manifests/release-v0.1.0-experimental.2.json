@@ -89,8 +89,8 @@
       "sha256": "672646e6e6517026cd274811ef0fb7fb810d8a5a444f8033dfdfc8a9a3cb0397"
     },
     "native-board-20261026.json": {
-      "bytes": 2050,
-      "sha256": "ef4a3d6d422b144de273581e6f78275e16b3fe3dbba3ba4eb54e88ad2d43b2ea"
+      "bytes": 2536,
+      "sha256": "70f15710abe97566cf754fff02afc83939f70c0f017eb816b55914e46382cf6e"
     }
   },
   "native_validation": {
@@ -105,7 +105,8 @@
       "program execution after modification: correct result",
       "native workspace-write and read-only sandbox probes: PASS",
       "native .2 -> .1 -> .2 rollback/upgrade: PASS",
-      "post-upgrade model/program preservation and edit/run: PASS"
+      "post-upgrade model/program preservation and edit/run: PASS",
+      "native codex-riscv -> codex command migration and version startup: PASS"
     ],
     "record": "docs/native-validation-v0.1.0-experimental.2.md",
     "limits": "Single-board measured behaviors; no installed binary hashes or comprehensive security/stability audit",

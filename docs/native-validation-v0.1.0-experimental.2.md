@@ -46,6 +46,10 @@ The user supplied the following state transitions using the managed installer:
 
 CLI `--version` remains `codex-cli 0.0.0` in both releases; the installer `status` identifies the adaptation version. This supports the tested upgrade/rollback path and preservation of the program/model workflow. It is not a byte-for-byte audit of all user settings or project files, nor a destructive rollback of edits.
 
+## Native command-name migration
+
+The user then ran `sh install-codex-riscv.sh upgrade --command codex` on the same `riscv64` development board. The installer reported `Command migrated` from the old managed entry to `codex`. Final status showed current `.2`, previous `.1`, and the managed command basename `codex`; `codex --version` returned `codex-cli 0.0.0`. The intermediate install-stage message used the old entry before renaming, as expected. This confirms native command migration and version startup; a new interactive task after renaming was not reported.
+
 ## Evidence and limits
 
 A [sanitized structured transcript](code-mode-evidence/native-board-20261026.json) records the supplied checks and state transitions. No installed binary digest or separate shell exit-code transcript was supplied. This single-board result does not establish all filter rules, every TUI flow, other boards/kernels, long-term stability, performance or exploit resistance.
@@ -57,5 +61,7 @@ The release remains an experimental prerelease. The immutable `.2` release archi
 用户提供了 VisionFive 2 上的终端结果：`riscv64`、内核 `6.12.113+deb13-riscv64`、bubblewrap `0.12.0`。`workspace-write` 与 `read-only` 两组脚本均通过：工作区写入按策略允许或拒绝，工作区外写入和 IPv4 socket 创建均被拒绝，`Seccomp=2`、`NoNewPrivs=1`。
 
 托管版本按 `.2 → .1 → .2` 完成回滚与升级。升级后继续启用 Code Mode，原模型 `gpt-5.6-luna` 和程序仍在，修改与运行结果正确；此前的创建、初次运行、退出后 `/resume`、修改及再次运行也已确认成功。
+
+用户随后确认 `upgrade --command codex` 实机迁移成功，托管入口为 `codex`，当前 `.2` / 上一 `.1` 保持不变，版本输出正常。
 
 该记录覆盖所测单板配置、拒绝行为和实际工作流，不能替代完整安全审计。复测步骤见[沙箱与回滚检查](native-sandbox-check.md)。

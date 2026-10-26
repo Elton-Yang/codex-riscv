@@ -25,8 +25,10 @@ Launcher bytes, `--no-daemon`, helper dispatch, user login/configuration and pro
 
 默认 CLI 命令改为 `codex`。已有安装重新下载脚本后执行 `upgrade --command codex` 即可迁移，无需卸载。保留原安装目录、版本历史、登录信息、模型配置和项目文件；旧命令入口在迁移成功后删除。
 
-若目标位置或 PATH 中存在其他来源的 `codex`，安装器会拒绝覆盖；先核对来源再决定使用哪个安装。普通 `upgrade` 会保留旧命令名；新安装默认 `codex`，仍可显式指定 `--command codex-riscv`。仅更新安装器及说明，不替换 `.2` 发布包。此前以旧命令名记录的实机结果保留为历史证据，新入口的实机迁移待用户确认。
+若目标位置或 PATH 中存在其他来源的 `codex`，安装器会拒绝覆盖；先核对来源再决定使用哪个安装。普通 `upgrade` 会保留旧命令名；新安装默认 `codex`，仍可显式指定 `--command codex-riscv`。仅更新安装器及说明，不替换 `.2` 发布包。此前以旧命令名记录的实机结果保留为历史证据，用户已在 VisionFive 2 上确认迁移成功：`status` 显示新托管入口 `codex`，`codex --version` 正常输出 `codex-cli 0.0.0`。
 
 ## Validation on 2026-10-26
 
-64 installer fixture tests passed, including fresh default installation, explicit legacy-name retention, in-place rename, target/PATH conflicts, old-entry modification, metadata/unlink failure recovery, concurrent target creation, version history, configuration preservation and uninstall. Actual `.1`/`.2` archives passed two QEMU smoke scenarios: fresh `codex` install, and old-name `.1` install followed by `.2` upgrade with command migration and rollback. Helper dispatch, standalone bare onboarding, isolated configuration preservation and uninstall passed. These are emulated checks; native board command migration remains pending.
+64 installer fixture tests passed, including fresh default installation, explicit legacy-name retention, in-place rename, target/PATH conflicts, old-entry modification, metadata/unlink failure recovery, concurrent target creation, version history, configuration preservation and uninstall. Actual `.1`/`.2` archives passed two QEMU smoke scenarios: fresh `codex` install, and old-name `.1` install followed by `.2` upgrade with command migration and rollback. Helper dispatch, standalone bare onboarding, isolated configuration preservation and uninstall passed. The user subsequently supplied native VisionFive 2 terminal output confirming `upgrade --command codex`, the managed `codex` entry, `.2` current / `.1` previous history, `codex-cli 0.0.0` and `riscv64`. This confirms command migration and version startup; no additional interactive task under the new entry was reported.
+
+The `Installed ... codex-riscv` line is emitted by the version-install stage before renaming. The following `Command migrated` line and final `status` identify the resulting `codex` entry. This two-stage output is expected.
