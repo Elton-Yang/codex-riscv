@@ -34,8 +34,8 @@
   "cli_inventory_unmapped": [],
   "emulated_cli_tools": "PASS",
   "emulated_sandbox_and_persistent_resume": "PASS",
-  "physical_board_validation": "PENDING",
-  "native_performance": "UNMEASURED",
+  "physical_board_validation": "USER_REPORTED_RESUME_RESPONSIVENESS_IMPROVED",
+  "native_performance": "QUALITATIVE_RESUME_IMPROVEMENT; NO_TIMED_BENCHMARK",
   "installer_regression_tests": 64,
   "notes": "No functional CLI source/dependency change; prior native .2 results do not establish .3 performance or correctness",
   "evidence": {
@@ -62,6 +62,10 @@
     "source-and-config.json": {
       "bytes": 1241,
       "sha256": "1312586d5b82f0fe40594a7fc93313ab4029f6924460b95c9722e95e2a407f17"
+    },
+    "native-resume-feedback-20261026.json": {
+      "bytes": 1147,
+      "sha256": "4f2f4609ef72e2492031290afc89b994f8c58081ee2658624eb4ea248e996e09"
     }
   },
   "installer_actual_archive_upgrade_rollback": "PASS under QEMU with mocked platform gates",
@@ -79,5 +83,12 @@
       "bytes": 164,
       "sha256": "4fdd06e1ea633288ff1423dd8fc6d5f47de92b480b7dbbb75499ee9821fea7b5"
     }
+  },
+  "native_feedback": {
+    "record": "docs/performance-evidence/native-resume-feedback-20261026.json",
+    "scope": "User-reported post-update resume loading noticeably faster; perceived pause essentially eliminated",
+    "startup_latency": "UNREPORTED",
+    "speedup_ratio": null,
+    "fresh_native_kernel_checks": "UNREPORTED"
   }
 }

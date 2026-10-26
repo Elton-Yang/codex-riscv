@@ -1,8 +1,8 @@
 # v0.1.0-experimental.3: optimized CLI candidate
 
-This prerelease enables Rust compiler optimization for the main CLI while reusing the byte-identical, sandbox-enabled Code Mode host from `.2`. It is intended for board-side comparison of startup and session-resume responsiveness. **Native speedup has not been measured; no specific performance improvement is claimed.**
+This prerelease enables Rust compiler optimization for the main CLI while reusing the byte-identical, sandbox-enabled Code Mode host from `.2`. It is intended for board-side comparison of startup and session-resume responsiveness. **The user now reports noticeably faster native `/resume` loading after selection, with perceived pauses essentially eliminated. No numerical speedup or startup improvement has been measured.**
 
-本实验版优化主 CLI，沿用 `.2` 的原始 Code Mode host。目标是比较启动与 `/resume` 选中会话后的响应。真实开发板性能、交互恢复行为仍需用户验证，不承诺加速幅度。
+本实验版优化主 CLI，沿用 `.2` 的原始 Code Mode host。目标是比较启动与 `/resume` 选中会话后的响应。用户升级后已反馈 `/resume` 选中会话后的加载明显加快，基本消除停滞感；尚无数值耗时，也未反馈启动速度变化。
 
 ## Build changes
 
@@ -35,3 +35,7 @@ Use the same terminal, SD card and saved conversation to compare `.2` with `.3`,
 登录信息、模型设置和程序继续沿用。先退出所有 Codex 会话，再升级；需要对比旧版时用安装器回滚，比较完成后再次升级。程序版本回滚不撤销会话或项目修改，建议使用独立测试会话。
 
 Pre-publication installer checks: 64 regressions passed; actual `.2`/`.3` archives passed QEMU upgrade, rollback, configuration preservation, command migration, helper dispatch, bare onboarding and uninstall smoke. Both binaries and exact source inputs were hash-verified before upload.
+
+## Native resume feedback (2026-10-26)
+
+On the previously reported VisionFive 2 / SD-card / SSH setup, the user confirmed a clear improvement after updating: selecting a `/resume` conversation and pressing Enter loads noticeably faster and essentially eliminates the perceived pause. This is qualitative user evidence, not a timed benchmark, cold-cache result, generalized speedup claim or fresh `.3` kernel-policy audit. See [performance feedback](performance.md#native-feedback-on-2026-10-26).

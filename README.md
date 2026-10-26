@@ -4,7 +4,7 @@
 
 Unofficial experimental RISC-V Linux adaptation of OpenAI Codex CLI. Independent of OpenAI; no endorsement or official upstream RISC-V support is implied.
 
-The current experimental release is **`v0.1.0-experimental.3`**, for Debian 13 / riscv64. It enables `opt-level=3` for the CLI and reuses the `.2` Code Mode host. Native startup/resume speedup is unmeasured; faster operation is not guaranteed. The upstream development version still prints `codex-cli 0.0.0`.
+The current experimental release is **`v0.1.0-experimental.3`**, for Debian 13 / riscv64. It enables `opt-level=3` for the CLI and reuses the `.2` Code Mode host. The user reports noticeably faster native `/resume` post-selection loading with perceived pauses essentially eliminated; numerical timings and startup speed remain unmeasured. The upstream development version still prints `codex-cli 0.0.0`.
 
 ## Install or upgrade
 
@@ -54,7 +54,7 @@ Rollback switches program versions and does not undo edits made by Codex. Uninst
 
 ## `.3` optimized candidate
 
-Same CLI source/dependencies, retained debug assertions, overflow checks and security mechanisms. CLI size increases from about 315 MB to 345 MB. Full-system Sv39 tool integration, persistent resume and kernel-policy probes passed; simulation is not native performance evidence. See [`.3` release notes](docs/release-notes-v0.1.0-experimental.3.md) and [comparison steps](docs/performance.md).
+Same CLI source/dependencies, retained debug assertions, overflow checks and security mechanisms. CLI size increases from about 315 MB to 345 MB. Full-system Sv39 tool integration, persistent resume and kernel-policy probes passed; simulation is not native performance evidence. Subsequent user feedback confirms qualitatively improved resume responsiveness on VisionFive 2 with SD storage over SSH; no speedup ratio is claimed. See [`.3` release notes](docs/release-notes-v0.1.0-experimental.3.md) and [comparison steps](docs/performance.md).
 
 ## Historical `.2` validation
 

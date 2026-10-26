@@ -1,0 +1,25 @@
+{
+  "report_date": "2026-10-26",
+  "release": "v0.1.0-experimental.3",
+  "source": "User report in project conversation after updating",
+  "environment_context": {
+    "board": "VisionFive 2 / JH7110",
+    "storage": "SD card",
+    "terminal": "SSH; ordinary terminal input previously reported responsive"
+  },
+  "previous_observation": {
+    "release": ".2",
+    "resume_list": "fast",
+    "after_selection": "several seconds of noticeable pause"
+  },
+  "reported_result": {
+    "scenario": "/resume: select a saved conversation and press Enter",
+    "improvement": "Loading noticeably faster; perceived pause essentially eliminated",
+    "original_user_report": "更新以后优化效果还是不错的，/resume选中会话按下回车加载，速度明显提升，基本消除了停滞感"
+  },
+  "measurement_type": "Qualitative user-operated native comparison",
+  "timings_seconds": null,
+  "speedup_ratio": null,
+  "startup_speed": "Not reported in this feedback",
+  "limits": "No timing samples, cache control, fresh environment measurements, new tool-task or kernel-policy results supplied; do not generalize to other boards/workloads"
+}

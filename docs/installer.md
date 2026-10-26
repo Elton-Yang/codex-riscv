@@ -44,4 +44,4 @@ sh install-codex-riscv.sh uninstall
 
 57 项夹具回归覆盖 host 缺失、依赖缺失、执行权限、`.1` → `.2` 升级回滚和配置/项目保留。实际发布包安装烟测使用 QEMU 和模拟平台门槛；用户随后报告开发板上使用 `gpt-5.6-luna` 创建程序、退出后 `/resume` 并继续修改程序成功；后续终端输出又确认 `.2` → `.1` → `.2` 实机回滚升级、模型/程序保留、修改运行正确及实机沙箱探针通过（内核 `6.12.113+deb13-riscv64`、bubblewrap `0.12.0`），见[实机功能记录](native-validation-v0.1.0-experimental.2.md)。详见[发布说明](release-notes-v0.1.0-experimental.2.md)。
 
-`.3` 只优化主 CLI，host 沿用 `.2`；实机响应和性能尚待对比，见[新版说明](release-notes-v0.1.0-experimental.3.md)。
+`.3` 只优化主 CLI，host 沿用 `.2`；用户已反馈实机恢复会话加载明显改善，具体耗时与启动速度仍未测量，见[新版说明](release-notes-v0.1.0-experimental.3.md)。

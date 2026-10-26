@@ -4,7 +4,7 @@
 
 OpenAI Codex CLI 的非官方 RISC-V Linux 实验适配，独立于 OpenAI，未获官方背书。
 
-当前实验版为 **`v0.1.0-experimental.3`**，目标系统为 Debian 13 / riscv64。本版以 `opt-level=3` 优化主 CLI，沿用 `.2` 的 Code Mode host；实机启动与 `/resume` 加速幅度待对比，不保证更快。上游开发版本号仍显示 `codex-cli 0.0.0`。
+当前实验版为 **`v0.1.0-experimental.3`**，目标系统为 Debian 13 / riscv64。本版以 `opt-level=3` 优化主 CLI，沿用 `.2` 的 Code Mode host；用户已反馈实机 `/resume` 选中后的加载明显加快，基本消除停滞感；具体加速倍数和启动速度仍未测量。上游开发版本号仍显示 `codex-cli 0.0.0`。
 
 ## 安装或原位升级
 
@@ -54,7 +54,7 @@ sh install-codex-riscv.sh uninstall
 
 ## `.3` 优化版
 
-固定源码与依赖，保留断言、溢出检查和安全机制，CLI 从 315 MB 增长到约 345 MB。完整 Sv39 工具集成、会话持久化恢复及内核探针通过；模拟测试不代表实机性能。详见[`.3` 发布说明](docs/release-notes-v0.1.0-experimental.3.md)与[性能对比步骤](docs/performance.md)。
+固定源码与依赖，保留断言、溢出检查和安全机制，CLI 从 315 MB 增长到约 345 MB。完整 Sv39 工具集成、会话持久化恢复及内核探针通过；模拟测试不代表实机性能；用户后续在 VisionFive 2 / SD 卡 / SSH 环境中确认了恢复加载的主观改善，未提供计时数据。详见[`.3` 发布说明](docs/release-notes-v0.1.0-experimental.3.md)与[性能对比步骤](docs/performance.md)。
 
 ## 历史 `.2` 验证
 
