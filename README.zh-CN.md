@@ -12,8 +12,6 @@ OpenAI Codex CLI 的非官方 RISC-V Linux 实验适配，独立于 OpenAI，未
 
 https://github.com/user-attachments/assets/adcac9ee-0b42-407c-8a33-9d6d42cf6928
 
-[打开或下载 MP4 视频](https://github.com/user-attachments/assets/adcac9ee-0b42-407c-8a33-9d6d42cf6928)
-
 ## 安装或原位升级
 
 在开发板上使用普通用户安装，不要以 root 运行安装器或 Codex。系统依赖：

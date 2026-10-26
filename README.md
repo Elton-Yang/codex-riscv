@@ -12,8 +12,6 @@ Starting Codex on a VisionFive 2 / JH7110 running Debian 13 and creating a simpl
 
 https://github.com/user-attachments/assets/adcac9ee-0b42-407c-8a33-9d6d42cf6928
 
-[Open or download the MP4 video](https://github.com/user-attachments/assets/adcac9ee-0b42-407c-8a33-9d6d42cf6928)
-
 ## Install or upgrade
 
 Use an ordinary user, without `sudo`, on the board. Runtime dependencies:
