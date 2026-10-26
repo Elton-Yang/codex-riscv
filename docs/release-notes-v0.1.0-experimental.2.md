@@ -1,8 +1,8 @@
 # v0.1.0-experimental.2: RISC-V Code Mode
 
-This experimental prerelease adds a sandbox-enabled `codex-code-mode-host` next to the existing CLI. The CLI bytes and pinned upstream commit (`970111f6cb62cc02fe36a82ea7d71b37a2889c97`) are unchanged from `.1`; both still use the upstream development version `0.0.0`. Physical VisionFive 2 validation of this new package is pending.
+This experimental prerelease adds a sandbox-enabled `codex-code-mode-host` next to the existing CLI. The CLI bytes and pinned upstream commit (`970111f6cb62cc02fe36a82ea7d71b37a2889c97`) are unchanged from `.1`; both still use the upstream development version `0.0.0`. The user subsequently reported native program creation and resumed editing with `gpt-5.6-luna` on their development board; see the [native validation addendum](native-validation-v0.1.0-experimental.2.md).
 
-本版增加与 CLI 同目录的 Code Mode host；主 CLI 保持 `.1` 的原始字节。已完成下述完整系统模拟验证，真实开发板升级及 Code Mode 运行仍待用户确认。
+本版增加与 CLI 同目录的 Code Mode host；主 CLI 保持 `.1` 的原始字节。已完成下述完整系统模拟验证；用户随后报告实机创建程序、退出后 `/resume` 并继续修改程序成功，仍使用 `gpt-5.6-luna`。
 
 ## Changes
 
@@ -25,6 +25,10 @@ All runtime tests below used local full-system QEMU 10.0.13, Linux 6.12.107, Sv3
 - All 1,960 V8 archive members matched the generated objects. All 188 preserved attribution files matched their inventories; the selected 561 Cargo package identities matched prior license coverage. Full final linker map and known upstream attribution limits remain disclosed under `licenses/code-mode/`.
 
 See [validation evidence](code-mode-evidence/) and [Code Mode notes](code-mode.md). Simulation is not physical-board certification, a full security audit, performance/stability coverage or validation of every optional runtime.
+
+## User-operated native result (2026-10-26)
+
+The user reported successful program creation, exit followed by `/resume`, and subsequent program editing with the existing `gpt-5.6-luna` model. This is native functional evidence supplied by the user; no new native program-execution or kernel-policy test is claimed. See the [full record and scope](native-validation-v0.1.0-experimental.2.md). The original release assets, tag and installer digest are unchanged.
 
 ## Upgrade and test on your board
 

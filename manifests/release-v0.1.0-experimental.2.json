@@ -15,7 +15,7 @@
     "bytes": 141972552,
     "sha256": "92797ef3600dd9a44fb9981a4c5ab2aca8eb6f9fe6196dab2ccd27c3d058112b"
   },
-  "physical_board_validation": "PENDING",
+  "physical_board_validation": "USER_REPORTED_FUNCTIONAL_PASS",
   "emulated_acceptance": "PASS",
   "model_api_calls": 0,
   "installer_regression_tests": 57,
@@ -88,5 +88,18 @@
       "bytes": 5369,
       "sha256": "672646e6e6517026cd274811ef0fb7fb810d8a5a444f8033dfdfc8a9a3cb0397"
     }
-  }
+  },
+  "native_validation": {
+    "report_date": "2026-10-26",
+    "source": "User report in project conversation; no terminal logs supplied",
+    "model": "gpt-5.6-luna",
+    "checks": [
+      "program creation",
+      "exit then /resume",
+      "program modification after resume"
+    ],
+    "record": "docs/native-validation-v0.1.0-experimental.2.md",
+    "limits": "No fresh native program-execution or kernel-policy result; exact flags and installed hashes not supplied"
+  },
+  "model_api_calls_scope": "Agent-operated emulated acceptance only; the later user-operated native report used the existing model"
 }

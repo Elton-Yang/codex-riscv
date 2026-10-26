@@ -40,7 +40,7 @@ cd "$HOME/codex-riscv-smoke"
 codex-riscv -c features.code_mode_only=true
 ```
 
-让模型创建一个小 Python 文件并执行。该选项只对本次启动启用 Code Mode，不写入配置；沿用现有认证与模型选择。CLI 自动寻找同目录的 host。新版开发板实测仍待确认；出现错误时保留日志，不要关闭沙箱来绕过。
+让模型创建一个小 Python 文件并执行。该选项只对本次启动启用 Code Mode，不写入配置；沿用现有认证与模型选择。CLI 自动寻找同目录的 host。用户已报告在开发板上使用 `gpt-5.6-luna` 创建程序、退出后 `/resume` 并继续修改程序成功，见[实机验证记录](docs/native-validation-v0.1.0-experimental.2.md)。出现错误时保留日志，不要关闭沙箱来绕过。
 
 管理命令：
 
@@ -63,9 +63,10 @@ sh install-codex-riscv.sh uninstall
 | 低地址冲突、100 GiB 地址空间限制 | 均按预期安全拒绝 |
 | 真实 CLI → host → 创建文件与执行 Python | 完整系统模拟通过；仅模型响应为本地模拟 |
 | workspace-write 内核检查 | Seccomp=2、NoNewPrivs=1、工作区外写入被拒绝 |
-| 新版开发板安装、升级与 Code Mode | **待用户实测** |
+| 用户开发板创建程序 | 用户报告使用 `gpt-5.6-luna` 成功 |
+| 退出 → `/resume` → 修改程序 | 用户报告成功 |
 
-历史 `.1` 在 VisionFive 2 / JH7110、Debian 13 上有启动、认证、模型选择、基础对话和只读沙箱拒绝行为的用户记录，不能替代 `.2` 的实机验证。参见[历史验证](docs/validation.md)、[新版发布说明](docs/release-notes-v0.1.0-experimental.2.md)与[新验收证据](docs/code-mode-evidence/)。
+历史 `.1` 在 VisionFive 2 / JH7110、Debian 13 上有启动、认证、模型选择、基础对话和只读沙箱拒绝行为的用户记录，`.2` 的程序创建与恢复编辑结果另见[用户实机记录](docs/native-validation-v0.1.0-experimental.2.md)。参见[历史验证](docs/validation.md)、[新版发布说明](docs/release-notes-v0.1.0-experimental.2.md)与[新验收证据](docs/code-mode-evidence/)。
 
 以上结果不代表完整安全审计、攻击抵抗认证、长期稳定性或其他板卡/内核兼容。完整 TUI、realtime 外部运行时、npm 更新器及显式 daemon、agents、remote server 仍未验证。
 

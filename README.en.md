@@ -40,7 +40,7 @@ cd "$HOME/codex-riscv-smoke"
 codex-riscv -c features.code_mode_only=true
 ```
 
-Ask it to create a small Python file and execute it. This enables Code Mode for this invocation only; existing authentication and model selection apply. The CLI finds `bin/codex-code-mode-host` beside its actual executable automatically. Native `.2` testing is pending; please retain errors rather than disable sandboxing.
+Ask it to create a small Python file and execute it. This enables Code Mode for this invocation only; existing authentication and model selection apply. The CLI finds `bin/codex-code-mode-host` beside its actual executable automatically. The user has reported native program creation and `/resume` followed by editing with `gpt-5.6-luna`; see [native validation](docs/native-validation-v0.1.0-experimental.2.md). Retain errors rather than disable sandboxing.
 
 Management commands:
 
@@ -63,9 +63,10 @@ Rollback switches program versions and does not undo edits made by Codex. Uninst
 | Low-Smi collision and 100 GiB VA limit | Expected fail-closed refusals passed |
 | Actual CLI → host → real patch/Python tools | Passed in full-system simulation; only model responses mocked |
 | Workspace-write kernel checks | Seccomp=2, NoNewPrivs=1, outside-workspace write denied |
-| New package install/upgrade/Code Mode on VisionFive 2 | **Pending user confirmation** |
+| User-operated native program creation on the development board | Reported success with `gpt-5.6-luna` |
+| Native exit → `/resume` → program editing | User reported success |
 
-The historical `.1` user tests covered VisionFive 2 / JH7110, Debian 13, startup, authentication/model choice/basic conversation and two read-only sandbox denial probes. They do not establish native `.2` Code Mode behavior. See [`.1` validation](docs/validation.md), [`.2` release notes](docs/release-notes-v0.1.0-experimental.2.md) and [new evidence](docs/code-mode-evidence/).
+The historical `.1` user tests covered VisionFive 2 / JH7110, Debian 13, startup, authentication/model choice/basic conversation and two read-only sandbox denial probes. Native `.2` creation and resumed editing are recorded separately in the [user report](docs/native-validation-v0.1.0-experimental.2.md). See [`.1` validation](docs/validation.md), [`.2` release notes](docs/release-notes-v0.1.0-experimental.2.md) and [new evidence](docs/code-mode-evidence/).
 
 These checks are not an exploit-resistance certification, full sandbox audit, long-term stability result or validation of other boards/kernels. Full TUI coverage, realtime runtime, npm updater and explicit packaged daemon/agents/remote-server workflows remain unvalidated.
 
