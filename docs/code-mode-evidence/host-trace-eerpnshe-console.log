@@ -1,0 +1,1103 @@
+
+OpenSBI v1.6
+   ____                    _____ ____ _____
+  / __ \                  / ____|  _ \_   _|
+ | |  | |_ __   ___ _ __ | (___ | |_) || |
+ | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
+ | |__| | |_) |  __/ | | |____) | |_) || |_
+  \____/| .__/ \___|_| |_|_____/|____/_____|
+        | |
+        |_|
+
+Platform Name               : riscv-virtio,qemu
+Platform Features           : medeleg
+Platform HART Count         : 2
+Platform IPI Device         : aclint-mswi
+Platform Timer Device       : aclint-mtimer @ 10000000Hz
+Platform Console Device     : uart8250
+Platform HSM Device         : ---
+Platform PMU Device         : ---
+Platform Reboot Device      : syscon-reboot
+Platform Shutdown Device    : syscon-poweroff
+Platform Suspend Device     : ---
+Platform CPPC Device        : ---
+Firmware Base               : 0x80000000
+Firmware Size               : 337 KB
+Firmware RW Offset          : 0x40000
+Firmware RW Size            : 81 KB
+Firmware Heap Offset        : 0x4a000
+Firmware Heap Size          : 41 KB (total), 2 KB (reserved), 13 KB (used), 25 KB (free)
+Firmware Scratch Size       : 4096 B (total), 440 B (used), 3656 B (free)
+Runtime SBI Version         : 2.0
+Standard SBI Extensions     : ipi,pmu,srst,hsm,rfnc,time,base,legacy,dbcn
+Experimental SBI Extensions : sse,fwft,dbtr
+
+Domain0 Name                : root
+Domain0 Boot HART           : 0
+Domain0 HARTs               : 0*,1*
+Domain0 Region00            : 0x0000000000100000-0x0000000000100fff M: (I,R,W) S/U: (R,W)
+Domain0 Region01            : 0x0000000010000000-0x0000000010000fff M: (I,R,W) S/U: (R,W)
+Domain0 Region02            : 0x0000000002000000-0x000000000200ffff M: (I,R,W) S/U: ()
+Domain0 Region03            : 0x0000000080040000-0x000000008005ffff M: (R,W) S/U: ()
+Domain0 Region04            : 0x0000000080000000-0x000000008003ffff M: (R,X) S/U: ()
+Domain0 Region05            : 0x000000000c400000-0x000000000c5fffff M: (I,R,W) S/U: (R,W)
+Domain0 Region06            : 0x000000000c000000-0x000000000c3fffff M: (I,R,W) S/U: (R,W)
+Domain0 Region07            : 0x0000000000000000-0xffffffffffffffff M: () S/U: (R,W,X)
+Domain0 Next Address        : 0x0000000080200000
+Domain0 Next Arg1           : 0x00000000ffe00000
+Domain0 Next Mode           : S-mode
+Domain0 SysReset            : yes
+Domain0 SysSuspend          : yes
+
+Boot HART ID                : 0
+Boot HART Domain            : root
+Boot HART Priv Version      : v1.12
+Boot HART Base ISA          : rv64imafdc
+Boot HART ISA Extensions    : sstc,zicntr,zihpm,sdtrig,svadu
+Boot HART PMP Count         : 16
+Boot HART PMP Granularity   : 2 bits
+Boot HART PMP Address Bits  : 54
+Boot HART MHPM Info         : 16 (0x0007fff8)
+Boot HART Debug Triggers    : 2 triggers
+Boot HART MIDELEG           : 0x0000000000000222
+Boot HART MEDELEG           : 0x000000000004b109
+[    0.000000] Linux version 6.12.107+deb13-riscv64 (debian-kernel@lists.debian.org) (riscv64-linux-gnu-gcc-14 (Debian 14.2.0-19) 14.2.0, GNU ld (GNU Binutils for Debian) 2.44) #1 SMP Debian 6.12.107-1 (2026-08-29)
+[    0.000000] random: crng init done
+[    0.000000] Machine model: riscv-virtio,qemu
+[    0.000000] SBI specification v2.0 detected
+[    0.000000] SBI implementation ID=0x1 Version=0x10006
+[    0.000000] SBI TIME extension detected
+[    0.000000] SBI IPI extension detected
+[    0.000000] SBI RFENCE extension detected
+[    0.000000] SBI SRST extension detected
+[    0.000000] SBI DBCN extension detected
+[    0.000000] efi: UEFI not found.
+[    0.000000] OF: reserved mem: 0x0000000080000000..0x000000008003ffff (256 KiB) nomap non-reusable mmode_resv1@80000000
+[    0.000000] OF: reserved mem: 0x0000000080040000..0x000000008005ffff (128 KiB) nomap non-reusable mmode_resv0@80040000
+[    0.000000] NUMA: Faking a node at [mem 0x0000000080000000-0x00000000ffffffff]
+[    0.000000] NODE_DATA(0) allocated [mem 0xffff2000-0xffff443f]
+[    0.000000] Zone ranges:
+[    0.000000]   DMA32    [mem 0x0000000080000000-0x00000000ffffffff]
+[    0.000000]   Normal   empty
+[    0.000000]   Device   empty
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000080000000-0x000000008005ffff]
+[    0.000000]   node   0: [mem 0x0000000080060000-0x00000000ffffffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000080000000-0x00000000ffffffff]
+[    0.000000] SBI HSM extension detected
+[    0.000000] riscv: base ISA extensions acdfim
+[    0.000000] riscv: ELF capabilities acdfim
+[    0.000000] percpu: Embedded 32 pages/cpu s90712 r8192 d32168 u131072
+[    0.000000] Kernel command line: console=ttyS0 rdinit=/bootstrap-init panic=-1 codex.mode=host-trace
+[    0.000000] Dentry cache hash table entries: 262144 (order: 9, 2097152 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 131072 (order: 8, 1048576 bytes, linear)
+[    0.000000] Fallback order for Node 0: 0 
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 524288
+[    0.000000] Policy zone: DMA32
+[    0.000000] mem auto-init: stack:all(zero), heap alloc:on, heap free:off
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=2, Nodes=1
+[    0.000000] ftrace: allocating 39507 entries in 155 pages
+[    0.000000] ftrace: allocated 155 pages with 5 groups
+[    0.000000] rcu: Hierarchical RCU implementation.
+[    0.000000] rcu: 	RCU restricting CPUs from NR_CPUS=128 to nr_cpu_ids=2.
+[    0.000000] 	Rude variant of Tasks RCU enabled.
+[    0.000000] 	Tracing variant of Tasks RCU enabled.
+[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 25 jiffies.
+[    0.000000] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=2
+[    0.000000] RCU Tasks Rude: Setting shift to 1 and lim to 1 rcu_task_cb_adjust=1 rcu_task_cpu_ids=2.
+[    0.000000] RCU Tasks Trace: Setting shift to 1 and lim to 1 rcu_task_cb_adjust=1 rcu_task_cpu_ids=2.
+[    0.000000] NR_IRQS: 64, nr_irqs: 64, preallocated irqs: 0
+[    0.000000] riscv-intc: 64 local interrupts mapped
+[    0.000000] riscv: providing IPIs using SBI IPI extension
+[    0.000000] rcu: srcu_init: Setting srcu_struct sizes based on contention.
+[    0.000000] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645041785100000 ns
+[    0.000000] clocksource: riscv_clocksource: mask: 0xffffffffffffffff max_cycles: 0x24e6a1710, max_idle_ns: 440795202120 ns
+[    0.000063] sched_clock: 64 bits at 10MHz, resolution 100ns, wraps every 4398046511100ns
+[    0.000180] riscv-timer: Timer interrupt in S-mode is available via sstc extension
+[    0.008354] Console: colour dummy device 80x25
+[    0.010831] Calibrating delay loop (skipped), value calculated using timer frequency.. 20.00 BogoMIPS (lpj=40000)
+[    0.010994] pid_max: default: 32768 minimum: 301
+[    0.012965] LSM: initializing lsm=lockdown,capability,landlock,yama,apparmor,tomoyo,bpf,ipe,ima,evm
+[    0.014035] landlock: Up and running.
+[    0.014059] Yama: disabled by default; enable with sysctl kernel.yama.*
+[    0.017065] AppArmor: AppArmor initialized
+[    0.017585] TOMOYO Linux initialized
+[    0.021531] LSM support for eBPF active
+[    0.023912] Mount-cache hash table entries: 4096 (order: 3, 32768 bytes, linear)
+[    0.023953] Mountpoint-cache hash table entries: 4096 (order: 3, 32768 bytes, linear)
+[    0.060544] ASID allocator using 16 bits (65536 entries)
+[    0.061540] rcu: Hierarchical SRCU implementation.
+[    0.061574] rcu: 	Max phase no-delay instances is 1000.
+[    0.063505] Timer migration: 1 hierarchy levels; 8 children per group; 1 crossnode level
+[    0.067308] EFI services will not be available.
+[    0.069148] smp: Bringing up secondary CPUs ...
+[    0.077629] smp: Brought up 1 node, 2 CPUs
+[    0.096087] node 0 deferred pages initialised in 12ms
+[    0.098395] Memory: 1924160K/2097152K available (10706K kernel code, 5220K rwdata, 10240K rodata, 2687K init, 708K bss, 169232K reserved, 0K cma-reserved)
+[    0.107426] devtmpfs: initialized
+[    0.121037] futex hash table entries: 512 (order: 3, 32768 bytes, linear)
+[    0.123909] pinctrl core: initialized pinctrl subsystem
+[    0.131972] DMI not present or invalid.
+[    0.137033] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+[    0.140400] DMA: preallocated 256 KiB GFP_KERNEL pool for atomic allocations
+[    0.140589] DMA: preallocated 256 KiB GFP_KERNEL|GFP_DMA32 pool for atomic allocations
+[    0.140807] audit: initializing netlink subsys (disabled)
+[    0.142900] audit: type=2000 audit(0.132:1): state=initialized audit_enabled=0 res=1
+[    0.148105] thermal_sys: Registered thermal governor 'fair_share'
+[    0.148147] thermal_sys: Registered thermal governor 'bang_bang'
+[    0.148188] thermal_sys: Registered thermal governor 'step_wise'
+[    0.148196] thermal_sys: Registered thermal governor 'user_space'
+[    0.148203] thermal_sys: Registered thermal governor 'power_allocator'
+[    0.148961] cpuidle: using governor ladder
+[    0.149344] cpuidle: using governor menu
+[    0.174578] cpu1: Ratio of byte access time to unaligned word access is 7.44, unaligned accesses are fast
+[    0.198822] cpu0: Ratio of byte access time to unaligned word access is 7.44, unaligned accesses are fast
+[    0.225544] HugeTLB: registered 1.00 GiB page size, pre-allocated 0 pages
+[    0.225572] HugeTLB: 16380 KiB vmemmap can be freed for a 1.00 GiB page
+[    0.225591] HugeTLB: registered 2.00 MiB page size, pre-allocated 0 pages
+[    0.225595] HugeTLB: 28 KiB vmemmap can be freed for a 2.00 MiB page
+[    0.236677] ACPI: Interpreter disabled.
+[    0.237551] iommu: Default domain type: Translated
+[    0.237585] iommu: DMA domain TLB invalidation policy: strict mode
+[    0.243453] pps_core: LinuxPPS API ver. 1 registered
+[    0.243472] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[    0.243521] PTP clock support registered
+[    0.253179] NetLabel: Initializing
+[    0.253206] NetLabel:  domain hash size = 128
+[    0.253220] NetLabel:  protocols = UNLABELED CIPSOv4 CALIPSO
+[    0.253965] NetLabel:  unlabeled traffic allowed by default
+[    0.262904] vgaarb: loaded
+[    0.264258] clocksource: Switched to clocksource riscv_clocksource
+[    0.271243] VFS: Disk quotas dquot_6.6.0
+[    0.271362] VFS: Dquot-cache hash table entries: 512 (order 0, 4096 bytes)
+[    0.276591] AppArmor: AppArmor Filesystem Enabled
+[    0.276990] pnp: PnP ACPI: disabled
+[    0.299663] NET: Registered PF_INET protocol family
+[    0.300772] IP idents hash table entries: 32768 (order: 6, 262144 bytes, linear)
+[    0.336967] tcp_listen_portaddr_hash hash table entries: 1024 (order: 2, 16384 bytes, linear)
+[    0.337065] Table-perturb hash table entries: 65536 (order: 6, 262144 bytes, linear)
+[    0.337157] TCP established hash table entries: 16384 (order: 5, 131072 bytes, linear)
+[    0.337459] TCP bind hash table entries: 16384 (order: 7, 524288 bytes, linear)
+[    0.337645] TCP: Hash tables configured (established 16384 bind 16384)
+[    0.338924] MPTCP token hash table entries: 2048 (order: 4, 49152 bytes, linear)
+[    0.339200] UDP hash table entries: 1024 (order: 3, 32768 bytes, linear)
+[    0.339404] UDP-Lite hash table entries: 1024 (order: 3, 32768 bytes, linear)
+[    0.340934] NET: Registered PF_UNIX/PF_LOCAL protocol family
+[    0.341301] NET: Registered PF_XDP protocol family
+[    0.341470] PCI: CLS 0 bytes, default 64
+[    0.346097] Trying to unpack rootfs image as initramfs...
+[    0.346999] Initialise system trusted keyrings
+[    0.349237] Key type blacklist registered
+[    0.350424] workingset: timestamp_bits=44 max_order=19 bucket_order=0
+[    0.350628] zbud: loaded
+[    0.352197] fuse: init (API version 7.41)
+[    0.354832] integrity: Platform Keyring initialized
+[    0.355064] integrity: Machine keyring initialized
+[    0.424666] Key type asymmetric registered
+[    0.424764] Asymmetric key parser 'x509' registered
+[    2.063022] Freeing initrd memory: 65084K
+[    2.073368] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 247)
+[    2.074048] io scheduler mq-deadline registered
+[    2.085120] riscv-plic: plic@c000000: mapped 95 interrupts with 2 handlers for 4 contexts.
+[    2.087488] ledtrig-cpu: registered to indicate activity on CPUs
+[    2.088707] pci-host-generic 30000000.pci: host bridge /soc/pci@30000000 ranges:
+[    2.089382] pci-host-generic 30000000.pci:       IO 0x0003000000..0x000300ffff -> 0x0000000000
+[    2.089830] pci-host-generic 30000000.pci:      MEM 0x0040000000..0x007fffffff -> 0x0040000000
+[    2.089876] pci-host-generic 30000000.pci:      MEM 0x0400000000..0x07ffffffff -> 0x0400000000
+[    2.090324] pci-host-generic 30000000.pci: Memory resource size exceeds max for 32 bits
+[    2.090715] pci-host-generic 30000000.pci: ECAM at [mem 0x30000000-0x3fffffff] for [bus 00-ff]
+[    2.091960] pci-host-generic 30000000.pci: PCI host bridge to bus 0000:00
+[    2.092345] pci_bus 0000:00: root bus resource [bus 00-ff]
+[    2.092419] pci_bus 0000:00: root bus resource [io  0x0000-0xffff]
+[    2.092457] pci_bus 0000:00: root bus resource [mem 0x40000000-0x7fffffff]
+[    2.092465] pci_bus 0000:00: root bus resource [mem 0x400000000-0x7ffffffff]
+[    2.093771] pci 0000:00:00.0: [1b36:0008] type 00 class 0x060000 conventional PCI endpoint
+[    2.097533] pci 0000:00:01.0: [1af4:1003] type 00 class 0x078000 conventional PCI endpoint
+[    2.097772] pci 0000:00:01.0: BAR 0 [io  0x0000-0x003f]
+[    2.097822] pci 0000:00:01.0: BAR 1 [mem 0x00000000-0x00000fff]
+[    2.097880] pci 0000:00:01.0: BAR 4 [mem 0x00000000-0x00003fff 64bit pref]
+[    2.099844] pci 0000:00:01.0: BAR 4 [mem 0x400000000-0x400003fff 64bit pref]: assigned
+[    2.100129] pci 0000:00:01.0: BAR 1 [mem 0x40000000-0x40000fff]: assigned
+[    2.100166] pci 0000:00:01.0: BAR 0 [io  0x0040-0x007f]: assigned
+[    2.100433] pci_bus 0000:00: resource 4 [io  0x0000-0xffff]
+[    2.100456] pci_bus 0000:00: resource 5 [mem 0x40000000-0x7fffffff]
+[    2.100465] pci_bus 0000:00: resource 6 [mem 0x400000000-0x7ffffffff]
+[    2.103247] SBI CPPC extension NOT detected!!
+[    2.107510] virtio-pci 0000:00:01.0: enabling device (0000 -> 0003)
+[    2.111484] Serial: 8250/16550 driver, 4 ports, IRQ sharing disabled
+[    2.122462] printk: legacy console [ttyS0] disabled
+[    2.125109] 10000000.serial: ttyS0 at MMIO 0x10000000 (irq = 13, base_baud = 230400) is a 16550A
+[    2.126618] printk: legacy console [ttyS0] enabled
+[    2.166597] mousedev: PS/2 mouse device common for all mice
+[    2.169672] goldfish_rtc 101000.rtc: registered as rtc0
+[    2.170499] goldfish_rtc 101000.rtc: setting system clock to 2026-10-26T04:45:28 UTC (1792989928)
+[    2.174971] riscv-pmu-sbi: SBI PMU extension is available
+[    2.175486] riscv-pmu-sbi: 16 firmware and 18 hardware counters
+[    2.175630] riscv-pmu-sbi: Perf sampling/filtering is not supported as sscof extension is not available
+[    2.178793] NET: Registered PF_INET6 protocol family
+[    2.188969] Segment Routing with IPv6
+[    2.189239] In-situ OAM (IOAM) with IPv6
+[    2.189697] mip6: Mobile IPv6
+[    2.189986] NET: Registered PF_PACKET protocol family
+[    2.190510] mpls_gso: MPLS GSO support
+[    2.203739] registered taskstats version 1
+[    2.206178] Loading compiled-in X.509 certificates
+[    2.275376] Loaded X.509 cert 'Build time autogenerated kernel key: 15c361a026a8712a0f3a4b6b0cee2b5ffefaa268'
+[    2.288815] Demotion targets for Node 0: null
+[    2.291801] Key type .fscrypt registered
+[    2.291907] Key type fscrypt-provisioning registered
+[    2.305526] Key type encrypted registered
+[    2.305691] AppArmor: AppArmor sha256 policy hashing enabled
+[    2.306290] ima: No TPM chip found, activating TPM-bypass!
+[    2.306440] ima: Allocated hash algorithm: sha256
+[    2.308285] ima: No architecture policies found
+[    2.308928] evm: Initialising EVM extended attributes:
+[    2.309037] evm: security.selinux
+[    2.309128] evm: security.SMACK64 (disabled)
+[    2.309201] evm: security.SMACK64EXEC (disabled)
+[    2.309277] evm: security.SMACK64TRANSMUTE (disabled)
+[    2.309358] evm: security.SMACK64MMAP (disabled)
+[    2.309436] evm: security.apparmor
+[    2.309495] evm: security.ima
+[    2.309548] evm: security.capability
+[    2.309617] evm: HMAC attrs: 0x1
+[    2.331873] clk: Disabling unused clocks
+[    2.332235] PM: genpd: Disabling unused power domains
+[    2.394220] Freeing unused kernel image (initmem) memory: 2684K
+[    2.416913] Run /bootstrap-init as init process
+GUEST_SWITCH_ROOT_TO_ORDINARY_TMPFS
+VALIDATION_GUEST_BEGIN mode=host-trace
+Linux (none) 6.12.107+deb13-riscv64 #1 SMP Debian 6.12.107-1 (2026-08-29) riscv64 GNU/Linux
+processor	: 0
+hart		: 0
+isa		: rv64imafdc_zicntr_zicsr_zifencei_zihpm_zca_zcd_sstc_svvptc
+mmu		: sv39
+mvendorid	: 0x0
+marchid		: 0x0
+mimpid		: 0x0
+hart isa	: rv64imafdc_zicntr_zicsr_zifencei_zihpm_zca_zcd_sstc_svvptc
+
+processor	: 1
+hart		: 1
+isa		: rv64imafdc_zicntr_zicsr_zifencei_zihpm_zca_zcd_sstc_svvptc
+mmu		: sv39
+mvendorid	: 0x0
+marchid		: 0x0
+mimpid		: 0x0
+hart isa	: rv64imafdc_zicntr_zicsr_zifencei_zihpm_zca_zcd_sstc_svvptc
+
+validation-root / tmpfs rw,relatime,size=1433600k,inode64 0 0
+GUEST_RANDOMIZE_VA_SPACE=2
+VIRTIO_PORT_READY=/dev/vport0p1
+HOST_MMAP_TRACE_BEGIN
+167   mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x3fa46e6000
+167   mmap(NULL, 935864, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 4, 0) = 0x3fa4601000
+167   mmap(0x3fa46d8000, 57344, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 4, 0xd7000) = 0x3fa46d8000
+167   mmap(NULL, 4791512, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 4, 0) = 0x3fa416f000
+167   mmap(0x3fa4580000, 516096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 4, 0x411000) = 0x3fa4580000
+167   mmap(0x3fa45fe000, 11480, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x3fa45fe000
+167   mmap(NULL, 111528, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 4, 0) = 0x3fa4153000
+167   mmap(0x3fa416d000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 4, 0x19000) = 0x3fa416d000
+167   mmap(NULL, 540688, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 4, 0) = 0x3fa40ce000
+167   mmap(0x3fa4151000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 4, 0x82000) = 0x3fa4151000
+167   mmap(NULL, 1465872, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 4, 0) = 0x3fa3f68000
+167   mmap(0x3fa40bd000, 20480, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 4, 0x155000) = 0x3fa40bd000
+167   mmap(0x3fa40c2000, 48656, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x3fa40c2000
+167   mmap(NULL, 94608, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 4, 0) = 0x3fa3f50000
+167   mmap(0x3fa3f66000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 4, 0x15000) = 0x3fa3f66000
+167   mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x3fa3f4e000
+167   mmap(NULL, 807064, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 4, 0) = 0x3fa3e88000
+167   mmap(0x3fa3f4c000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 4, 0xc3000) = 0x3fa3f4c000
+167   mmap(NULL, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x3fa3e85000
+167   mprotect(0x3fa40bd000, 12288, PROT_READ) = 0
+167   mprotect(0x3fa3f4c000, 4096, PROT_READ) = 0
+167   mprotect(0x3fa3f66000, 4096, PROT_READ) = 0
+167   mprotect(0x3fa4151000, 4096, PROT_READ) = 0
+167   mprotect(0x3fa416d000, 4096, PROT_READ) = 0
+167   mprotect(0x3fa4580000, 503808, PROT_READ) = 0
+167   mprotect(0x3fa46d8000, 40960, PROT_READ) = 0
+167   mprotect(0x2adfac5000, 2093056, PROT_READ) = 0
+167   mprotect(0x3fa470b000, 8192, PROT_READ) = 0
+167   prlimit64(0, RLIMIT_STACK, NULL, {rlim_cur=8192*1024, rlim_max=RLIM64_INFINITY}) = 0
+167   syscall_0x102(0x3fd58bdcb8, 0x1, 0, 0, 0, 0x112d) = 0
+167   mmap(0x10000, 4295950336, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x10000
+167   mmap(0x3000000000, 34359738368, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x3000000000
+167   mmap(0x37976db000, 17179869184, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x3ba3e85000
+167   mprotect(0x3ba3e86000, 4096, PROT_READ|PROT_WRITE) = 0
+167   mprotect(0x3000004000, 16384, PROT_READ|PROT_WRITE) = 0
+167   prlimit64(0, RLIMIT_STACK, NULL, {rlim_cur=8192*1024, rlim_max=RLIM64_INFINITY}) = 0
+167   mprotect(0x3000008000, 32768, PROT_READ|PROT_WRITE) = 0
+167   mprotect(0x3000010000, 49152, PROT_READ|PROT_WRITE) = 0
+167   mprotect(0x300001c000, 16384, PROT_READ|PROT_WRITE) = 0
+167   mprotect(0x3000020000, 16384, PROT_READ|PROT_WRITE) = 0
+167   mmap(NULL, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_STACK, -1, 0) = 0x3ba3e82000
+167   mprotect(0x3ba3e82000, 4096, PROT_NONE) = 0
+167   mprotect(0x3000024000, 16384, PROT_READ|PROT_WRITE) = 0
+167   mprotect(0x3000028000, 49152, PROT_READ|PROT_WRITE) = 0
+167   mprotect(0x3000034000, 49152, PROT_READ|PROT_WRITE) = 0
+167   mprotect(0x3000040000, 49152, PROT_READ|PROT_WRITE) = 0
+167   mprotect(0x300004c000, 49152, PROT_READ|PROT_WRITE) = 0
+167   mprotect(0x3000058000, 32768, PROT_READ|PROT_WRITE) = 0
+167   mprotect(0x3000060000, 16384, PROT_READ|PROT_WRITE) = 0
+167   mprotect(0x3000064000, 16384, PROT_READ|PROT_WRITE) = 0
+167   mprotect(0x3000068000, 16384, PROT_READ|PROT_WRITE) = 0
+167   mprotect(0x300006c000, 16384, PROT_READ|PROT_WRITE) = 0
+167   mprotect(0x3000070000, 16384, PROT_READ|PROT_WRITE) = 0
+167   mprotect(0x3000074000, 49152, PROT_READ|PROT_WRITE) = 0
+167   mprotect(0x3000080000, 49152, PROT_READ|PROT_WRITE) = 0
+167   mprotect(0x300008c000, 32768, PROT_READ|PROT_WRITE) = 0
+167   mprotect(0x3000094000, 16384, PROT_READ|PROT_WRITE) = 0
+167   mprotect(0x3000098000, 16384, PROT_READ|PROT_WRITE) = 0
+167   mprotect(0x300009c000, 16384, PROT_READ|PROT_WRITE) = 0
+167   mprotect(0x30000a0000, 49152, PROT_READ|PROT_WRITE) = 0
+167   mprotect(0x30000ac000, 32768, PROT_READ|PROT_WRITE) = 0
+167   mprotect(0x30000b4000, 49152, PROT_READ|PROT_WRITE) = 0
+167   mprotect(0x30000c0000, 32768, PROT_READ|PROT_WRITE) = 0
+167   mprotect(0x30000c8000, 16384, PROT_READ|PROT_WRITE) = 0
+167   mprotect(0x30000cc000, 49152, PROT_READ|PROT_WRITE) = 0
+167   mprotect(0x30000d8000, 16384, PROT_READ|PROT_WRITE) = 0
+167   mmap(NULL, 2101248, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_STACK, -1, 0) = 0x3ba3c81000
+167   mprotect(0x3ba3c82000, 2097152, PROT_READ|PROT_WRITE) = 0
+168   mmap(NULL, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_STACK, -1, 0) = 0x3ba3c7e000
+168   mprotect(0x3ba3c7e000, 4096, PROT_NONE) = 0
+168   mprotect(0x30000dc000, 16384, PROT_READ|PROT_WRITE) = 0
+167   mmap(NULL, 2101248, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_STACK, -1, 0) = 0x3ba3a7d000
+167   mprotect(0x3ba3a7e000, 2097152, PROT_READ|PROT_WRITE) = 0
+169   mmap(NULL, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_STACK, -1, 0) = 0x3ba3a7a000
+169   mprotect(0x3ba3a7a000, 4096, PROT_NONE) = 0
+167   mmap(NULL, 2101248, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_STACK, -1, 0) = 0x3ba3879000
+167   mprotect(0x3ba387a000, 2097152, PROT_READ|PROT_WRITE) = 0
+170   mmap(NULL, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_STACK, -1, 0) = 0x3ba3876000
+170   mprotect(0x3ba3876000, 4096, PROT_NONE) = 0
+167   mmap(NULL, 2101248, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_STACK, -1, 0) = 0x3ba3675000
+167   mprotect(0x3ba3676000, 2097152, PROT_READ|PROT_WRITE) = 0
+171   mmap(NULL, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_STACK, -1, 0) = 0x3ba3672000
+171   mprotect(0x3ba3672000, 4096, PROT_NONE) = 0
+167   mprotect(0x30000e0000, 16384, PROT_READ|PROT_WRITE) = 0
+167   mmap(NULL, 65536, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x3ba3662000
+167   mmap(NULL, 65536, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x3ba3652000
+167   mmap(NULL, 1114112, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x3ba3542000
+167   mmap(NULL, 8392704, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_STACK, -1, 0) = 0x3ba2d41000
+167   mprotect(0x3ba2d42000, 8388608, PROT_READ|PROT_WRITE) = 0
+167   mprotect(0x2adfcd1000, 4096, PROT_READ) = 0
+167   syscall_0x102(0x3fd58af780, 0x1, 0, 0, 0, 0x4a) = 0
+167   mprotect(0x30000e4000, 49152, PROT_READ|PROT_WRITE) = 0
+167   mmap(0xff00000000, 176093655040, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_NORESERVE, -1, 0) = 0x1d613c000
+167   munmap(0x1d613c000, 703348736)    = 0
+167   munmap(0x2a00000000, 3591614464)  = 0
+167   mprotect(0x30000f0000, 655360, PROT_READ|PROT_WRITE) = 0
+167   mmap(0xd300000000, 5368705024, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_NORESERVE, -1, 0) = 0x3a62d42000
+167   munmap(0x3a62d42000, 2636898304)  = 0
+167   munmap(0x3b40000000, 1658064896)  = 0
+167   mprotect(0x3b00000000, 16777216, PROT_NONE) = 0
+167   syscall_0x102(0x3fd58af7a0, 0x1, 0, 0, 0, 0x4a) = 0
+167   mprotect(0x3000190000, 16384, PROT_READ|PROT_WRITE) = 0
+167   mmap(NULL, 134230016, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_NORESERVE, -1, 0) = 0x3b9ad3e000
+167   munmap(0x3b9ad3e000, 8192)        = 0
+167   munmap(0x3ba2d40000, 4096)        = 0
+167   mmap(0xb800000000, 51539603456, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_NORESERVE, -1, 0) = -1 ENOMEM (Cannot allocate memory)
+167   mmap(0xc00000000, 17179869184, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_NORESERVE, -1, 0) = 0x2c00000000
+167   mmap(NULL, 2101248, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_STACK, -1, 0) = 0x3b9ab3f000
+167   mprotect(0x3b9ab40000, 2097152, PROT_READ|PROT_WRITE) = 0
+173   mmap(NULL, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_STACK, -1, 0) = 0x3b9ab3c000
+173   mprotect(0x3b9ab3c000, 4096, PROT_NONE) = 0
+173   mprotect(0x3000194000, 131072, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x30001b4000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x30001b8000, 65536, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x30001c8000, 65536, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x30001d8000, 65536, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x30001e8000, 81920, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3ba4086000, 4096, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3000204000, 65536, PROT_READ|PROT_WRITE) = 0
+173   mmap(0x2af0000000, 268435456, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_NORESERVE, -1, 0) = 0x2af0000000
+173   mprotect(0x2af0000000, 268435456, PROT_READ|PROT_WRITE|PROT_EXEC) = 0
+173   mprotect(0x3000214000, 49152, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x2c02000000, 131072, PROT_READ|PROT_WRITE) = 0
+173   mmap(NULL, 536883200, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_NORESERVE, -1, 0) = 0x3b7ab39000
+173   munmap(0x3b7ab39000, 12288)       = 0
+173   mprotect(0x3b7ab3c000, 65536, PROT_READ) = 0
+173   mprotect(0x3b7ab4c000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3b7ab50000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3b7ab54000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3b7ab58000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3b7ab3c000, 65536, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3b7ab3c000, 65536, PROT_READ) = 0
+173   mmap(NULL, 536883200, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_NORESERVE, -1, 0) = 0x3b5ab39000
+173   munmap(0x3b5ab39000, 12288)       = 0
+173   mprotect(0x3b5ab3c000, 65536, PROT_READ) = 0
+173   mprotect(0x3b5ab4c000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3b5ab50000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3b5ab54000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3b5ab58000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mmap(NULL, 67121152, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_NORESERVE, -1, 0) = 0x3b56b39000
+173   munmap(0x3b56b39000, 12288)       = 0
+173   mprotect(0x3b56b3c000, 65536, PROT_READ) = 0
+173   mprotect(0x3b56b4c000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3b56b50000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3b56b54000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3b56b58000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3b56b3c000, 65536, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3b56b3c000, 65536, PROT_READ) = 0
+173   mprotect(0x3000220000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3000224000, 49152, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3000230000, 49152, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x1200000000, 262144, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x1200040000, 262144, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x1200080000, 262144, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x12000c0000, 262144, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x1200100000, 262144, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x1200140000, 262144, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x1200180000, 262144, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x12001c0000, 262144, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x1200200000, 262144, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x1200240000, 262144, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x1200280000, 262144, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x12002c0000, 262144, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x1200300000, 262144, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x1200340000, 262144, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x1200380000, 262144, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x12003c0000, 262144, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x1200400000, 262144, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x1200440000, 262144, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x1200480000, 262144, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x12004c0000, 262144, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x1200500000, 262144, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x1200540000, 262144, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x1200580000, 262144, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x12005c0000, 262144, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x12005e2000, 122880, PROT_NONE) = 0
+173   mprotect(0x3b7ab3c000, 65536, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3b56b3c000, 65536, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x300023c000, 32768, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3000244000, 32768, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x300024c000, 32768, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3000254000, 65536, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3000264000, 114688, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3b56b3c000, 65536, PROT_READ) = 0
+173   mprotect(0x3b7ab3c000, 65536, PROT_READ) = 0
+173   mprotect(0x1200000000, 262144, PROT_READ) = 0
+173   mprotect(0x1200040000, 262144, PROT_READ) = 0
+173   mprotect(0x1200080000, 262144, PROT_READ) = 0
+173   mprotect(0x12000c0000, 262144, PROT_READ) = 0
+173   mprotect(0x1200100000, 262144, PROT_READ) = 0
+173   mprotect(0x1200140000, 262144, PROT_READ) = 0
+173   mprotect(0x1200180000, 262144, PROT_READ) = 0
+173   mprotect(0x12001c0000, 262144, PROT_READ) = 0
+173   mprotect(0x1200200000, 262144, PROT_READ) = 0
+173   mprotect(0x1200240000, 262144, PROT_READ) = 0
+173   mprotect(0x1200280000, 262144, PROT_READ) = 0
+173   mprotect(0x12002c0000, 262144, PROT_READ) = 0
+173   mprotect(0x1200300000, 262144, PROT_READ) = 0
+173   mprotect(0x1200340000, 262144, PROT_READ) = 0
+173   mprotect(0x1200380000, 262144, PROT_READ) = 0
+173   mprotect(0x12003c0000, 262144, PROT_READ) = 0
+173   mprotect(0x1200400000, 262144, PROT_READ) = 0
+173   mprotect(0x1200440000, 262144, PROT_READ) = 0
+173   mprotect(0x1200480000, 262144, PROT_READ) = 0
+173   mprotect(0x12004c0000, 262144, PROT_READ) = 0
+173   mprotect(0x1200500000, 262144, PROT_READ) = 0
+173   mprotect(0x1200540000, 262144, PROT_READ) = 0
+173   mprotect(0x1200580000, 262144, PROT_READ) = 0
+173   mprotect(0x12005c0000, 139264, PROT_READ) = 0
+173   mmap(NULL, 268447744, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_NORESERVE, -1, 0) = 0x3b46b39000
+173   munmap(0x3b46b39000, 12288)       = 0
+173   mprotect(0x3b46b3c000, 65536, PROT_READ) = 0
+173   mprotect(0x3b46b4c000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3b46b50000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3b46b54000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3b46b58000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mmap(NULL, 536883200, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_NORESERVE, -1, 0) = 0x3adfffd000
+173   munmap(0x3adfffd000, 12288)       = 0
+173   mprotect(0x3ae0000000, 65536, PROT_READ) = 0
+173   mprotect(0x3ae0010000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3ae0014000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3ae0018000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3ae001c000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mmap(NULL, 67121152, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_NORESERVE, -1, 0) = 0x3b42b39000
+173   munmap(0x3b42b39000, 12288)       = 0
+173   mprotect(0x3b42b3c000, 65536, PROT_READ) = 0
+173   mprotect(0x3b42b4c000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3b42b50000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3b42b54000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3b42b58000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3b46b3c000, 65536, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3b46b3c000, 65536, PROT_READ) = 0
+173   mprotect(0x3000280000, 163840, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x30002a8000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x30002ac000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x30002b0000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x30002b4000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x30002b8000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x30002bc000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x30002c0000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x30002c4000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x30002c8000, 16384, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x30002cc000, 163840, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x1201000000, 262144, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3b01000000, 262144, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3b46b3c000, 65536, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3b46b3c000, 65536, PROT_READ) = 0
+173   mprotect(0x30002f4000, 49152, PROT_READ|PROT_WRITE) = 0
+173   mmap(0x1200010000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200010000
+173   mmap(0x1200030000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200030000
+173   mmap(0x1200050000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200050000
+173   mmap(0x1200070000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200070000
+173   mmap(0x1200090000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200090000
+173   mmap(0x1200110000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200110000
+173   mmap(0x12000f0000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x12000f0000
+173   mmap(0x12000b0000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x12000b0000
+173   mmap(0x12000d0000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x12000d0000
+173   mmap(0x1200130000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200130000
+173   mmap(0x1200150000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200150000
+173   mmap(0x1200170000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200170000
+173   mmap(0x1200190000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200190000
+173   mprotect(0x1201040000, 262144, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x3000300000, 49152, PROT_READ|PROT_WRITE) = 0
+173   mprotect(0x300030c000, 49152, PROT_READ|PROT_WRITE) = 0
+173   mmap(0x2c02000000, 131072, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x2c02000000
+173   mprotect(0x3b01000000, 262144, PROT_NONE) = 0
+173   mprotect(0x1200000000, 262144, PROT_NONE) = 0
+173   mprotect(0x1200040000, 262144, PROT_NONE) = 0
+173   mprotect(0x1200080000, 262144, PROT_NONE) = 0
+173   mprotect(0x12000c0000, 262144, PROT_NONE) = 0
+173   mprotect(0x1200100000, 262144, PROT_NONE) = 0
+173   mprotect(0x1200140000, 262144, PROT_NONE) = 0
+173   mprotect(0x1200180000, 262144, PROT_NONE) = 0
+173   mprotect(0x12001c0000, 262144, PROT_NONE) = 0
+173   mprotect(0x1200200000, 262144, PROT_NONE) = 0
+173   mprotect(0x1200240000, 262144, PROT_NONE) = 0
+173   mprotect(0x1200280000, 262144, PROT_NONE) = 0
+167   mmap(NULL, 2101248, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_STACK, -1, 0) = 0x3b4293b000
+167   mprotect(0x3b4293c000, 2097152, PROT_READ|PROT_WRITE <unfinished ...>
+173   mprotect(0x12002c0000, 262144, PROT_NONE <unfinished ...>
+167   <... mprotect resumed>)           = 0
+173   <... mprotect resumed>)           = 0
+173   mprotect(0x1200300000, 262144, PROT_NONE) = 0
+173   mprotect(0x1200340000, 262144, PROT_NONE) = 0
+173   mprotect(0x1200380000, 262144, PROT_NONE) = 0
+173   mprotect(0x12003c0000, 262144, PROT_NONE) = 0
+173   mprotect(0x1200400000, 262144, PROT_NONE) = 0
+173   mprotect(0x1200440000, 262144, PROT_NONE) = 0
+173   mprotect(0x1200480000, 262144, PROT_NONE) = 0
+173   mprotect(0x12004c0000, 262144, PROT_NONE) = 0
+174   mmap(NULL, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_STACK, -1, 0) = 0x3b42938000
+174   mprotect(0x3b42938000, 4096, PROT_NONE) = 0
+173   mprotect(0x1200500000, 262144, PROT_NONE) = 0
+173   mprotect(0x1200540000, 262144, PROT_NONE) = 0
+173   mprotect(0x1200580000, 262144, PROT_NONE) = 0
+173   mprotect(0x12005c0000, 262144, PROT_NONE) = 0
+173   mmap(0x3b7ab3c000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x3b7ab3c000
+167   mmap(NULL, 2101248, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_STACK, -1, 0 <unfinished ...>
+173   munmap(0x3b7ab3c000, 536870912 <unfinished ...>
+167   <... mmap resumed>)               = 0x3b42737000
+167   mprotect(0x3b42738000, 2097152, PROT_READ|PROT_WRITE <unfinished ...>
+173   <... munmap resumed>)             = 0
+167   <... mprotect resumed>)           = 0
+173   mmap(0x3ae0000000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x3ae0000000
+173   munmap(0x3ae0000000, 536870912)   = 0
+173   mmap(0x3b5ab3c000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x3b5ab3c000
+175   mmap(NULL, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_STACK, -1, 0) = 0x3b9ab39000
+173   munmap(0x3b5ab3c000, 536870912 <unfinished ...>
+175   mprotect(0x3b9ab39000, 4096, PROT_NONE) = 0
+173   <... munmap resumed>)             = 0
+175   mprotect(0x3000318000, 131072, PROT_READ|PROT_WRITE) = 0
+173   mmap(0x3b56b3c000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x3b56b3c000
+173   munmap(0x3b56b3c000, 67108864)    = 0
+173   mmap(0x3b42b3c000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x3b42b3c000
+173   munmap(0x3b42b3c000, 67108864)    = 0
+173   mmap(0x3b46b3c000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x3b46b3c000
+173   munmap(0x3b46b3c000, 268435456)   = 0
+173   munmap(0x3b9ab3c000, 12288)       = 0
+175   mprotect(0x2c02000000, 131072, PROT_READ|PROT_WRITE) = 0
+175   mmap(NULL, 536883200, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_NORESERVE, -1, 0) = 0x3b7ab36000
+175   munmap(0x3b7ab36000, 8192)        = 0
+175   munmap(0x3b9ab38000, 4096)        = 0
+175   mprotect(0x3b7ab38000, 65536, PROT_READ) = 0
+175   mprotect(0x3b7ab48000, 16384, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x3b7ab4c000, 16384, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x3b7ab50000, 16384, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x3b7ab54000, 16384, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x3b7ab38000, 65536, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x3b7ab38000, 65536, PROT_READ) = 0
+175   mmap(NULL, 536883200, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_NORESERVE, -1, 0) = 0x3b5ab35000
+175   munmap(0x3b5ab35000, 12288)       = 0
+175   mprotect(0x3b5ab38000, 65536, PROT_READ) = 0
+175   mprotect(0x3b5ab48000, 16384, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x3b5ab4c000, 16384, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x3b5ab50000, 16384, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x3b5ab54000, 16384, PROT_READ|PROT_WRITE) = 0
+175   mmap(NULL, 67121152, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_NORESERVE, -1, 0) = 0x3b56b35000
+175   munmap(0x3b56b35000, 12288)       = 0
+175   mprotect(0x3b56b38000, 65536, PROT_READ) = 0
+175   mprotect(0x3b56b48000, 16384, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x3b56b4c000, 16384, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x3b56b50000, 16384, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x3b56b54000, 16384, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x3b56b38000, 65536, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x3b56b38000, 65536, PROT_READ) = 0
+175   mprotect(0x1200000000, 262144, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x1200040000, 262144, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x1200080000, 262144, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x12000c0000, 262144, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x1200100000, 262144, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x1200140000, 262144, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x1200180000, 262144, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x12001c0000, 262144, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x1200200000, 262144, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x1200240000, 262144, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x1200280000, 262144, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x12002c0000, 262144, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x1200300000, 262144, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x1200340000, 262144, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x1200380000, 262144, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x12003c0000, 262144, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x1200400000, 262144, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x1200440000, 262144, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x1200480000, 262144, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x12004c0000, 262144, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x1200500000, 262144, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x1200540000, 262144, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x1200580000, 262144, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x12005c0000, 262144, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x12005e2000, 122880, PROT_NONE) = 0
+175   mprotect(0x3b7ab38000, 65536, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x3b56b38000, 65536, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x3b56b38000, 65536, PROT_READ) = 0
+175   mprotect(0x3b7ab38000, 65536, PROT_READ) = 0
+175   mprotect(0x1200000000, 262144, PROT_READ) = 0
+175   mprotect(0x1200040000, 262144, PROT_READ) = 0
+175   mprotect(0x1200080000, 262144, PROT_READ) = 0
+175   mprotect(0x12000c0000, 262144, PROT_READ) = 0
+175   mprotect(0x1200100000, 262144, PROT_READ) = 0
+175   mprotect(0x1200140000, 262144, PROT_READ) = 0
+175   mprotect(0x1200180000, 262144, PROT_READ) = 0
+175   mprotect(0x12001c0000, 262144, PROT_READ) = 0
+175   mprotect(0x1200200000, 262144, PROT_READ) = 0
+175   mprotect(0x1200240000, 262144, PROT_READ) = 0
+175   mprotect(0x1200280000, 262144, PROT_READ) = 0
+175   mprotect(0x12002c0000, 262144, PROT_READ) = 0
+175   mprotect(0x1200300000, 262144, PROT_READ) = 0
+175   mprotect(0x1200340000, 262144, PROT_READ) = 0
+175   mprotect(0x1200380000, 262144, PROT_READ) = 0
+175   mprotect(0x12003c0000, 262144, PROT_READ) = 0
+175   mprotect(0x1200400000, 262144, PROT_READ) = 0
+175   mprotect(0x1200440000, 262144, PROT_READ) = 0
+175   mprotect(0x1200480000, 262144, PROT_READ) = 0
+175   mprotect(0x12004c0000, 262144, PROT_READ) = 0
+175   mprotect(0x1200500000, 262144, PROT_READ) = 0
+175   mprotect(0x1200540000, 262144, PROT_READ) = 0
+175   mprotect(0x1200580000, 262144, PROT_READ) = 0
+175   mprotect(0x12005c0000, 139264, PROT_READ) = 0
+175   mmap(NULL, 268447744, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_NORESERVE, -1, 0) = 0x3b46b35000
+175   munmap(0x3b46b35000, 12288)       = 0
+175   mprotect(0x3b46b38000, 65536, PROT_READ) = 0
+175   mprotect(0x3b46b48000, 16384, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x3b46b4c000, 16384, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x3b46b50000, 16384, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x3b46b54000, 16384, PROT_READ|PROT_WRITE) = 0
+175   mmap(NULL, 536883200, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_NORESERVE, -1, 0) = 0x3adfffd000
+175   munmap(0x3adfffd000, 12288)       = 0
+175   mprotect(0x3ae0000000, 65536, PROT_READ) = 0
+175   mprotect(0x3ae0010000, 16384, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x3ae0014000, 16384, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x3ae0018000, 16384, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x3ae001c000, 16384, PROT_READ|PROT_WRITE) = 0
+175   mmap(NULL, 67121152, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_NORESERVE, -1, 0) = 0x3adbffd000
+175   munmap(0x3adbffd000, 12288)       = 0
+175   mprotect(0x3adc000000, 65536, PROT_READ) = 0
+175   mprotect(0x3adc010000, 16384, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x3adc014000, 16384, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x3adc018000, 16384, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x3adc01c000, 16384, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x3b46b38000, 65536, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x3b46b38000, 65536, PROT_READ) = 0
+175   mprotect(0x3b01000000, 262144, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x3b46b38000, 65536, PROT_READ|PROT_WRITE) = 0
+175   mprotect(0x3b46b38000, 65536, PROT_READ) = 0
+175   mmap(0x1200010000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200010000
+175   mmap(0x1200030000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200030000
+175   mmap(0x1200050000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200050000
+175   mmap(0x1200070000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200070000
+175   mmap(0x1200090000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200090000
+175   mmap(0x1200110000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200110000
+175   mmap(0x12000f0000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x12000f0000
+175   mmap(0x12000b0000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x12000b0000
+175   mmap(0x12000d0000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x12000d0000
+175   mmap(0x1200130000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200130000
+175   mmap(0x1200150000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200150000
+175   mmap(0x1200170000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200170000
+175   mmap(0x1200190000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200190000
+175   mmap(0x2c02000000, 131072, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x2c02000000
+175   mprotect(0x3b01000000, 262144, PROT_NONE) = 0
+175   mprotect(0x1200000000, 262144, PROT_NONE) = 0
+175   mprotect(0x1200040000, 262144, PROT_NONE) = 0
+175   mprotect(0x1200080000, 262144, PROT_NONE) = 0
+175   mprotect(0x12000c0000, 262144, PROT_NONE) = 0
+175   mprotect(0x1200100000, 262144, PROT_NONE) = 0
+175   mprotect(0x1200140000, 262144, PROT_NONE) = 0
+175   mprotect(0x1200180000, 262144, PROT_NONE) = 0
+175   mprotect(0x12001c0000, 262144, PROT_NONE) = 0
+175   mprotect(0x1200200000, 262144, PROT_NONE) = 0
+175   mprotect(0x1200240000, 262144, PROT_NONE) = 0
+175   mprotect(0x1200280000, 262144, PROT_NONE) = 0
+175   mprotect(0x12002c0000, 262144, PROT_NONE) = 0
+175   mprotect(0x1200300000, 262144, PROT_NONE) = 0
+175   mprotect(0x1200340000, 262144, PROT_NONE) = 0
+175   mprotect(0x1200380000, 262144, PROT_NONE) = 0
+175   mprotect(0x12003c0000, 262144, PROT_NONE) = 0
+175   mprotect(0x1200400000, 262144, PROT_NONE) = 0
+175   mprotect(0x1200440000, 262144, PROT_NONE) = 0
+175   mprotect(0x1200480000, 262144, PROT_NONE) = 0
+176   mmap(NULL, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_STACK, -1, 0 <unfinished ...>
+175   mprotect(0x12004c0000, 262144, PROT_NONE <unfinished ...>
+176   <... mmap resumed>)               = 0x3b9ab3c000
+176   mprotect(0x3b9ab3c000, 4096, PROT_NONE <unfinished ...>
+175   <... mprotect resumed>)           = 0
+176   <... mprotect resumed>)           = 0
+175   mprotect(0x1200500000, 262144, PROT_NONE) = 0
+175   mprotect(0x1200540000, 262144, PROT_NONE) = 0
+175   mprotect(0x1200580000, 262144, PROT_NONE) = 0
+175   mprotect(0x12005c0000, 262144, PROT_NONE) = 0
+175   mmap(0x3b7ab38000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x3b7ab38000
+175   munmap(0x3b7ab38000, 536870912)   = 0
+175   mmap(0x3ae0000000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x3ae0000000
+175   munmap(0x3ae0000000, 536870912)   = 0
+175   mmap(0x3b5ab38000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x3b5ab38000
+175   munmap(0x3b5ab38000, 536870912)   = 0
+175   mmap(0x3b56b38000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x3b56b38000
+175   munmap(0x3b56b38000, 67108864)    = 0
+175   mmap(0x3adc000000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x3adc000000
+175   munmap(0x3adc000000, 67108864)    = 0
+175   mmap(0x3b46b38000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x3b46b38000
+175   munmap(0x3b46b38000, 268435456)   = 0
+175   munmap(0x3b9ab39000, 12288)       = 0
+176   mprotect(0x2c02000000, 131072, PROT_READ|PROT_WRITE) = 0
+176   mmap(NULL, 536883200, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_NORESERVE, -1, 0) = 0x3b7ab39000
+176   munmap(0x3b7ab39000, 12288)       = 0
+176   mprotect(0x3b7ab3c000, 65536, PROT_READ) = 0
+176   mprotect(0x3b7ab4c000, 16384, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x3b7ab50000, 16384, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x3b7ab54000, 16384, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x3b7ab58000, 16384, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x3b7ab3c000, 65536, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x3b7ab3c000, 65536, PROT_READ) = 0
+176   mmap(NULL, 536883200, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_NORESERVE, -1, 0) = 0x3b5ab39000
+176   munmap(0x3b5ab39000, 12288)       = 0
+176   mprotect(0x3b5ab3c000, 65536, PROT_READ) = 0
+176   mprotect(0x3b5ab4c000, 16384, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x3b5ab50000, 16384, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x3b5ab54000, 16384, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x3b5ab58000, 16384, PROT_READ|PROT_WRITE) = 0
+176   mmap(NULL, 67121152, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_NORESERVE, -1, 0) = 0x3b56b39000
+176   munmap(0x3b56b39000, 12288)       = 0
+176   mprotect(0x3b56b3c000, 65536, PROT_READ) = 0
+176   mprotect(0x3b56b4c000, 16384, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x3b56b50000, 16384, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x3b56b54000, 16384, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x3b56b58000, 16384, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x3b56b3c000, 65536, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x3b56b3c000, 65536, PROT_READ) = 0
+176   mprotect(0x1200000000, 262144, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x1200040000, 262144, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x1200080000, 262144, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x12000c0000, 262144, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x1200100000, 262144, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x1200140000, 262144, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x1200180000, 262144, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x12001c0000, 262144, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x1200200000, 262144, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x1200240000, 262144, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x1200280000, 262144, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x12002c0000, 262144, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x1200300000, 262144, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x1200340000, 262144, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x1200380000, 262144, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x12003c0000, 262144, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x1200400000, 262144, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x1200440000, 262144, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x1200480000, 262144, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x12004c0000, 262144, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x1200500000, 262144, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x1200540000, 262144, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x1200580000, 262144, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x12005c0000, 262144, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x12005e2000, 122880, PROT_NONE) = 0
+176   mprotect(0x3b7ab3c000, 65536, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x3b56b3c000, 65536, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x3b56b3c000, 65536, PROT_READ) = 0
+176   mprotect(0x3b7ab3c000, 65536, PROT_READ) = 0
+176   mprotect(0x1200000000, 262144, PROT_READ) = 0
+176   mprotect(0x1200040000, 262144, PROT_READ) = 0
+176   mprotect(0x1200080000, 262144, PROT_READ) = 0
+176   mprotect(0x12000c0000, 262144, PROT_READ) = 0
+176   mprotect(0x1200100000, 262144, PROT_READ) = 0
+176   mprotect(0x1200140000, 262144, PROT_READ) = 0
+176   mprotect(0x1200180000, 262144, PROT_READ) = 0
+176   mprotect(0x12001c0000, 262144, PROT_READ) = 0
+176   mprotect(0x1200200000, 262144, PROT_READ) = 0
+176   mprotect(0x1200240000, 262144, PROT_READ) = 0
+176   mprotect(0x1200280000, 262144, PROT_READ) = 0
+176   mprotect(0x12002c0000, 262144, PROT_READ) = 0
+176   mprotect(0x1200300000, 262144, PROT_READ) = 0
+176   mprotect(0x1200340000, 262144, PROT_READ) = 0
+176   mprotect(0x1200380000, 262144, PROT_READ) = 0
+176   mprotect(0x12003c0000, 262144, PROT_READ) = 0
+176   mprotect(0x1200400000, 262144, PROT_READ) = 0
+176   mprotect(0x1200440000, 262144, PROT_READ) = 0
+176   mprotect(0x1200480000, 262144, PROT_READ) = 0
+176   mprotect(0x12004c0000, 262144, PROT_READ) = 0
+176   mprotect(0x1200500000, 262144, PROT_READ) = 0
+176   mprotect(0x1200540000, 262144, PROT_READ) = 0
+176   mprotect(0x1200580000, 262144, PROT_READ) = 0
+176   mprotect(0x12005c0000, 139264, PROT_READ) = 0
+176   mmap(NULL, 268447744, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_NORESERVE, -1, 0) = 0x3b46b39000
+176   munmap(0x3b46b39000, 12288)       = 0
+176   mprotect(0x3b46b3c000, 65536, PROT_READ) = 0
+176   mprotect(0x3b46b4c000, 16384, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x3b46b50000, 16384, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x3b46b54000, 16384, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x3b46b58000, 16384, PROT_READ|PROT_WRITE) = 0
+176   mmap(NULL, 536883200, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_NORESERVE, -1, 0) = 0x3adfffd000
+176   munmap(0x3adfffd000, 12288)       = 0
+176   mprotect(0x3ae0000000, 65536, PROT_READ) = 0
+176   mprotect(0x3ae0010000, 16384, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x3ae0014000, 16384, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x3ae0018000, 16384, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x3ae001c000, 16384, PROT_READ|PROT_WRITE) = 0
+176   mmap(NULL, 67121152, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_NORESERVE, -1, 0) = 0x3adbffd000
+176   munmap(0x3adbffd000, 12288)       = 0
+176   mprotect(0x3adc000000, 65536, PROT_READ) = 0
+176   mprotect(0x3adc010000, 16384, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x3adc014000, 16384, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x3adc018000, 16384, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x3adc01c000, 16384, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x3b46b3c000, 65536, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x3b46b3c000, 65536, PROT_READ) = 0
+176   mprotect(0x3b01000000, 262144, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x3b46b3c000, 65536, PROT_READ|PROT_WRITE) = 0
+176   mprotect(0x3b46b3c000, 65536, PROT_READ) = 0
+176   mmap(0x1200010000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200010000
+176   mmap(0x1200030000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200030000
+176   mmap(0x1200050000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200050000
+176   mmap(0x1200070000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200070000
+176   mmap(0x1200090000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200090000
+176   mmap(0x1200110000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200110000
+176   mmap(0x12000f0000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x12000f0000
+176   mmap(0x12000b0000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x12000b0000
+176   mmap(0x12000d0000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x12000d0000
+176   mmap(0x1200130000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200130000
+176   mmap(0x1200150000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200150000
+176   mmap(0x1200170000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200170000
+176   mmap(0x1200190000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200190000
+176   mmap(0x2c02000000, 131072, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x2c02000000
+176   mprotect(0x3b01000000, 262144, PROT_NONE) = 0
+176   mprotect(0x1200000000, 262144, PROT_NONE) = 0
+176   mprotect(0x1200040000, 262144, PROT_NONE) = 0
+176   mprotect(0x1200080000, 262144, PROT_NONE) = 0
+176   mprotect(0x12000c0000, 262144, PROT_NONE) = 0
+176   mprotect(0x1200100000, 262144, PROT_NONE) = 0
+176   mprotect(0x1200140000, 262144, PROT_NONE) = 0
+176   mprotect(0x1200180000, 262144, PROT_NONE) = 0
+176   mprotect(0x12001c0000, 262144, PROT_NONE) = 0
+176   mprotect(0x1200200000, 262144, PROT_NONE) = 0
+176   mprotect(0x1200240000, 262144, PROT_NONE) = 0
+176   mprotect(0x1200280000, 262144, PROT_NONE) = 0
+176   mprotect(0x12002c0000, 262144, PROT_NONE <unfinished ...>
+177   mmap(NULL, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_STACK, -1, 0 <unfinished ...>
+176   <... mprotect resumed>)           = 0
+177   <... mmap resumed>)               = 0x3b46b39000
+177   mprotect(0x3b46b39000, 4096, PROT_NONE <unfinished ...>
+176   mprotect(0x1200300000, 262144, PROT_NONE <unfinished ...>
+177   <... mprotect resumed>)           = 0
+176   <... mprotect resumed>)           = 0
+176   mprotect(0x1200340000, 262144, PROT_NONE) = 0
+176   mprotect(0x1200380000, 262144, PROT_NONE) = 0
+176   mprotect(0x12003c0000, 262144, PROT_NONE) = 0
+176   mprotect(0x1200400000, 262144, PROT_NONE) = 0
+176   mprotect(0x1200440000, 262144, PROT_NONE) = 0
+176   mprotect(0x1200480000, 262144, PROT_NONE) = 0
+176   mprotect(0x12004c0000, 262144, PROT_NONE) = 0
+176   mprotect(0x1200500000, 262144, PROT_NONE) = 0
+176   mprotect(0x1200540000, 262144, PROT_NONE) = 0
+176   mprotect(0x1200580000, 262144, PROT_NONE) = 0
+176   mprotect(0x12005c0000, 262144, PROT_NONE) = 0
+176   mmap(0x3b7ab3c000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x3b7ab3c000
+176   munmap(0x3b7ab3c000, 536870912)   = 0
+176   mmap(0x3ae0000000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x3ae0000000
+176   munmap(0x3ae0000000, 536870912)   = 0
+176   mmap(0x3b5ab3c000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x3b5ab3c000
+176   munmap(0x3b5ab3c000, 536870912)   = 0
+176   mmap(0x3b56b3c000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x3b56b3c000
+176   munmap(0x3b56b3c000, 67108864)    = 0
+176   mmap(0x3adc000000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x3adc000000
+176   munmap(0x3adc000000, 67108864)    = 0
+176   mmap(0x3b46b3c000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x3b46b3c000
+176   munmap(0x3b46b3c000, 268435456)   = 0
+176   munmap(0x3b9ab3c000, 12288)       = 0
+177   mprotect(0x2c02000000, 131072, PROT_READ|PROT_WRITE) = 0
+177   mmap(NULL, 536883200, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_NORESERVE, -1, 0) = 0x3b7ab3c000
+177   munmap(0x3b9ab3c000, 12288)       = 0
+177   mprotect(0x3b7ab3c000, 65536, PROT_READ) = 0
+177   mprotect(0x3b7ab4c000, 16384, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x3b7ab50000, 16384, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x3b7ab54000, 16384, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x3b7ab58000, 16384, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x3b7ab3c000, 65536, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x3b7ab3c000, 65536, PROT_READ) = 0
+177   mmap(NULL, 536883200, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_NORESERVE, -1, 0) = 0x3b5ab39000
+177   munmap(0x3b5ab39000, 12288)       = 0
+177   mprotect(0x3b5ab3c000, 65536, PROT_READ) = 0
+177   mprotect(0x3b5ab4c000, 16384, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x3b5ab50000, 16384, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x3b5ab54000, 16384, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x3b5ab58000, 16384, PROT_READ|PROT_WRITE) = 0
+177   mmap(NULL, 67121152, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_NORESERVE, -1, 0) = 0x3b56b39000
+177   munmap(0x3b56b39000, 12288)       = 0
+177   mprotect(0x3b56b3c000, 65536, PROT_READ) = 0
+177   mprotect(0x3b56b4c000, 16384, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x3b56b50000, 16384, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x3b56b54000, 16384, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x3b56b58000, 16384, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x3b56b3c000, 65536, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x3b56b3c000, 65536, PROT_READ) = 0
+177   mprotect(0x1200000000, 262144, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x1200040000, 262144, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x1200080000, 262144, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x12000c0000, 262144, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x1200100000, 262144, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x1200140000, 262144, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x1200180000, 262144, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x12001c0000, 262144, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x1200200000, 262144, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x1200240000, 262144, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x1200280000, 262144, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x12002c0000, 262144, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x1200300000, 262144, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x1200340000, 262144, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x1200380000, 262144, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x12003c0000, 262144, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x1200400000, 262144, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x1200440000, 262144, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x1200480000, 262144, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x12004c0000, 262144, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x1200500000, 262144, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x1200540000, 262144, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x1200580000, 262144, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x12005c0000, 262144, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x12005e2000, 122880, PROT_NONE) = 0
+177   mprotect(0x3b7ab3c000, 65536, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x3b56b3c000, 65536, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x3b56b3c000, 65536, PROT_READ) = 0
+177   mprotect(0x3b7ab3c000, 65536, PROT_READ) = 0
+177   mprotect(0x1200000000, 262144, PROT_READ) = 0
+177   mprotect(0x1200040000, 262144, PROT_READ) = 0
+177   mprotect(0x1200080000, 262144, PROT_READ) = 0
+177   mprotect(0x12000c0000, 262144, PROT_READ) = 0
+177   mprotect(0x1200100000, 262144, PROT_READ) = 0
+177   mprotect(0x1200140000, 262144, PROT_READ) = 0
+177   mprotect(0x1200180000, 262144, PROT_READ) = 0
+177   mprotect(0x12001c0000, 262144, PROT_READ) = 0
+177   mprotect(0x1200200000, 262144, PROT_READ) = 0
+177   mprotect(0x1200240000, 262144, PROT_READ) = 0
+177   mprotect(0x1200280000, 262144, PROT_READ) = 0
+177   mprotect(0x12002c0000, 262144, PROT_READ) = 0
+177   mprotect(0x1200300000, 262144, PROT_READ) = 0
+177   mprotect(0x1200340000, 262144, PROT_READ) = 0
+177   mprotect(0x1200380000, 262144, PROT_READ) = 0
+177   mprotect(0x12003c0000, 262144, PROT_READ) = 0
+177   mprotect(0x1200400000, 262144, PROT_READ) = 0
+177   mprotect(0x1200440000, 262144, PROT_READ) = 0
+177   mprotect(0x1200480000, 262144, PROT_READ) = 0
+177   mprotect(0x12004c0000, 262144, PROT_READ) = 0
+177   mprotect(0x1200500000, 262144, PROT_READ) = 0
+177   mprotect(0x1200540000, 262144, PROT_READ) = 0
+177   mprotect(0x1200580000, 262144, PROT_READ) = 0
+177   mprotect(0x12005c0000, 139264, PROT_READ) = 0
+177   mmap(NULL, 268447744, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_NORESERVE, -1, 0) = 0x3aefffd000
+177   munmap(0x3aefffd000, 12288)       = 0
+177   mprotect(0x3af0000000, 65536, PROT_READ) = 0
+177   mprotect(0x3af0010000, 16384, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x3af0014000, 16384, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x3af0018000, 16384, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x3af001c000, 16384, PROT_READ|PROT_WRITE) = 0
+177   mmap(NULL, 536883200, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_NORESERVE, -1, 0) = 0x3acfffd000
+177   munmap(0x3acfffd000, 12288)       = 0
+177   mprotect(0x3ad0000000, 65536, PROT_READ) = 0
+177   mprotect(0x3ad0010000, 16384, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x3ad0014000, 16384, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x3ad0018000, 16384, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x3ad001c000, 16384, PROT_READ|PROT_WRITE) = 0
+177   mmap(NULL, 67121152, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_NORESERVE, -1, 0) = 0x3b52b39000
+177   munmap(0x3b52b39000, 12288)       = 0
+177   mprotect(0x3b52b3c000, 65536, PROT_READ) = 0
+177   mprotect(0x3b52b4c000, 16384, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x3b52b50000, 16384, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x3b52b54000, 16384, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x3b52b58000, 16384, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x3af0000000, 65536, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x3af0000000, 65536, PROT_READ) = 0
+177   mprotect(0x3b01000000, 262144, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x3af0000000, 65536, PROT_READ|PROT_WRITE) = 0
+177   mprotect(0x3af0000000, 65536, PROT_READ) = 0
+177   mmap(0x1200010000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200010000
+177   mmap(0x1200030000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200030000
+177   mmap(0x1200050000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200050000
+177   mmap(0x1200070000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200070000
+177   mmap(0x1200090000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200090000
+177   mmap(0x1200110000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200110000
+177   mmap(0x12000f0000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x12000f0000
+177   mmap(0x12000b0000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x12000b0000
+177   mmap(0x12000d0000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x12000d0000
+177   mmap(0x1200130000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200130000
+177   mmap(0x1200150000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200150000
+177   mmap(0x1200170000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200170000
+177   mmap(0x1200190000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1200190000
+177   mmap(0x2c02000000, 131072, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x2c02000000
+177   mprotect(0x3b01000000, 262144, PROT_NONE) = 0
+177   mprotect(0x1200000000, 262144, PROT_NONE) = 0
+177   mprotect(0x1200040000, 262144, PROT_NONE) = 0
+177   mprotect(0x1200080000, 262144, PROT_NONE) = 0
+177   mprotect(0x12000c0000, 262144, PROT_NONE) = 0
+177   mprotect(0x1200100000, 262144, PROT_NONE) = 0
+177   mprotect(0x1200140000, 262144, PROT_NONE) = 0
+177   mprotect(0x1200180000, 262144, PROT_NONE) = 0
+177   mprotect(0x12001c0000, 262144, PROT_NONE) = 0
+177   mprotect(0x1200200000, 262144, PROT_NONE) = 0
+177   mprotect(0x1200240000, 262144, PROT_NONE) = 0
+177   mprotect(0x1200280000, 262144, PROT_NONE) = 0
+177   mprotect(0x12002c0000, 262144, PROT_NONE) = 0
+177   mprotect(0x1200300000, 262144, PROT_NONE) = 0
+177   mprotect(0x1200340000, 262144, PROT_NONE) = 0
+177   mprotect(0x1200380000, 262144, PROT_NONE) = 0
+177   mprotect(0x12003c0000, 262144, PROT_NONE) = 0
+177   mprotect(0x1200400000, 262144, PROT_NONE) = 0
+177   mprotect(0x1200440000, 262144, PROT_NONE) = 0
+177   mprotect(0x1200480000, 262144, PROT_NONE) = 0
+177   mprotect(0x12004c0000, 262144, PROT_NONE) = 0
+177   mprotect(0x1200500000, 262144, PROT_NONE) = 0
+177   mprotect(0x1200540000, 262144, PROT_NONE) = 0
+177   mprotect(0x1200580000, 262144, PROT_NONE) = 0
+177   mprotect(0x12005c0000, 262144, PROT_NONE) = 0
+177   mmap(0x3b7ab3c000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x3b7ab3c000
+177   munmap(0x3b7ab3c000, 536870912)   = 0
+177   mmap(0x3ad0000000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x3ad0000000
+177   munmap(0x3ad0000000, 536870912)   = 0
+177   mmap(0x3b5ab3c000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x3b5ab3c000
+177   munmap(0x3b5ab3c000, 536870912)   = 0
+177   mmap(0x3b56b3c000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x3b56b3c000
+177   munmap(0x3b56b3c000, 67108864)    = 0
+177   mmap(0x3b52b3c000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x3b52b3c000
+177   munmap(0x3b52b3c000, 67108864)    = 0
+177   mmap(0x3af0000000, 65536, PROT_NONE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x3af0000000
+177   munmap(0x3af0000000, 268435456)   = 0
+177   munmap(0x3b46b39000, 12288)       = 0
+174   munmap(0x3b42938000, 12288)       = 0
+171   munmap(0x3ba3672000, 12288)       = 0
+168   munmap(0x3ba3c7e000, 12288)       = 0
+169   munmap(0x3ba3a7a000, 12288)       = 0
+170   munmap(0x3ba3876000, 12288)       = 0
+HOST_MMAP_TRACE_END
+VALIDATION_MODE_EXIT=0
+VALIDATION_GUEST_END
+[    6.845065] reboot: Power down

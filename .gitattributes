@@ -1,2 +1,8 @@
 # Preserve original license bytes and hashes, including upstream line endings.
 licenses/** -text -whitespace
+
+# Preserve raw evidence, replay patches and third-party attribution verbatim.
+docs/code-mode-evidence/** -text -whitespace
+patches/code-mode/*.patch -whitespace
+licenses/code-mode/** -text -whitespace
+tests/code-mode/**/*.log -text -whitespace

@@ -1,0 +1,15 @@
+{
+  "component": "deno_core_icudata",
+  "version": "0.78.0",
+  "crate_vcs_revision": "9adfc1019ed4fce2e873c8bc7aebec09928010c8",
+  "crate_relative_path": "src/icudtl.dat",
+  "bytes": 10876560,
+  "sha256": "9f48c7f9c7c94d516a14870707e910ab94d75ae640ff6842c4af53276cd26ebe",
+  "git_blob_sha1": "9655a2e17f08c56d6dbbc47f6e52e3fd3ef2436e",
+  "matches_icu_repository": "https://chromium.googlesource.com/chromium/deps/icu.git",
+  "matches_icu_revision": "d578f2e8b7bd5938e21cfb6bf15c079e0aa5b738",
+  "matches_icu_path": "common/icudtl.dat",
+  "source_listing_url": "https://chromium.googlesource.com/chromium/deps/icu.git/+/d578f2e8b7bd5938e21cfb6bf15c079e0aa5b738/common/?format=JSON",
+  "exact_git_blob_match": true,
+  "icu_license": "files/native/third_party/icu/LICENSE"
+}

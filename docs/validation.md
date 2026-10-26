@@ -1,3 +1,5 @@
+> This file records historical `.1` CLI validation. Current `.2` Code Mode results are in [release notes](release-notes-v0.1.0-experimental.2.md) and [evidence](code-mode-evidence/).
+
 # Validation record / 验证记录
 
 Date: 2026-10-25 UTC. Scope: a preliminary cross-build, emulated checks, and subsequent user-operated native checks on one VisionFive 2 board. This remains an experimental adaptation, not a complete platform port.

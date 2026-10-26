@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "protocol": 1,
+  "checks": [
+    "real host handshake",
+    "JavaScript arithmetic",
+    "store/load across cells",
+    "mock nested tool roundtrip",
+    "notify callback",
+    "fixed Python file creation",
+    "fixed host-native Python execution",
+    "yield/wait/terminate",
+    "clean shutdown"
+  ],
+  "limits": [
+    "test delegate, not Codex tool-policy handlers",
+    "not OS sandbox enforcement or full CLI integration",
+    "no account, model API, or user device used"
+  ]
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "component": "third_party/libunwind/src",
+    "revision": "1fd455816c724182cf8736811182bf0c37b03035",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "component": "third_party/libc++abi/src",
+    "revision": "8f11bb1d4438d0239d0dfc1bd9456a9f31629dda",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "component": "third_party/libc++/src",
+    "revision": "b16984ce99c702355a5b2b4c52574e82cec41fb9",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "component": "third_party/llvm-libc/src",
+    "revision": "75ae50cd48c8a9d70f552ccff040029968778da9",
+    "error": "HTTP Error 404: Not Found"
+  }
+]

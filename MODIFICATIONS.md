@@ -18,3 +18,20 @@ The scripts, packaging, documentation and generated notice collections in this
 repository were prepared with an AI assistant for this community experiment.
 Their authorship is separate from the upstream OpenAI project. Existing
 copyright and attribution notices are preserved; no endorsement is implied.
+
+## Code Mode in v0.1.0-experimental.2 (2026-10-26)
+
+The released CLI is byte-identical to `.1`. A separate host builds rusty_v8
+152.2.0 / V8 15.2.124.1 from the pinned published crate and native source inputs.
+The Codex runtime requires secure V8 initialization on RISC-V. V8 snapshot and
+native constants agree on a 32 GiB cage, two unchanged 64 GiB guards and existing
+typed-array masks. PartitionAlloc advisory placement is adapted for Sv39;
+Oilpan gains a non-fixed exact-size aligned-reservation fallback without
+changing its cage size, compression or red zone. These are experimental
+placement adaptations, not an ASLR improvement or security certification.
+
+Replay patches are under patches/code-mode/. Test-only low-Smi preinit and V8
+intrinsics remain in a separate regression executable, never in the host.
+The installer now checks both binaries before activating `.2`, preserving the
+standalone launcher and existing user configuration. See the `.2` release notes
+for actual emulated tests and pending physical-board confirmation.

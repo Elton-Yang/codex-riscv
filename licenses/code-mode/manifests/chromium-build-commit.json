@@ -1,0 +1,125 @@
+{
+  "sha": "2c779f961da7f5632d6836113112179e67938868",
+  "node_id": "C_kwDOCYWyLdoAKDJjNzc5Zjk2MWRhN2Y1NjMyZDY4MzYxMTMxMTIxNzllNjc5Mzg4Njg",
+  "commit": {
+    "author": {
+      "name": "Bartek Iwańczuk",
+      "email": "biwanczuk@gmail.com",
+      "date": "2026-07-15T18:30:53Z"
+    },
+    "committer": {
+      "name": "Nathan Whitaker",
+      "email": "nathan@deno.com",
+      "date": "2026-07-29T21:19:51Z"
+    },
+    "message": "Scope musl to the target toolchain (enables arm64 musl cross builds) (#206)\n\nTighten the use_musl guards from !toolchain_for_rust_host_build_tools to\ncurrent_toolchain == default_toolchain, so musl applies only to the target\ntoolchain. For cross builds (e.g. x64 host -> arm64 target) this keeps the x64\nhost and snapshot toolchains (clang_x64_v8_arm64) on glibc automatically,\nwithout needing per-arch glibc toolchain variants. x86_64 musl is unchanged\n(its host is already the non-default clang_x64_glibc).",
+    "tree": {
+      "sha": "cb15783947766baf6f7203010974886339c117af",
+      "url": "https://api.github.com/repos/denoland/chromium_build/git/trees/cb15783947766baf6f7203010974886339c117af"
+    },
+    "url": "https://api.github.com/repos/denoland/chromium_build/git/commits/2c779f961da7f5632d6836113112179e67938868",
+    "comment_count": 0,
+    "verification": {
+      "verified": false,
+      "reason": "unsigned",
+      "signature": null,
+      "payload": null,
+      "verified_at": null
+    }
+  },
+  "url": "https://api.github.com/repos/denoland/chromium_build/commits/2c779f961da7f5632d6836113112179e67938868",
+  "html_url": "https://github.com/denoland/chromium_build/commit/2c779f961da7f5632d6836113112179e67938868",
+  "comments_url": "https://api.github.com/repos/denoland/chromium_build/commits/2c779f961da7f5632d6836113112179e67938868/comments",
+  "author": {
+    "login": "bartlomieju",
+    "id": 13602871,
+    "node_id": "MDQ6VXNlcjEzNjAyODcx",
+    "avatar_url": "https://avatars.githubusercontent.com/u/13602871?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/bartlomieju",
+    "html_url": "https://github.com/bartlomieju",
+    "followers_url": "https://api.github.com/users/bartlomieju/followers",
+    "following_url": "https://api.github.com/users/bartlomieju/following{/other_user}",
+    "gists_url": "https://api.github.com/users/bartlomieju/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/bartlomieju/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/bartlomieju/subscriptions",
+    "organizations_url": "https://api.github.com/users/bartlomieju/orgs",
+    "repos_url": "https://api.github.com/users/bartlomieju/repos",
+    "events_url": "https://api.github.com/users/bartlomieju/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/bartlomieju/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "committer": {
+    "login": "nathanwhit",
+    "id": 17734409,
+    "node_id": "MDQ6VXNlcjE3NzM0NDA5",
+    "avatar_url": "https://avatars.githubusercontent.com/u/17734409?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/nathanwhit",
+    "html_url": "https://github.com/nathanwhit",
+    "followers_url": "https://api.github.com/users/nathanwhit/followers",
+    "following_url": "https://api.github.com/users/nathanwhit/following{/other_user}",
+    "gists_url": "https://api.github.com/users/nathanwhit/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/nathanwhit/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/nathanwhit/subscriptions",
+    "organizations_url": "https://api.github.com/users/nathanwhit/orgs",
+    "repos_url": "https://api.github.com/users/nathanwhit/repos",
+    "events_url": "https://api.github.com/users/nathanwhit/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/nathanwhit/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "parents": [
+    {
+      "sha": "d1b597f98015d1e0c23abcabf6233df83f4d4f99",
+      "url": "https://api.github.com/repos/denoland/chromium_build/commits/d1b597f98015d1e0c23abcabf6233df83f4d4f99",
+      "html_url": "https://github.com/denoland/chromium_build/commit/d1b597f98015d1e0c23abcabf6233df83f4d4f99"
+    }
+  ],
+  "stats": {
+    "total": 11,
+    "additions": 6,
+    "deletions": 5
+  },
+  "files": [
+    {
+      "sha": "436f71f5661f71139898ecbb411b5c8d1acd0de0",
+      "filename": "config/c++/BUILD.gn",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "blob_url": "https://github.com/denoland/chromium_build/blob/2c779f961da7f5632d6836113112179e67938868/config%2Fc%2B%2B%2FBUILD.gn",
+      "raw_url": "https://github.com/denoland/chromium_build/raw/2c779f961da7f5632d6836113112179e67938868/config%2Fc%2B%2B%2FBUILD.gn",
+      "contents_url": "https://api.github.com/repos/denoland/chromium_build/contents/config%2Fc%2B%2B%2FBUILD.gn?ref=2c779f961da7f5632d6836113112179e67938868",
+      "patch": "@@ -23,7 +23,7 @@ config(\"runtime_library\") {\n   # V8's bundled libc++ gates its ctype rune table on __GLIBC__, which\n   # musl doesn't define; use libc++'s portable default rune table and\n   # flag musl for the remaining locale differences. Target only.\n-  if (use_musl && !toolchain_for_rust_host_build_tools) {\n+  if (use_musl && current_toolchain == default_toolchain) {\n     defines += [\n       \"_LIBCPP_PROVIDES_DEFAULT_RUNE_TABLE\",\n       \"_LIBCPP_HAS_MUSL_LIBC\","
+    },
+    {
+      "sha": "7c2781d66d8bb2398932acd0379e5769b3a92632",
+      "filename": "config/rust.gni",
+      "status": "modified",
+      "additions": 4,
+      "deletions": 3,
+      "changes": 7,
+      "blob_url": "https://github.com/denoland/chromium_build/blob/2c779f961da7f5632d6836113112179e67938868/config%2Frust.gni",
+      "raw_url": "https://github.com/denoland/chromium_build/raw/2c779f961da7f5632d6836113112179e67938868/config%2Frust.gni",
+      "contents_url": "https://api.github.com/repos/denoland/chromium_build/contents/config%2Frust.gni?ref=2c779f961da7f5632d6836113112179e67938868",
+      "patch": "@@ -345,10 +345,11 @@ if (is_linux || is_chromeos) {\n \n # When targeting musl, rewrite the gnu triple to its musl counterpart\n # (x86_64-unknown-linux-gnu -> x86_64-unknown-linux-musl, etc.) so V8's\n-# internal Rust crates + libstd are built for musl. The host build-tools\n-# toolchain must stay glibc, so exclude it.\n+# internal Rust crates + libstd are built for musl. Only the default (target)\n+# toolchain is musl; host and snapshot toolchains (which build executable build\n+# tools that run on the glibc build host) stay glibc.\n if (use_musl && rust_abi_target != \"\" &&\n-    !toolchain_for_rust_host_build_tools) {\n+    current_toolchain == default_toolchain) {\n   rust_abi_target = string_replace(rust_abi_target, \"-gnu\", \"-musl\")\n }\n "
+    },
+    {
+      "sha": "b8d97a93251ba65a44175645d2bbc73c0cc3288c",
+      "filename": "config/sysroot.gni",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "blob_url": "https://github.com/denoland/chromium_build/blob/2c779f961da7f5632d6836113112179e67938868/config%2Fsysroot.gni",
+      "raw_url": "https://github.com/denoland/chromium_build/raw/2c779f961da7f5632d6836113112179e67938868/config%2Fsysroot.gni",
+      "contents_url": "https://api.github.com/repos/denoland/chromium_build/contents/config%2Fsysroot.gni?ref=2c779f961da7f5632d6836113112179e67938868",
+      "patch": "@@ -24,7 +24,7 @@ declare_args() {\n if (sysroot == \"\") {\n   if (current_os == target_os && current_cpu == target_cpu &&\n       target_sysroot != \"\" && use_musl &&\n-      !toolchain_for_rust_host_build_tools) {\n+      current_toolchain == default_toolchain) {\n     sysroot = target_sysroot\n   } else if (is_android) {\n     import(\"//build/config/android/config.gni\")"
+    }
+  ]
+}

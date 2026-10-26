@@ -1,0 +1,15 @@
+{
+  "uname": [
+    "Linux",
+    "(none)",
+    "6.12.107+deb13-riscv64",
+    "#1 SMP Debian 6.12.107-1 (2026-08-29)",
+    "riscv64"
+  ],
+  "mmu_modes": [
+    "sv39",
+    "sv39"
+  ],
+  "randomize_va_space": 2,
+  "cpuinfo": "processor\t: 0\nhart\t\t: 0\nisa\t\t: rv64imafdc_zicntr_zicsr_zifencei_zihpm_zca_zcd_sstc_svvptc\nmmu\t\t: sv39\nmvendorid\t: 0x0\nmarchid\t\t: 0x0\nmimpid\t\t: 0x0\nhart isa\t: rv64imafdc_zicntr_zicsr_zifencei_zihpm_zca_zcd_sstc_svvptc\n\nprocessor\t: 1\nhart\t\t: 1\nisa\t\t: rv64imafdc_zicntr_zicsr_zifencei_zihpm_zca_zcd_sstc_svvptc\nmmu\t\t: sv39\nmvendorid\t: 0x0\nmarchid\t\t: 0x0\nmimpid\t\t: 0x0\nhart isa\t: rv64imafdc_zicntr_zicsr_zifencei_zihpm_zca_zcd_sstc_svvptc\n\n"
+}

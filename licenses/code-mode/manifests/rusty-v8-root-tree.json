@@ -1,0 +1,208 @@
+{
+  "sha": "2768994f664e8a6e3aba27503606c58339136e2a",
+  "url": "https://api.github.com/repos/denoland/rusty_v8/git/trees/2768994f664e8a6e3aba27503606c58339136e2a",
+  "tree": [
+    {
+      "path": ".cargo",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "74ab57333e190aa968700ffc0eaa446e9c2907ec",
+      "url": "https://api.github.com/repos/denoland/rusty_v8/git/trees/74ab57333e190aa968700ffc0eaa446e9c2907ec"
+    },
+    {
+      "path": ".clang-format",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ea91c9ecfe066ddf3809cf85fa6b231a4eba3fe5",
+      "size": 21,
+      "url": "https://api.github.com/repos/denoland/rusty_v8/git/blobs/ea91c9ecfe066ddf3809cf85fa6b231a4eba3fe5"
+    },
+    {
+      "path": ".github",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "ef2416fdc5903b4a0dac7cbfe6fe64274132da5f",
+      "url": "https://api.github.com/repos/denoland/rusty_v8/git/trees/ef2416fdc5903b4a0dac7cbfe6fe64274132da5f"
+    },
+    {
+      "path": ".gitignore",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "02da83ec2e99d2f48ea7430f9968466576897556",
+      "size": 190,
+      "url": "https://api.github.com/repos/denoland/rusty_v8/git/blobs/02da83ec2e99d2f48ea7430f9968466576897556"
+    },
+    {
+      "path": ".gitmodules",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "60c70c4b469d2ae6a812b78487a24227b311a611",
+      "size": 2952,
+      "url": "https://api.github.com/repos/denoland/rusty_v8/git/blobs/60c70c4b469d2ae6a812b78487a24227b311a611"
+    },
+    {
+      "path": ".gn",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5f9df22a68ff2245e47678a7cba0a8dbd96be2ef",
+      "size": 3351,
+      "url": "https://api.github.com/repos/denoland/rusty_v8/git/blobs/5f9df22a68ff2245e47678a7cba0a8dbd96be2ef"
+    },
+    {
+      "path": ".prettierrc.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5b5bd9933e329bb03f9d1e4a0d16124502603873",
+      "size": 28,
+      "url": "https://api.github.com/repos/denoland/rusty_v8/git/blobs/5b5bd9933e329bb03f9d1e4a0d16124502603873"
+    },
+    {
+      "path": ".rustfmt.toml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "faa3d5a33a3d8c1809a58966d5f6057a78f818f2",
+      "size": 104,
+      "url": "https://api.github.com/repos/denoland/rusty_v8/git/blobs/faa3d5a33a3d8c1809a58966d5f6057a78f818f2"
+    },
+    {
+      "path": "BUILD.gn",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9b16d47d7fe5cf7af7814bd49837b7f09a77d37b",
+      "size": 1471,
+      "url": "https://api.github.com/repos/denoland/rusty_v8/git/blobs/9b16d47d7fe5cf7af7814bd49837b7f09a77d37b"
+    },
+    {
+      "path": "Cargo.lock",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "411676c85fe9624267a2ca16212b13c45594be68",
+      "size": 63945,
+      "url": "https://api.github.com/repos/denoland/rusty_v8/git/blobs/411676c85fe9624267a2ca16212b13c45594be68"
+    },
+    {
+      "path": "Cargo.toml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2a30e3096854e175b2cf669d8e0300c4e621020b",
+      "size": 4079,
+      "url": "https://api.github.com/repos/denoland/rusty_v8/git/blobs/2a30e3096854e175b2cf669d8e0300c4e621020b"
+    },
+    {
+      "path": "Cross.toml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e987d4f1717ac0fb276d4460dcb7c2cb407b932d",
+      "size": 699,
+      "url": "https://api.github.com/repos/denoland/rusty_v8/git/blobs/e987d4f1717ac0fb276d4460dcb7c2cb407b932d"
+    },
+    {
+      "path": "Dockerfile",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c37463ca08fea0d23c61013a7eee830745ce1767",
+      "size": 975,
+      "url": "https://api.github.com/repos/denoland/rusty_v8/git/blobs/c37463ca08fea0d23c61013a7eee830745ce1767"
+    },
+    {
+      "path": "LICENSE",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5a671244de937cfc449c42d48da7867e4f0a7852",
+      "size": 1078,
+      "url": "https://api.github.com/repos/denoland/rusty_v8/git/blobs/5a671244de937cfc449c42d48da7867e4f0a7852"
+    },
+    {
+      "path": "README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7c123f668e8a40fec1aa0bdb659f79743eb233d5",
+      "size": 18355,
+      "url": "https://api.github.com/repos/denoland/rusty_v8/git/blobs/7c123f668e8a40fec1aa0bdb659f79743eb233d5"
+    },
+    {
+      "path": "benches",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "20e2f0f8caf8539495780dc1b4fc72d4f2b4c327",
+      "url": "https://api.github.com/repos/denoland/rusty_v8/git/trees/20e2f0f8caf8539495780dc1b4fc72d4f2b4c327"
+    },
+    {
+      "path": "build",
+      "mode": "160000",
+      "type": "commit",
+      "sha": "2c779f961da7f5632d6836113112179e67938868"
+    },
+    {
+      "path": "build.rs",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bae40abdc71f8f6acdb646143deda4c52cc9e927",
+      "size": 84469,
+      "url": "https://api.github.com/repos/denoland/rusty_v8/git/blobs/bae40abdc71f8f6acdb646143deda4c52cc9e927"
+    },
+    {
+      "path": "buildtools",
+      "mode": "160000",
+      "type": "commit",
+      "sha": "0d8a204ff274ee12fa9ace5e3ffd8e5fbcb54926"
+    },
+    {
+      "path": "examples",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "dac055539d8cd9c72ae01144072f5ec0cf469905",
+      "url": "https://api.github.com/repos/denoland/rusty_v8/git/trees/dac055539d8cd9c72ae01144072f5ec0cf469905"
+    },
+    {
+      "path": "gen",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d564d0bc3dd917926892c55e3706cc116d5b165e",
+      "url": "https://api.github.com/repos/denoland/rusty_v8/git/trees/d564d0bc3dd917926892c55e3706cc116d5b165e"
+    },
+    {
+      "path": "rust-toolchain.toml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0924897677c99f17d9249e7bf4ed51f594e4216e",
+      "size": 287,
+      "url": "https://api.github.com/repos/denoland/rusty_v8/git/blobs/0924897677c99f17d9249e7bf4ed51f594e4216e"
+    },
+    {
+      "path": "src",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "19b8c5fcf9f633c8b2a16f6f3dc218486310e787",
+      "url": "https://api.github.com/repos/denoland/rusty_v8/git/trees/19b8c5fcf9f633c8b2a16f6f3dc218486310e787"
+    },
+    {
+      "path": "tests",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "c5aaa67533d53f918321c62ad1df28f56842a2ba",
+      "url": "https://api.github.com/repos/denoland/rusty_v8/git/trees/c5aaa67533d53f918321c62ad1df28f56842a2ba"
+    },
+    {
+      "path": "third_party",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "69719f48db4d59bd72541435f32baa703a520505",
+      "url": "https://api.github.com/repos/denoland/rusty_v8/git/trees/69719f48db4d59bd72541435f32baa703a520505"
+    },
+    {
+      "path": "tools",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "6ffce4f35a5e225a7597909b9f06315d1d5be246",
+      "url": "https://api.github.com/repos/denoland/rusty_v8/git/trees/6ffce4f35a5e225a7597909b9f06315d1d5be246"
+    },
+    {
+      "path": "v8",
+      "mode": "160000",
+      "type": "commit",
+      "sha": "c4ca1eccb90c5464d826b7713dc27178a53b0cfe"
+    }
+  ],
+  "truncated": false
+}

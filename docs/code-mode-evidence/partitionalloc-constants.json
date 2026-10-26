@@ -1,0 +1,24 @@
+{
+  "scope": "Compile-only constants; hint budget is not actual placement entropy or runtime reservation proof.",
+  "values": {
+    "host_x64": {
+      "hint_mask": 70368744173568,
+      "hint_offset": 0,
+      "core_pools_bytes": 34359738368,
+      "zero_segment_mib": 4097,
+      "brp": 1,
+      "pointer_compression": 0,
+      "external_metadata": 1
+    },
+    "native_riscv64": {
+      "hint_mask": 34359734272,
+      "hint_offset": 206158430208,
+      "core_pools_bytes": 34359738368,
+      "zero_segment_mib": 4097,
+      "brp": 1,
+      "pointer_compression": 0,
+      "external_metadata": 1
+    }
+  },
+  "verified_expected_configuration": true
+}

@@ -29,7 +29,7 @@ import time
 
 
 ROOT = Path(__file__).resolve().parents[1]
-TAG = "v0.1.0-experimental.1"
+TAG = "v0.1.0-experimental.2"
 
 
 def run(args, env):
@@ -89,6 +89,8 @@ def pty_until(args, env, expected, label):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--sysroot", type=Path, required=True)
+    parser.add_argument("--archive", type=Path, help="test a local release archive before publication; checksum checks remain enabled")
+    parser.add_argument("--previous-archive", type=Path, help="also exercise actual .1 to .2 upgrade and rollback")
     args = parser.parse_args()
     cross = args.sysroot.resolve()
     qemu = cross / "usr/bin/qemu-riscv64"
@@ -115,6 +117,14 @@ def main():
             "bwrap": "echo 'mock presence only: no sandbox validation'; exit 1\n",
             "ldd": "exec " + shlex.join([str(runner), str(loader), "--list"]) + ' "$1"\n',
         }
+        if args.archive:
+            previous = args.previous_archive.resolve() if args.previous_archive else args.archive.resolve()
+            scripts["curl"] = ('out=\nsource=' + shlex.quote(str(args.archive.resolve())) + '\n'
+                               'while [ "$#" -gt 0 ]; do\n'
+                               '  case "$1" in\n'
+                               '    --output) out=$2; shift;;\n'
+                               '    */codex-riscv64-linux-gnu-v0.1.0-experimental.1.tar.gz) source=' + shlex.quote(str(previous)) + ';;\n'
+                               '  esac\n  shift\ndone\ncp -- "$source" "$out"\n')
         for name, body in scripts.items():
             path = mocks / name
             path.write_text("#!/bin/sh\n" + body)
@@ -128,13 +138,28 @@ def main():
         env["SMOKE_TARGET_RUNNER"] = str(runner)
         prefix = home / ".local/share/codex-riscv"
         command = home / ".local/bin/codex-riscv"
-        print("EMULATION HARNESS: mocked platform gates; real HTTPS download, digest, extraction, target libraries and binary.", flush=True)
+        print("EMULATION HARNESS: mocked platform gates; " +
+              ("local archive transport" if args.archive else "real HTTPS download") +
+              "; real digest, extraction, target libraries and binary.", flush=True)
+        if args.previous_archive:
+            run(["sh", installer, "install", "--version", "v0.1.0-experimental.1"], env)
+            (home / ".codex").mkdir(exist_ok=True)
+            (home / ".codex/config.toml").write_text('model = "fixture-preserved-model"\n')
         run(["sh", installer], env)
         run(["sh", installer, "status"], env)
+        if args.previous_archive:
+            run(["sh", installer, "rollback"], env)
+            assert (prefix / "current").resolve().name == "v0.1.0-experimental.1"
+            run(["sh", installer, "upgrade"], env)
+            assert (prefix / "current").resolve().name == TAG
+            assert (home / ".codex/config.toml").read_text() == 'model = "fixture-preserved-model"\n'
+            # Keep the later onboarding check unauthenticated and unconfigured.
+            (home / ".codex/config.toml").unlink()
         version = prefix / "versions" / TAG
         assert command.resolve() == prefix / "launcher"
         for relative in ("LICENSE", "NOTICE", "licenses/THIRD-PARTY-NOTICES.html"):
             assert (version / relative).is_file(), relative
+        assert os.access(version / "bin/codex-code-mode-host", os.X_OK)
         with (version / "bin/codex").open("rb") as source:
             checksum = hashlib.file_digest(source, "sha256").hexdigest()
         print("Installed binary SHA-256: " + checksum, flush=True)

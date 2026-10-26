@@ -22,8 +22,9 @@ import tarfile
 import tempfile
 import uuid
 
-DEFAULT_VERSION = "v0.1.0-experimental.1"
+DEFAULT_VERSION = "v0.1.0-experimental.2"
 RELEASES = {
+    "v0.1.0-experimental.2": "409e051bcb98862d615ad468cd4b134456cbf52b6efa4a3c078ed02c219a233c",
     "v0.1.0-experimental.1": "2b70f049652793a2dd6c8035122ce2a6920de680153be1c6f8e2a172dde70120",
 }
 REPOSITORY = "https://github.com/Elton-Yang/codex-riscv"
@@ -272,11 +273,17 @@ def check_platform():
         fail("glibc >= 2.39 is required; found " + libc)
 
 
-def check_binary(directory):
+def check_binary(directory, tag):
     binary = directory / "bin/codex"
-    result = subprocess.run(["ldd", str(binary)], text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-    if result.returncode or "not found" in result.stdout:
-        fail("Runtime library check failed; no version was activated:\n" + result.stdout)
+    binaries = [binary]
+    if tag != "v0.1.0-experimental.1":
+        binaries.append(directory / "bin/codex-code-mode-host")
+    for executable in binaries:
+        if not executable.is_file() or not os.access(executable, os.X_OK):
+            fail("Missing executable: " + executable.name + "; no version was activated")
+        result = subprocess.run(["ldd", str(executable)], text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        if result.returncode or "not found" in result.stdout:
+            fail("Runtime library check failed for " + executable.name + "; no version was activated:\n" + result.stdout)
     # Even --version may initialize upstream PATH aliases. Keep that side effect
     # in a disposable home, never the user's Codex settings/credentials.
     with tempfile.TemporaryDirectory(prefix="codex-riscv-check-") as temporary:
@@ -337,7 +344,7 @@ def install(prefix, command_path, tag):
         data = managed_version(prefix, tag, verify=True)
         if data["sha256"] != RELEASES[tag]:
             fail("Installed version does not match the pinned archive checksum")
-        check_binary(directory)
+        check_binary(directory, tag)
     else:
         with tempfile.TemporaryDirectory(prefix=".stage-", dir=prefix) as temporary:
             temporary = Path(temporary)
@@ -350,7 +357,7 @@ def install(prefix, command_path, tag):
             staged = temporary / "unpacked"
             staged.mkdir()
             extract_archive(archive, staged, tag)
-            check_binary(staged)
+            check_binary(staged, tag)
             files, dirs = inventory(staged)
             write_json(staged / VERSION_MARKER, {"schema": SCHEMA, "tag": tag, "sha256": RELEASES[tag], "files": files, "dirs": dirs})
             staged.rename(directory)
@@ -491,7 +498,7 @@ def main():
             if not current or not previous or current == previous:
                 fail("No previous managed version to roll back to")
             managed_version(prefix, previous, verify=True)
-            check_binary(prefix / "versions" / previous)
+            check_binary(prefix / "versions" / previous, previous)
             if not command_owned(command_path, prefix):
                 fail("Managed command link is missing; rerun install first")
             activate(prefix, previous, current)

@@ -1,0 +1,30 @@
+--- a/tools/ninja_gn_binaries.py
++++ b/tools/ninja_gn_binaries.py
+@@ -11,7 +11,7 @@
+ import sys
+ import zipfile
+ import tempfile
+-import http.client
++import urllib.request
+ from v8_deps import Var
+ from download_file import DownloadUrl
+ from stat import ST_MODE
+@@ -71,14 +71,10 @@
+ 
+ def DownloadCIPD(package, tag, output_dir):
+     def get(url):
+-        parsed = urlparse(url)
+-        conn = http.client.HTTPSConnection(parsed.netloc)
+-        conn.request("GET", parsed.path + (f'?{parsed.query}' if parsed.query else ''), headers={"Host": parsed.netloc})
+-        response = conn.getresponse()
+-        if response.status != 200:
+-            raise Exception(f'GET {url} returned {response.status} {response.reason}')
+-        data = response.read().decode()
+-        return json.loads(data)
++        # Use Python's standard HTTPS proxy support, as download_file.py does.
++        # Direct sockets are unavailable in managed/proxied build environments.
++        with urllib.request.urlopen(url, timeout=120) as response:
++            return json.load(response)
+ 
+     resolved = get(RESOLVE_URL.format(package, tag))
+     instance_id = resolved['instance_id']

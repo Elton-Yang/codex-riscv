@@ -1,0 +1,84 @@
+[
+  {
+    "sha": "f84b1b2714dc3005dd0635aff881b8a8a32bb707",
+    "node_id": "C_kwDODQu68NoAKGY4NGIxYjI3MTRkYzMwMDVkZDA2MzVhZmY4ODFiOGE4YTMyYmI3MDc",
+    "commit": {
+      "author": {
+        "name": "Divy",
+        "email": "dj.srivastava23@gmail.com",
+        "date": "2026-03-14T09:02:47Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-03-14T09:02:47Z"
+      },
+      "message": "feat: custom Node domains support in Inspector (#1904)\n\nCo-authored-by: Bartek Iwańczuk <biwanczuk@gmail.com>\nCo-authored-by: Claude Opus 4.6 <noreply@anthropic.com>",
+      "tree": {
+        "sha": "3a02b00db86743536ff3d8ed5c12f74b8bd88a8b",
+        "url": "https://api.github.com/repos/denoland/rusty_v8/git/trees/3a02b00db86743536ff3d8ed5c12f74b8bd88a8b"
+      },
+      "url": "https://api.github.com/repos/denoland/rusty_v8/git/commits/f84b1b2714dc3005dd0635aff881b8a8a32bb707",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJptSQ3CRC1aQ7uu5UhlAAAEAUQADNJasPfddZvEy47rt5uXu8s\niQh51GJaSaW8hdx5dPQ+0u6tq+NIyqtlD4VdWRuEzIG58oEmMjd/5RJFl1F9fN8E\nlfhMyELuykWveJ8iwDZ+nrr7KJ3CMt2Mwo6mS3J/NwHff2ABdVF5IvYT1xfvwwDY\nY6wRaqfJO2kqFAkSOjx2/5tQCz9Hrc6g2RYdMKdVZUqwn0jVg7FnCBL740gGWtw4\nFZgb9u6vPHRaxz8wdHC7HGb5iqimFxhxfGAR/gqGazfvREvarnbgnOnjOs7Zq1AH\nvwmFxaY542VPMyL21alGYqI2jghvo3BXicsMRtMwFzAPvvD/7QXcYPp8ysS+J+NY\nQ9drLEob5LnweFmAa5ou2mZs0hzw6uQ+rRlI1hd1WLqM0KvoXV3pOTphUz+uqgYW\n05jVDrw62I87yApDjOB6dT7UCnbPzxDz3oYYittXrViV7GDnQyBQD+poxlxJAfEU\n15Ryi9CAOQIRSz+3cPjeJeDxlM0dmN8PGLQx1/fWfnnRTPp26PMH6nNol5tAJU6v\nvlME8AVisjEMICzN65QJkQUpiHdSWulbGm5Xs7FXi3LS3+QtZfHOWJmKln/LWnis\nf8bRRZkOOincxHufjAT8V4FCxtRWLZiPH+J3khwiuQA4sOfRIcTJqIzw/UMRaVH0\n8ec2MloJPztbXmRi47eh\n=UcXm\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 3a02b00db86743536ff3d8ed5c12f74b8bd88a8b\nparent ee7047cc11afe5116bb0b7a9927aefab7948986f\nauthor Divy <dj.srivastava23@gmail.com> 1773478967 +0530\ncommitter GitHub <noreply@github.com> 1773478967 +0100\n\nfeat: custom Node domains support in Inspector (#1904)\n\nCo-authored-by: Bartek Iwańczuk <biwanczuk@gmail.com>\nCo-authored-by: Claude Opus 4.6 <noreply@anthropic.com>",
+        "verified_at": "2026-03-14T09:02:48Z"
+      }
+    },
+    "url": "https://api.github.com/repos/denoland/rusty_v8/commits/f84b1b2714dc3005dd0635aff881b8a8a32bb707",
+    "html_url": "https://github.com/denoland/rusty_v8/commit/f84b1b2714dc3005dd0635aff881b8a8a32bb707",
+    "comments_url": "https://api.github.com/repos/denoland/rusty_v8/commits/f84b1b2714dc3005dd0635aff881b8a8a32bb707/comments",
+    "author": {
+      "login": "littledivy",
+      "id": 34997667,
+      "node_id": "MDQ6VXNlcjM0OTk3NjY3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/34997667?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/littledivy",
+      "html_url": "https://github.com/littledivy",
+      "followers_url": "https://api.github.com/users/littledivy/followers",
+      "following_url": "https://api.github.com/users/littledivy/following{/other_user}",
+      "gists_url": "https://api.github.com/users/littledivy/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/littledivy/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/littledivy/subscriptions",
+      "organizations_url": "https://api.github.com/users/littledivy/orgs",
+      "repos_url": "https://api.github.com/users/littledivy/repos",
+      "events_url": "https://api.github.com/users/littledivy/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/littledivy/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "ee7047cc11afe5116bb0b7a9927aefab7948986f",
+        "url": "https://api.github.com/repos/denoland/rusty_v8/commits/ee7047cc11afe5116bb0b7a9927aefab7948986f",
+        "html_url": "https://github.com/denoland/rusty_v8/commit/ee7047cc11afe5116bb0b7a9927aefab7948986f"
+      }
+    ]
+  }
+]

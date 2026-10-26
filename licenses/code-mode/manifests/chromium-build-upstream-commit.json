@@ -1,0 +1,38 @@
+{
+  "commit": "fab0ea1e4e8033be4088e2478d58cfac471b76ca",
+  "tree": "cfec2fdeee9b4b3817805e840d07fcd1311a7de3",
+  "parents": [
+    "ad76126f62c1a8f7b6a6285ca796e1dcf54a727a"
+  ],
+  "author": {
+    "name": "Lukasz Anforowicz",
+    "email": "lukasza@chromium.org",
+    "time": "Fri Jul 24 19:23:45 2026"
+  },
+  "committer": {
+    "name": "Copybara-Service",
+    "email": "copybara-worker@google.com",
+    "time": "Fri Jul 24 19:27:24 2026"
+  },
+  "message": "[crubit] Disable outside of Chromium builds to fix V8 build issues.\n\nFixed: 538326431\nChange-Id: I73df17dbf8b510c1bc3867f0da9611b13b0949eb\nReviewed-on: https://chromium-review.googlesource.com/c/chromium/src/+/8141111\nReviewed-by: Devon Loehr <dloehr@google.com>\nCommit-Queue: Devon Loehr <dloehr@google.com>\nAuto-Submit: \u0141ukasz Anforowicz <lukasza@chromium.org>\nCommit-Queue: \u0141ukasz Anforowicz <lukasza@chromium.org>\nCr-Commit-Position: refs/heads/main@{#1668072}\nNOKEYCHECK=True\nGitOrigin-RevId: 424806e00643a42822a55666398a59c02651970f\n",
+  "tree_diff": [
+    {
+      "type": "modify",
+      "old_id": "87b5ae84544f5dd3c322084af91f850e552bf75e",
+      "old_mode": 33188,
+      "old_path": "config/rust.gni",
+      "new_id": "3b5db82dd161e47b261450a216e168997eb0948c",
+      "new_mode": 33188,
+      "new_path": "config/rust.gni"
+    },
+    {
+      "type": "modify",
+      "old_id": "9caf516d53a82e6b8b4f8a5a147290e7e3312060",
+      "old_mode": 33188,
+      "old_path": "rust/gni_impl/cpp_api_from_rust.gni",
+      "new_id": "739922f480e83b0f8f49de361de22ce131ed6d73",
+      "new_mode": 33188,
+      "new_path": "rust/gni_impl/cpp_api_from_rust.gni"
+    }
+  ]
+}

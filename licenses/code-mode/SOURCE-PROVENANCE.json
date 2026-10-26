@@ -1,0 +1,37 @@
+{
+  "codex_source_revision": "970111f6cb62cc02fe36a82ea7d71b37a2889c97",
+  "target": "riscv64gc-unknown-linux-gnu",
+  "rusty_v8": {
+    "crate": "v8",
+    "version": "152.2.0",
+    "crate_url": "https://static.crates.io/crates/v8/v8-152.2.0.crate",
+    "crate_sha256": "a10fe1a92da5c32c7c7f838ce36c0ccfcfd5edf0865b58bdde820aa64cea9888",
+    "cargo_lock_checksum_matches": true,
+    "recorded_vcs_revision": "2768994f664e8a6e3aba27503606c58339136e2a",
+    "recorded_vcs_dirty": true,
+    "submodule_tree_evidence": "manifests/rusty-v8-recursive-tree.json",
+    "submodule_repositories": "manifests/rusty-v8.gitmodules",
+    "readme_v8_version": "15.2.124.1"
+  },
+  "v8": {
+    "repository": "https://github.com/denoland/v8",
+    "revision": "c4ca1eccb90c5464d826b7713dc27178a53b0cfe",
+    "source_tree_evidence": "manifests/v8-recursive-tree.json"
+  },
+  "native_submodules": "manifests/native-component-pins.json",
+  "chromium_rust": {
+    "repository": "https://chromium.googlesource.com/chromium/src/third_party/rust",
+    "revision": "afbc96607d0e659715d803cc099607dd1737fc41",
+    "packages_manifest": "manifests/chromium-rust-package-declarations.json",
+    "source_archives_manifest_relative_to_work_root": "manifests/restored-chromium-rust.json"
+  },
+  "icu_embedded_data": "manifests/icu-data-provenance.json",
+  "original_license_file_hashes": "LICENSE-FILES.json",
+  "scope_limits": "COVERAGE.json",
+  "current_generated_graph_audit": "GRAPH-LICENSE-RECONCILIATION.json",
+  "audited_local_source_and_patch_hashes": "manifests/audited-source-snapshot.json",
+  "note": "Local experimental V8/Code Mode source modifications are recorded separately; upstream input identity is not a claim of unmodified final source.",
+  "actual_artifact_audit": "GRAPH-LICENSE-RECONCILIATION.json",
+  "native_archive_sha256": "179d4126e8922a8047623ac750510bc7bd3cc361401181f5bbd1590cdd48fd9f",
+  "host_sha256": "833501f801ae9b640ec9aa725fd0c62f03062e4faf729397a82136a8841f3f88"
+}

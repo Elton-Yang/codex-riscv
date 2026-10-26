@@ -1,0 +1,125 @@
+{
+  "audit_date": "2026-10-26",
+  "status": "Revalidated actual archive members and preserved attribution files for 2026-10-26 host; locked Cargo package set unchanged; original attribution and absent-link-map limits retained",
+  "scope": "Current GN graph for obj/librusty_v8.a and locked cargo tree -p codex-code-mode-host --target riscv64gc-unknown-linux-gnu --edges normal,build",
+  "cargo": {
+    "selected_unique_packages": 561,
+    "external_packages_including_local_v8": 538,
+    "codex_workspace_packages": 23,
+    "external_covered_by_baseline_inventory": 511,
+    "external_additions_covered_by_supplement": 27,
+    "unmapped_selected_packages": [],
+    "note": "Use cargo-tree identities, not Cargo metadata workspace-unified features, to select this host closure. libm 0.2.16 is an additional selected crate relative to baseline and its exact cached published license was added."
+  },
+  "native_archive": {
+    "explicit_object_inputs": 1960,
+    "unmapped_object_rules": [],
+    "groups": {
+      "rusty-v8": 3,
+      "v8": 942,
+      "v8/third_party/inspector_protocol": 9,
+      "generated": 268,
+      "third_party/simdutf": 1,
+      "third_party/libc++": 49,
+      "third_party/libc++abi": 17,
+      "v8/third_party/siphash": 1,
+      "third_party/abseil-cpp": 137,
+      "third_party/partition_alloc": 68,
+      "third_party/icu": 456,
+      "chromium-build": 2,
+      "third_party/highway": 7
+    },
+    "generated_objects": 268,
+    "all_generated_sources_categorized": true,
+    "implicit_rust_rlibs_not_archived_by_ar_rule": 56,
+    "implicit_compiler_rt_not_archived_by_ar_rule": [
+      "../clang/lib/clang/23/lib/riscv64-unknown-linux-gnu/libclang_rt.builtins.a"
+    ],
+    "note": "Rule uses llvm-ar and rspfile_content=${in}; only explicit 1960 objects enter this archive. Rlibs and compiler-rt are build dependencies here. Final Cargo linker selection is not yet observed."
+  },
+  "gn_build_closure": {
+    "rust_crate_directories": 45,
+    "all_have_exact_pinned_original_notices": true,
+    "chromium_std_notices_preserved": true,
+    "actual_header_dependency_observation": "All 1960 final archive input objects have VALID Ninja dependency records; all reported vendor source/header groups mapped to preserved notices. Compiler -MMD dependency records exclude system headers and are not a full preprocessor trace."
+  },
+  "resolved_new_notice_needs": [
+    "Exact inherited Chromium BSD license for both linked build/rust/allocator C++ sources: source Git blobs match upstream build revision and GitOrigin-RevId maps to exact Chromium LICENSE.",
+    "libm 0.2.16 exact cached crate license added.",
+    "Node and ChromeDevTools original notices added conservatively; copied-from revision proof still unconfirmed.",
+    "GoogleTest production-support gtest_prod.h full BSD notice preserved verbatim from actual included header; bytes verified against original Cargo.lock-verified v8 crate archive."
+  ],
+  "remaining_attribution_limits": [
+    {
+      "id": "icudata-wrapper-text",
+      "status": "known_upstream_publication_gap",
+      "component": "deno_core_icudata 0.78.0",
+      "detail": "Exact crate and repository declare MIT but no separate MIT text/copyright header was found. Declaration retained; embedded ICU data has exact blob proof and complete Unicode/ICU notice."
+    },
+    {
+      "id": "node-inspector-origin",
+      "status": "origin_revision_unconfirmed_notice_added_conservatively",
+      "component": "Rusty V8 src/deno_inspector/string_util.h and Node domains",
+      "detail": "Header explicitly says based on Node node_string.h. Upstream introduction commit/PR does not record copied-from Node revision. Official Node license at a frozen pre-introduction file-history candidate is preserved, explicitly not asserted as exact copied-from revision.",
+      "notice": "files/supplementary-origin-candidates/nodejs/LICENSE"
+    },
+    {
+      "id": "devtools-protocol-origin",
+      "status": "origin_revision_unconfirmed_notice_added_conservatively",
+      "component": "Rusty V8 src/deno_inspector/domain_{io,network,target}.pdl",
+      "detail": "Source links to moving ChromeDevTools master paths. Official BSD license at a frozen pre-introduction protocol revision is preserved, explicitly not asserted as exact copied-from revision.",
+      "notice": "files/supplementary-origin-candidates/devtools-protocol/LICENSE"
+    },
+    {
+      "id": "inherited-baseline-text-gaps",
+      "status": "inherited_no_new_gap",
+      "components": [
+        "debugserver-types 0.5.0",
+        "eventsource-stream 0.2.3"
+      ],
+      "detail": "Both are selected by the host and were already documented by baseline notice audit as lacking separate original license files; declarations and generated license terms are retained in baseline."
+    }
+  ],
+  "pending_actual_artifact_checks": [],
+  "evidence": {
+    "selected_cargo_coverage": "manifests/cargo-selected-license-coverage.json",
+    "native_object_mapping": "manifests/v8-archive-link-input-closure.json",
+    "observed_headers": "manifests/observed-native-header-dependencies.json",
+    "audited_source_hashes": "manifests/audited-source-snapshot.json",
+    "exact_chromium_allocator_origin": "manifests/chromium-build-allocator-origin.json",
+    "completed_headers": "manifests/completed-native-header-dependencies.json"
+  },
+  "actual_artifacts": {
+    "archive": {
+      "bytes": 1369783052,
+      "sha256": "179d4126e8922a8047623ac750510bc7bd3cc361401181f5bbd1590cdd48fd9f",
+      "object_members": 1960,
+      "all_object_member_contents_match_expected_ninja_objects": true,
+      "verification": "manifests/actual-v8-archive-members.json"
+    },
+    "host": {
+      "bytes": 163304368,
+      "sha256": "833501f801ae9b640ec9aa725fd0c62f03062e4faf729397a82136a8841f3f88",
+      "elf_needed": [
+        "libssl.so.3",
+        "libcrypto.so.3",
+        "libgcc_s.so.1",
+        "libm.so.6",
+        "libc.so.6",
+        "ld-linux-riscv64-lp64d.so.1"
+      ],
+      "unexpected_elf_needed": [],
+      "verification": "manifests/actual-host-linkage-reconciliation.json"
+    }
+  },
+  "actual_linkage_limits": [
+    "Successful host was already stripped; no full final linker map/trace was retained. Reconciliation is based on the immutable host ELF, unchanged locked Cargo selection/fingerprint, actual native archive verification, and build-script link declarations, not object-by-object proof of final linker garbage collection.",
+    "System libc, libm, libgcc_s, dynamic loader and OpenSSL shared libraries remain external runtime dependencies; no additional system library is bundled by this audit."
+  ],
+  "remaining_release_checks": [
+    "Retain and disclose original copied-from-revision limitations and known missing-original-text caveats documented above.",
+    "No full final linker map/trace was retained; do not claim object-by-object proof of final linker garbage collection. Native archive itself has complete member/content proof.",
+    "Revalidate immutable artifact/source hashes if source, flags, dependencies or host binary changes before packaging.",
+    "Package baseline CLI notices/native source archives/Rust std notices together with this supplement."
+  ]
+}

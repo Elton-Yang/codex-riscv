@@ -1,0 +1,28 @@
+{
+  "notice_files": 177,
+  "unique_paths": 188,
+  "all_saved_file_hashes_verified": true,
+  "chromium_gn_crate_directories": 51,
+  "chromium_gn_crates_missing_notice_file": [],
+  "cargo_additional_external_package_count": 27,
+  "icu_data_exact_git_blob_match": true,
+  "resolved_retrieval_failures": [
+    "LLVM subtree root listings needed canonical URL without .git; all four exact pinned LICENSE.TXT files recovered"
+  ],
+  "limitations": [
+    "Conservative source notice set, not a final linked-object or legal completeness audit. Includes build-only and optional components.",
+    "deno_core_icudata 0.78.0 wrapper repository and crate have no separate MIT license file or copyright header; exact MIT Cargo declaration retained, and its embedded ICU data is byte-for-byte tied to full ICU LICENSE.",
+    "Shared original CLI dependencies and Rust 1.99.1 standard-library notices must accompany this supplement from the baseline package.",
+    "Rusty V8 published crate records dirty=true; exact source package checksum identifies input. Upstream license retrieval pinned to its recorded VCS revision and submodule tree, not a claim of whole-tree byte equivalence.",
+    "Actual artifact reconciliation does not supply the full final linker map/trace or establish legal clearance; all original origin/text caveats remain explicitly documented."
+  ],
+  "saved_files": 188,
+  "other_files": {
+    "source_file_not_notice": 4,
+    "package_declaration": 1,
+    "source_component_readme": 6
+  },
+  "graph_reconciliation": "GRAPH-LICENSE-RECONCILIATION.json",
+  "final_artifact_status": "Actual V8 archive: all 1960 members byte-verified; immutable successful host SHA/ELF and locked Cargo/native declarations reconciled. Full linker map not captured; original attribution caveats retained.",
+  "cargo_count_basis": "Current host-only locked cargo tree; initial workspace metadata comparison omitted selected libm 0.2.16."
+}

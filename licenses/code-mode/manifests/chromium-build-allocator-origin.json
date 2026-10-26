@@ -1,0 +1,18 @@
+{
+  "upstream_build_revision": "fab0ea1e4e8033be4088e2478d58cfac471b76ca",
+  "chromium_origin_revision": "424806e00643a42822a55666398a59c02651970f",
+  "source_files": [
+    {
+      "file": "build/rust/allocator/alias.cc",
+      "local_git_blob_sha1": "ca20986f8ed4965aa45e16e270fd06da3e9ff389",
+      "upstream_git_blob_sha1": "ca20986f8ed4965aa45e16e270fd06da3e9ff389",
+      "exact_match": true
+    },
+    {
+      "file": "build/rust/allocator/alloc_error_handler_impl.cc",
+      "local_git_blob_sha1": "6373efd35668b9b631e5e9353532cf6b44543aba",
+      "upstream_git_blob_sha1": "6373efd35668b9b631e5e9353532cf6b44543aba",
+      "exact_match": true
+    }
+  ]
+}

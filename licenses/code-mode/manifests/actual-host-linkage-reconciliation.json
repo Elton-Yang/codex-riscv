@@ -1,0 +1,209 @@
+{
+  "host_path": "target/riscv64gc-unknown-linux-gnu/dev-small/codex-code-mode-host",
+  "host_bytes": 163304368,
+  "host_sha256": "833501f801ae9b640ec9aa725fd0c62f03062e4faf729397a82136a8841f3f88",
+  "host_stable_during_read": true,
+  "elf_needed": [
+    "libssl.so.3",
+    "libcrypto.so.3",
+    "libgcc_s.so.1",
+    "libm.so.6",
+    "libc.so.6",
+    "ld-linux-riscv64-lp64d.so.1"
+  ],
+  "unexpected_elf_needed": [],
+  "rustc_link_declarations": [
+    {
+      "build_directory": "openssl-sys-9f27ec2a2bb0f2ba",
+      "output_sha256": "9f83b727d5826a124a4066012801d76c25eeb408fc76e46b8d89d9df5b2d94e1",
+      "directives": [
+        "cargo:rustc-link-lib=dylib=ssl",
+        "cargo:rustc-link-lib=dylib=crypto"
+      ]
+    },
+    {
+      "build_directory": "aws-lc-sys-d22416484fa3ec4e",
+      "output_sha256": "405ff8922e058c9288e1a097183b572614611b021d1fea5395f71e865497a38f",
+      "directives": [
+        "cargo:rustc-link-lib=static=aws_lc_0_45_0_crypto"
+      ]
+    },
+    {
+      "build_directory": "ring-1e2b8a0684e32687",
+      "output_sha256": "5ca97207626b7e89163938f005cade6c6df9d985856537009bbdacec077b8d1b",
+      "directives": [
+        "cargo:rustc-link-lib=static=ring_core_0_17_14_",
+        "cargo:rustc-link-lib=static=ring_core_0_17_14__test"
+      ]
+    },
+    {
+      "build_directory": "v8-4fd79590f3381abc",
+      "output_sha256": "cf76b2dd9669569ad310238318df9f3f0443e3fd76603bb6f72e231802ecb36b",
+      "directives": [
+        "cargo:rustc-link-lib=static=rusty_v8"
+      ]
+    },
+    {
+      "build_directory": "zstd-sys-73777ca1a3c81049",
+      "output_sha256": "ba37ef84b988867e68c936d8007fa65c3ce67683639242ff3c2df716fe8c5da0",
+      "directives": [
+        "cargo:rustc-link-lib=static=zstd"
+      ]
+    }
+  ],
+  "host_cargo_fingerprint": {
+    "rustc": 11835527281324007204,
+    "features": "[]",
+    "declared_features": "[]",
+    "target": 14368089536963006569,
+    "profile": 8946592252240683368,
+    "path": 2857651055484964927,
+    "deps": [
+      [
+        797297352614216187,
+        "tonic",
+        false,
+        4311356180747195490
+      ],
+      [
+        1821923722828794727,
+        "futures",
+        false,
+        10803223699031711782
+      ],
+      [
+        3163899731817361221,
+        "tokio_util",
+        false,
+        7747572779814375797
+      ],
+      [
+        4997296002408501533,
+        "codex_code_mode_runtime",
+        false,
+        6084421321746268523
+      ],
+      [
+        5096870971229793865,
+        "codex_code_mode_host",
+        false,
+        2977782565454432557
+      ],
+      [
+        8889446427035620327,
+        "axum",
+        false,
+        8684898779232007755
+      ],
+      [
+        9394460649638301237,
+        "tokio",
+        false,
+        7516694319783376095
+      ],
+      [
+        9400259586519959684,
+        "codex_http_client",
+        false,
+        618524250738172469
+      ],
+      [
+        9800012718262444189,
+        "uuid",
+        false,
+        15000261413849980407
+      ],
+      [
+        9904903520081483939,
+        "anyhow",
+        false,
+        10903622211472036407
+      ],
+      [
+        10257923056054025583,
+        "tokio_stream",
+        false,
+        10346682679455900667
+      ],
+      [
+        10904014048651519591,
+        "codex_protocol",
+        false,
+        11719399520209578800
+      ],
+      [
+        11183367507467174537,
+        "prost",
+        false,
+        609326154360484009
+      ],
+      [
+        12041186341109472307,
+        "tracing_subscriber",
+        false,
+        4621354171690502883
+      ],
+      [
+        12099969391254410937,
+        "codex_code_mode_protocol",
+        false,
+        5080885715039431985
+      ],
+      [
+        12337120219148518958,
+        "clap",
+        false,
+        9668407675101245365
+      ],
+      [
+        13209128654145846702,
+        "codex_otel_trace_websocket",
+        false,
+        8013091388560064986
+      ],
+      [
+        13795362694956882968,
+        "serde_json",
+        false,
+        1461263471906966518
+      ],
+      [
+        14757622794040968908,
+        "tracing",
+        false,
+        1680382408118974677
+      ],
+      [
+        15801396903320128609,
+        "codex_otel",
+        false,
+        16631826489601760519
+      ]
+    ],
+    "local": [
+      {
+        "CheckDepInfo": {
+          "dep_info": "riscv64gc-unknown-linux-gnu/dev-small/.fingerprint/codex-code-mode-host-e72102509baad852/dep-bin-codex-code-mode-host",
+          "checksum": false
+        }
+      }
+    ],
+    "rustflags": [],
+    "config": 1240012394677581368,
+    "compile_kind": 13748030006194427100
+  },
+  "host_cargo_fingerprint_sha256": "fa69b333e179e46c1ff2e1551b377cd471f7af3a89259879b2dbc1f410a4fccc",
+  "cargo_lock_sha256": "d2603497af91c77bc766155e39b6e8fff8af9674cbcea121e293d4997aa62f4c",
+  "native_notice_mapping": {
+    "rusty_v8": "licenses/ archive/native and Cargo supplement",
+    "aws_lc_0_45_0_crypto": "baseline native AWS-LC licenses plus wrapper declaration",
+    "ring_core_0_17_14_ and test archive": "baseline native ring/BoringSSL/Fiat/ISC notices",
+    "zstd": "baseline zstd-sys and native BSD notices",
+    "ssl and crypto": "External separately installed target OpenSSL shared libraries; not copied into distribution"
+  },
+  "limits": [
+    "Successful host was already stripped; no full final linker map/trace was retained. Reconciliation is based on the immutable host ELF, unchanged locked Cargo selection/fingerprint, actual native archive verification, and build-script link declarations, not object-by-object proof of final linker garbage collection.",
+    "System libc, libm, libgcc_s, dynamic loader and OpenSSL shared libraries remain external runtime dependencies; no additional system library is bundled by this audit."
+  ],
+  "revalidated_date": "2026-10-26"
+}

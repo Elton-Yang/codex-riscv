@@ -1,0 +1,50 @@
+[
+  {
+    "file": "patches/0002-v8-cipd-standard-proxy.patch",
+    "sha256": "460143261bc2fb211d9b0f9f31d1a4bc152072f141f334c164309bb2ca1a955e"
+  },
+  {
+    "file": "patches/0003-v8-riscv-sandbox-target-layout.patch",
+    "sha256": "4adc3b494cdc90747793d984fa2679552fa5083351bd6a731408adb0c2d759f7"
+  },
+  {
+    "file": "patches/0004-v8-riscv-sv39-full-sandbox-experiment.patch",
+    "sha256": "6f86b555c42c24c9a827cdb6c6f246609565b5425895dd279b31efdd9531441c"
+  },
+  {
+    "file": "patches/0005-code-mode-riscv-fail-closed.patch",
+    "sha256": "e7a03df3b422b5d60f5c461d90f206766deb418d7b059c1f31346acf74cfffb3"
+  },
+  {
+    "file": "patches/0006-v8-riscv-sv39-pie-capacity.patch",
+    "sha256": "6a0978516b7824a5f01ac56221bef3a6441b41bc7f85f904d3338bee60aee53e"
+  },
+  {
+    "file": "src/codex-rs/Cargo.lock",
+    "sha256": "d2603497af91c77bc766155e39b6e8fff8af9674cbcea121e293d4997aa62f4c"
+  },
+  {
+    "file": "src/codex-rs/code-mode-runtime/src/v8_init.rs",
+    "sha256": "c801953b6781c63590609153f285ae3569935f096209eaca71e92c715064a387"
+  },
+  {
+    "file": "target/riscv64gc-unknown-linux-gnu/dev-small/gn_out/args.gn",
+    "sha256": "ff96e741a1ba64b2524fff8064da6031762412ca7b75a135c3a065d6d7bf6fc8"
+  },
+  {
+    "file": "vendor/v8/third_party/partition_alloc/src/partition_alloc/address_space_randomization.h",
+    "sha256": "1e2159392b054a23ea1f0bba05ed776d4e5ebc2fb107dcbf4721aae925a925ff"
+  },
+  {
+    "file": "vendor/v8/v8/include/v8-internal.h",
+    "sha256": "bda14afe1cb6f8a768a0ebdac4954ac2500575ac2fa551dfa1fe5c9118448aa4"
+  },
+  {
+    "file": "vendor/v8/v8/src/heap/cppgc-internal/caged-heap.cc",
+    "sha256": "31fa459afccc24d1d6a3dce9aff447be39d7c0ca8ee6cd6279c711ca9019f661"
+  },
+  {
+    "file": "vendor/v8/v8/src/sandbox/sandbox.cc",
+    "sha256": "68ef4f122cf335e878a9b72e3b869e50dbe406e6ada9eaed8b6f5ad62df46d6b"
+  }
+]

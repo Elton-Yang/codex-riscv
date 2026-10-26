@@ -1,0 +1,71 @@
+{
+  "id": "e72c8f903df302afeac6383161463a308857499e",
+  "entries": [
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "4ba75d99170086eb9a1e312c201ebfb3571c2bfd",
+      "name": "BUILD.gn"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "923a2e07c80f48c82baf3be62f771c419ba11200",
+      "name": "DEPS"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "ca20986f8ed4965aa45e16e270fd06da3e9ff389",
+      "name": "alias.cc"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "80995ecfb045e36664e85e509a2d035e27c83936",
+      "name": "alias.h"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "6373efd35668b9b631e5e9353532cf6b44543aba",
+      "name": "alloc_error_handler_impl.cc"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "d4af2eb3d63e24e9f4b1737def6f2f5af33d28df",
+      "name": "alloc_error_handler_impl.h"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "7f5f8a342b7582c186f8cb041ce14398234fbde3",
+      "name": "allocator_impls.cc"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "d50d32415beaed4678edb228a1f3bce8b3f8934d",
+      "name": "allocator_impls.h"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "f9079679a3e9af5d894890623b1d66069e3ae0ab",
+      "name": "compiler_specific.h"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "616f55289c7a7af222900a35a59ddd15e3ff1f2a",
+      "name": "immediate_crash.h"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "d3d1b8ee23a50f706a16414ab3a9c3674cfb0432",
+      "name": "lib.rs"
+    }
+  ]
+}

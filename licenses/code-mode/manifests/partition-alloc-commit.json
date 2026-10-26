@@ -1,0 +1,38 @@
+{
+  "commit": "ff3b8b885b8374cbd3902642d94dc737bda93d5d",
+  "tree": "89bb7ef4a998b00e579155d82dc60064a12fe3f6",
+  "parents": [
+    "e6c4d08c9badb8cef65d11f7f9dc1924f4d70027"
+  ],
+  "author": {
+    "name": "yoshiki iguchi",
+    "email": "yoshiki@google.com",
+    "time": "Fri May 29 21:56:47 2026"
+  },
+  "committer": {
+    "name": "Copybara-Service",
+    "email": "copybara-worker@google.com",
+    "time": "Fri May 29 21:58:34 2026"
+  },
+  "message": "Clean up: Fix 11 wrong escapes in 5 DEPS files in base\n\nAccording to the checkdeps doc, the period (.) should be escaped with\ntwo backslashes (\\\\), but sometimes it was done with one backslash (\\)\nwrongly.\n\nThis CL fixes these wrong escapes.\n\nSee the checkdeps doc for the detailed format:\nhttps://chromium.googlesource.com/chromium/src/+/master/buildtools/checkdeps/README.md\n\nBug: None\nTest: Passed CQ\nTest: Ran `/buildtools/checkdeps/checkdeps.py`\n\nChange-Id: I937bf7532fa54bbc7c38abd08f94a47311392906\nReviewed-on: https://chromium-review.googlesource.com/c/chromium/src/+/7883083\nReviewed-by: Daniel Cheng <dcheng@chromium.org>\nCommit-Queue: Yoshiki IGUCHI <yoshiki@chromium.org>\nCr-Commit-Position: refs/heads/main@{#1638749}\nNOKEYCHECK=True\nGitOrigin-RevId: e2ee5821963baed92f29e830f05d257fbfdc6bdd\n",
+  "tree_diff": [
+    {
+      "type": "modify",
+      "old_id": "ac57f43824a6fbee336837caf8ce5d076c73cda6",
+      "old_mode": 33188,
+      "old_path": "DEPS",
+      "new_id": "bd53d678f77705a3052cc076ef17ee3bd98161ba",
+      "new_mode": 33188,
+      "new_path": "DEPS"
+    },
+    {
+      "type": "modify",
+      "old_id": "1caf9b85648cd84217dd07180da3115c05f54490",
+      "old_mode": 33188,
+      "old_path": "src/partition_alloc/shim/DEPS",
+      "new_id": "6aa5aeef0d04a6772a5cfbae9b13347318fc6e2f",
+      "new_mode": 33188,
+      "new_path": "src/partition_alloc/shim/DEPS"
+    }
+  ]
+}

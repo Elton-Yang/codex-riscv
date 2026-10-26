@@ -1,0 +1,92 @@
+{
+  "tag": "v0.1.0-experimental.2",
+  "upstream_commit": "970111f6cb62cc02fe36a82ea7d71b37a2889c97",
+  "target": "riscv64gc-unknown-linux-gnu",
+  "profile": "dev-small",
+  "cli": {
+    "bytes": 314651976,
+    "sha256": "703975ef3ca50630be8349eb30f30e42ef458202bb54339797bae0b4d15e08b7"
+  },
+  "host": {
+    "bytes": 163304368,
+    "sha256": "833501f801ae9b640ec9aa725fd0c62f03062e4faf729397a82136a8841f3f88"
+  },
+  "sandbox_test": {
+    "bytes": 141972552,
+    "sha256": "92797ef3600dd9a44fb9981a4c5ab2aca8eb6f9fe6196dab2ccd27c3d058112b"
+  },
+  "physical_board_validation": "PENDING",
+  "emulated_acceptance": "PASS",
+  "model_api_calls": 0,
+  "installer_regression_tests": 57,
+  "evidence": {
+    "archive-verification.json": {
+      "bytes": 275,
+      "sha256": "818a736bd9fe4a8540dba4db01b945a0d9fa50dc92c552c6afe56c8395218b7e"
+    },
+    "cli-guest.json": {
+      "bytes": 706,
+      "sha256": "d6666784f5ecb45f022109b7e70a996bd814904c92bef34122c9cca653a07e32"
+    },
+    "cli-integration-result.json": {
+      "bytes": 1756,
+      "sha256": "5ad565e4c9c3feba480adfc07f9986b363dc6237e88b55c154887ff72937613b"
+    },
+    "cli-invocation.json": {
+      "bytes": 1385,
+      "sha256": "0dbdd55dadaf275740f4bc69434e90e3db1efede5a969f20564925cd93cf3e15"
+    },
+    "cli-result.json": {
+      "bytes": 760,
+      "sha256": "62fd98188bfc0a3b601bbd400518b9daa716aaca115653f473427fd2e5528b0a"
+    },
+    "host-protocol.json": {
+      "bytes": 507,
+      "sha256": "0911d52750728363fb88f35c06256a9fd2e001a69704e148c8b8951c482964ae"
+    },
+    "host-trace-eerpnshe-console.log": {
+      "bytes": 70651,
+      "sha256": "877861ed740bc6a07405448e2ce728762fd4761662fc31a579964396941be9ee"
+    },
+    "host-trace-protocol.json": {
+      "bytes": 507,
+      "sha256": "0911d52750728363fb88f35c06256a9fd2e001a69704e148c8b8951c482964ae"
+    },
+    "host-u7jxas3e-console.log": {
+      "bytes": 17452,
+      "sha256": "fba7d2357b8404160c48cd70e86a3dfc45284a83ea4ac7630a55aac61eb609b0"
+    },
+    "partitionalloc-constants.json": {
+      "bytes": 654,
+      "sha256": "be50e6ccbc17db3f35cc78a2190c2ea34c02aff024888c34a01b1f132f809f0c"
+    },
+    "sandbox-1-console.log": {
+      "bytes": 22158,
+      "sha256": "e419ab994facd44f3ee385b1cc6115628f6c7da730e00e0f99655b15429d4a92"
+    },
+    "sandbox-2-console.log": {
+      "bytes": 22157,
+      "sha256": "29833efd5b0e13d866bcd5c20540533b6fa631600b4bd973ebc2683f89382ad0"
+    },
+    "sandbox-3-console.log": {
+      "bytes": 22158,
+      "sha256": "15709effba50d624b57c7196c63c35cd44d7ba411c8b1ebd89bb7fdab71b05fa"
+    },
+    "sandbox-4-console.log": {
+      "bytes": 20477,
+      "sha256": "4215d7627bd1d7c51688cdd3dec9daafe831db9fc6e6739289371d88d61e5f8a"
+    },
+    "sandbox-5-console.log": {
+      "bytes": 20562,
+      "sha256": "071c05d71c63e7f5066675c5d2b28e496443940cee924531caf204a20dbfdee1"
+    },
+    "sandbox-constants.json": {
+      "bytes": 729,
+      "sha256": "17911fa26dadc76d1a7d50c1bd97cc4688095c0dc68b00e303a06a2aa0bbbebd"
+    },
+    "sandbox-validation.json": {
+      "bytes": 5369,
+      "sha256": "672646e6e6517026cd274811ef0fb7fb810d8a5a444f8033dfdfc8a9a3cb0397"
+    }
+  }
+}

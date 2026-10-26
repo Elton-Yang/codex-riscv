@@ -1,0 +1,26 @@
+--- a/third_party/partition_alloc/src/partition_alloc/address_space_randomization.h
++++ b/third_party/partition_alloc/src/partition_alloc/address_space_randomization.h
+@@ -141,6 +141,23 @@
+       ASLROffset() {
+         return AslrAddress(0x20000000ULL);
+       }
++    #elif PA_BUILDFLAG(IS_LINUX) && PA_BUILDFLAG(PA_ARCH_CPU_RISCV64)
++      // Sv39 has 256 GiB of user virtual address space. Prefer the high
++      // 192..224 GiB window so the 32 GiB-aligned core pools do not fragment
++      // the large, fully guarded V8 reservation below ordinary PIE mappings.
++      // These remain advisory hints, never fixed mappings. Alignment removes
++      // all hint entropy for the core-pool pair (as in the old 30-bit fallback);
++      // smaller mappings retain 23 random page-hint bits with 4 KiB pages.
++      // Retries/kernel placement may leave this window; the embedder must
++      // still reject an insecure V8 reservation rather than weaken its guards.
++      PA_ALWAYS_INLINE PAGE_ALLOCATOR_CONSTANTS_DECLARE_CONSTEXPR uintptr_t
++      ASLRMask() {
++        return AslrMask(35);
++      }
++      PA_ALWAYS_INLINE PAGE_ALLOCATOR_CONSTANTS_DECLARE_CONSTEXPR uintptr_t
++      ASLROffset() {
++        return AslrAddress(0x3000000000ULL);
++      }
+     #elif PA_BUILDFLAG(PA_ARCH_CPU_ARM64)
+       #if PA_BUILDFLAG(IS_LINUX)
+ 

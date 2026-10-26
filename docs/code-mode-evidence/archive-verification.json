@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "archive_bytes": 1369783052,
+  "archive_sha256": "179d4126e8922a8047623ac750510bc7bd3cc361401181f5bbd1590cdd48fd9f",
+  "expected_object_count": 1960,
+  "actual_object_member_count": 1960,
+  "unexpected_members": [],
+  "missing_expected_objects": []
+}

@@ -1,0 +1,205 @@
+[
+  {
+    "name": "codex-code-mode-host",
+    "version": "0.0.0",
+    "license": "Apache-2.0",
+    "source": null,
+    "repository": null
+  },
+  {
+    "name": "codex-code-mode-runtime",
+    "version": "0.0.0",
+    "license": "Apache-2.0",
+    "source": null,
+    "repository": null
+  },
+  {
+    "name": "codex-otel-trace-websocket",
+    "version": "0.0.0",
+    "license": "Apache-2.0",
+    "source": null,
+    "repository": null
+  },
+  {
+    "name": "bindgen",
+    "version": "0.72.1",
+    "license": "BSD-3-Clause",
+    "source": "registry+https://github.com/rust-lang/crates.io-index",
+    "repository": "https://github.com/rust-lang/rust-bindgen"
+  },
+  {
+    "name": "calendrical_calculations",
+    "version": "0.2.4",
+    "license": "Apache-2.0",
+    "source": "registry+https://github.com/rust-lang/crates.io-index",
+    "repository": "https://github.com/unicode-org/icu4x"
+  },
+  {
+    "name": "cexpr",
+    "version": "0.6.0",
+    "license": "Apache-2.0/MIT",
+    "source": "registry+https://github.com/rust-lang/crates.io-index",
+    "repository": "https://github.com/jethrogb/rust-cexpr"
+  },
+  {
+    "name": "clang-sys",
+    "version": "1.8.1",
+    "license": "Apache-2.0",
+    "source": "registry+https://github.com/rust-lang/crates.io-index",
+    "repository": "https://github.com/KyleMayes/clang-sys"
+  },
+  {
+    "name": "core_maths",
+    "version": "0.1.1",
+    "license": "MIT",
+    "source": "registry+https://github.com/rust-lang/crates.io-index",
+    "repository": "https://github.com/robertbastian/core_maths"
+  },
+  {
+    "name": "deno_core_icudata",
+    "version": "0.78.0",
+    "license": "MIT",
+    "source": "registry+https://github.com/rust-lang/crates.io-index",
+    "repository": "https://github.com/denoland/deno_core_icudata"
+  },
+  {
+    "name": "diplomat-runtime",
+    "version": "0.15.1",
+    "license": "MIT OR Apache-2.0",
+    "source": "registry+https://github.com/rust-lang/crates.io-index",
+    "repository": "https://github.com/rust-diplomat/diplomat"
+  },
+  {
+    "name": "diplomat",
+    "version": "0.15.0",
+    "license": "MIT OR Apache-2.0",
+    "source": "registry+https://github.com/rust-lang/crates.io-index",
+    "repository": "https://github.com/rust-diplomat/diplomat"
+  },
+  {
+    "name": "diplomat_core",
+    "version": "0.15.0",
+    "license": "MIT OR Apache-2.0",
+    "source": "registry+https://github.com/rust-lang/crates.io-index",
+    "repository": "https://github.com/rust-diplomat/diplomat"
+  },
+  {
+    "name": "fslock",
+    "version": "0.2.1",
+    "license": "MIT",
+    "source": "registry+https://github.com/rust-lang/crates.io-index",
+    "repository": "https://github.com/brunoczim/fslock"
+  },
+  {
+    "name": "gzip-header",
+    "version": "1.0.0",
+    "license": "MIT/Apache-2.0",
+    "source": "registry+https://github.com/rust-lang/crates.io-index",
+    "repository": "https://github.com/oyvindln/gzip-header"
+  },
+  {
+    "name": "icu_calendar",
+    "version": "2.2.1",
+    "license": "Unicode-3.0",
+    "source": "registry+https://github.com/rust-lang/crates.io-index",
+    "repository": "https://github.com/unicode-org/icu4x"
+  },
+  {
+    "name": "icu_calendar_data",
+    "version": "2.2.0",
+    "license": "Unicode-3.0",
+    "source": "registry+https://github.com/rust-lang/crates.io-index",
+    "repository": "https://github.com/unicode-org/icu4x"
+  },
+  {
+    "name": "itertools",
+    "version": "0.13.0",
+    "license": "MIT OR Apache-2.0",
+    "source": "registry+https://github.com/rust-lang/crates.io-index",
+    "repository": "https://github.com/rust-itertools/itertools"
+  },
+  {
+    "name": "ixdtf",
+    "version": "0.6.4",
+    "license": "Unicode-3.0",
+    "source": "registry+https://github.com/rust-lang/crates.io-index",
+    "repository": "https://github.com/unicode-org/icu4x"
+  },
+  {
+    "name": "libloading",
+    "version": "0.8.9",
+    "license": "ISC",
+    "source": "registry+https://github.com/rust-lang/crates.io-index",
+    "repository": "https://github.com/nagisa/rust_libloading/"
+  },
+  {
+    "name": "linux-raw-sys",
+    "version": "0.4.15",
+    "license": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+    "source": "registry+https://github.com/rust-lang/crates.io-index",
+    "repository": "https://github.com/sunfishcode/linux-raw-sys"
+  },
+  {
+    "name": "resb",
+    "version": "0.1.2",
+    "license": "Unicode-3.0",
+    "source": "registry+https://github.com/rust-lang/crates.io-index",
+    "repository": "https://github.com/unicode-org/icu4x"
+  },
+  {
+    "name": "rustix",
+    "version": "0.38.44",
+    "license": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+    "source": "registry+https://github.com/rust-lang/crates.io-index",
+    "repository": "https://github.com/bytecodealliance/rustix"
+  },
+  {
+    "name": "strck",
+    "version": "1.0.0",
+    "license": "MIT",
+    "source": "registry+https://github.com/rust-lang/crates.io-index",
+    "repository": "https://github.com/QnnOkabayashi/strck"
+  },
+  {
+    "name": "temporal_capi",
+    "version": "0.2.3",
+    "license": "MIT OR Apache-2.0",
+    "source": "registry+https://github.com/rust-lang/crates.io-index",
+    "repository": "https://github.com/boa-dev/temporal"
+  },
+  {
+    "name": "temporal_rs",
+    "version": "0.2.3",
+    "license": "MIT OR Apache-2.0",
+    "source": "registry+https://github.com/rust-lang/crates.io-index",
+    "repository": "https://github.com/boa-dev/temporal"
+  },
+  {
+    "name": "timezone_provider",
+    "version": "0.2.3",
+    "license": "MIT OR Apache-2.0",
+    "source": "registry+https://github.com/rust-lang/crates.io-index",
+    "repository": "https://github.com/boa-dev/temporal"
+  },
+  {
+    "name": "v8",
+    "version": "152.2.0",
+    "license": "MIT",
+    "source": "registry+https://github.com/rust-lang/crates.io-index",
+    "repository": "https://github.com/denoland/rusty_v8"
+  },
+  {
+    "name": "which",
+    "version": "6.0.3",
+    "license": "MIT",
+    "source": "registry+https://github.com/rust-lang/crates.io-index",
+    "repository": "https://github.com/harryfei/which-rs.git"
+  },
+  {
+    "name": "zoneinfo64",
+    "version": "0.3.0",
+    "license": "Unicode-3.0",
+    "source": "registry+https://github.com/rust-lang/crates.io-index",
+    "repository": "https://github.com/unicode-org/icu4x"
+  }
+]

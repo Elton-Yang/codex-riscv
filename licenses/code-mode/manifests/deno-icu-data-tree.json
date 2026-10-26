@@ -1,0 +1,62 @@
+{
+  "sha": "9adfc1019ed4fce2e873c8bc7aebec09928010c8",
+  "url": "https://api.github.com/repos/denoland/deno_core_icudata/git/trees/9adfc1019ed4fce2e873c8bc7aebec09928010c8",
+  "tree": [
+    {
+      "path": ".gitignore",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c8edfc3664cbeff65ffc339e11bd2757fa852d9d",
+      "size": 164,
+      "url": "https://api.github.com/repos/denoland/deno_core_icudata/git/blobs/c8edfc3664cbeff65ffc339e11bd2757fa852d9d"
+    },
+    {
+      "path": "Cargo.lock",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "506da881bde490558dc45117635bed4a76f9bcfb",
+      "size": 162,
+      "url": "https://api.github.com/repos/denoland/deno_core_icudata/git/blobs/506da881bde490558dc45117635bed4a76f9bcfb"
+    },
+    {
+      "path": "Cargo.toml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "33710048e0bfcf1f126bbac098f5e05b6c4037e5",
+      "size": 234,
+      "url": "https://api.github.com/repos/denoland/deno_core_icudata/git/blobs/33710048e0bfcf1f126bbac098f5e05b6c4037e5"
+    },
+    {
+      "path": "README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8b98ecaf2b4bbca1b33bb098ced78517cbfc835e",
+      "size": 105,
+      "url": "https://api.github.com/repos/denoland/deno_core_icudata/git/blobs/8b98ecaf2b4bbca1b33bb098ced78517cbfc835e"
+    },
+    {
+      "path": "src",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "fac70ae9d4203b637e825f1600ec3b524a18b131",
+      "url": "https://api.github.com/repos/denoland/deno_core_icudata/git/trees/fac70ae9d4203b637e825f1600ec3b524a18b131"
+    },
+    {
+      "path": "src/icudtl.dat",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9655a2e17f08c56d6dbbc47f6e52e3fd3ef2436e",
+      "size": 10876560,
+      "url": "https://api.github.com/repos/denoland/deno_core_icudata/git/blobs/9655a2e17f08c56d6dbbc47f6e52e3fd3ef2436e"
+    },
+    {
+      "path": "src/lib.rs",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3a2364f673dda99ddd5edc9b3a7b8b936ae9efa3",
+      "size": 205,
+      "url": "https://api.github.com/repos/denoland/deno_core_icudata/git/blobs/3a2364f673dda99ddd5edc9b3a7b8b936ae9efa3"
+    }
+  ],
+  "truncated": false
+}

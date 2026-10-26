@@ -1,157 +1,80 @@
 # codex-riscv
 
-[English (default)](README.md) · [简体中文](README.zh-CN.md)
+[简体中文](README.zh-CN.md)
 
-An **unofficial experimental RISC-V Linux build and adaptation of OpenAI Codex CLI**. This project is independent of OpenAI and is not endorsed by OpenAI. It does not indicate official upstream RISC-V support.
+Unofficial experimental RISC-V Linux adaptation of OpenAI Codex CLI. Independent of OpenAI; no endorsement or official upstream RISC-V support is implied.
 
-The first adaptation release is `v0.1.0-experimental.1`, targeting Debian 13 / riscv64.
+The current experimental release is **`v0.1.0-experimental.2`**, for Debian 13 / riscv64. It adds a sandbox-enabled Code Mode host alongside the unchanged `.1` CLI. The upstream development version still prints `codex-cli 0.0.0`.
 
-## Status
+## Install or upgrade
 
-| Check | Result |
-| --- | --- |
-| Cross-build for `riscv64gc-unknown-linux-gnu` | Passed |
-| `codex --version` and `--help` under QEMU | Both exited 0 |
-| seccomp policy-selection unit tests under QEMU | 6 passed, 0 failed |
-| Native startup on VisionFive 2 / JH7110 | User-operated `--version` / `--help` produced normal output |
-| Native read-only sandbox running `/bin/true` | Exit 0 |
-| Native read-only sandbox denying file writes / IPv4 socket creation | Read-only filesystem, exit 2 / `EPERM`, exit 1; both outside-sandbox controls succeeded |
-| Authentication, model selection and basic interactive conversation | User reported success |
-| Tool calls, model-driven file edits, `workspace-write`, full test suite | **Not tested** |
+Use an ordinary user, without `sudo`, on the board. Runtime dependencies:
 
-The user ran the native checks on 2026-10-25 on VisionFive 2 / Debian 13 with kernel `6.12.113+deb13-riscv64` and bubblewrap `0.12.0`. These results are separate from the build host's QEMU checks. They cover the listed startup and denial behavior and basic conversation, not a comprehensive sandbox security audit or long-term stability. Do not run Codex as root or disable its sandbox to work around failures. See the [validation record](docs/validation.md).
-
-The earlier successful interactive conversation used `--no-daemon`. The user subsequently completed installation with the first installer, but bare `codex-riscv` failed on the incomplete packaged-daemon path. The updated installer supplies a default standalone launcher; native startup of this fix has not yet been confirmed. See the [installer v1.1 notes](docs/release-notes-installer-v1.1.md).
-
-## Pinned upstream and patch
-
-- Upstream: [openai/codex](https://github.com/openai/codex)
-- Commit: [`970111f6cb62cc02fe36a82ea7d71b37a2889c97`](https://github.com/openai/codex/commit/970111f6cb62cc02fe36a82ea7d71b37a2889c97)
-- Target: `riscv64gc-unknown-linux-gnu`, LP64D ABI
-- Rust `1.99.1`, cross GCC `14.2`, target glibc `2.41`
-- Profile: unoptimized `dev-small`, stripped, for experiments
-
-The functional source patch adds two lines selecting `TargetArch::riscv64` in the Linux seccomp architecture dispatch. `seccompiler 0.5.0` already provides this architecture. No filter rules or security checks were removed.
-
-The pinned upstream development commit declares package version `0.0.0`, so `--version` reports `codex-cli 0.0.0`. This repository's release tag identifies the adaptation, not an upstream Codex release.
-
-## Try it on Debian 13 riscv64
-
-Use the per-user installer below, or download manually from the [release page](https://github.com/Elton-Yang/codex-riscv/releases/tag/v0.1.0-experimental.1). The installer uses the existing experimental binary without rebuilding or changing its version.
-
-### 1. Check the system and install runtime dependencies
-
-```bash
-uname -m                       # expected: riscv64
-dpkg --print-architecture      # expected: riscv64
-getconf GNU_LIBC_VERSION       # this binary requires glibc >= 2.39
-
+```sh
 sudo apt update
-sudo apt install ca-certificates curl python3 gzip libc6 libgcc-s1 libssl3t64 bubblewrap
+sudo apt install ca-certificates curl python3 libc6 libgcc-s1 libssl3t64 bubblewrap
 ```
 
-`libssl3t64` supplies OpenSSL 3 libraries; apt also installs its zlib/zstd dependencies. `git` and `ripgrep` are useful optional development tools:
+Requires Linux riscv64 and glibc ≥ 2.39. The two executables together occupy about 478 MB; allow roughly 1.5 GB free for download/staging and keep space for the previous installed version. No Rust, Node.js or compiler is needed to run the package.
 
-```bash
-sudo apt install git ripgrep
-```
+Download and inspect the existing installer URL, then upgrade in place:
 
-You do not need Rust, Node.js or a cross compiler to run the binary. Allow space for the archive and extraction: the executable alone is `314651976` bytes, excluding accompanying notices and documentation.
-
-### 2. Install a user-global command (recommended)
-
-Download and review the script, then run it as your ordinary user, **without `sudo`**:
-
-```bash
+```sh
 curl --fail --location --proto '=https' --proto-redir '=https' --tlsv1.2 \
   https://raw.githubusercontent.com/Elton-Yang/codex-riscv/main/install.sh \
   -o install-codex-riscv.sh
 less install-codex-riscv.sh
-sh install-codex-riscv.sh
+sh install-codex-riscv.sh upgrade
 export PATH="$HOME/.local/bin:$PATH"
+sh install-codex-riscv.sh status
 codex-riscv --version
 ```
 
-The default installation retains the full release under `~/.local/share/codex-riscv/versions/v0.1.0-experimental.1` and creates `~/.local/bin/codex-riscv`. That command uses a managed Python 3 launcher to run the unchanged binary with `--no-daemon`: bare startup, `resume` and `fork` default to standalone mode without a shared background daemon. This does not disable sandboxing. The installer checks the pinned archive, platform and dynamic libraries before activation, preserves license materials and does not edit shell startup files.
+`upgrade` also installs on a fresh system. It checks a pinned archive SHA256, executable permissions and both binaries' dynamic dependencies before switching `current`. The launcher keeps `--no-daemon`; no sandbox is disabled. Existing login information, model settings, `~/.codex`, shell files and projects are preserved. Existing custom prefixes require the original `--prefix` option. Re-download the script for a new release: old scripts do not query GitHub `latest`.
 
-Choose the management action you need; do not run all of these in sequence:
+Start Code Mode in a disposable project:
 
-```bash
-sh install-codex-riscv.sh status
-sh install-codex-riscv.sh install --version v0.1.0-experimental.1
-sh install-codex-riscv.sh upgrade --channel experimental
+```sh
+mkdir -p "$HOME/codex-riscv-smoke"
+cd "$HOME/codex-riscv-smoke"
+codex-riscv -c features.code_mode_only=true
+```
+
+Ask it to create a small Python file and execute it. This enables Code Mode for this invocation only; existing authentication and model selection apply. The CLI finds `bin/codex-code-mode-host` beside its actual executable automatically. Native `.2` testing is pending; please retain errors rather than disable sandboxing.
+
+Management commands:
+
+```sh
 sh install-codex-riscv.sh rollback
+sh install-codex-riscv.sh install --version v0.1.0-experimental.1
 sh install-codex-riscv.sh uninstall
 ```
 
-`upgrade` selects the experimental release listed in this installer, not GitHub's `latest`. Only one release is currently supported; reinstalling it does not create a rollback version. Rollback requires an earlier successful switch between different installed versions. Download and review an updated installer before upgrading to future releases. Uninstall removes only managed, unmodified installation files, never `~/.codex`, credentials or project files.
+Rollback switches program versions and does not undo edits made by Codex. Uninstall preserves settings and projects. The default command is `codex-riscv`; `--command codex` is available for a new install if it does not collide with another installation. See [installer details](docs/installer.en.md).
 
-Already installed with v1? **Download and review the script above again**, then run `sh install-codex-riscv.sh upgrade`. This updates the managed launcher in place without changing the binary version or requiring uninstall; the saved command name and bin directory are retained. Before updating, use `codex-riscv --no-daemon`, or `codex-riscv --no-daemon resume` / `codex-riscv --no-daemon fork` as a workaround.
+## Validation
 
-To use the name `codex`, explicitly pass `--command codex` on the first installation. An unrelated command at the destination or on `PATH` blocks installation. A `codex-riscv` binary copied using the old instructions is not overwritten either: inspect it before manually moving or renaming it. See the [installer guide](docs/installer.en.md) for options, layout and troubleshooting.
+| Scope | Result |
+| --- | --- |
+| `.2` host source build, RISC-V LP64D | Passed |
+| Full-system Sv39, restricted rv64gc-oriented ISA, ASLR=2 | Passed |
+| Actual host stdio protocol, ordinary and traced runs | Passed |
+| Three fresh secure V8/native-buffer/TurboFan runs | Passed: 32 GiB cage, 160 GiB full reservation |
+| Low-Smi collision and 100 GiB VA limit | Expected fail-closed refusals passed |
+| Actual CLI → host → real patch/Python tools | Passed in full-system simulation; only model responses mocked |
+| Workspace-write kernel checks | Seccomp=2, NoNewPrivs=1, outside-workspace write denied |
+| New package install/upgrade/Code Mode on VisionFive 2 | **Pending user confirmation** |
 
-### 3. Manual download and startup check (without the installer)
+The historical `.1` user tests covered VisionFive 2 / JH7110, Debian 13, startup, authentication/model choice/basic conversation and two read-only sandbox denial probes. They do not establish native `.2` Code Mode behavior. See [`.1` validation](docs/validation.md), [`.2` release notes](docs/release-notes-v0.1.0-experimental.2.md) and [new evidence](docs/code-mode-evidence/).
 
-```bash
-TAG=v0.1.0-experimental.1
-NAME="codex-riscv64-linux-gnu-${TAG}"
-BASE="https://github.com/Elton-Yang/codex-riscv/releases/download/${TAG}"
-DOWNLOAD_DIR=$(mktemp -d "${TMPDIR:-/tmp}/codex-riscv.XXXXXX")
-cd "$DOWNLOAD_DIR"
+These checks are not an exploit-resistance certification, full sandbox audit, long-term stability result or validation of other boards/kernels. Full TUI coverage, realtime runtime, npm updater and explicit packaged daemon/agents/remote-server workflows remain unvalidated.
 
-curl --fail --location --proto '=https' --proto-redir '=https' --tlsv1.2 \
-  -O "$BASE/$NAME.tar.gz"
-printf '%s  %s\n' \
-  2b70f049652793a2dd6c8035122ce2a6920de680153be1c6f8e2a172dde70120 \
-  "$NAME.tar.gz" | sha256sum --check --strict
-```
+## Sources, changes and licenses
 
-**Continue only after checksum verification succeeds:**
+Pinned CLI upstream: [`970111f6cb62cc02fe36a82ea7d71b37a2889c97`](https://github.com/openai/codex/commit/970111f6cb62cc02fe36a82ea7d71b37a2889c97). Rust 1.99.1, cross GCC 14.2, target glibc 2.41; stripped, unoptimized `dev-small`. CLI changes retain the two-line RISC-V seccomp architecture selection. Code Mode uses rusty_v8 152.2.0 / V8 15.2.124.1 with the source adaptations recorded in [MODIFICATIONS.md](MODIFICATIONS.md).
 
-```bash
-tar -xzf "$NAME.tar.gz"
-"./$NAME/bin/codex" --version
-"./$NAME/bin/codex" --help
-```
+Download binary and dependency-source archives plus `SHA256SUMS` from the [`.2` prerelease](https://github.com/Elton-Yang/codex-riscv/releases/tag/v0.1.0-experimental.2). The fixed binary archive digest is also embedded in `install.sh`. The package is dynamically linked, not a universal static Linux executable.
 
-This fixed checksum applies only to the named release. It verifies integrity, not an independent publisher signature. If a download returns 404, check this project's release page rather than substituting an unknown binary source. Keep the full extracted `LICENSE`, `NOTICE` and `licenses/` materials, including when redistributing.
+The [Code Mode build notes](docs/code-mode.md) describe the prepared source/toolchain layout and replay patches. `scripts/build.sh` reproduces the CLI-only build on a compatible Debian 13 x86_64 build host. No clean-room Code Mode setup or bit-identical rebuild is claimed.
 
-### 4. Validate the native sandbox before real work
-
-This build does not bundle bubblewrap. It uses the system `bwrap`, and the board's kernel and system policy must permit the relevant user namespaces and sandbox mechanisms. A Debian userland version alone does not establish that a vendor kernel is suitable.
-
-Start in an isolated test directory without sensitive files. Validate read-only, write-restriction and network-denial behavior. Record the kernel version and full errors if bubblewrap, namespace, seccomp or Landlock operations fail. Do not turn off sandboxing to claim compatibility.
-
-## Reproduce the cross-build
-
-The build scripts target a **Debian 13 x86_64 build host**, not native installation on the board. Read the host prerequisites in the scripts first:
-
-```bash
-./scripts/build.sh
-./scripts/check.sh
-```
-
-The upstream commit, Rust version and Debian package manifests are pinned; Cargo uses `--locked`. Debian packages are checked against a signature/hash chain and extracted locally. Host prerequisites must already be present.
-
-The underlying build and test commands were executed successfully. The reorganized public scripts have not been run end-to-end in a fresh environment. Bit-for-bit reproducibility across paths, dates and hosts is not claimed. Missing or changed pinned mirror content must fail verification rather than silently upgrade dependencies. See [validation details](docs/validation.md).
-
-To regenerate license notices:
-
-```bash
-./scripts/generate-notices.py
-```
-
-## Limitations
-
-- npm launcher, upstream automatic updates and packaged-daemon installation paths are not adapted for RISC-V. The managed launcher defaults to standalone mode, with upgrades managed by this repository’s installer. It does not add support for explicit daemon, agents or remote-server features. Root / system-wide installation is not supported.
-- Optional external code-mode / V8 and realtime runtimes were not built, included or tested.
-- Native validation covers only the listed checks on one board and user-reported basic conversation. Tool calls, model-driven file edits, `workspace-write`, exhaustive TUI behavior, other kernels and long-term stability remain untested.
-- The file-write and IPv4-socket denials are not a comprehensive sandbox security audit. The legacy Landlock backend and the full set of filter rules were not separately validated.
-- This large `dev-small` executable does not represent optimized release performance.
-- This is a dynamically linked GNU/Linux binary, not a generic static executable.
-
-## Licensing and provenance
-
-Upstream Codex is Apache-2.0. This repository retains [LICENSE](LICENSE), [NOTICE](NOTICE) and modification records. Third-party components may use other licenses; see `licenses/THIRD-PARTY-NOTICES.html` and the original texts and supplemental notices under `licenses/`.
-
-Retain those materials when redistributing. Automated notice generation assists with dependency information; it is not a legal guarantee for every use case.
+Keep `LICENSE`, `NOTICE`, `licenses/`, modification records and the relevant dependency-source materials when redistributing. The Code Mode notice supplement supplements the baseline; known upstream attribution gaps and absent final linker map are explicitly disclosed. Inventory coverage is not legal clearance.

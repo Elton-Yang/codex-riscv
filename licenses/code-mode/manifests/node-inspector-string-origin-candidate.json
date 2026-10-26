@@ -1,0 +1,84 @@
+[
+  {
+    "sha": "ec4168668bd251eaff40e8f0604626c0e0a74976",
+    "node_id": "C_kwDOAZ7xs9oAKGVjNDE2ODY2OGJkMjUxZWFmZjQwZThmMDYwNDYyNmMwZTBhNzQ5NzY",
+    "commit": {
+      "author": {
+        "name": "Shelley Vohr",
+        "email": "shelley.vohr@gmail.com",
+        "date": "2025-07-02T19:57:10Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2025-07-02T19:57:10Z"
+      },
+      "message": "tools: update inspector_protocol to 69d69dd\n\nPR-URL: https://github.com/nodejs/node/pull/58900\nReviewed-By: Chengzhong Wu <legendecas@gmail.com>\nReviewed-By: Luigi Pinca <luigipinca@gmail.com>",
+      "tree": {
+        "sha": "cbb4ce341d1cc0d2392d3c5abbb5c9aeee38676a",
+        "url": "https://api.github.com/repos/nodejs/node/git/trees/cbb4ce341d1cc0d2392d3c5abbb5c9aeee38676a"
+      },
+      "url": "https://api.github.com/repos/nodejs/node/git/commits/ec4168668bd251eaff40e8f0604626c0e0a74976",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJoZY8WCRC1aQ7uu5UhlAAAMREQAFwqpsi5RolWX5PKsC9DPujT\nY+XbwPEcxEGzq5fsXQ2KIrwXEEy1ujeWTpPVMSMzs/weYhIlq0waH8jSPWXu6AgU\nSWTM/7TZCNiTSZjAogB9+zAD+WCXcEDDMXJCkMmBHO3St9W6vO4LUprKpw63c2hs\n/5+KXOi4Vob0RZD+QacaccyEnd0pegIEcx3ABw/9fKAFoNk9sy672t+3S6h2bYMa\nZp1BNGSA10CXZhf50HETNt0RHINWwbQt4XVvfPupyXKmAcnRGxhERlbLb+D5JnZa\nleL6tS8IbwDlWbGbiUj+iirftLVZ/nea72KNkK1/+Bbmsul4Ryir1PVplNe1hjKU\njqhlYJGVsDM8iZuEjsVYJtCuT/jOZqhCjcE+qKRrOqO/WMfW9D/soSbJolXldQpv\ngVY8DV2rqiOtSfk6Zx0yl2BlW3WkGbkdDFZdWjsW2wG1OZKqdrTPikrVVOQJSlOC\nHe0eDtB8Z+FWHT6uMm/vJo2at7z0mLSOsW5f8gS7CvFAyHu2VvFqBJN0zXHUdqXx\nd3Xiw1KrYhEVEi+TWV2CGp2f9nT/h659utBkWI4Bvx1g4j1gcCTylb7deCTCuXUh\nOjsWzsZMFZNt0Bg+JP0re8rP5Ancuxbf7BiRSFnge8Ekrxqrzvuh43a/1d+39W4r\nlVV1vGwMtH2iCcmoUnJV\n=O9Yc\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree cbb4ce341d1cc0d2392d3c5abbb5c9aeee38676a\nparent 46508d9dd858ae8140ea121af9496bfee8c21b4f\nauthor Shelley Vohr <shelley.vohr@gmail.com> 1751486230 +0200\ncommitter GitHub <noreply@github.com> 1751486230 +0000\n\ntools: update inspector_protocol to 69d69dd\n\nPR-URL: https://github.com/nodejs/node/pull/58900\nReviewed-By: Chengzhong Wu <legendecas@gmail.com>\nReviewed-By: Luigi Pinca <luigipinca@gmail.com>",
+        "verified_at": "2025-07-02T19:57:10Z"
+      }
+    },
+    "url": "https://api.github.com/repos/nodejs/node/commits/ec4168668bd251eaff40e8f0604626c0e0a74976",
+    "html_url": "https://github.com/nodejs/node/commit/ec4168668bd251eaff40e8f0604626c0e0a74976",
+    "comments_url": "https://api.github.com/repos/nodejs/node/commits/ec4168668bd251eaff40e8f0604626c0e0a74976/comments",
+    "author": {
+      "login": "codebytere",
+      "id": 2036040,
+      "node_id": "MDQ6VXNlcjIwMzYwNDA=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2036040?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/codebytere",
+      "html_url": "https://github.com/codebytere",
+      "followers_url": "https://api.github.com/users/codebytere/followers",
+      "following_url": "https://api.github.com/users/codebytere/following{/other_user}",
+      "gists_url": "https://api.github.com/users/codebytere/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/codebytere/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/codebytere/subscriptions",
+      "organizations_url": "https://api.github.com/users/codebytere/orgs",
+      "repos_url": "https://api.github.com/users/codebytere/repos",
+      "events_url": "https://api.github.com/users/codebytere/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/codebytere/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "46508d9dd858ae8140ea121af9496bfee8c21b4f",
+        "url": "https://api.github.com/repos/nodejs/node/commits/46508d9dd858ae8140ea121af9496bfee8c21b4f",
+        "html_url": "https://github.com/nodejs/node/commit/46508d9dd858ae8140ea121af9496bfee8c21b4f"
+      }
+    ]
+  }
+]

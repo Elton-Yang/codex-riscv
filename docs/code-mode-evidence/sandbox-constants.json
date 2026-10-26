@@ -1,0 +1,27 @@
+{
+  "label": "release-20261026",
+  "values": {
+    "snapshot_x64": {
+      "size_log2": 35,
+      "pointer_shift": 29,
+      "guard_bytes": 68719476736,
+      "additional_guard_bytes": 0,
+      "typed_array_masks": 1,
+      "bounded_size_shift": 29,
+      "max_safe_buffer_bytes": 34359738367,
+      "external_pointer_table_bytes": 536870912
+    },
+    "native_riscv64": {
+      "size_log2": 35,
+      "pointer_shift": 29,
+      "guard_bytes": 68719476736,
+      "additional_guard_bytes": 0,
+      "typed_array_masks": 1,
+      "bounded_size_shift": 29,
+      "max_safe_buffer_bytes": 34359738367,
+      "external_pointer_table_bytes": 536870912
+    }
+  },
+  "verified_expected_configuration": true,
+  "expect_mismatch": false
+}

@@ -1,0 +1,84 @@
+[
+  {
+    "sha": "ab28501ef13f59244bcf2366243be2d88d65ec3b",
+    "node_id": "C_kwDOBSfADdoAKGFiMjg1MDFlZjEzZjU5MjQ0YmNmMjM2NjI0M2JlMmQ4OGQ2NWVjM2I",
+    "commit": {
+      "author": {
+        "name": "DevTools Bot",
+        "email": "24444246+devtools-bot@users.noreply.github.com",
+        "date": "2026-01-28T04:36:08Z"
+      },
+      "committer": {
+        "name": "DevTools Bot",
+        "email": "24444246+devtools-bot@users.noreply.github.com",
+        "date": "2026-01-28T04:36:16Z"
+      },
+      "message": "Roll protocol to r1575685",
+      "tree": {
+        "sha": "10370bd7ec11d2d9a2ddbd734ae01a93ed115af4",
+        "url": "https://api.github.com/repos/ChromeDevTools/devtools-protocol/git/trees/10370bd7ec11d2d9a2ddbd734ae01a93ed115af4"
+      },
+      "url": "https://api.github.com/repos/ChromeDevTools/devtools-protocol/git/commits/ab28501ef13f59244bcf2366243be2d88d65ec3b",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/ChromeDevTools/devtools-protocol/commits/ab28501ef13f59244bcf2366243be2d88d65ec3b",
+    "html_url": "https://github.com/ChromeDevTools/devtools-protocol/commit/ab28501ef13f59244bcf2366243be2d88d65ec3b",
+    "comments_url": "https://api.github.com/repos/ChromeDevTools/devtools-protocol/commits/ab28501ef13f59244bcf2366243be2d88d65ec3b/comments",
+    "author": {
+      "login": "devtools-bot",
+      "id": 24444246,
+      "node_id": "MDQ6VXNlcjI0NDQ0MjQ2",
+      "avatar_url": "https://avatars.githubusercontent.com/u/24444246?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/devtools-bot",
+      "html_url": "https://github.com/devtools-bot",
+      "followers_url": "https://api.github.com/users/devtools-bot/followers",
+      "following_url": "https://api.github.com/users/devtools-bot/following{/other_user}",
+      "gists_url": "https://api.github.com/users/devtools-bot/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/devtools-bot/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/devtools-bot/subscriptions",
+      "organizations_url": "https://api.github.com/users/devtools-bot/orgs",
+      "repos_url": "https://api.github.com/users/devtools-bot/repos",
+      "events_url": "https://api.github.com/users/devtools-bot/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/devtools-bot/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "devtools-bot",
+      "id": 24444246,
+      "node_id": "MDQ6VXNlcjI0NDQ0MjQ2",
+      "avatar_url": "https://avatars.githubusercontent.com/u/24444246?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/devtools-bot",
+      "html_url": "https://github.com/devtools-bot",
+      "followers_url": "https://api.github.com/users/devtools-bot/followers",
+      "following_url": "https://api.github.com/users/devtools-bot/following{/other_user}",
+      "gists_url": "https://api.github.com/users/devtools-bot/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/devtools-bot/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/devtools-bot/subscriptions",
+      "organizations_url": "https://api.github.com/users/devtools-bot/orgs",
+      "repos_url": "https://api.github.com/users/devtools-bot/repos",
+      "events_url": "https://api.github.com/users/devtools-bot/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/devtools-bot/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "19078ce7475287f37d181ac061ed05c8feaedbeb",
+        "url": "https://api.github.com/repos/ChromeDevTools/devtools-protocol/commits/19078ce7475287f37d181ac061ed05c8feaedbeb",
+        "html_url": "https://github.com/ChromeDevTools/devtools-protocol/commit/19078ce7475287f37d181ac061ed05c8feaedbeb"
+      }
+    ]
+  }
+]

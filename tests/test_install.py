@@ -15,6 +15,7 @@ import hashlib
 import io
 import json
 import os
+import re
 from pathlib import Path
 import select
 import signal
@@ -41,7 +42,8 @@ if name == "uname":
 elif name == "getconf":
     print(os.environ.get("TEST_GLIBC", "glibc 2.41"))
 elif name == "ldd":
-    if os.environ.get("TEST_MISSING_LIBRARY"):
+    if (os.environ.get("TEST_MISSING_LIBRARY") or
+            (os.environ.get("TEST_HOST_MISSING_LIBRARY") and args[0].endswith("codex-code-mode-host"))):
         print("libssl.so.3 => not found")
         sys.exit(0)
     print("libssl.so.3 => /lib/libssl.so.3 (0x1234)")
@@ -102,7 +104,7 @@ class InstallerTests(unittest.TestCase):
                 del self.env[variable]
         self.installer = self.make_installer(TAG)
 
-    def make_archive(self, tag, extra=(), omit=(), binary_script=None):
+    def make_archive(self, tag, extra=(), omit=(), binary_script=None, host_mode=0o755):
         root = "codex-riscv64-linux-gnu-" + tag
         target = self.archives / (root + ".tar.gz")
         entries = {
@@ -111,6 +113,8 @@ class InstallerTests(unittest.TestCase):
             root + "/NOTICE": (b"Test notice\n", 0o644),
             root + "/licenses/test.txt": (b"Third-party test license\n", 0o644),
         }
+        if tag != TAG:
+            entries[root + "/bin/codex-code-mode-host"] = (b"#!/bin/sh\nexit 0\n", host_mode)
         with tarfile.open(target, "w:gz", format=tarfile.USTAR_FORMAT) as archive:
             for name, (data, mode) in entries.items():
                 if name.split(root + "/", 1)[-1] in omit:
@@ -128,7 +132,8 @@ class InstallerTests(unittest.TestCase):
         digest = checksum or hashlib.sha256(archive.read_bytes()).hexdigest()
         source = (REPOSITORY / "install.sh").read_text()
         self.assertIn(PUBLISHED_SHA, source, "Test fixture must replace the real pinned digest")
-        source = source.replace(PUBLISHED_SHA, digest).replace(TAG, tag)
+        source = re.sub(r'^DEFAULT_VERSION = .*$', 'DEFAULT_VERSION = "' + tag + '"', source, flags=re.M)
+        source = re.sub(r'^RELEASES = \{.*?^\}', 'RELEASES = {' + repr(tag) + ': ' + repr(digest) + '}', source, flags=re.M | re.S)
         installer = self.work / ("installer-" + tag + ".sh")
         installer.write_text(source)
         return installer
@@ -525,6 +530,49 @@ print(json.dumps(sys.argv[1:]))
         self.assert_current(TAG)
         self.run_installer("rollback", installer=newer)
         self.assert_current(NEXT_TAG)
+
+    def test_code_mode_host_required_before_activation(self):
+        self.run_installer()
+        archive = self.make_archive(NEXT_TAG, omit=["bin/codex-code-mode-host"])
+        newer = self.make_installer(NEXT_TAG, archive=archive)
+        result = self.run_installer("upgrade", installer=newer, success=False)
+        self.assertIn("Missing executable: codex-code-mode-host", result.stdout)
+        self.assert_current(TAG)
+
+    def test_code_mode_host_library_failure_preserves_current(self):
+        self.run_installer()
+        newer = self.make_installer(NEXT_TAG)
+        result = self.run_installer("upgrade", installer=newer, success=False,
+                                    TEST_HOST_MISSING_LIBRARY="1")
+        self.assertIn("Runtime library check failed for codex-code-mode-host", result.stdout)
+        self.assert_current(TAG)
+
+    def test_code_mode_host_without_execute_permission_is_rejected(self):
+        self.run_installer()
+        archive = self.make_archive(NEXT_TAG, host_mode=0o644)
+        newer = self.make_installer(NEXT_TAG, archive=archive)
+        self.run_installer("upgrade", installer=newer, success=False)
+        self.assert_current(TAG)
+
+    def test_code_mode_upgrade_preserves_configuration_and_projects(self):
+        config = self.home / ".codex"
+        config.mkdir()
+        sentinel = config / "config.toml"
+        sentinel.write_text('model = "existing-model"\n# fixture only\n')
+        project = self.home / "project.txt"
+        project.write_text("existing project content\n")
+        shell = self.home / ".profile"
+        shell.write_text("# existing shell configuration\n")
+        originals = {p: p.read_bytes() for p in (sentinel, project, shell)}
+        self.run_installer()
+        newer = self.make_installer(NEXT_TAG)
+        self.run_installer("upgrade", installer=newer)
+        self.assert_current(NEXT_TAG)
+        self.assertTrue((self.prefix / "current/bin/codex-code-mode-host").is_file())
+        self.run_installer("rollback", installer=newer)
+        self.assert_current(TAG)
+        for path, data in originals.items():
+            self.assertEqual(path.read_bytes(), data)
 
     def test_failed_upgrade_keeps_working_version(self):
         self.run_installer()

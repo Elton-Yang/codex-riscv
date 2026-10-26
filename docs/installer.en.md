@@ -2,136 +2,55 @@
 
 [简体中文](installer.md) · [README](../README.md)
 
-`install.sh` manages the existing unofficial RISC-V Linux release. It does not build Codex, install an npm package or change upstream source. Run it with `sh` as an ordinary user on Linux riscv64. “User-global” means the command can be used from any directory after its bin directory is on your `PATH`; it does not install for every account.
+The existing `install.sh` installs the curated experimental release for Linux riscv64, glibc ≥ 2.39, as an ordinary user. Python 3, curl, CA certificates, `ldd`, `uname`, `getconf`, bubblewrap, libgcc and OpenSSL 3 runtime libraries are required. It does not build Codex or install npm packages.
 
-## Requirements and trust
+## Install and upgrade
 
-- Linux `riscv64`, glibc **2.39 or newer**; Debian 13 riscv64 is the intended starting point.
-- Python 3 for both the installer and installed launcher (keep it installed), `curl` and CA certificates for HTTPS downloads, `uname`, `getconf`, `ldd`, and system `bwrap`.
-- Runtime libraries including `libgcc-s1` and OpenSSL 3 (`libssl3t64` on Debian 13). The installer checks the staged binary's dynamic dependencies and runs `--version` with a disposable `HOME` / `CODEX_HOME` before activation.
-- Enough free disk space for the compressed archive, the full extracted release and retained previous versions. The current executable alone is about 315 MB.
+Re-download the script for newly supported releases; a previously downloaded script does not query GitHub latest.
 
-Debian dependencies:
-
-```bash
-sudo apt update
-sudo apt install ca-certificates curl python3 libc6 libgcc-s1 libssl3t64 bubblewrap
-```
-
-The package installation uses `sudo`; the Codex installer and Codex itself must not. Presence of `bwrap` is not proof that the board's kernel and policy support its sandbox. Follow the separate [native sandbox validation guidance](../README.md#4-validate-the-native-sandbox-before-real-work).
-
-Download the script from this repository and review it before running. The `main` URL in the README can change. For repeatable installation, use an inspected repository commit in place of `main` and retain that script. The embedded archive SHA-256 pins the expected release bytes, but is not a publisher signature or an independent way to authenticate the installer itself.
-
-The current catalog contains exactly:
-
-| Adaptation release | SHA-256 of the `.tar.gz` archive |
-| --- | --- |
-| `v0.1.0-experimental.1` | `2b70f049652793a2dd6c8035122ce2a6920de680153be1c6f8e2a172dde70120` |
-
-The archive is `codex-riscv64-linux-gnu-v0.1.0-experimental.1.tar.gz` from this project's GitHub Release. No mirror, unknown version, checksum bypass or alternative source is accepted by the production installer. The default `experimental` channel is an explicit opt-in to this repository's experimental build by running its installer; it is not an upstream stable channel. There is no `stable` or `latest` fallback.
-
-## Commands
-
-```text
-sh install.sh [install|upgrade|rollback|uninstall|status]
-              [--version TAG] [--channel experimental]
-              [--prefix ABSOLUTE_PATH] [--bin-dir ABSOLUTE_PATH]
-              [--command codex-riscv|codex]
-```
-
-Use `sh install.sh --help` for the authoritative option list. With no action, the installer performs `install`.
-
-```bash
-# Default: supported experimental release, separate command name.
-sh install.sh
-
-# Explicit adaptation version; binary --version still says 0.0.0.
-sh install.sh install --version v0.1.0-experimental.1
-sh install.sh status
-
-# Same installation path; selects the release pinned in this script.
-sh install.sh upgrade --channel experimental
-
-# Only after a different managed version has been activated.
-sh install.sh rollback
-
-# Removes the managed installation, not user data or credentials.
-sh install.sh uninstall
-```
-
-There is currently only one published binary release. Installing or upgrading to it again does not manufacture a previous version. Future upgrade support requires an updated installer catalog; download and review that installer first. Rollback switches to the previously active managed version, not an arbitrary upstream release. Keep the same custom `--prefix` when managing a non-default installation.
-
-## Upgrade an existing v1 installation
-
-The first installer completed installation on the user's RISC-V board, but its direct-binary command failed on bare startup by entering the packaged-daemon path. The earlier successful TUI conversation used `--no-daemon`.
-
-**Download and review the updated `install.sh` again** as shown in the README; do not reuse a cached v1 script. Then run:
-
-```bash
+```sh
+curl --fail --location --proto '=https' --proto-redir '=https' --tlsv1.2 \
+  https://raw.githubusercontent.com/Elton-Yang/codex-riscv/main/install.sh \
+  -o install-codex-riscv.sh
+less install-codex-riscv.sh
 sh install-codex-riscv.sh upgrade
+sh install-codex-riscv.sh status
 ```
 
-Existing users can optionally upgrade in one line below. This **executes downloaded code directly**; downloading and reviewing it first, as above, is safer.
+`upgrade` works for first installation too. The default is `.2`; both `v0.1.0-experimental.1` and `v0.1.0-experimental.2` are supported. Exact archive SHA256 values are pinned in `RELEASES` inside the script and published in the release `SHA256SUMS`. Unknown versions, mirrors and checksum bypasses are not supported. HTTPS and the digest protect the selected bytes, not an independent publisher signature.
 
-```bash
-curl --fail --location --proto '=https' --proto-redir '=https' --tlsv1.2 https://raw.githubusercontent.com/Elton-Yang/codex-riscv/main/install.sh | sh -s -- upgrade
+```sh
+sh install-codex-riscv.sh install --version v0.1.0-experimental.2
+sh install-codex-riscv.sh upgrade --channel experimental
+sh install-codex-riscv.sh rollback
+sh install-codex-riscv.sh uninstall
 ```
 
-This migrates the old managed command link to the standalone launcher in place, using the same binary release. No uninstall is needed. The saved `--command` and `--bin-dir` are read from installation metadata; pass the original `--prefix` for a custom installation. New command creation still checks for collisions.
+Rollback toggles the previous successful version; same-version reinstall does not create history. It switches program versions only and does not undo changes to settings or projects. Uninstall removes verified, unmodified managed files; modified or foreign files are preserved and reported.
 
-Until you update, use:
-
-```bash
-codex-riscv --no-daemon
-codex-riscv --no-daemon resume
-codex-riscv --no-daemon fork
-```
-
-## Paths and command names
-
-Defaults:
+## Layout and preservation
 
 ```text
 ~/.local/share/codex-riscv/
-├── versions/
-│   └── v0.1.0-experimental.1/
-│       ├── bin/codex
-│       ├── LICENSE
-│       ├── NOTICE
-│       ├── licenses/
-│       └── ...release documentation and installer metadata
-├── launcher                            # managed Python 3 launcher
-├── current -> versions/v0.1.0-experimental.1
-└── previous -> versions/<previous-tag>  # only after a version switch
-
+├── versions/v0.1.0-experimental.2/
+│   ├── bin/codex
+│   ├── bin/codex-code-mode-host
+│   ├── LICENSE, NOTICE
+│   └── licenses/, docs/, manifests/, patches/, scripts/
+├── launcher
+├── current -> versions/v0.1.0-experimental.2
+└── previous -> versions/<previous-successful-tag>
 ~/.local/bin/codex-riscv -> ~/.local/share/codex-riscv/launcher
 ```
 
-Use `--prefix` for the managed installation directory and `--bin-dir` for its command directory, both absolute paths. Choose a dedicated, empty prefix, not a project directory or your home directory. Root / system-wide installation is deliberately not implemented.
+The launcher adds `--no-daemon` to ordinary calls and preserves internal helper dispatch. CLI discovers the host adjacent to its actual executable. This does not disable sandboxing. Installation does not log in, call a model, modify `~/.codex`, change model settings, alter shell files or touch projects.
 
-The installer prints a `PATH` hint if needed. For the defaults, this command affects only the current shell:
+`--prefix` and `--bin-dir` must be separate absolute dedicated paths outside Codex configuration; default command is `codex-riscv`. `--command codex` can be chosen for first installation if it does not collide with another command. Existing installations retain their command/bin directory; custom prefixes must be supplied again for later management. The installer never edits PATH; add `~/.local/bin` yourself if needed.
 
-```bash
-export PATH="$HOME/.local/bin:$PATH"
-```
+## Activation checks and limits
 
-It does not modify `.profile`, `.bashrc`, `.zshrc` or other startup files. Add a line yourself only if you want persistence and after checking your existing `PATH` configuration.
+Before activation, the archive is checked against its exact digest; traversal, links, devices, duplicates and oversized archives are rejected. Regular files are staged in a new directory. Both `.2` binaries must exist, be executable and resolve their dynamic libraries; `.1` requires only the CLI. CLI `--version` runs in a disposable HOME/CODEX_HOME. The installer does not initialize V8 through a model request, so successful installation is not a Code Mode runtime test.
 
-The safe default is `codex-riscv`. To choose `codex`, pass `--command codex` at first installation. The installer refuses an unrelated file or link at the command destination, and an unrelated same-name executable found on `PATH`. It does not remove or overwrite an npm, package-manager or manually installed Codex. Inspect a collision and decide yourself whether to rename or move it. Changing the command name of an existing managed installation requires uninstalling and reinstalling it.
+Only after checks pass does the installer atomically replace `current`; it retains the previous version. Download/check failures leave the active version intact. Recoverable activation failures restore history, but the two history links are not a power-loss transaction. A killed install can leave `.stage-*` directories; inspect them before removal. Do not put user files inside managed version directories or delete metadata to override ownership checks.
 
-## Safety and failure behavior
-
-- Download over HTTPS and require the exact archive digest from the installer catalog before inspecting or executing its contents.
-- Preflight the archive; reject absolute paths, traversal, links, special files and duplicate paths. Extract only ordinary directories and files into a fresh staging directory, not over a live installation.
-- Preserve the complete release, including notices. Check dynamic libraries and startup before replacing the `current` symlink atomically. A download, checksum or startup failure does not switch the active version.
-- Keep the previously active managed version for rollback. This does not undo changes Codex or you made to a project or to `~/.codex`.
-- Before uninstalling, check ownership metadata and recorded file contents. Refuse modified or untracked installation files rather than deleting them. Do not put personal files under the managed prefix.
-- Never delete `~/.codex`, authentication, shell settings or project files. No model request or login is performed during installation.
-
-If uninstall reports altered or untracked files, inspect and back them up or move them out yourself, then retry. Do not remove the ownership metadata to force the installer to accept the directory. An unrelated file replacing the command symlink is not removed. A forced termination can leave a `.stage-*` directory; inspect and remove only that abandoned staging directory yourself before retrying uninstall. Active-link replacements are atomic, but current/previous history is not a power-loss-safe two-link transaction.
-
-## Updates and validation limits
-
-The existing binary was built from a development commit whose package version is `0.0.0`, and upstream update checks are disabled for that development version. The managed launcher uses `exec` to run the unchanged `current/bin/codex`, adding `--no-daemon` to ordinary CLI calls unless already supplied, while preserving user arguments, exit status and signal behavior. Internal helper calls retain their special dispatch without added TUI options. Bare startup, `resume` and `fork` default to standalone mode without a shared background daemon. This does not disable sandboxing or add support for explicit daemon, agents or remote-server features. Use this installer for upgrades; do not use an upstream/npm update path to replace the RISC-V binary.
-
-Installer fixture tests use isolated directories and mocked platform/download commands; they are not native board tests. Likewise, QEMU startup of the published binary does not prove that the installer or sandbox works on a physical board. The user completed native v1 installation but then encountered the bare-startup failure; native startup of the standalone fix has not yet been confirmed. Earlier VisionFive 2 binary checks cannot substitute for testing this repair. See [validation records](validation.md), the [historical v1 notes](release-notes-installer-v1.md) and the [v1.1 repair notes](release-notes-installer-v1.1.md) for the recorded scope.
+The fixture suite covers missing host/libraries/permissions, `.1` → `.2` upgrade and rollback, configuration/project preservation and existing installer protections. Local package smoke tests use QEMU and mocked platform gates. Physical `.2` installation and authenticated startup on VisionFive 2 remain pending user confirmation. See [release notes](release-notes-v0.1.0-experimental.2.md).

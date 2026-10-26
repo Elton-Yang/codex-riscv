@@ -1,0 +1,16 @@
+test_duplicate_output_rejected (test_cli_code_mode_smoke.HarnessTests.test_duplicate_output_rejected) ... ok
+test_exact_three_stage_synthetic_acceptance (test_cli_code_mode_smoke.HarnessTests.test_exact_three_stage_synthetic_acceptance) ... ok
+test_explicit_failed_tool_rejected (test_cli_code_mode_smoke.HarnessTests.test_explicit_failed_tool_rejected) ... ok
+test_missing_seccomp_rejected (test_cli_code_mode_smoke.HarnessTests.test_missing_seccomp_rejected) ... ok
+test_no_code_mode_tool_rejected (test_cli_code_mode_smoke.HarnessTests.test_no_code_mode_tool_rejected) ... ok
+test_nonzero_python_exit_rejected (test_cli_code_mode_smoke.HarnessTests.test_nonzero_python_exit_rejected) ... ok
+test_outside_write_rejected (test_cli_code_mode_smoke.HarnessTests.test_outside_write_rejected) ... ok
+test_preexisting_fixture_rejected (test_cli_code_mode_smoke.HarnessTests.test_preexisting_fixture_rejected) ... ok
+test_python_source_compiles_and_patch_roundtrip (test_cli_code_mode_smoke.HarnessTests.test_python_source_compiles_and_patch_roundtrip) ... ok
+test_wrong_model_rejected (test_cli_code_mode_smoke.HarnessTests.test_wrong_model_rejected) ... ok
+test_wrong_patch_bytes_rejected (test_cli_code_mode_smoke.HarnessTests.test_wrong_patch_bytes_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.006s
+
+OK
