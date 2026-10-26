@@ -65,6 +65,7 @@ sh install-codex-riscv.sh uninstall
 | workspace-write 内核检查 | Seccomp=2、NoNewPrivs=1、工作区外写入被拒绝 |
 | 用户开发板创建程序 | 用户报告使用 `gpt-5.6-luna` 成功 |
 | 退出 → `/resume` → 修改程序 | 用户报告成功 |
+| 初次及修改后运行程序 | 用户确认两次结果均正确 |
 
 历史 `.1` 在 VisionFive 2 / JH7110、Debian 13 上有启动、认证、模型选择、基础对话和只读沙箱拒绝行为的用户记录，`.2` 的程序创建与恢复编辑结果另见[用户实机记录](docs/native-validation-v0.1.0-experimental.2.md)。参见[历史验证](docs/validation.md)、[新版发布说明](docs/release-notes-v0.1.0-experimental.2.md)与[新验收证据](docs/code-mode-evidence/)。
 

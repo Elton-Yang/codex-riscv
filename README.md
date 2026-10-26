@@ -65,6 +65,7 @@ Rollback switches program versions and does not undo edits made by Codex. Uninst
 | Workspace-write kernel checks | Seccomp=2, NoNewPrivs=1, outside-workspace write denied |
 | User-operated native program creation on the development board | Reported success with `gpt-5.6-luna` |
 | Native exit → `/resume` → program editing | User reported success |
+| Native program runs before and after modification | User confirmed both results correct |
 
 The historical `.1` user tests covered VisionFive 2 / JH7110, Debian 13, startup, authentication/model choice/basic conversation and two read-only sandbox denial probes. Native `.2` creation and resumed editing are recorded separately in the [user report](docs/native-validation-v0.1.0-experimental.2.md). See [`.1` validation](docs/validation.md), [`.2` release notes](docs/release-notes-v0.1.0-experimental.2.md) and [new evidence](docs/code-mode-evidence/).
 

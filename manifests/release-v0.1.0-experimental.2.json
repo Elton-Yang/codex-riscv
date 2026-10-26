@@ -96,10 +96,12 @@
     "checks": [
       "program creation",
       "exit then /resume",
-      "program modification after resume"
+      "program modification after resume",
+      "initial program execution: correct result",
+      "program execution after modification: correct result"
     ],
     "record": "docs/native-validation-v0.1.0-experimental.2.md",
-    "limits": "No fresh native program-execution or kernel-policy result; exact flags and installed hashes not supplied"
+    "limits": "No fresh native kernel-policy result; exit codes, exact flags and installed hashes not supplied"
   },
   "model_api_calls_scope": "Agent-operated emulated acceptance only; the later user-operated native report used the existing model"
 }

@@ -28,7 +28,7 @@ See [validation evidence](code-mode-evidence/) and [Code Mode notes](code-mode.m
 
 ## User-operated native result (2026-10-26)
 
-The user reported successful program creation, exit followed by `/resume`, and subsequent program editing with the existing `gpt-5.6-luna` model. This is native functional evidence supplied by the user; no new native program-execution or kernel-policy test is claimed. See the [full record and scope](native-validation-v0.1.0-experimental.2.md). The original release assets, tag and installer digest are unchanged.
+The user reported successful program creation, exit followed by `/resume`, and subsequent program editing with the existing `gpt-5.6-luna` model, and then confirmed correct program output both before and after modification. This is native functional evidence supplied by the user; no new native kernel-policy test is claimed. See the [full record and scope](native-validation-v0.1.0-experimental.2.md). The original release assets, tag and installer digest are unchanged.
 
 ## Upgrade and test on your board
 
@@ -44,3 +44,5 @@ codex-riscv -c features.code_mode_only=true
 The installer preserves `~/.codex`, login information, model settings, shell files and projects. No persistent feature/config changes are made. Use a disposable project for the first Code Mode task. `sh install-codex-riscv.sh rollback` switches back to the previous managed program version; it does not undo changes made by Codex to configuration or project files.
 
 新版仍由原安装地址升级，无需卸载；默认 standalone 启动。首次验证建议使用空测试项目，通过 `-c features.code_mode_only=true` 临时启用 Code Mode。若异常请保留终端错误，再使用安装器回滚；不要关闭沙箱来绕过失败。
+
+Native sandbox and rollback instructions / 实机沙箱与回滚步骤: [check guide](native-sandbox-check.md).
