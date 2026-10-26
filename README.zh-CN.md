@@ -10,7 +10,9 @@ OpenAI Codex CLI 的非官方 RISC-V Linux 实验适配，独立于 OpenAI，未
 
 在运行 Debian 13 的 VisionFive 2 / JH7110 开发板上启动 Codex，并编写一个简单的 Python 程序。
 
-https://github.com/user-attachments/assets/df7a67c9-8069-44d7-8a0e-d03e67f8e921
+https://github.com/user-attachments/assets/adcac9ee-0b42-407c-8a33-9d6d42cf6928
+
+[打开或下载 MP4 视频](https://github.com/user-attachments/assets/adcac9ee-0b42-407c-8a33-9d6d42cf6928)
 
 ## 安装或原位升级
 

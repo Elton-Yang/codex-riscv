@@ -10,7 +10,9 @@ The current experimental release is **`v0.1.0-experimental.3`**, for Debian 13 /
 
 Starting Codex on a VisionFive 2 / JH7110 running Debian 13 and creating a simple Python program.
 
-https://github.com/user-attachments/assets/df7a67c9-8069-44d7-8a0e-d03e67f8e921
+https://github.com/user-attachments/assets/adcac9ee-0b42-407c-8a33-9d6d42cf6928
+
+[Open or download the MP4 video](https://github.com/user-attachments/assets/adcac9ee-0b42-407c-8a33-9d6d42cf6928)
 
 ## Install or upgrade
 
